@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+
+<html lang="zh-TW">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        hexo-theme-suka © SukkaW
+        GitHub: https://github.com/SukkaW/hexo-theme-suka
+    -->
+
+    <!-- ### Resource Hint ### -->
+
+    <!-- ## DNS Prefetch ## -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+<!-- busuanzi -->
+
+    <link rel="dns-prefetch" href="//busuanzi.ibruce.info">
+
+
+<!-- comment -->
+
+
+    <link rel="dns-prefetch" href="//disqus.com">
+    <link rel="dns-prefetch" href="//mosdeo-github-io.disqus.com">
+
+
+
+
+
+
+<!-- analytics -->
+
+
+    <link rel="dns-prefetch" href="//www.google-analytics.com">
+
+
+
+
+
+
+    <!-- ## Preload ## -->
+    
+    <!-- Busuanzi -->
+    
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.js" as="script">
+
+
+
+
+
+
+
+    <!-- ### Meta & Title & Info ### -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <meta name="renderer" content="webkit">
+
+    <!-- Title -->
+    <title>用 Bayesian 推論出地址遺失值 | LKY 只有原創內容的 Blog</title>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image&#x2F;ico" href="/img/suka-favicon.ico">
+
+    <!-- ### Import File ### -->
+    <link rel="stylesheet" href="/lib/spectre/spectre.min.css"><style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    a, a:visited {
+        color: #0070ff;
+    }
+
+    a:active, a:focus, a:hover {
+        color: #0070ff;
+        opacity: .75;
+    }
+
+    #post-content a,
+    #post-content a:hover,
+    #post-content a:focus,
+    #post-content a:visited {
+        color: #005eb9;
+        opacity: 1;
+    }
+
+    
+
+    .post-entry .card-body a {
+        color: #0070ff;
+    }
+
+    .avatar {
+        background: #444;
+    }
+
+    .navbar-link,
+    .navbar-link:visited,
+    .timeline .timeline-item .timeline-icon.icon-lg {
+        color: #0070ff;
+    }
+
+    .navbar-link:hover {
+        color: #0070ff;
+        opacity: .8;
+    }
+
+    #search-input .btn,
+    #disqus_click_btn,
+    #disqus-switch-to-direct,
+    #disqus-loadmore-button {
+        background: #727e96;
+        border-color: #727e96;
+        color: #fff;
+    }
+
+    #post-toc a.post-toc-link,
+    #post-toc a.post-toc-link:visited,
+    .share-menu.menu .menu-item>a {
+        color: #727e96;
+    }
+
+    .share-menu.menu .menu-item>a:hover,
+    .share-menu.menu .menu-item>a:focus,
+    .share-menu.menu .menu-item>a:visited {
+        color: #50596c;
+        background: #f8f9fa;
+        opacity: .85;
+    }
+</style><link rel="stylesheet" href="/css/style.min.css">
+
+
+
+
+
+
+
+
+    <!-- Prettify Theme -->
+    
+    <link rel="preload" href="/css/highlight/github.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/css/highlight/github.min.css"></noscript>
+
+
+
+
+
+<script>
+/*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+!function(t){"use strict";t.loadCSS||(t.loadCSS=function(){});var e=loadCSS.relpreload={};if(e.support=function(){var e;try{e=t.document.createElement("link").relList.supports("preload")}catch(t){e=!1}return function(){return e}}(),e.bindMediaToggle=function(t){var e=t.media||"all";function a(){t.addEventListener?t.removeEventListener("load",a):t.attachEvent&&t.detachEvent("onload",a),t.setAttribute("onload",null),t.media=e}t.addEventListener?t.addEventListener("load",a):t.attachEvent&&t.attachEvent("onload",a),setTimeout(function(){t.rel="stylesheet",t.media="only x"}),setTimeout(a,3e3)},e.poly=function(){if(!e.support())for(var a=t.document.getElementsByTagName("link"),n=0;n<a.length;n++){var o=a[n];"preload"!==o.rel||"style"!==o.getAttribute("as")||o.getAttribute("data-loadcss")||(o.setAttribute("data-loadcss",!0),e.bindMediaToggle(o))}},!e.support()){e.poly();var a=t.setInterval(e.poly,500);t.addEventListener?t.addEventListener("load",function(){e.poly(),t.clearInterval(a)}):t.attachEvent&&t.attachEvent("onload",function(){e.poly(),t.clearInterval(a)})}"undefined"!=typeof exports?exports.loadCSS=loadCSS:t.loadCSS=loadCSS}("undefined"!=typeof global?global:this);
+</script>
+
+    <!-- ### Site Verification ### -->
+    
+
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="LKY 只有原創內容的 Blog"><meta name="msapplication-starturl" content="https://mosdeo.github.io"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="LKY 只有原創內容的 Blog"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- ### The Open Graph & Twitter Card Protocol ### -->
+    <meta property="og:title" content="用 Bayesian 推論出地址遺失值 | LKY 只有原創內容的 Blog"><meta property="og:site_name" content="LKY 只有原創內容的 Blog"><meta property="og:type" content="article"><meta property="og:url" content="https://mosdeo.github.io/2019/01/10/%E7%94%A8Bayseian%E6%8E%A8%E8%AB%96%E5%87%BA%E5%9C%B0%E5%9D%80%E7%BC%BA%E5%A4%B1%E5%80%BC/"><meta property="og:locale" content="zh-TW"><meta name="description" content="情境 我有一大堆人工輸入的地址清單，可是「XX區」大家經常懶得寫，那我要如何找出「XX區」到底是哪一區呢？ 現況 假設要被推論的地址是＂台北市羅斯福路5566號＂，已知訊息如下：  該地址新開了一間85度C咖啡店 羅斯福路只出現在大安區、文山區與中正區 大安區地址數量:文山區地址數量＝5:1 由[原本地址清單 &amp;amp; 85度C官方網站店鋪清單（註*）]兩份表關聯對比得知，地址為大安區時有85度 - Lin, Kao-Yuan - LKY 只有原創內容的 Blog"><meta name="keywords" content="數據分析, 機器學習, 資料科學"><meta property="og:image" content="/content/images/Bayes_rule.png"><meta property="og:image" content="https://mosdeo.github.io/content/images/85%E5%BA%A6C%E5%92%96%E5%95%A1%E8%9B%8B%E7%B3%95.jpg"><meta property="article:published_time" content="2019-01-09T16:00:00.000Z"><meta property="article:modified_time" content="2019-09-23T02:08:50.348Z"><meta property="og:updated_time" content="2019-09-23T02:08:50.348Z"><meta property="article:author" content="Lin, Kao-Yuan"><meta property="article:tag" content="數據分析, 機器學習, 資料科學"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="/content/images/Bayes_rule.png">
+
+    
+
+    <!-- ### Canonical link ### -->
+    <link rel="canonical" href="https://mosdeo.github.io/2019/01/10/%E7%94%A8Bayseian%E6%8E%A8%E8%AB%96%E5%87%BA%E5%9C%B0%E5%9D%80%E7%BC%BA%E5%A4%B1%E5%80%BC/">
+
+    <meta name="generator" content="Hexo 5.2.0">
+
+    <!-- ### Analytics ### -->
+    
+    <!-- Google Analytics -->
+<script>
+    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+    ga('create', 'UA-64570213-2', 'auto');
+    ga('send', 'pageview');
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+
+
+
+
+
+
+
+
+
+    <!-- ### Structured Data ### -->
+    
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "url": "https://mosdeo.github.io/2019/01/10/%E7%94%A8Bayseian%E6%8E%A8%E8%AB%96%E5%87%BA%E5%9C%B0%E5%9D%80%E7%BC%BA%E5%A4%B1%E5%80%BC/",
+    "@type": "BlogPosting",
+    "logo": "https://mosdeo.github.io/img/suka-favicon.ico",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://mosdeo.github.io/2019/01/10/%E7%94%A8Bayseian%E6%8E%A8%E8%AB%96%E5%87%BA%E5%9C%B0%E5%9D%80%E7%BC%BA%E5%A4%B1%E5%80%BC/"
+    },
+    "headline": "用 Bayesian 推論出地址遺失值 | LKY 只有原創內容的 Blog",
+    
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://mosdeo.github.io/content/images/Bayes_rule.png"
+    },
+    
+    "datePublished": "2019-01-09T16:00:00.000Z",
+    "dateModified": "2019-09-23T02:08:50.348Z",
+    "author": {
+        "@type": "Person",
+        "name": "Lin, Kao-Yuan",
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://mosdeo.github.io/img/default_avatar.png"
+        },
+        "description": "今之能者，謂能轉貼，至於魯蛇，皆能轉貼。不原創，何以別乎？"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "LKY 只有原創內容的 Blog",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://mosdeo.github.io/img/suka-favicon.ico"
+        }
+    },
+    
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://mosdeo.github.io/search?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+    },
+    
+    "keywords": "數據分析, 機器學習, 資料科學",
+    "description": "情境 我有一大堆人工輸入的地址清單，可是「XX區」大家經常懶得寫，那我要如何找出「XX區」到底是哪一區呢？ 現況 假設要被推論的地址是＂台北市羅斯福路5566號＂，已知訊息如下：  該地址新開了一間85度C咖啡店 羅斯福路只出現在大安區、文山區與中正區 大安區地址數量:文山區地址數量＝5:1 由[原本地址清單 &amp;amp;amp; 85度C官方網站店鋪清單（註*）]兩份表關聯對比得知，地址為大安區時有85度 - Lin, Kao-Yuan - LKY 只有原創內容的 Blog"
+}
+</script>
+
+
+
+    <!-- ### Custom Head ### -->
+    
+</head>
+
+    <body>
+            
+
+            <!-- ### Main content ### -->
+            <!-- ## Header ##-->
+<header>
+    <h1 class="header-title text-center"><a href="/">LKY 只有原創內容的 Blog</a></h1>
+
+    <p class="text-center header-slogan">
+        
+            
+                今之能者，謂能轉貼，至於魯蛇，皆能轉貼。不原創，何以別乎？
+            
+        
+    </p>
+
+    <nav class="navbar-section text-center">
+    
+        <a href="/" class="navbar-link">Home</a>
+    
+    
+        <a href="/archives/" class="navbar-link">Archives</a>
+    
+    
+        <a href="/search" class="navbar-link">Search</a>
+    
+    
+    
+        <div class="dropdown dropdown-right">
+    <a class="navbar-link dropdown-toggle" tabindex="0">Share</a>
+    <ul class="menu share-menu">
+
+        <!-- Share Weibo -->
+        
+        <li class="menu-item">
+            <a href="http://service.weibo.com/share/share.php?appkey=&title=LKY 只有原創內容的 Blog&url=https://mosdeo.github.io&pic=/content/images/Bayes_rule.png&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">Share to Weibo</a>
+        </li>
+        
+
+        <!-- Share Twitter -->
+        
+        <li class="menu-item">
+            <a href="https://twitter.com/intent/tweet?text=LKY 只有原創內容的 Blog&url=https://mosdeo.github.io&via=Lin, Kao-Yuan" target="_blank" rel="external noopener noreferrer nofollow">Share to Twitter</a>
+        </li>
+        
+
+        <!-- Share Facebook -->
+        
+        <li class="menu-item">
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://mosdeo.github.io" target="_blank" rel="external noopener noreferrer nofollow">Share to Facebook</a>
+        </li>
+        
+
+        <!-- Share Google+ -->
+        
+        <li class="menu-item">
+            <a href="https://plus.google.com/share?url=https://mosdeo.github.io" target="_blank" rel="external noopener noreferrer nofollow">Share to Google+</a>
+        </li>
+        
+
+        <!-- Share LinkedIn -->
+        
+        <li class="menu-item">
+            <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://mosdeo.github.io&title=用 Bayesian 推論出地址遺失值" target="_blank" rel="external noopener noreferrer nofollow">Share to LinkedIn</a>
+        </li>
+        
+
+        <!-- Share QQ -->
+        
+        <li class="menu-item">
+            <a href="http://connect.qq.com/widget/shareqq/index.html?site=LKY 只有原創內容的 Blog&title=用 Bayesian 推論出地址遺失值&summary=&pics=/content/images/Bayes_rule.png&url=https://mosdeo.github.io" target="_blank" rel="external noopener noreferrer nofollow"> Share to QQ</a>
+        </li>
+        
+
+        <!-- Share Telegram -->
+        
+        <li class="menu-item">
+            <a href="https://t.me/share/url?url=https://mosdeo.github.io&text=用 Bayesian 推論出地址遺失值" target="_blank" rel="external noopener noreferrer nofollow">Share to Telegram</a>
+        </li>
+        
+
+        <!-- QRCode -->
+        
+        <li class="menu-item">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANQAAADUCAAAAADBtVLEAAADoklEQVR42u3aQW4jMQxE0dz/0jPbGcBi/VLimDa+N4ETx91PQJMSya8/H/j6EiVKlChRH4f6Gl7//cODv/378/S7m/f/Xvv094efFSVqCerhQzfc5OniZGHo+9MCnu5TlKhtqPQlj34/AVIAma5N/v/h/YgS9WaoUyCYUKeH+xRopsAhStQnoE43frMBPQWAlLRFiXpHFHnIb5LmLSS9/9YuXZSoJ6NSYt3y88eqSaJEPRGFCu8PkitJsO0mdlrUH+96iBL1JFR6QOln2gNl854ssChRW1Bpwzg99NMhMhVCp8VoCziiRG1D0YbyseABHvxU0KTNiSnJixK1AUWKH+lLSdNtWoC0cGlBRYnahCJDGelCafNLGg/ksBkPmaJELUClRNkMM6bNazvoSAezRInahLq9qXQjqWiDCinloKQoURtQTTOZDH+QocWUSJvEfazQihL1IhQpPJLBjjR4RQY+6Ka37iSKEvXLKFo8bA9wTdJuA1a1oRUl6pdRpPlMNqjfXYQ0UDIlYlGiNqGmg1r74N98Nm1cU+FVlKjNqO8kz1hsDANYZHi/6s6LEvUiFBmGaoY7mgBEr4WaBaJELUCRAjxNgvTVbIDT94gStRlFGl83zbKmuEmCD+p6iBL1YhT5SZpnbbE/BYHpPo4NAlGiXoiixXmSiNvN7VRgaQKZKFGbUHSgqS1G0k0tTeQ/vksXJepJqFQsTBvWujFWNN7SfaHkK0rUi1Cng9pNMCALkgJSBLTTzqJE/SKqLfA3jbHmQEmGTaZ7FiVqC6p5YKcGNz1spqGQmwAjStQ2VNpUpmInHSIhxZTmM6JEbUQ1SbIdGJ4CxM2QybgBECVqASoFgWlDSQsot0X/uiAkStQCFC1OpoMhPRySQHETYESJ2oIig4TkQEmSNNnokuvFBoEoUQtQp+JGKjaSgyBZNHIInZKzKFEbUc0QyARJw1lTgJk2wLEBIUrUAhRJnqcvnwozqRHeDqKQg6soUZtQ9BA4JemmqUAb3bS4KUrUFlQzKNVsOOlA7+1gF9rQihL1AlR60eHCpphPH/w0ZBU7iaJEvQBFD38kCZNCZtucI4FFlKhtKPKApgecBgo6nHgVVESJWoRqDnbkYJk2oU2AooPLokS9A2qC0aYaGSAhTbUYrESJegMUSc7pIEeGIdtg8SPRT5SoJ6KaggcZGEmB4SagpAUXJWoLihTy082ThNwk0iYIiRK1CfVJL1GiRIkS9TGvvw740o81nATUAAAAAElFTkSuQmCC" alr="QRCode">
+        </li>
+        
+
+    </ul>
+</div>
+    
+    
+        <a href="/atom.xml" target="_blank" class="navbar-link">RSS</a>
+    
+</nav>
+</header>
+
+            
+    <!-- ## Post ## -->
+    <div class="post-container">
+    <div id="post-card" class="card">
+        
+            <div class="card-image lazyload" data-bg="url('/content/images/Bayes_rule.png')"></div>
+        
+        <div class="card-item-container">
+            <div class="card-inner-cell">
+                <!-- # Post Header Info # -->
+                <div class="card-header">
+                    
+    <h1 class="card-title h3 mb-2">用 Bayesian 推論出地址遺失值</h1>
+
+
+
+
+<div class="post-header-info">
+    <p class="post-header-info-left text-gray">
+        <img class="author-thumb lazyload" data-src="/img/default_avatar.png" src="/img/suka-lazyload.gif" alt="Lin, Kao-Yuan's Avatar">
+        <span>2019-01-10</span>
+        
+        
+            <!-- Busuanzi Post Views -->
+<span id="busuanzi_container_page_pv" hidden>
+    <span class="suka-devide-dot"></span>
+    <span></span>
+    <span id="busuanzi_value_page_pv"></span>
+    <span>Views</span>
+</span>
+        
+        
+    </p>
+    <div class="post-header-info-right">
+        
+            <div class="dropdown dropdown-right">
+<a class="dropdown-toggle" tabindex="0">Share the post</a>
+<ul class="menu share-menu">
+    <!-- Share Weibo -->
+    
+    <li class="menu-item">
+        <a href="http://service.weibo.com/share/share.php?appkey=&title=用 Bayesian 推論出地址遺失值&url=https://mosdeo.github.io/2019/01/10/%E7%94%A8Bayseian%E6%8E%A8%E8%AB%96%E5%87%BA%E5%9C%B0%E5%9D%80%E7%BC%BA%E5%A4%B1%E5%80%BC/&pic=/content/images/Bayes_rule.png&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">Share to Weibo</a>
+    </li>
+    
+
+    <!-- Share Twitter -->
+    
+    <li class="menu-item">
+        <a href="https://twitter.com/intent/tweet?text=用 Bayesian 推論出地址遺失值&url=https://mosdeo.github.io/2019/01/10/%E7%94%A8Bayseian%E6%8E%A8%E8%AB%96%E5%87%BA%E5%9C%B0%E5%9D%80%E7%BC%BA%E5%A4%B1%E5%80%BC/&via=Lin, Kao-Yuan" target="_blank" rel="external noopener noreferrer nofollow">Share to Twitter</a>
+    </li>
+    
+
+    <!-- Share Facebook -->
+    
+    <li class="menu-item">
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://mosdeo.github.io/2019/01/10/%E7%94%A8Bayseian%E6%8E%A8%E8%AB%96%E5%87%BA%E5%9C%B0%E5%9D%80%E7%BC%BA%E5%A4%B1%E5%80%BC/" target="_blank" rel="external noopener noreferrer nofollow">Share to Facebook</a>
+    </li>
+    
+
+    <!-- Share Google+ -->
+    
+    <li class="menu-item">
+        <a href="https://plus.google.com/share?url=https://mosdeo.github.io/2019/01/10/%E7%94%A8Bayseian%E6%8E%A8%E8%AB%96%E5%87%BA%E5%9C%B0%E5%9D%80%E7%BC%BA%E5%A4%B1%E5%80%BC/" target="_blank" rel="external noopener noreferrer nofollow">Share to Google+</a>
+    </li>
+    
+
+    <!-- Share LinkedIn -->
+    
+    <li class="menu-item">
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://mosdeo.github.io/2019/01/10/%E7%94%A8Bayseian%E6%8E%A8%E8%AB%96%E5%87%BA%E5%9C%B0%E5%9D%80%E7%BC%BA%E5%A4%B1%E5%80%BC/&title=LKY 只有原創內容的 Blog" target="_blank" rel="external noopener noreferrer nofollow">Share to LinkedIn</a>
+    </li>
+    
+
+    <!-- Share QQ -->
+    
+    <li class="menu-item">
+        <a href="http://connect.qq.com/widget/shareqq/index.html?site=LKY 只有原創內容的 Blog&title=LKY 只有原創內容的 Blog&summary=&pics=/content/images/Bayes_rule.png&url=https://mosdeo.github.io/2019/01/10/%E7%94%A8Bayseian%E6%8E%A8%E8%AB%96%E5%87%BA%E5%9C%B0%E5%9D%80%E7%BC%BA%E5%A4%B1%E5%80%BC/" target="_blank" rel="external noopener noreferrer nofollow"> Share to QQ</a>
+    </li>
+    
+
+    <!-- Share Telegram -->
+    
+    <li class="menu-item">
+        <a href="https://t.me/share/url?url=https://mosdeo.github.io/2019/01/10/%E7%94%A8Bayseian%E6%8E%A8%E8%AB%96%E5%87%BA%E5%9C%B0%E5%9D%80%E7%BC%BA%E5%A4%B1%E5%80%BC/&text=LKY 只有原創內容的 Blog" target="_blank" rel="external noopener noreferrer nofollow">Share to Telegram</a>
+    </li>
+    
+
+    <!-- QRCode -->
+    
+    <li class="menu-item">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANQAAADUCAAAAADBtVLEAAADoklEQVR42u3aQW4jMQxE0dz/0jPbGcBi/VLimDa+N4ETx91PQJMSya8/H/j6EiVKlChRH4f6Gl7//cODv/378/S7m/f/Xvv094efFSVqCerhQzfc5OniZGHo+9MCnu5TlKhtqPQlj34/AVIAma5N/v/h/YgS9WaoUyCYUKeH+xRopsAhStQnoE43frMBPQWAlLRFiXpHFHnIb5LmLSS9/9YuXZSoJ6NSYt3y88eqSaJEPRGFCu8PkitJsO0mdlrUH+96iBL1JFR6QOln2gNl854ssChRW1Bpwzg99NMhMhVCp8VoCziiRG1D0YbyseABHvxU0KTNiSnJixK1AUWKH+lLSdNtWoC0cGlBRYnahCJDGelCafNLGg/ksBkPmaJELUClRNkMM6bNazvoSAezRInahLq9qXQjqWiDCinloKQoURtQTTOZDH+QocWUSJvEfazQihL1IhQpPJLBjjR4RQY+6Ka37iSKEvXLKFo8bA9wTdJuA1a1oRUl6pdRpPlMNqjfXYQ0UDIlYlGiNqGmg1r74N98Nm1cU+FVlKjNqO8kz1hsDANYZHi/6s6LEvUiFBmGaoY7mgBEr4WaBaJELUCRAjxNgvTVbIDT94gStRlFGl83zbKmuEmCD+p6iBL1YhT5SZpnbbE/BYHpPo4NAlGiXoiixXmSiNvN7VRgaQKZKFGbUHSgqS1G0k0tTeQ/vksXJepJqFQsTBvWujFWNN7SfaHkK0rUi1Cng9pNMCALkgJSBLTTzqJE/SKqLfA3jbHmQEmGTaZ7FiVqC6p5YKcGNz1spqGQmwAjStQ2VNpUpmInHSIhxZTmM6JEbUQ1SbIdGJ4CxM2QybgBECVqASoFgWlDSQsot0X/uiAkStQCFC1OpoMhPRySQHETYESJ2oIig4TkQEmSNNnokuvFBoEoUQtQp+JGKjaSgyBZNHIInZKzKFEbUc0QyARJw1lTgJk2wLEBIUrUAhRJnqcvnwozqRHeDqKQg6soUZtQ9BA4JemmqUAb3bS4KUrUFlQzKNVsOOlA7+1gF9rQihL1AlR60eHCpphPH/w0ZBU7iaJEvQBFD38kCZNCZtucI4FFlKhtKPKApgecBgo6nHgVVESJWoRqDnbkYJk2oU2AooPLokS9A2qC0aYaGSAhTbUYrESJegMUSc7pIEeGIdtg8SPRT5SoJ6KaggcZGEmB4SagpAUXJWoLihTy082ThNwk0iYIiRK1CfVJL1GiRIkS9TGvvw740o81nATUAAAAAElFTkSuQmCC" alt="QRCode">
+    </li>
+    
+
+</ul>
+</div>
+        
+    </div>
+</div>
+                </div>
+                <div class="card-body">
+                    
+                        
+                        
+                            <div id="post-toc"><ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%83%85%E5%A2%83"><span class="post-toc-number">1.</span> <span class="post-toc-text">情境</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%8F%BE%E6%B3%81"><span class="post-toc-number">2.</span> <span class="post-toc-text">現況</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E8%A7%A3%E6%B3%95"><span class="post-toc-number">3.</span> <span class="post-toc-text">解法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BD%BF%E7%94%A8%E8%B2%9D%E5%BC%8F%E5%AE%9A%E7%90%86%E7%9A%84%E5%B7%AE%E5%88%A5%E5%9C%A8%E5%93%AA%E8%A3%A1%EF%BC%9F"><span class="post-toc-number">4.</span> <span class="post-toc-text">使用貝式定理的差別在哪裡？</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%96%91%E5%95%8F"><span class="post-toc-number">5.</span> <span class="post-toc-text">疑問</span></a></li></ol></div>
+                        
+                    
+                    <article id="post-content">
+                        <p><img src="/content/images/85%E5%BA%A6C%E5%92%96%E5%95%A1%E8%9B%8B%E7%B3%95.jpg" alt=""></p>
+<h2 id="情境">情境</h2>
+<p>我有一大堆人工輸入的地址清單，可是「XX區」大家經常懶得寫，那我要如何找出「XX區」到底是哪一區呢？</p>
+<h2 id="現況">現況</h2>
+<p>假設要被推論的地址是＂台北市羅斯福路5566號＂，已知訊息如下：</p>
+<ol start="0">
+<li>該地址新開了一間85度C咖啡店</li>
+<li>羅斯福路只出現在大安區、文山區<s>與中正區</s></li>
+<li>大安區地址數量:文山區地址數量＝5:1</li>
+<li>由[原本地址清單 &amp; 85度C官方網站店鋪清單（註*）]兩份表關聯對比得知，地址為大安區時有85度C的機率為 0.000003，地址為文山區時有85度C的機率為 0.000019<br>
+註：為什麼不直接從85度C官方網站店鋪清單查詢遺失的「XX區」？有可能這家店是新開的(如假設 0.)，官網資料還沒 update。</li>
+</ol>
+<h2 id="解法">解法</h2>
+<p>根據貝式定理（Bayes’ theorem）</p>
+<blockquote>
+<p>P(該地址在大安區)/P(該地址在文山區)<br>
+= (P(大安區地址)/P(文山區地址))×(P(85度C|大安區地址)/P(85度C|文山區地址))<br>
+= 5×(0.000003/0.000019)<br>
+= 0.7895 倍</p>
+</blockquote>
+<p>結果 &lt; 1，故推論該地址在文山區。</p>
+<h2 id="使用貝式定理的差別在哪裡？">使用貝式定理的差別在哪裡？</h2>
+<p>在此案例中，如果只看地址清單，會推論地址在大安區，因為大安區出現在地址清單中的頻率較高。但由於新增了外部證據，因此推論結果發生改變。</p>
+<h2 id="疑問">疑問</h2>
+<p>Q: 如果那個有問題的地址，剛好不是85度C呢？<br>
+A: 那就看看有沒有小七、全家、OK等等之類的（先別急著罵我講幹話）。貝式推論本來就是一個「找證據來說話」的過程，因此手上有不同證據，就會得到不同結論，故也有人說「貝式推論本身就帶有偏見」。</p>
+<hr>
+<p>此文章為應用數學假設性探討，以上數據皆為亂掰。如有雷同，純屬巧合。</p>
+
+                    </article>
+                    
+
+
+    <blockquote id="date-expire-notification" class="post-expired-notify">This article was last updated on <span id="date-expire-num"></span> days ago, and the information described in the article may have changed.</blockquote>
+    <script>
+    (function() {
+        var dateUpdate = Date.parse("2019-09-23");
+        var nowDate = new Date();
+        var a = nowDate.getTime();
+        var b = a - dateUpdate;
+        var daysUpdateExpire = Math.floor(b/(24*3600*1000));
+        if (daysUpdateExpire >= 120) {
+            document.getElementById('date-expire-num').innerHTML = daysUpdateExpire;
+        } else {
+            document.getElementById('date-expire-notification').style.display = 'none';
+        }
+    })();
+    </script>
+
+
+<p class="post-footer-info mb-0 pt-0">Published at&nbsp;<time datetime="2019-01-09T16:00:00.000Z" itemprop="datePublished">2019-01-10</time>
+
+    , Updated at&nbsp;<time datetime="2019-09-23T02:08:50.348Z" itemprop="dateModified">2019-09-23</time>
+
+</p>
+<p class="post-footer-info mb-0 pt-2">
+
+
+
+<span class="post-tags-list mt-2">
+
+<a class="post-tags-list-item" href="/tags/%E6%95%B8%E6%93%9A%E5%88%86%E6%9E%90/" rel="tag">#&nbsp;數據分析</a>
+
+<a class="post-tags-list-item" href="/tags/%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92/" rel="tag">#&nbsp;機器學習</a>
+
+<a class="post-tags-list-item" href="/tags/%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8/" rel="tag">#&nbsp;資料科學</a>
+
+</span>
+
+
+</p>
+
+                </div>
+                <div class="post-nav px-2 bg-gray">
+<ul class="pagination">
+    <!-- Prev Nav -->
+    
+        <li class="page-item page-prev">
+            <a href="/2019/03/14/%E5%90%8C%E4%BA%8B%E6%80%8E%E9%BA%BC%E9%82%84%E4%B8%8D%20commit%EF%BC%81%E5%88%A5%E7%94%9F%E6%B0%A3%EF%BC%8C%E4%BD%A0%E5%8F%AF%E8%83%BD%E8%B8%A9%E5%88%B0%20SVN%20%E7%9A%84%E5%A4%A7%E5%B0%8F%E5%AF%AB%E5%9C%B0%E9%9B%B7/" rel="prev">
+                <div class="page-item-title"><i class="icon icon-back" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">同事怎麼還不commit🤬別生氣！你們可能踩到 SVN 的大小寫地雷</div>
+            </a>
+        </li>
+    
+
+    <!-- Next Nav -->
+    
+        <li class="page-item page-next">
+            <a href="/2019/01/01/%E5%A6%82%E4%BD%95%E9%99%8D%E4%BD%8E%E9%A3%9F%E6%85%BE%E5%8F%88%E4%BD%BF%E9%80%B2%E9%A3%9F%E5%AE%B9%E6%98%93%E6%9C%89%E9%A3%BD%E8%B6%B3%E6%84%9F/" rel="next">
+                <div class="page-item-title"><i class="icon icon-forward" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">如何降低食慾又使進食容易有飽足感？</div>
+            </a>
+        </li>
+    
+</ul>
+</div>
+
+                
+                    <!-- # Comment # -->
+                    
+                        <div class="card-footer post-comment">
+                            <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://mosdeo.github.io/2019/01/10/%E7%94%A8Bayseian%E6%8E%A8%E8%AB%96%E5%87%BA%E5%9C%B0%E5%9D%80%E7%BC%BA%E5%A4%B1%E5%80%BC/'; // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'https://mosdeo.github.io/2019/01/10/%E7%94%A8Bayseian%E6%8E%A8%E8%AB%96%E5%87%BA%E5%9C%B0%E5%9D%80%E7%BC%BA%E5%A4%B1%E5%80%BC/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+<script id="disqus-thread-script">
+    (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document;
+        var s = d.createElement('script');
+        s.src = '//mosdeo-github-io.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', + new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+                        </div>
+                    
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!-- ### Footer ### -->
+            <footer class="text-center">
+    <!-- footer copyright -->
+    
+        <p class="footer-copyright mb-0">Copyright&nbsp;©&nbsp;<span id="copyright-year"></span>
+            <a class="footer-copyright-a" href="https://mosdeo.github.io">LKY 只有原創內容的 Blog</a>
+        </p>
+
+    <!-- footer custom text -->
+    <p class="footer-text mb-0">
+    
+    </p>
+    <!-- footer develop info -->
+    <p class="footer-develop mb-0">
+        
+    <!-- Busuanzi User Views -->
+    <span id="busuanzi_container_site_uv" hidden>
+        <span></span>
+        <span id="busuanzi_value_site_uv"></span>
+        <span>Viewers</span>
+        
+            <span>|</span>
+        
+    </span>
+
+
+
+
+        
+        Powered by&nbsp;<!--
+         --><a href="https://hexo.io" target="_blank" class="footer-develop-a" rel="external nofollow noopener noreferrer">Hexo</a><span class="footer-develop-divider"></span>Theme&nbsp;-&nbsp;<!--
+         --><a href="https://github.com/SukkaW/hexo-theme-suka" target="_blank" class="footer-develop-a" rel="external noopener">Suka</a>
+    </p>
+</footer>
+
+
+        <!-- ### Import File ### -->
+        <!-- ### Footer JS Import ### -->
+
+<script>
+
+    
+window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 50
+};
+document.getElementById('copyright-year').textContent = new Date().getFullYear();
+console.log('\n %c Suka Theme (hexo-theme-suka) | © SukkaW | Verision 1.3.3 %c https://github.com/SukkaW/hexo-theme-suka \n', 'color: #fff; background: #444; padding:5px 0;', 'background: #bbb; padding:5px 0;');
+
+</script>
+
+<script src="/lib/vanilla-lazyload/lazyload.min.js" async></script>
+    <script src="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.js" async></script>
+
+
+<!-- Offset -->
+
+
+
+
+<!-- Comment -->
+
+    
+        <script id="dsq-count-scr" src="https://mosdeo-github-io.disqus.com/count.js" async></script>
+
+    
+
+
+<!-- ### Custom Footer ### -->
+
+    </body>
+
+</html>

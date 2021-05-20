@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+
+<html lang="zh-TW">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        hexo-theme-suka © SukkaW
+        GitHub: https://github.com/SukkaW/hexo-theme-suka
+    -->
+
+    <!-- ### Resource Hint ### -->
+
+    <!-- ## DNS Prefetch ## -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+<!-- busuanzi -->
+
+    <link rel="dns-prefetch" href="//busuanzi.ibruce.info">
+
+
+<!-- comment -->
+
+
+    <link rel="dns-prefetch" href="//disqus.com">
+    <link rel="dns-prefetch" href="//mosdeo-github-io.disqus.com">
+
+
+
+
+
+
+<!-- analytics -->
+
+
+    <link rel="dns-prefetch" href="//www.google-analytics.com">
+
+
+
+
+
+
+    <!-- ## Preload ## -->
+    
+    <!-- Busuanzi -->
+    
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.js" as="script">
+
+
+
+
+
+
+
+    <!-- ### Meta & Title & Info ### -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <meta name="renderer" content="webkit">
+
+    <!-- Title -->
+    <title>解決在 macOS 上安裝 OpenCV 遇到「‘opencv2/opencv.hpp’ file not found」地雷 | LKY 只有原創內容的 Blog</title>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image&#x2F;ico" href="/img/suka-favicon.ico">
+
+    <!-- ### Import File ### -->
+    <link rel="stylesheet" href="/lib/spectre/spectre.min.css"><style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    a, a:visited {
+        color: #0070ff;
+    }
+
+    a:active, a:focus, a:hover {
+        color: #0070ff;
+        opacity: .75;
+    }
+
+    #post-content a,
+    #post-content a:hover,
+    #post-content a:focus,
+    #post-content a:visited {
+        color: #005eb9;
+        opacity: 1;
+    }
+
+    
+
+    .post-entry .card-body a {
+        color: #0070ff;
+    }
+
+    .avatar {
+        background: #444;
+    }
+
+    .navbar-link,
+    .navbar-link:visited,
+    .timeline .timeline-item .timeline-icon.icon-lg {
+        color: #0070ff;
+    }
+
+    .navbar-link:hover {
+        color: #0070ff;
+        opacity: .8;
+    }
+
+    #search-input .btn,
+    #disqus_click_btn,
+    #disqus-switch-to-direct,
+    #disqus-loadmore-button {
+        background: #727e96;
+        border-color: #727e96;
+        color: #fff;
+    }
+
+    #post-toc a.post-toc-link,
+    #post-toc a.post-toc-link:visited,
+    .share-menu.menu .menu-item>a {
+        color: #727e96;
+    }
+
+    .share-menu.menu .menu-item>a:hover,
+    .share-menu.menu .menu-item>a:focus,
+    .share-menu.menu .menu-item>a:visited {
+        color: #50596c;
+        background: #f8f9fa;
+        opacity: .85;
+    }
+</style><link rel="stylesheet" href="/css/style.min.css">
+
+
+
+
+
+
+
+
+    <!-- Prettify Theme -->
+    
+    <link rel="preload" href="/css/highlight/github.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/css/highlight/github.min.css"></noscript>
+
+
+
+
+
+<script>
+/*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+!function(t){"use strict";t.loadCSS||(t.loadCSS=function(){});var e=loadCSS.relpreload={};if(e.support=function(){var e;try{e=t.document.createElement("link").relList.supports("preload")}catch(t){e=!1}return function(){return e}}(),e.bindMediaToggle=function(t){var e=t.media||"all";function a(){t.addEventListener?t.removeEventListener("load",a):t.attachEvent&&t.detachEvent("onload",a),t.setAttribute("onload",null),t.media=e}t.addEventListener?t.addEventListener("load",a):t.attachEvent&&t.attachEvent("onload",a),setTimeout(function(){t.rel="stylesheet",t.media="only x"}),setTimeout(a,3e3)},e.poly=function(){if(!e.support())for(var a=t.document.getElementsByTagName("link"),n=0;n<a.length;n++){var o=a[n];"preload"!==o.rel||"style"!==o.getAttribute("as")||o.getAttribute("data-loadcss")||(o.setAttribute("data-loadcss",!0),e.bindMediaToggle(o))}},!e.support()){e.poly();var a=t.setInterval(e.poly,500);t.addEventListener?t.addEventListener("load",function(){e.poly(),t.clearInterval(a)}):t.attachEvent&&t.attachEvent("onload",function(){e.poly(),t.clearInterval(a)})}"undefined"!=typeof exports?exports.loadCSS=loadCSS:t.loadCSS=loadCSS}("undefined"!=typeof global?global:this);
+</script>
+
+    <!-- ### Site Verification ### -->
+    
+
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="LKY 只有原創內容的 Blog"><meta name="msapplication-starturl" content="https://mosdeo.github.io"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="LKY 只有原創內容的 Blog"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- ### The Open Graph & Twitter Card Protocol ### -->
+    <meta property="og:title" content="解決在 macOS 上安裝 OpenCV 遇到「‘opencv2&#x2F;opencv.hpp’ file not found」地雷 | LKY 只有原創內容的 Blog"><meta property="og:site_name" content="LKY 只有原創內容的 Blog"><meta property="og:type" content="article"><meta property="og:url" content="https://mosdeo.github.io/2019/10/10/%E5%9C%A8%20macOS%20%E4%B8%8A%E5%AE%89%E8%A3%9D%20OpenCV%20%E9%81%87%E5%88%B0%E7%9A%84%E5%9C%B0%E9%9B%B7/"><meta property="og:locale" content="zh-TW"><meta name="description" content="安裝 OpenCV 一直都是堪稱玄學的技術，猶記得我大四第一次入門花了兩週才安裝成功，其中一個原因是我自己對「編譯、連結、載入、執行」不熟悉，這也是我技能樹有待補強的地方。 是說，這麼多年過去了，Windows 和 Linux 上我也安裝了無數次，EmguCV 也搞得定，換到上 macOS 仍須鬼打牆一整天才找到解方。 錯誤如下：  fatal error: ‘opencv2&#x2F;opencv.hpp - Lin, Kao-Yuan - LKY 只有原創內容的 Blog"><meta name="keywords" content="OpenCV, Mac, 除錯"><meta property="og:image" content="/content/images/macOS_OpenCV.png"><meta property="article:published_time" content="2019-10-09T16:00:00.000Z"><meta property="article:modified_time" content="2019-10-10T11:16:52.492Z"><meta property="og:updated_time" content="2019-10-10T11:16:52.492Z"><meta property="article:author" content="Lin, Kao-Yuan"><meta property="article:tag" content="OpenCV, Mac, 除錯"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="/content/images/macOS_OpenCV.png">
+
+    
+
+    <!-- ### Canonical link ### -->
+    <link rel="canonical" href="https://mosdeo.github.io/2019/10/10/%E5%9C%A8%20macOS%20%E4%B8%8A%E5%AE%89%E8%A3%9D%20OpenCV%20%E9%81%87%E5%88%B0%E7%9A%84%E5%9C%B0%E9%9B%B7/">
+
+    <meta name="generator" content="Hexo 5.2.0">
+
+    <!-- ### Analytics ### -->
+    
+    <!-- Google Analytics -->
+<script>
+    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+    ga('create', 'UA-64570213-2', 'auto');
+    ga('send', 'pageview');
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+
+
+
+
+
+
+
+
+
+    <!-- ### Structured Data ### -->
+    
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "url": "https://mosdeo.github.io/2019/10/10/%E5%9C%A8%20macOS%20%E4%B8%8A%E5%AE%89%E8%A3%9D%20OpenCV%20%E9%81%87%E5%88%B0%E7%9A%84%E5%9C%B0%E9%9B%B7/",
+    "@type": "BlogPosting",
+    "logo": "https://mosdeo.github.io/img/suka-favicon.ico",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://mosdeo.github.io/2019/10/10/%E5%9C%A8%20macOS%20%E4%B8%8A%E5%AE%89%E8%A3%9D%20OpenCV%20%E9%81%87%E5%88%B0%E7%9A%84%E5%9C%B0%E9%9B%B7/"
+    },
+    "headline": "解決在 macOS 上安裝 OpenCV 遇到「‘opencv2/opencv.hpp’ file not found」地雷 | LKY 只有原創內容的 Blog",
+    
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://mosdeo.github.io/content/images/macOS_OpenCV.png"
+    },
+    
+    "datePublished": "2019-10-09T16:00:00.000Z",
+    "dateModified": "2019-10-10T11:16:52.492Z",
+    "author": {
+        "@type": "Person",
+        "name": "Lin, Kao-Yuan",
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://mosdeo.github.io/img/default_avatar.png"
+        },
+        "description": "今之能者，謂能轉貼，至於魯蛇，皆能轉貼。不原創，何以別乎？"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "LKY 只有原創內容的 Blog",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://mosdeo.github.io/img/suka-favicon.ico"
+        }
+    },
+    
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://mosdeo.github.io/search?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+    },
+    
+    "keywords": "OpenCV, Mac, 除錯",
+    "description": "安裝 OpenCV 一直都是堪稱玄學的技術，猶記得我大四第一次入門花了兩週才安裝成功，其中一個原因是我自己對「編譯、連結、載入、執行」不熟悉，這也是我技能樹有待補強的地方。 是說，這麼多年過去了，Windows 和 Linux 上我也安裝了無數次，EmguCV 也搞得定，換到上 macOS 仍須鬼打牆一整天才找到解方。 錯誤如下：  fatal error: ‘opencv2/opencv.hpp - Lin, Kao-Yuan - LKY 只有原創內容的 Blog"
+}
+</script>
+
+
+
+    <!-- ### Custom Head ### -->
+    
+</head>
+
+    <body>
+            
+
+            <!-- ### Main content ### -->
+            <!-- ## Header ##-->
+<header>
+    <h1 class="header-title text-center"><a href="/">LKY 只有原創內容的 Blog</a></h1>
+
+    <p class="text-center header-slogan">
+        
+            
+                今之能者，謂能轉貼，至於魯蛇，皆能轉貼。不原創，何以別乎？
+            
+        
+    </p>
+
+    <nav class="navbar-section text-center">
+    
+        <a href="/" class="navbar-link">Home</a>
+    
+    
+        <a href="/archives/" class="navbar-link">Archives</a>
+    
+    
+        <a href="/search" class="navbar-link">Search</a>
+    
+    
+    
+        <div class="dropdown dropdown-right">
+    <a class="navbar-link dropdown-toggle" tabindex="0">Share</a>
+    <ul class="menu share-menu">
+
+        <!-- Share Weibo -->
+        
+        <li class="menu-item">
+            <a href="http://service.weibo.com/share/share.php?appkey=&title=LKY 只有原創內容的 Blog&url=https://mosdeo.github.io&pic=/content/images/macOS_OpenCV.png&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">Share to Weibo</a>
+        </li>
+        
+
+        <!-- Share Twitter -->
+        
+        <li class="menu-item">
+            <a href="https://twitter.com/intent/tweet?text=LKY 只有原創內容的 Blog&url=https://mosdeo.github.io&via=Lin, Kao-Yuan" target="_blank" rel="external noopener noreferrer nofollow">Share to Twitter</a>
+        </li>
+        
+
+        <!-- Share Facebook -->
+        
+        <li class="menu-item">
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://mosdeo.github.io" target="_blank" rel="external noopener noreferrer nofollow">Share to Facebook</a>
+        </li>
+        
+
+        <!-- Share Google+ -->
+        
+        <li class="menu-item">
+            <a href="https://plus.google.com/share?url=https://mosdeo.github.io" target="_blank" rel="external noopener noreferrer nofollow">Share to Google+</a>
+        </li>
+        
+
+        <!-- Share LinkedIn -->
+        
+        <li class="menu-item">
+            <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://mosdeo.github.io&title=解決在 macOS 上安裝 OpenCV 遇到「‘opencv2/opencv.hpp’ file not found」地雷" target="_blank" rel="external noopener noreferrer nofollow">Share to LinkedIn</a>
+        </li>
+        
+
+        <!-- Share QQ -->
+        
+        <li class="menu-item">
+            <a href="http://connect.qq.com/widget/shareqq/index.html?site=LKY 只有原創內容的 Blog&title=解決在 macOS 上安裝 OpenCV 遇到「‘opencv2/opencv.hpp’ file not found」地雷&summary=&pics=/content/images/macOS_OpenCV.png&url=https://mosdeo.github.io" target="_blank" rel="external noopener noreferrer nofollow"> Share to QQ</a>
+        </li>
+        
+
+        <!-- Share Telegram -->
+        
+        <li class="menu-item">
+            <a href="https://t.me/share/url?url=https://mosdeo.github.io&text=解決在 macOS 上安裝 OpenCV 遇到「‘opencv2/opencv.hpp’ file not found」地雷" target="_blank" rel="external noopener noreferrer nofollow">Share to Telegram</a>
+        </li>
+        
+
+        <!-- QRCode -->
+        
+        <li class="menu-item">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANQAAADUCAAAAADBtVLEAAADpklEQVR42u3b0W7bQAxEUf//T7dPBdLW4tzZxBFjXL0ksS15jwDtcknm8esNj4coUaJEiXo71GM4/rz/8XPPXvv3vWevfzwvXeOvgQ7X/e/6okQtQT196P4BPPv9ZNBXN2m6YWScokRtQzUTxLMvIQNuJ4wWK0rUT0BNk8bVZEEGN92MNAZRon4yalpkyTkEPy2ookT9VFS68NUAnp3XLLhX507nfzpKFyXqxSiaeLn750uySaJEfTEKJ9+LBMj093TjyITxpVUPUaJegJo2eG1A+jg4rtBNokaUqG0o8uCSpH4KaJuiHtms4kK2KFHfiCIF6auNIt3MtQVwugEdA1pRom5CNRNFWmSnxH9baEiImMwUJWoZKhWtafA5JfabQBk1pIgStQBFkyVtI0lTwG7HcnlNUaKWoMjD2yya7QREFukpwBUlahMqPcAkSZ8GSieV9PkYHIsStQiVAlHSJJVeT9910sQ1Ft1EiboBRQPZlNy83LiVmz1S1L68gaJELUA1mzqSmCQTCC06kEAZV+dFifomFEmcHDdrHEw0tPhW73xFifpmVLpoKs7RG3BaYEuFPVGitqCaDSBNlKTmj6ZBsmkkESVqC4pcMAWiZOBNAQ0FsKnhSpSoG1B08aQBJ7nOdMNo89dYIBAl6kYU+ZL0gDfNhmkRbYvbokRtRDWbQzpBTF9OkqFkY3gcpYsS9ULUZ4JRmtxMYHpunMhEiVqAOm1uIkn+ppmRFO+qSqIoUTehSBKFFObIANPiipOWD/APLKJE3YRqN2x0kE2BLTWZ4AK7KFELUGnRbBOUzWI5BbepkBCjdFGibkaRxApO1IPgNW0ajxZ+UaKWoFICJeGbBOZJQocs/qJEbUGR4trJYEnihSBJ4CxK1DZU05yYJhdaEP9sQySqzosSdSOKPJh0Ijht0KLNXXiiECXqJtSUKKFNUm3yny7MpOgnStQmFH2om0HSDd5J8+NxhlaUqBtQUzLytKBNA1napDVOWKJELUKRwJEmMUmhIBUa0oQlStRWFAE1we9JgpNuSuOGVpSoBah0kMQkLXy3BYG6IUWUqAUokqwkBWbaGJU2liTojZtEUaJuRtEGwtTwODVRpUIBbQBDDVeiRC1AtYmOppBGi9E0wBUl6l1QTaMiaR5OiUwyyYgS9dNQqXmwSZLQxX4a27RBFSVqE4okTppAdXrQm8WZNpWIErUJRZP5NBClQWmbqImBsShRC1DvdIgSJUqUqLc5fgO8zlfEBdehIwAAAABJRU5ErkJggg==" alr="QRCode">
+        </li>
+        
+
+    </ul>
+</div>
+    
+    
+        <a href="/atom.xml" target="_blank" class="navbar-link">RSS</a>
+    
+</nav>
+</header>
+
+            
+    <!-- ## Post ## -->
+    <div class="post-container">
+    <div id="post-card" class="card">
+        
+            <div class="card-image lazyload" data-bg="url('/content/images/macOS_OpenCV.png')"></div>
+        
+        <div class="card-item-container">
+            <div class="card-inner-cell">
+                <!-- # Post Header Info # -->
+                <div class="card-header">
+                    
+    <h1 class="card-title h3 mb-2">解決在 macOS 上安裝 OpenCV 遇到「‘opencv2/opencv.hpp’ file not found」地雷</h1>
+
+
+
+
+<div class="post-header-info">
+    <p class="post-header-info-left text-gray">
+        <img class="author-thumb lazyload" data-src="/img/default_avatar.png" src="/img/suka-lazyload.gif" alt="Lin, Kao-Yuan's Avatar">
+        <span>2019-10-10</span>
+        
+        
+            <!-- Busuanzi Post Views -->
+<span id="busuanzi_container_page_pv" hidden>
+    <span class="suka-devide-dot"></span>
+    <span></span>
+    <span id="busuanzi_value_page_pv"></span>
+    <span>Views</span>
+</span>
+        
+        
+    </p>
+    <div class="post-header-info-right">
+        
+            <div class="dropdown dropdown-right">
+<a class="dropdown-toggle" tabindex="0">Share the post</a>
+<ul class="menu share-menu">
+    <!-- Share Weibo -->
+    
+    <li class="menu-item">
+        <a href="http://service.weibo.com/share/share.php?appkey=&title=解決在 macOS 上安裝 OpenCV 遇到「‘opencv2/opencv.hpp’ file not found」地雷&url=https://mosdeo.github.io/2019/10/10/%E5%9C%A8%20macOS%20%E4%B8%8A%E5%AE%89%E8%A3%9D%20OpenCV%20%E9%81%87%E5%88%B0%E7%9A%84%E5%9C%B0%E9%9B%B7/&pic=/content/images/macOS_OpenCV.png&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">Share to Weibo</a>
+    </li>
+    
+
+    <!-- Share Twitter -->
+    
+    <li class="menu-item">
+        <a href="https://twitter.com/intent/tweet?text=解決在 macOS 上安裝 OpenCV 遇到「‘opencv2/opencv.hpp’ file not found」地雷&url=https://mosdeo.github.io/2019/10/10/%E5%9C%A8%20macOS%20%E4%B8%8A%E5%AE%89%E8%A3%9D%20OpenCV%20%E9%81%87%E5%88%B0%E7%9A%84%E5%9C%B0%E9%9B%B7/&via=Lin, Kao-Yuan" target="_blank" rel="external noopener noreferrer nofollow">Share to Twitter</a>
+    </li>
+    
+
+    <!-- Share Facebook -->
+    
+    <li class="menu-item">
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://mosdeo.github.io/2019/10/10/%E5%9C%A8%20macOS%20%E4%B8%8A%E5%AE%89%E8%A3%9D%20OpenCV%20%E9%81%87%E5%88%B0%E7%9A%84%E5%9C%B0%E9%9B%B7/" target="_blank" rel="external noopener noreferrer nofollow">Share to Facebook</a>
+    </li>
+    
+
+    <!-- Share Google+ -->
+    
+    <li class="menu-item">
+        <a href="https://plus.google.com/share?url=https://mosdeo.github.io/2019/10/10/%E5%9C%A8%20macOS%20%E4%B8%8A%E5%AE%89%E8%A3%9D%20OpenCV%20%E9%81%87%E5%88%B0%E7%9A%84%E5%9C%B0%E9%9B%B7/" target="_blank" rel="external noopener noreferrer nofollow">Share to Google+</a>
+    </li>
+    
+
+    <!-- Share LinkedIn -->
+    
+    <li class="menu-item">
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://mosdeo.github.io/2019/10/10/%E5%9C%A8%20macOS%20%E4%B8%8A%E5%AE%89%E8%A3%9D%20OpenCV%20%E9%81%87%E5%88%B0%E7%9A%84%E5%9C%B0%E9%9B%B7/&title=LKY 只有原創內容的 Blog" target="_blank" rel="external noopener noreferrer nofollow">Share to LinkedIn</a>
+    </li>
+    
+
+    <!-- Share QQ -->
+    
+    <li class="menu-item">
+        <a href="http://connect.qq.com/widget/shareqq/index.html?site=LKY 只有原創內容的 Blog&title=LKY 只有原創內容的 Blog&summary=&pics=/content/images/macOS_OpenCV.png&url=https://mosdeo.github.io/2019/10/10/%E5%9C%A8%20macOS%20%E4%B8%8A%E5%AE%89%E8%A3%9D%20OpenCV%20%E9%81%87%E5%88%B0%E7%9A%84%E5%9C%B0%E9%9B%B7/" target="_blank" rel="external noopener noreferrer nofollow"> Share to QQ</a>
+    </li>
+    
+
+    <!-- Share Telegram -->
+    
+    <li class="menu-item">
+        <a href="https://t.me/share/url?url=https://mosdeo.github.io/2019/10/10/%E5%9C%A8%20macOS%20%E4%B8%8A%E5%AE%89%E8%A3%9D%20OpenCV%20%E9%81%87%E5%88%B0%E7%9A%84%E5%9C%B0%E9%9B%B7/&text=LKY 只有原創內容的 Blog" target="_blank" rel="external noopener noreferrer nofollow">Share to Telegram</a>
+    </li>
+    
+
+    <!-- QRCode -->
+    
+    <li class="menu-item">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANQAAADUCAAAAADBtVLEAAADpklEQVR42u3b0W7bQAxEUf//T7dPBdLW4tzZxBFjXL0ksS15jwDtcknm8esNj4coUaJEiXo71GM4/rz/8XPPXvv3vWevfzwvXeOvgQ7X/e/6okQtQT196P4BPPv9ZNBXN2m6YWScokRtQzUTxLMvIQNuJ4wWK0rUT0BNk8bVZEEGN92MNAZRon4yalpkyTkEPy2ookT9VFS68NUAnp3XLLhX507nfzpKFyXqxSiaeLn750uySaJEfTEKJ9+LBMj093TjyITxpVUPUaJegJo2eG1A+jg4rtBNokaUqG0o8uCSpH4KaJuiHtms4kK2KFHfiCIF6auNIt3MtQVwugEdA1pRom5CNRNFWmSnxH9baEiImMwUJWoZKhWtafA5JfabQBk1pIgStQBFkyVtI0lTwG7HcnlNUaKWoMjD2yya7QREFukpwBUlahMqPcAkSZ8GSieV9PkYHIsStQiVAlHSJJVeT9910sQ1Ft1EiboBRQPZlNy83LiVmz1S1L68gaJELUA1mzqSmCQTCC06kEAZV+dFifomFEmcHDdrHEw0tPhW73xFifpmVLpoKs7RG3BaYEuFPVGitqCaDSBNlKTmj6ZBsmkkESVqC4pcMAWiZOBNAQ0FsKnhSpSoG1B08aQBJ7nOdMNo89dYIBAl6kYU+ZL0gDfNhmkRbYvbokRtRDWbQzpBTF9OkqFkY3gcpYsS9ULUZ4JRmtxMYHpunMhEiVqAOm1uIkn+ppmRFO+qSqIoUTehSBKFFObIANPiipOWD/APLKJE3YRqN2x0kE2BLTWZ4AK7KFELUGnRbBOUzWI5BbepkBCjdFGibkaRxApO1IPgNW0ajxZ+UaKWoFICJeGbBOZJQocs/qJEbUGR4trJYEnihSBJ4CxK1DZU05yYJhdaEP9sQySqzosSdSOKPJh0Ijht0KLNXXiiECXqJtSUKKFNUm3yny7MpOgnStQmFH2om0HSDd5J8+NxhlaUqBtQUzLytKBNA1napDVOWKJELUKRwJEmMUmhIBUa0oQlStRWFAE1we9JgpNuSuOGVpSoBah0kMQkLXy3BYG6IUWUqAUokqwkBWbaGJU2liTojZtEUaJuRtEGwtTwODVRpUIBbQBDDVeiRC1AtYmOppBGi9E0wBUl6l1QTaMiaR5OiUwyyYgS9dNQqXmwSZLQxX4a27RBFSVqE4okTppAdXrQm8WZNpWIErUJRZP5NBClQWmbqImBsShRC1DvdIgSJUqUqLc5fgO8zlfEBdehIwAAAABJRU5ErkJggg==" alt="QRCode">
+    </li>
+    
+
+</ul>
+</div>
+        
+    </div>
+</div>
+                </div>
+                <div class="card-body">
+                    
+                        
+                        
+                            <div id="post-toc"><ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%AA%A2%E6%9F%A5%E7%B7%A8%E8%AD%AF%E8%A8%AD%E5%AE%9A"><span class="post-toc-number">1.</span> <span class="post-toc-text">檢查編譯設定</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E9%80%8F%E9%81%8E-IntelliSense-%E9%A9%97%E8%AD%89-includePath-%E6%AD%A3%E7%A2%BA%E6%80%A7"><span class="post-toc-number">2.</span> <span class="post-toc-text">透過 IntelliSense 驗證 includePath 正確性</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%A4%B1%E6%95%97%EF%BC%9A%E6%94%B9-include"><span class="post-toc-number">3.</span> <span class="post-toc-text">失敗：改 include</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%88%90%E5%8A%9F%E8%A7%A3%E6%B1%BA%EF%BC%9Asoft-link"><span class="post-toc-number">4.</span> <span class="post-toc-text">成功解決：soft link</span></a></li></ol></div>
+                        
+                    
+                    <article id="post-content">
+                        <p>安裝 OpenCV 一直都是堪稱玄學的技術，猶記得我大四第一次入門花了兩週才安裝成功，其中一個原因是我自己對「編譯、連結、載入、執行」不熟悉，這也是我技能樹有待補強的地方。</p>
+<p>是說，這麼多年過去了，Windows 和 Linux 上我也安裝了無數次，EmguCV 也搞得定，換到上 macOS 仍須鬼打牆一整天才找到解方。</p>
+<p>錯誤如下：</p>
+<blockquote>
+<p>fatal error: ‘opencv2/opencv.hpp’ file not found</p>
+</blockquote>
+<hr>
+<h2 id="檢查編譯設定">檢查編譯設定</h2>
+<p>我又反覆檢查 VSCode 中 task.json 的編譯設定，確認給出的路徑裡的確有 libs</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;version&quot;</span>: <span class="string">&quot;2.0.0&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;command&quot;</span>: <span class="string">&quot;clang++&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;args&quot;</span>: [</span><br><span class="line">            <span class="string">&quot;$&#123;file&#125;&quot;</span>,</span><br><span class="line">            <span class="comment">//&quot;main(regression_demo).cpp&quot;,</span></span><br><span class="line">            <span class="comment">//&quot;main(classification_demo).cpp&quot;,</span></span><br><span class="line">            <span class="string">&quot;libLKYDeepNN/InputLayer.cpp&quot;</span>,<span class="string">&quot;libLKYDeepNN/HiddenLayer.cpp&quot;</span>,<span class="string">&quot;libLKYDeepNN/OutputLayer.cpp&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-Wall&quot;</span>,</span><br><span class="line">            <span class="comment">//&quot;-v&quot;,</span></span><br><span class="line">            <span class="string">&quot;-pthread&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-I /usr/local/Cellar/opencv/4.1.1_2/lib/&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-lopencv_core&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-lopencv_highgui&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-lopencv_imgproc&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-g&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-std=c++11&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-Ofast&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-o&quot;</span>,</span><br><span class="line">            <span class="string">&quot;LKYDeepNN&quot;</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="透過-IntelliSense-驗證-includePath-正確性">透過 IntelliSense 驗證 includePath 正確性</h2>
+<p>而我在 c_cpp_properties.json 中給 IntelliSense 的 includePath 是這樣，</p>
+<blockquote>
+<p>/usr/local/Cellar/opencv/4.1.1_2/include/opencv4/**</p>
+</blockquote>
+<p>IntelliSense 能正確識別叫出 namespace cv 底下的東西，所以也驗證了是正確的。</p>
+<hr>
+<h2 id="失敗：改-include">失敗：改 include</h2>
+<p>如果我把 include 從這樣</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;opencv2/opencv.hpp&gt;</span></span></span><br></pre></td></tr></table></figure>
+<p>改成這樣</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;opencv4/opencv2/opencv.hpp&gt;</span></span></span><br></pre></td></tr></table></figure>
+<p>的話，「fatal error: ‘opencv2/opencv.hpp’ file not found」會消失，但是換成其他的更深層的 OpenCV hpp 找不到 include。</p>
+<p>別忘了要改回來。</p>
+<hr>
+<h2 id="成功解決：soft-link">成功解決：soft link</h2>
+<p>最後發現，在 /usr/local/inlcude 建立一個 softlink 指向 opencv2，就可以成功編譯。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s /usr/<span class="built_in">local</span>/include/opencv4/opencv2 opencv2</span><br></pre></td></tr></table></figure>
+<p>是解決了，但我依然說不清楚誰去參考了「/usr/local/include/opencv2」因此得到錯誤或正確的結果。</p>
+<p>參考來源：https://blog.csdn.net/a13602955218/article/details/101625857</p>
+
+                    </article>
+                    
+
+
+    <blockquote id="date-expire-notification" class="post-expired-notify">This article was last updated on <span id="date-expire-num"></span> days ago, and the information described in the article may have changed.</blockquote>
+    <script>
+    (function() {
+        var dateUpdate = Date.parse("2019-10-10");
+        var nowDate = new Date();
+        var a = nowDate.getTime();
+        var b = a - dateUpdate;
+        var daysUpdateExpire = Math.floor(b/(24*3600*1000));
+        if (daysUpdateExpire >= 120) {
+            document.getElementById('date-expire-num').innerHTML = daysUpdateExpire;
+        } else {
+            document.getElementById('date-expire-notification').style.display = 'none';
+        }
+    })();
+    </script>
+
+
+<p class="post-footer-info mb-0 pt-0">Published at&nbsp;<time datetime="2019-10-09T16:00:00.000Z" itemprop="datePublished">2019-10-10</time>
+
+</p>
+<p class="post-footer-info mb-0 pt-2">
+
+
+
+<span class="post-tags-list mt-2">
+
+<a class="post-tags-list-item" href="/tags/OpenCV/" rel="tag">#&nbsp;OpenCV</a>
+
+<a class="post-tags-list-item" href="/tags/Mac/" rel="tag">#&nbsp;Mac</a>
+
+<a class="post-tags-list-item" href="/tags/%E9%99%A4%E9%8C%AF/" rel="tag">#&nbsp;除錯</a>
+
+</span>
+
+
+</p>
+
+                </div>
+                <div class="post-nav px-2 bg-gray">
+<ul class="pagination">
+    <!-- Prev Nav -->
+    
+        <li class="page-item page-prev">
+            <a href="/2020/01/16/LeetCode_Concurrency_Go%E8%AA%9E%E8%A8%80%E8%A9%B3%E8%A7%A3_PrintFooBarAlternately/" rel="prev">
+                <div class="page-item-title"><i class="icon icon-back" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">LeetCode Concurrency Go 語言詳解：Print FooBar Alternately</div>
+            </a>
+        </li>
+    
+
+    <!-- Next Nav -->
+    
+        <li class="page-item page-next">
+            <a href="/2019/03/20/Charlotte%E7%A2%B3%E6%8E%92%E6%94%BE%E8%A9%95%E4%BC%B0%E6%A1%88%E4%BE%8B/" rel="next">
+                <div class="page-item-title"><i class="icon icon-forward" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">Charlotte 碳排放評估案例</div>
+            </a>
+        </li>
+    
+</ul>
+</div>
+
+                
+                    <!-- # Comment # -->
+                    
+                        <div class="card-footer post-comment">
+                            <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://mosdeo.github.io/2019/10/10/%E5%9C%A8%20macOS%20%E4%B8%8A%E5%AE%89%E8%A3%9D%20OpenCV%20%E9%81%87%E5%88%B0%E7%9A%84%E5%9C%B0%E9%9B%B7/'; // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'https://mosdeo.github.io/2019/10/10/%E5%9C%A8%20macOS%20%E4%B8%8A%E5%AE%89%E8%A3%9D%20OpenCV%20%E9%81%87%E5%88%B0%E7%9A%84%E5%9C%B0%E9%9B%B7/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+<script id="disqus-thread-script">
+    (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document;
+        var s = d.createElement('script');
+        s.src = '//mosdeo-github-io.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', + new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+                        </div>
+                    
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!-- ### Footer ### -->
+            <footer class="text-center">
+    <!-- footer copyright -->
+    
+        <p class="footer-copyright mb-0">Copyright&nbsp;©&nbsp;<span id="copyright-year"></span>
+            <a class="footer-copyright-a" href="https://mosdeo.github.io">LKY 只有原創內容的 Blog</a>
+        </p>
+
+    <!-- footer custom text -->
+    <p class="footer-text mb-0">
+    
+    </p>
+    <!-- footer develop info -->
+    <p class="footer-develop mb-0">
+        
+    <!-- Busuanzi User Views -->
+    <span id="busuanzi_container_site_uv" hidden>
+        <span></span>
+        <span id="busuanzi_value_site_uv"></span>
+        <span>Viewers</span>
+        
+            <span>|</span>
+        
+    </span>
+
+
+
+
+        
+        Powered by&nbsp;<!--
+         --><a href="https://hexo.io" target="_blank" class="footer-develop-a" rel="external nofollow noopener noreferrer">Hexo</a><span class="footer-develop-divider"></span>Theme&nbsp;-&nbsp;<!--
+         --><a href="https://github.com/SukkaW/hexo-theme-suka" target="_blank" class="footer-develop-a" rel="external noopener">Suka</a>
+    </p>
+</footer>
+
+
+        <!-- ### Import File ### -->
+        <!-- ### Footer JS Import ### -->
+
+<script>
+
+    
+window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 50
+};
+document.getElementById('copyright-year').textContent = new Date().getFullYear();
+console.log('\n %c Suka Theme (hexo-theme-suka) | © SukkaW | Verision 1.3.3 %c https://github.com/SukkaW/hexo-theme-suka \n', 'color: #fff; background: #444; padding:5px 0;', 'background: #bbb; padding:5px 0;');
+
+</script>
+
+<script src="/lib/vanilla-lazyload/lazyload.min.js" async></script>
+    <script src="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.js" async></script>
+
+
+<!-- Offset -->
+
+
+
+
+<!-- Comment -->
+
+    
+        <script id="dsq-count-scr" src="https://mosdeo-github-io.disqus.com/count.js" async></script>
+
+    
+
+
+<!-- ### Custom Footer ### -->
+
+    </body>
+
+</html>

@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+
+<html lang="zh-TW">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        hexo-theme-suka © SukkaW
+        GitHub: https://github.com/SukkaW/hexo-theme-suka
+    -->
+
+    <!-- ### Resource Hint ### -->
+
+    <!-- ## DNS Prefetch ## -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+<!-- busuanzi -->
+
+    <link rel="dns-prefetch" href="//busuanzi.ibruce.info">
+
+
+<!-- comment -->
+
+
+    <link rel="dns-prefetch" href="//disqus.com">
+    <link rel="dns-prefetch" href="//mosdeo-github-io.disqus.com">
+
+
+
+
+
+
+<!-- analytics -->
+
+
+    <link rel="dns-prefetch" href="//www.google-analytics.com">
+
+
+
+
+
+
+    <!-- ## Preload ## -->
+    
+    <!-- Busuanzi -->
+    
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.js" as="script">
+
+
+
+
+
+
+
+    <!-- ### Meta & Title & Info ### -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <meta name="renderer" content="webkit">
+
+    <!-- Title -->
+    <title>我在微信公眾號上的文章清單(滾動更新) | LKY 只有原創內容的 Blog</title>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image&#x2F;ico" href="/img/suka-favicon.ico">
+
+    <!-- ### Import File ### -->
+    <link rel="stylesheet" href="/lib/spectre/spectre.min.css"><style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    a, a:visited {
+        color: #0070ff;
+    }
+
+    a:active, a:focus, a:hover {
+        color: #0070ff;
+        opacity: .75;
+    }
+
+    #post-content a,
+    #post-content a:hover,
+    #post-content a:focus,
+    #post-content a:visited {
+        color: #005eb9;
+        opacity: 1;
+    }
+
+    
+
+    .post-entry .card-body a {
+        color: #0070ff;
+    }
+
+    .avatar {
+        background: #444;
+    }
+
+    .navbar-link,
+    .navbar-link:visited,
+    .timeline .timeline-item .timeline-icon.icon-lg {
+        color: #0070ff;
+    }
+
+    .navbar-link:hover {
+        color: #0070ff;
+        opacity: .8;
+    }
+
+    #search-input .btn,
+    #disqus_click_btn,
+    #disqus-switch-to-direct,
+    #disqus-loadmore-button {
+        background: #727e96;
+        border-color: #727e96;
+        color: #fff;
+    }
+
+    #post-toc a.post-toc-link,
+    #post-toc a.post-toc-link:visited,
+    .share-menu.menu .menu-item>a {
+        color: #727e96;
+    }
+
+    .share-menu.menu .menu-item>a:hover,
+    .share-menu.menu .menu-item>a:focus,
+    .share-menu.menu .menu-item>a:visited {
+        color: #50596c;
+        background: #f8f9fa;
+        opacity: .85;
+    }
+</style><link rel="stylesheet" href="/css/style.min.css">
+
+
+
+
+
+
+
+
+    <!-- Prettify Theme -->
+    
+    <link rel="preload" href="/css/highlight/github.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/css/highlight/github.min.css"></noscript>
+
+
+
+
+
+<script>
+/*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+!function(t){"use strict";t.loadCSS||(t.loadCSS=function(){});var e=loadCSS.relpreload={};if(e.support=function(){var e;try{e=t.document.createElement("link").relList.supports("preload")}catch(t){e=!1}return function(){return e}}(),e.bindMediaToggle=function(t){var e=t.media||"all";function a(){t.addEventListener?t.removeEventListener("load",a):t.attachEvent&&t.detachEvent("onload",a),t.setAttribute("onload",null),t.media=e}t.addEventListener?t.addEventListener("load",a):t.attachEvent&&t.attachEvent("onload",a),setTimeout(function(){t.rel="stylesheet",t.media="only x"}),setTimeout(a,3e3)},e.poly=function(){if(!e.support())for(var a=t.document.getElementsByTagName("link"),n=0;n<a.length;n++){var o=a[n];"preload"!==o.rel||"style"!==o.getAttribute("as")||o.getAttribute("data-loadcss")||(o.setAttribute("data-loadcss",!0),e.bindMediaToggle(o))}},!e.support()){e.poly();var a=t.setInterval(e.poly,500);t.addEventListener?t.addEventListener("load",function(){e.poly(),t.clearInterval(a)}):t.attachEvent&&t.attachEvent("onload",function(){e.poly(),t.clearInterval(a)})}"undefined"!=typeof exports?exports.loadCSS=loadCSS:t.loadCSS=loadCSS}("undefined"!=typeof global?global:this);
+</script>
+
+    <!-- ### Site Verification ### -->
+    
+
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="LKY 只有原創內容的 Blog"><meta name="msapplication-starturl" content="https://mosdeo.github.io"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="LKY 只有原創內容的 Blog"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- ### The Open Graph & Twitter Card Protocol ### -->
+    <meta property="og:title" content="我在微信公眾號上的文章清單(滾動更新) | LKY 只有原創內容的 Blog"><meta property="og:site_name" content="LKY 只有原創內容的 Blog"><meta property="og:type" content="article"><meta property="og:url" content="https://mosdeo.github.io/2020/09/13/%E6%88%91%E5%9C%A8%E5%BE%AE%E4%BF%A1%E5%85%AC%E7%9C%BE%E8%99%9F%E4%B8%8A%E7%9A%84%E6%96%87%E7%AB%A0%E6%B8%85%E5%96%AE_%E6%BB%BE%E5%8B%95%E6%9B%B4%E6%96%B0/"><meta property="og:locale" content="zh-TW"><meta name="description" content="由於在微信的資料池裡面，搜尋我自己的名字，會被某個同名同姓的乒乓球選手新聞淹沒，所以我特地把自己發表在微信公眾號上的文章做一個清單，方便我自己查閱。 技術 Go语言中文网 2020-09-13 面试官：这个经典的并发问题用 Go 语言如何实现？ 2020-04-03 LeetCode Go 并发题详解：交替打印字符串 2020-02-19 只在我计算机上能跑的代码：select-case-defa - Lin, Kao-Yuan - LKY 只有原創內容的 Blog"><meta name="keywords" content="大陸"><meta property="og:image" content="http://5b0988e595225.cdn.sohucs.com/images/20180104/5eca329d7b5f4cabb34101cd98f60374.jpeg"><meta property="article:published_time" content="2020-09-12T16:00:00.000Z"><meta property="article:modified_time" content="2020-12-10T08:31:50.413Z"><meta property="og:updated_time" content="2020-12-10T08:31:50.413Z"><meta property="article:author" content="Lin, Kao-Yuan"><meta property="article:tag" content="大陸"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="http://5b0988e595225.cdn.sohucs.com/images/20180104/5eca329d7b5f4cabb34101cd98f60374.jpeg">
+
+    
+
+    <!-- ### Canonical link ### -->
+    <link rel="canonical" href="https://mosdeo.github.io/2020/09/13/%E6%88%91%E5%9C%A8%E5%BE%AE%E4%BF%A1%E5%85%AC%E7%9C%BE%E8%99%9F%E4%B8%8A%E7%9A%84%E6%96%87%E7%AB%A0%E6%B8%85%E5%96%AE_%E6%BB%BE%E5%8B%95%E6%9B%B4%E6%96%B0/">
+
+    <meta name="generator" content="Hexo 5.2.0">
+
+    <!-- ### Analytics ### -->
+    
+    <!-- Google Analytics -->
+<script>
+    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+    ga('create', 'UA-64570213-2', 'auto');
+    ga('send', 'pageview');
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+
+
+
+
+
+
+
+
+
+    <!-- ### Structured Data ### -->
+    
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "url": "https://mosdeo.github.io/2020/09/13/%E6%88%91%E5%9C%A8%E5%BE%AE%E4%BF%A1%E5%85%AC%E7%9C%BE%E8%99%9F%E4%B8%8A%E7%9A%84%E6%96%87%E7%AB%A0%E6%B8%85%E5%96%AE_%E6%BB%BE%E5%8B%95%E6%9B%B4%E6%96%B0/",
+    "@type": "BlogPosting",
+    "logo": "https://mosdeo.github.io/img/suka-favicon.ico",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://mosdeo.github.io/2020/09/13/%E6%88%91%E5%9C%A8%E5%BE%AE%E4%BF%A1%E5%85%AC%E7%9C%BE%E8%99%9F%E4%B8%8A%E7%9A%84%E6%96%87%E7%AB%A0%E6%B8%85%E5%96%AE_%E6%BB%BE%E5%8B%95%E6%9B%B4%E6%96%B0/"
+    },
+    "headline": "我在微信公眾號上的文章清單(滾動更新) | LKY 只有原創內容的 Blog",
+    
+    "image": {
+        "@type": "ImageObject",
+        "url": "http://5b0988e595225.cdn.sohucs.com/images/20180104/5eca329d7b5f4cabb34101cd98f60374.jpeg"
+    },
+    
+    "datePublished": "2020-09-12T16:00:00.000Z",
+    "dateModified": "2020-12-10T08:31:50.413Z",
+    "author": {
+        "@type": "Person",
+        "name": "Lin, Kao-Yuan",
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://mosdeo.github.io/img/default_avatar.png"
+        },
+        "description": "今之能者，謂能轉貼，至於魯蛇，皆能轉貼。不原創，何以別乎？"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "LKY 只有原創內容的 Blog",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://mosdeo.github.io/img/suka-favicon.ico"
+        }
+    },
+    
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://mosdeo.github.io/search?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+    },
+    
+    "keywords": "大陸",
+    "description": "由於在微信的資料池裡面，搜尋我自己的名字，會被某個同名同姓的乒乓球選手新聞淹沒，所以我特地把自己發表在微信公眾號上的文章做一個清單，方便我自己查閱。 技術 Go语言中文网 2020-09-13 面试官：这个经典的并发问题用 Go 语言如何实现？ 2020-04-03 LeetCode Go 并发题详解：交替打印字符串 2020-02-19 只在我计算机上能跑的代码：select-case-defa - Lin, Kao-Yuan - LKY 只有原創內容的 Blog"
+}
+</script>
+
+
+
+    <!-- ### Custom Head ### -->
+    
+</head>
+
+    <body>
+            
+
+            <!-- ### Main content ### -->
+            <!-- ## Header ##-->
+<header>
+    <h1 class="header-title text-center"><a href="/">LKY 只有原創內容的 Blog</a></h1>
+
+    <p class="text-center header-slogan">
+        
+            
+                今之能者，謂能轉貼，至於魯蛇，皆能轉貼。不原創，何以別乎？
+            
+        
+    </p>
+
+    <nav class="navbar-section text-center">
+    
+        <a href="/" class="navbar-link">Home</a>
+    
+    
+        <a href="/archives/" class="navbar-link">Archives</a>
+    
+    
+        <a href="/search" class="navbar-link">Search</a>
+    
+    
+    
+        <div class="dropdown dropdown-right">
+    <a class="navbar-link dropdown-toggle" tabindex="0">Share</a>
+    <ul class="menu share-menu">
+
+        <!-- Share Weibo -->
+        
+        <li class="menu-item">
+            <a href="http://service.weibo.com/share/share.php?appkey=&title=LKY 只有原創內容的 Blog&url=https://mosdeo.github.io&pic=http://5b0988e595225.cdn.sohucs.com/images/20180104/5eca329d7b5f4cabb34101cd98f60374.jpeg&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">Share to Weibo</a>
+        </li>
+        
+
+        <!-- Share Twitter -->
+        
+        <li class="menu-item">
+            <a href="https://twitter.com/intent/tweet?text=LKY 只有原創內容的 Blog&url=https://mosdeo.github.io&via=Lin, Kao-Yuan" target="_blank" rel="external noopener noreferrer nofollow">Share to Twitter</a>
+        </li>
+        
+
+        <!-- Share Facebook -->
+        
+        <li class="menu-item">
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://mosdeo.github.io" target="_blank" rel="external noopener noreferrer nofollow">Share to Facebook</a>
+        </li>
+        
+
+        <!-- Share Google+ -->
+        
+        <li class="menu-item">
+            <a href="https://plus.google.com/share?url=https://mosdeo.github.io" target="_blank" rel="external noopener noreferrer nofollow">Share to Google+</a>
+        </li>
+        
+
+        <!-- Share LinkedIn -->
+        
+        <li class="menu-item">
+            <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://mosdeo.github.io&title=我在微信公眾號上的文章清單(滾動更新)" target="_blank" rel="external noopener noreferrer nofollow">Share to LinkedIn</a>
+        </li>
+        
+
+        <!-- Share QQ -->
+        
+        <li class="menu-item">
+            <a href="http://connect.qq.com/widget/shareqq/index.html?site=LKY 只有原創內容的 Blog&title=我在微信公眾號上的文章清單(滾動更新)&summary=&pics=http://5b0988e595225.cdn.sohucs.com/images/20180104/5eca329d7b5f4cabb34101cd98f60374.jpeg&url=https://mosdeo.github.io" target="_blank" rel="external noopener noreferrer nofollow"> Share to QQ</a>
+        </li>
+        
+
+        <!-- Share Telegram -->
+        
+        <li class="menu-item">
+            <a href="https://t.me/share/url?url=https://mosdeo.github.io&text=我在微信公眾號上的文章清單(滾動更新)" target="_blank" rel="external noopener noreferrer nofollow">Share to Telegram</a>
+        </li>
+        
+
+        <!-- QRCode -->
+        
+        <li class="menu-item">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPQAAAD0CAAAAACJRFQiAAAEmUlEQVR42u3aS27jQBAEUd//0p7VAANDrIxseRbqCm68sEjxtYFy/b6+F15fokWLFi1a9Iehv4br7+///ezLh/3z2en+V/f8vD89++d7U4do0ZvQCfL0JU+IhHt6/s/7IqL4g4gWvQ2dAtgUNF59pj3Q9uCfDmB0iBYt+psmG+kZJIlJ7zAlM6JFi+YfpoGjLQimQ5sCo2jRojO6KRRSEpICEWkcTPCTREi06E1o0hj8hJ+/3g0VLfoD0XHoFRKPKZkhwS8FqlSc/JeppWjRH4yemm7pdwk83ZcOJQ0IyKAxDvBEi74QTQqA9M+fNA9oA78JhuTARIveiD55qSZRSMkJGfa3jcuxiSBa9OXokwYhTR5icDkczNOEZqyyRIu+EN0EFDocb5v87wYpshwkWvQWNGnunRQhuLAHB3ay4Bejt2jRl6NTI7ANIrQp0ELfWuQRLXoBmjT6SGOOBjOyYJMCH12wqzcRRIu+AJ2agfTFpuQhvTgpQMigcSqORIvegibJBS3ySTHRHCYpQmLwSpsIokVfhiYDd7IgOzUCSdFCB/6kAVlXWaJFX4RuAxmBkaYAPbj0XtP7oY1B0aIvQ5MkgLzE0xc2zb8mIaHBTbTorWgyIGsH9LQBQA+KHNY4EBAtegGaDu1oA6Ft4KXvaxKbtPAnWvQGdLtQQxp0qZBpigzSbKgXYkWLvhidhvBNcdAs4JChfLs0l4KcaNEb0CgAFM36b3CR+8iBp+aBaNFb0eSf/1PjIDX1yIJdevHfWNwTLXozOgW3ZuElNRBoMYITkMkiWvQCdHpYevjJUL5ZeqUDifR80aI3oWmTf2rejYOzg2Z+Ajd/DNGiN6HbxIIEmSnQkSXbJoGhxYlo0VvQbWEwFQekSUhejl71UFG06KVosmhTLa2BwEUWa5riBBUcokVfiCaFBS0OTpr5zUCPLOJMwVK06C1ouihDhuWp0EjFAmluPH0+NjdEi16ApktqCUSLAAKegmzTXEQbg6JFX4omyypTw58s6ZBlvDTsb5KqqjEoWvQl6LbgoAn+aaFPF3xIoRK3gEWLvhCdhvBtYz8t06KmfLGQWyUzokUvQNPg0TYISTLTFDlk2BcDm2jRC9C/AT0JNin5oQ3GqggRLXoBekzQwRCgTWLI4I4s0TVDBdGiN6GbIuKkIKDDuoRPg0MUIEWLXoROScI7A3bSMHhC06YhCniiRS9A04U5uujSBiASAE8GfXGAJ1r0xei2aUeXbNCLFAN72tR/+p1o0RvQZJE1JfLTEL5JSkjzniYmL79TtOglaFIokIWbk4Fes1RPnjUWOqJFL0CnAfcU5KbBX2owNMt05CDR0EG06MXoNNSbDoI0+N4Z1tPniha9Ef01XPSF6SCAJDRpAS41CPFQXrToi9FTACONvrTUngIiXXanz43NftGiF6DTkgtp0JGgMwU7EsDooby8V7Ro0XixPQVFmvDQwiUNE1ByIlr0cjRJ8qchIF2eSQByEG8lJ6JFX4BuEg0SpFJAIkUITWjogo5o0VvQJ0U6/iK4KE+b+3QQEAsO0aIvRW+6RIsWLVq06A+5/gC6RfQvy04z2AAAAABJRU5ErkJggg==" alr="QRCode">
+        </li>
+        
+
+    </ul>
+</div>
+    
+    
+        <a href="/atom.xml" target="_blank" class="navbar-link">RSS</a>
+    
+</nav>
+</header>
+
+            
+    <!-- ## Post ## -->
+    <div class="post-container">
+    <div id="post-card" class="card">
+        
+            <div class="card-image lazyload" data-bg="url('http://5b0988e595225.cdn.sohucs.com/images/20180104/5eca329d7b5f4cabb34101cd98f60374.jpeg')"></div>
+        
+        <div class="card-item-container">
+            <div class="card-inner-cell">
+                <!-- # Post Header Info # -->
+                <div class="card-header">
+                    
+    <h1 class="card-title h3 mb-2">我在微信公眾號上的文章清單(滾動更新)</h1>
+
+
+
+
+<div class="post-header-info">
+    <p class="post-header-info-left text-gray">
+        <img class="author-thumb lazyload" data-src="/img/default_avatar.png" src="/img/suka-lazyload.gif" alt="Lin, Kao-Yuan's Avatar">
+        <span>2020-09-13</span>
+        
+        
+            <!-- Busuanzi Post Views -->
+<span id="busuanzi_container_page_pv" hidden>
+    <span class="suka-devide-dot"></span>
+    <span></span>
+    <span id="busuanzi_value_page_pv"></span>
+    <span>Views</span>
+</span>
+        
+        
+    </p>
+    <div class="post-header-info-right">
+        
+            <div class="dropdown dropdown-right">
+<a class="dropdown-toggle" tabindex="0">Share the post</a>
+<ul class="menu share-menu">
+    <!-- Share Weibo -->
+    
+    <li class="menu-item">
+        <a href="http://service.weibo.com/share/share.php?appkey=&title=我在微信公眾號上的文章清單(滾動更新)&url=https://mosdeo.github.io/2020/09/13/%E6%88%91%E5%9C%A8%E5%BE%AE%E4%BF%A1%E5%85%AC%E7%9C%BE%E8%99%9F%E4%B8%8A%E7%9A%84%E6%96%87%E7%AB%A0%E6%B8%85%E5%96%AE_%E6%BB%BE%E5%8B%95%E6%9B%B4%E6%96%B0/&pic=http://5b0988e595225.cdn.sohucs.com/images/20180104/5eca329d7b5f4cabb34101cd98f60374.jpeg&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">Share to Weibo</a>
+    </li>
+    
+
+    <!-- Share Twitter -->
+    
+    <li class="menu-item">
+        <a href="https://twitter.com/intent/tweet?text=我在微信公眾號上的文章清單(滾動更新)&url=https://mosdeo.github.io/2020/09/13/%E6%88%91%E5%9C%A8%E5%BE%AE%E4%BF%A1%E5%85%AC%E7%9C%BE%E8%99%9F%E4%B8%8A%E7%9A%84%E6%96%87%E7%AB%A0%E6%B8%85%E5%96%AE_%E6%BB%BE%E5%8B%95%E6%9B%B4%E6%96%B0/&via=Lin, Kao-Yuan" target="_blank" rel="external noopener noreferrer nofollow">Share to Twitter</a>
+    </li>
+    
+
+    <!-- Share Facebook -->
+    
+    <li class="menu-item">
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://mosdeo.github.io/2020/09/13/%E6%88%91%E5%9C%A8%E5%BE%AE%E4%BF%A1%E5%85%AC%E7%9C%BE%E8%99%9F%E4%B8%8A%E7%9A%84%E6%96%87%E7%AB%A0%E6%B8%85%E5%96%AE_%E6%BB%BE%E5%8B%95%E6%9B%B4%E6%96%B0/" target="_blank" rel="external noopener noreferrer nofollow">Share to Facebook</a>
+    </li>
+    
+
+    <!-- Share Google+ -->
+    
+    <li class="menu-item">
+        <a href="https://plus.google.com/share?url=https://mosdeo.github.io/2020/09/13/%E6%88%91%E5%9C%A8%E5%BE%AE%E4%BF%A1%E5%85%AC%E7%9C%BE%E8%99%9F%E4%B8%8A%E7%9A%84%E6%96%87%E7%AB%A0%E6%B8%85%E5%96%AE_%E6%BB%BE%E5%8B%95%E6%9B%B4%E6%96%B0/" target="_blank" rel="external noopener noreferrer nofollow">Share to Google+</a>
+    </li>
+    
+
+    <!-- Share LinkedIn -->
+    
+    <li class="menu-item">
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://mosdeo.github.io/2020/09/13/%E6%88%91%E5%9C%A8%E5%BE%AE%E4%BF%A1%E5%85%AC%E7%9C%BE%E8%99%9F%E4%B8%8A%E7%9A%84%E6%96%87%E7%AB%A0%E6%B8%85%E5%96%AE_%E6%BB%BE%E5%8B%95%E6%9B%B4%E6%96%B0/&title=LKY 只有原創內容的 Blog" target="_blank" rel="external noopener noreferrer nofollow">Share to LinkedIn</a>
+    </li>
+    
+
+    <!-- Share QQ -->
+    
+    <li class="menu-item">
+        <a href="http://connect.qq.com/widget/shareqq/index.html?site=LKY 只有原創內容的 Blog&title=LKY 只有原創內容的 Blog&summary=&pics=http://5b0988e595225.cdn.sohucs.com/images/20180104/5eca329d7b5f4cabb34101cd98f60374.jpeg&url=https://mosdeo.github.io/2020/09/13/%E6%88%91%E5%9C%A8%E5%BE%AE%E4%BF%A1%E5%85%AC%E7%9C%BE%E8%99%9F%E4%B8%8A%E7%9A%84%E6%96%87%E7%AB%A0%E6%B8%85%E5%96%AE_%E6%BB%BE%E5%8B%95%E6%9B%B4%E6%96%B0/" target="_blank" rel="external noopener noreferrer nofollow"> Share to QQ</a>
+    </li>
+    
+
+    <!-- Share Telegram -->
+    
+    <li class="menu-item">
+        <a href="https://t.me/share/url?url=https://mosdeo.github.io/2020/09/13/%E6%88%91%E5%9C%A8%E5%BE%AE%E4%BF%A1%E5%85%AC%E7%9C%BE%E8%99%9F%E4%B8%8A%E7%9A%84%E6%96%87%E7%AB%A0%E6%B8%85%E5%96%AE_%E6%BB%BE%E5%8B%95%E6%9B%B4%E6%96%B0/&text=LKY 只有原創內容的 Blog" target="_blank" rel="external noopener noreferrer nofollow">Share to Telegram</a>
+    </li>
+    
+
+    <!-- QRCode -->
+    
+    <li class="menu-item">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPQAAAD0CAAAAACJRFQiAAAEmUlEQVR42u3aS27jQBAEUd//0p7VAANDrIxseRbqCm68sEjxtYFy/b6+F15fokWLFi1a9Iehv4br7+///ezLh/3z2en+V/f8vD89++d7U4do0ZvQCfL0JU+IhHt6/s/7IqL4g4gWvQ2dAtgUNF59pj3Q9uCfDmB0iBYt+psmG+kZJIlJ7zAlM6JFi+YfpoGjLQimQ5sCo2jRojO6KRRSEpICEWkcTPCTREi06E1o0hj8hJ+/3g0VLfoD0XHoFRKPKZkhwS8FqlSc/JeppWjRH4yemm7pdwk83ZcOJQ0IyKAxDvBEi74QTQqA9M+fNA9oA78JhuTARIveiD55qSZRSMkJGfa3jcuxiSBa9OXokwYhTR5icDkczNOEZqyyRIu+EN0EFDocb5v87wYpshwkWvQWNGnunRQhuLAHB3ay4Bejt2jRl6NTI7ANIrQp0ELfWuQRLXoBmjT6SGOOBjOyYJMCH12wqzcRRIu+AJ2agfTFpuQhvTgpQMigcSqORIvegibJBS3ySTHRHCYpQmLwSpsIokVfhiYDd7IgOzUCSdFCB/6kAVlXWaJFX4RuAxmBkaYAPbj0XtP7oY1B0aIvQ5MkgLzE0xc2zb8mIaHBTbTorWgyIGsH9LQBQA+KHNY4EBAtegGaDu1oA6Ft4KXvaxKbtPAnWvQGdLtQQxp0qZBpigzSbKgXYkWLvhidhvBNcdAs4JChfLs0l4KcaNEb0CgAFM36b3CR+8iBp+aBaNFb0eSf/1PjIDX1yIJdevHfWNwTLXozOgW3ZuElNRBoMYITkMkiWvQCdHpYevjJUL5ZeqUDifR80aI3oWmTf2rejYOzg2Z+Ajd/DNGiN6HbxIIEmSnQkSXbJoGhxYlo0VvQbWEwFQekSUhejl71UFG06KVosmhTLa2BwEUWa5riBBUcokVfiCaFBS0OTpr5zUCPLOJMwVK06C1ouihDhuWp0EjFAmluPH0+NjdEi16ApktqCUSLAAKegmzTXEQbg6JFX4omyypTw58s6ZBlvDTsb5KqqjEoWvQl6LbgoAn+aaFPF3xIoRK3gEWLvhCdhvBtYz8t06KmfLGQWyUzokUvQNPg0TYISTLTFDlk2BcDm2jRC9C/AT0JNin5oQ3GqggRLXoBekzQwRCgTWLI4I4s0TVDBdGiN6GbIuKkIKDDuoRPg0MUIEWLXoROScI7A3bSMHhC06YhCniiRS9A04U5uujSBiASAE8GfXGAJ1r0xei2aUeXbNCLFAN72tR/+p1o0RvQZJE1JfLTEL5JSkjzniYmL79TtOglaFIokIWbk4Fes1RPnjUWOqJFL0CnAfcU5KbBX2owNMt05CDR0EG06MXoNNSbDoI0+N4Z1tPniha9Ef01XPSF6SCAJDRpAS41CPFQXrToi9FTACONvrTUngIiXXanz43NftGiF6DTkgtp0JGgMwU7EsDooby8V7Ro0XixPQVFmvDQwiUNE1ByIlr0cjRJ8qchIF2eSQByEG8lJ6JFX4BuEg0SpFJAIkUITWjogo5o0VvQJ0U6/iK4KE+b+3QQEAsO0aIvRW+6RIsWLVq06A+5/gC6RfQvy04z2AAAAABJRU5ErkJggg==" alt="QRCode">
+    </li>
+    
+
+</ul>
+</div>
+        
+    </div>
+</div>
+                </div>
+                <div class="card-body">
+                    
+                        
+                        
+                            <div id="post-toc"><ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%8A%80%E8%A1%93"><span class="post-toc-number">1.</span> <span class="post-toc-text">技術</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Go%E8%AF%AD%E8%A8%80%E4%B8%AD%E6%96%87%E7%BD%91"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Go语言中文网</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E9%9D%9E%E6%8A%80%E8%A1%93"><span class="post-toc-number">2.</span> <span class="post-toc-text">非技術</span></a></li></ol></div>
+                        
+                    
+                    <article id="post-content">
+                        <p>由於在微信的資料池裡面，搜尋我自己的名字，會被某個同名同姓的乒乓球選手新聞淹沒，所以我特地把自己發表在微信公眾號上的文章做一個清單，方便我自己查閱。</p>
+<h3 id="技術">技術</h3>
+<h4 id="Go语言中文网">Go语言中文网</h4>
+<p>2020-09-13 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/pP3hJKa-EGvLXi0luL1cRg">面试官：这个经典的并发问题用 Go 语言如何实现？</a></p>
+<p>2020-04-03 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/K032xlARjiyS8ecJrqZXaA">LeetCode Go 并发题详解：交替打印字符串</a></p>
+<p>2020-02-19 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/zMZXd8DLtjhm06Q0lm1pcg">只在我计算机上能跑的代码：select-case-default 忘记让出 CPU 的坑</a></p>
+<p>2020-02-16 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/WJJL-3pkeA8qBF75QTt9Ag">面试题实战：给一个数 n，使用 Go 打印交替顺序零与奇偶数</a></p>
+<p>2020-02-11 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/wL-Cy6DScmPIpQAma6_3Qw">多 Goroutine 的并发程序如何保证按序输出？channel 的使用是关键</a></p>
+<p>2020-02-04 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/I5va3PI1oGIj8R_n3Nw2yw">LeetCode上并发题目无Go版本：台湾同胞试水 — 交替打印FooBar</a></p>
+<h3 id="非技術">非技術</h3>
+<p>2020-02-14 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/9KEpxb6h6aGJvMnQXUS_Hg">在台湾亲身经历约口罩抢购热潮…</a></p>
+<p>2020-02-11 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/iBBroMhDxz1VYJiI62QYMw">我在台湾亲历口罩抢购潮 | 人在书店×2002</a></p>
+
+                    </article>
+                    
+
+
+    <blockquote id="date-expire-notification" class="post-expired-notify">This article was last updated on <span id="date-expire-num"></span> days ago, and the information described in the article may have changed.</blockquote>
+    <script>
+    (function() {
+        var dateUpdate = Date.parse("2020-12-10");
+        var nowDate = new Date();
+        var a = nowDate.getTime();
+        var b = a - dateUpdate;
+        var daysUpdateExpire = Math.floor(b/(24*3600*1000));
+        if (daysUpdateExpire >= 120) {
+            document.getElementById('date-expire-num').innerHTML = daysUpdateExpire;
+        } else {
+            document.getElementById('date-expire-notification').style.display = 'none';
+        }
+    })();
+    </script>
+
+
+<p class="post-footer-info mb-0 pt-0">Published at&nbsp;<time datetime="2020-09-12T16:00:00.000Z" itemprop="datePublished">2020-09-13</time>
+
+    , Updated at&nbsp;<time datetime="2020-12-10T08:31:50.413Z" itemprop="dateModified">2020-12-10</time>
+
+</p>
+<p class="post-footer-info mb-0 pt-2">
+
+
+
+<span class="post-tags-list mt-2">
+
+<a class="post-tags-list-item" href="/tags/%E5%A4%A7%E9%99%B8/" rel="tag">#&nbsp;大陸</a>
+
+</span>
+
+
+</p>
+
+                </div>
+                <div class="post-nav px-2 bg-gray">
+<ul class="pagination">
+    <!-- Prev Nav -->
+    
+        <li class="page-item page-prev">
+            <a href="/2020/12/10/%E7%82%BA%E4%BB%80%E9%BA%BC%E7%89%A9%E8%81%AF%E7%B6%B2%E8%90%BD%E5%9C%B0%E5%9B%B0%E9%9B%A3%E3%80%81%E8%B3%A3%E9%BB%9E%E7%A8%80%E5%B0%91%E3%80%81%E6%9C%89%E5%83%B9%E5%80%BC%E6%95%B8%E6%93%9A%E7%8D%B2%E5%8F%96%E5%9B%B0%E9%9B%A3%EF%BC%8C%E5%A4%A7%E5%A4%9A%E5%8F%AA%E8%83%BD%E4%BD%9C%E7%82%BA%E5%99%B1%E9%A0%AD%EF%BC%9F%E8%AB%87%E6%88%91%E7%9A%84%E7%B6%93%E9%A9%97/" rel="prev">
+                <div class="page-item-title"><i class="icon icon-back" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">為什麼物聯網落地困難、賣點稀少、有價值數據獲取困難，大多只能作為噱頭？談我的經驗</div>
+            </a>
+        </li>
+    
+
+    <!-- Next Nav -->
+    
+        <li class="page-item page-next">
+            <a href="/2020/09/02/LeetCode_Concurrency_Go%E8%AA%9E%E8%A8%80%E8%A9%B3%E8%A7%A3_%E7%B6%93%E5%85%B8%E5%93%B2%E5%AD%B8%E5%AE%B6%E5%90%83%E9%A3%AF%E5%95%8F%E9%A1%8C_%E7%A2%B0%E9%81%8B%E6%B0%A3%E8%A7%A3%E6%B3%95/" rel="next">
+                <div class="page-item-title"><i class="icon icon-forward" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">LeetCode Concurrency Go 語言詳解：經典哲學家吃飯問題：碰運氣解法</div>
+            </a>
+        </li>
+    
+</ul>
+</div>
+
+                
+                    <!-- # Comment # -->
+                    
+                        <div class="card-footer post-comment">
+                            <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://mosdeo.github.io/2020/09/13/%E6%88%91%E5%9C%A8%E5%BE%AE%E4%BF%A1%E5%85%AC%E7%9C%BE%E8%99%9F%E4%B8%8A%E7%9A%84%E6%96%87%E7%AB%A0%E6%B8%85%E5%96%AE_%E6%BB%BE%E5%8B%95%E6%9B%B4%E6%96%B0/'; // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'https://mosdeo.github.io/2020/09/13/%E6%88%91%E5%9C%A8%E5%BE%AE%E4%BF%A1%E5%85%AC%E7%9C%BE%E8%99%9F%E4%B8%8A%E7%9A%84%E6%96%87%E7%AB%A0%E6%B8%85%E5%96%AE_%E6%BB%BE%E5%8B%95%E6%9B%B4%E6%96%B0/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+<script id="disqus-thread-script">
+    (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document;
+        var s = d.createElement('script');
+        s.src = '//mosdeo-github-io.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', + new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+                        </div>
+                    
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!-- ### Footer ### -->
+            <footer class="text-center">
+    <!-- footer copyright -->
+    
+        <p class="footer-copyright mb-0">Copyright&nbsp;©&nbsp;<span id="copyright-year"></span>
+            <a class="footer-copyright-a" href="https://mosdeo.github.io">LKY 只有原創內容的 Blog</a>
+        </p>
+
+    <!-- footer custom text -->
+    <p class="footer-text mb-0">
+    
+    </p>
+    <!-- footer develop info -->
+    <p class="footer-develop mb-0">
+        
+    <!-- Busuanzi User Views -->
+    <span id="busuanzi_container_site_uv" hidden>
+        <span></span>
+        <span id="busuanzi_value_site_uv"></span>
+        <span>Viewers</span>
+        
+            <span>|</span>
+        
+    </span>
+
+
+
+
+        
+        Powered by&nbsp;<!--
+         --><a href="https://hexo.io" target="_blank" class="footer-develop-a" rel="external nofollow noopener noreferrer">Hexo</a><span class="footer-develop-divider"></span>Theme&nbsp;-&nbsp;<!--
+         --><a href="https://github.com/SukkaW/hexo-theme-suka" target="_blank" class="footer-develop-a" rel="external noopener">Suka</a>
+    </p>
+</footer>
+
+
+        <!-- ### Import File ### -->
+        <!-- ### Footer JS Import ### -->
+
+<script>
+
+    
+window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 50
+};
+document.getElementById('copyright-year').textContent = new Date().getFullYear();
+console.log('\n %c Suka Theme (hexo-theme-suka) | © SukkaW | Verision 1.3.3 %c https://github.com/SukkaW/hexo-theme-suka \n', 'color: #fff; background: #444; padding:5px 0;', 'background: #bbb; padding:5px 0;');
+
+</script>
+
+<script src="/lib/vanilla-lazyload/lazyload.min.js" async></script>
+    <script src="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.js" async></script>
+
+
+<!-- Offset -->
+
+
+
+
+<!-- Comment -->
+
+    
+        <script id="dsq-count-scr" src="https://mosdeo-github-io.disqus.com/count.js" async></script>
+
+    
+
+
+<!-- ### Custom Footer ### -->
+
+    </body>
+
+</html>

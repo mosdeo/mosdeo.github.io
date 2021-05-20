@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+
+<html lang="zh-TW">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        hexo-theme-suka © SukkaW
+        GitHub: https://github.com/SukkaW/hexo-theme-suka
+    -->
+
+    <!-- ### Resource Hint ### -->
+
+    <!-- ## DNS Prefetch ## -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+<!-- busuanzi -->
+
+    <link rel="dns-prefetch" href="//busuanzi.ibruce.info">
+
+
+<!-- comment -->
+
+
+    <link rel="dns-prefetch" href="//disqus.com">
+    <link rel="dns-prefetch" href="//mosdeo-github-io.disqus.com">
+
+
+
+
+
+
+<!-- analytics -->
+
+
+    <link rel="dns-prefetch" href="//www.google-analytics.com">
+
+
+
+
+
+
+    <!-- ## Preload ## -->
+    
+    <!-- Busuanzi -->
+    
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.js" as="script">
+
+
+
+
+
+
+
+    <!-- ### Meta & Title & Info ### -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <meta name="renderer" content="webkit">
+
+    <!-- Title -->
+    <title>如何快速架設開發用的臨時 Line Bot？ | LKY 只有原創內容的 Blog</title>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image&#x2F;ico" href="/img/suka-favicon.ico">
+
+    <!-- ### Import File ### -->
+    <link rel="stylesheet" href="/lib/spectre/spectre.min.css"><style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    a, a:visited {
+        color: #0070ff;
+    }
+
+    a:active, a:focus, a:hover {
+        color: #0070ff;
+        opacity: .75;
+    }
+
+    #post-content a,
+    #post-content a:hover,
+    #post-content a:focus,
+    #post-content a:visited {
+        color: #005eb9;
+        opacity: 1;
+    }
+
+    
+
+    .post-entry .card-body a {
+        color: #0070ff;
+    }
+
+    .avatar {
+        background: #444;
+    }
+
+    .navbar-link,
+    .navbar-link:visited,
+    .timeline .timeline-item .timeline-icon.icon-lg {
+        color: #0070ff;
+    }
+
+    .navbar-link:hover {
+        color: #0070ff;
+        opacity: .8;
+    }
+
+    #search-input .btn,
+    #disqus_click_btn,
+    #disqus-switch-to-direct,
+    #disqus-loadmore-button {
+        background: #727e96;
+        border-color: #727e96;
+        color: #fff;
+    }
+
+    #post-toc a.post-toc-link,
+    #post-toc a.post-toc-link:visited,
+    .share-menu.menu .menu-item>a {
+        color: #727e96;
+    }
+
+    .share-menu.menu .menu-item>a:hover,
+    .share-menu.menu .menu-item>a:focus,
+    .share-menu.menu .menu-item>a:visited {
+        color: #50596c;
+        background: #f8f9fa;
+        opacity: .85;
+    }
+</style><link rel="stylesheet" href="/css/style.min.css">
+
+
+
+
+
+
+
+
+    <!-- Prettify Theme -->
+    
+    <link rel="preload" href="/css/highlight/github.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/css/highlight/github.min.css"></noscript>
+
+
+
+
+
+<script>
+/*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+!function(t){"use strict";t.loadCSS||(t.loadCSS=function(){});var e=loadCSS.relpreload={};if(e.support=function(){var e;try{e=t.document.createElement("link").relList.supports("preload")}catch(t){e=!1}return function(){return e}}(),e.bindMediaToggle=function(t){var e=t.media||"all";function a(){t.addEventListener?t.removeEventListener("load",a):t.attachEvent&&t.detachEvent("onload",a),t.setAttribute("onload",null),t.media=e}t.addEventListener?t.addEventListener("load",a):t.attachEvent&&t.attachEvent("onload",a),setTimeout(function(){t.rel="stylesheet",t.media="only x"}),setTimeout(a,3e3)},e.poly=function(){if(!e.support())for(var a=t.document.getElementsByTagName("link"),n=0;n<a.length;n++){var o=a[n];"preload"!==o.rel||"style"!==o.getAttribute("as")||o.getAttribute("data-loadcss")||(o.setAttribute("data-loadcss",!0),e.bindMediaToggle(o))}},!e.support()){e.poly();var a=t.setInterval(e.poly,500);t.addEventListener?t.addEventListener("load",function(){e.poly(),t.clearInterval(a)}):t.attachEvent&&t.attachEvent("onload",function(){e.poly(),t.clearInterval(a)})}"undefined"!=typeof exports?exports.loadCSS=loadCSS:t.loadCSS=loadCSS}("undefined"!=typeof global?global:this);
+</script>
+
+    <!-- ### Site Verification ### -->
+    
+
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="LKY 只有原創內容的 Blog"><meta name="msapplication-starturl" content="https://mosdeo.github.io"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="LKY 只有原創內容的 Blog"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- ### The Open Graph & Twitter Card Protocol ### -->
+    <meta property="og:title" content="如何快速架設開發用的臨時 Line Bot？ | LKY 只有原創內容的 Blog"><meta property="og:site_name" content="LKY 只有原創內容的 Blog"><meta property="og:type" content="article"><meta property="og:url" content="https://mosdeo.github.io/2017/10/06/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E6%9E%B6%E8%A8%AD%E9%96%8B%E7%99%BC%E7%94%A8%E7%9A%84%E8%87%A8%E6%99%82%20LineBot/"><meta property="og:locale" content="zh-TW"><meta name="description" content="這篇文章會談什麼？ 如何最方便的佈署一個 Line chatbot。要是你佈署成功了，它就只會 echo，也就是把你傳的字串吐回給你，不會產生任何新字串，證明 Server 有接收到你的訊息。 這篇文章不談什麼？ 不會談如何讓 chatbot 調皮搗蛋、生動有趣、讓你覺得 Server 上面養了一隻真人。因為那牽涉到複雜、多變，而且沒有固定作法的機器學習。也許未來會談，但這篇文章不會。    寫程 - Lin, Kao-Yuan - LKY 只有原創內容的 Blog"><meta name="keywords" content="佈署, 後端"><meta property="og:image" content="/content/images/%E4%BD%88%E7%BD%B2LineChatbot/%E6%B8%AC%E8%A9%A6%E5%B0%8D%E8%A9%B1.png"><meta property="og:image" content="https://mosdeo.github.io/content/images/%E4%BD%88%E7%BD%B2LineChatbot/Line%E5%BE%8C%E5%8F%B0chatbot%E5%BF%85%E8%A6%81keys.png"><meta property="og:image" content="https://mosdeo.github.io/content/images/%E4%BD%88%E7%BD%B2LineChatbot/Line%E5%BE%8C%E5%8F%B0webhook_URL.png"><meta property="og:image" content="https://mosdeo.github.io/content/images/%E4%BD%88%E7%BD%B2LineChatbot/%E5%BE%9Engrok%E5%A1%AB%E5%85%A5webhook.png"><meta property="og:image" content="https://mosdeo.github.io/content/images/%E4%BD%88%E7%BD%B2LineChatbot/%E6%B8%AC%E8%A9%A6%E5%B0%8D%E8%A9%B1.png"><meta property="article:published_time" content="2017-10-05T16:00:00.000Z"><meta property="article:modified_time" content="2019-09-23T02:08:50.280Z"><meta property="og:updated_time" content="2019-09-23T02:08:50.280Z"><meta property="article:author" content="Lin, Kao-Yuan"><meta property="article:tag" content="佈署, 後端"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="/content/images/%E4%BD%88%E7%BD%B2LineChatbot/%E6%B8%AC%E8%A9%A6%E5%B0%8D%E8%A9%B1.png">
+
+    
+
+    <!-- ### Canonical link ### -->
+    <link rel="canonical" href="https://mosdeo.github.io/2017/10/06/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E6%9E%B6%E8%A8%AD%E9%96%8B%E7%99%BC%E7%94%A8%E7%9A%84%E8%87%A8%E6%99%82%20LineBot/">
+
+    <meta name="generator" content="Hexo 5.2.0">
+
+    <!-- ### Analytics ### -->
+    
+    <!-- Google Analytics -->
+<script>
+    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+    ga('create', 'UA-64570213-2', 'auto');
+    ga('send', 'pageview');
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+
+
+
+
+
+
+
+
+
+    <!-- ### Structured Data ### -->
+    
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "url": "https://mosdeo.github.io/2017/10/06/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E6%9E%B6%E8%A8%AD%E9%96%8B%E7%99%BC%E7%94%A8%E7%9A%84%E8%87%A8%E6%99%82%20LineBot/",
+    "@type": "BlogPosting",
+    "logo": "https://mosdeo.github.io/img/suka-favicon.ico",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://mosdeo.github.io/2017/10/06/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E6%9E%B6%E8%A8%AD%E9%96%8B%E7%99%BC%E7%94%A8%E7%9A%84%E8%87%A8%E6%99%82%20LineBot/"
+    },
+    "headline": "如何快速架設開發用的臨時 Line Bot？ | LKY 只有原創內容的 Blog",
+    
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://mosdeo.github.io/content/images/%E4%BD%88%E7%BD%B2LineChatbot/%E6%B8%AC%E8%A9%A6%E5%B0%8D%E8%A9%B1.png"
+    },
+    
+    "datePublished": "2017-10-05T16:00:00.000Z",
+    "dateModified": "2019-09-23T02:08:50.280Z",
+    "author": {
+        "@type": "Person",
+        "name": "Lin, Kao-Yuan",
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://mosdeo.github.io/img/default_avatar.png"
+        },
+        "description": "今之能者，謂能轉貼，至於魯蛇，皆能轉貼。不原創，何以別乎？"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "LKY 只有原創內容的 Blog",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://mosdeo.github.io/img/suka-favicon.ico"
+        }
+    },
+    
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://mosdeo.github.io/search?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+    },
+    
+    "keywords": "佈署, 後端",
+    "description": "這篇文章會談什麼？ 如何最方便的佈署一個 Line chatbot。要是你佈署成功了，它就只會 echo，也就是把你傳的字串吐回給你，不會產生任何新字串，證明 Server 有接收到你的訊息。 這篇文章不談什麼？ 不會談如何讓 chatbot 調皮搗蛋、生動有趣、讓你覺得 Server 上面養了一隻真人。因為那牽涉到複雜、多變，而且沒有固定作法的機器學習。也許未來會談，但這篇文章不會。    寫程 - Lin, Kao-Yuan - LKY 只有原創內容的 Blog"
+}
+</script>
+
+
+
+    <!-- ### Custom Head ### -->
+    
+</head>
+
+    <body>
+            
+
+            <!-- ### Main content ### -->
+            <!-- ## Header ##-->
+<header>
+    <h1 class="header-title text-center"><a href="/">LKY 只有原創內容的 Blog</a></h1>
+
+    <p class="text-center header-slogan">
+        
+            
+                今之能者，謂能轉貼，至於魯蛇，皆能轉貼。不原創，何以別乎？
+            
+        
+    </p>
+
+    <nav class="navbar-section text-center">
+    
+        <a href="/" class="navbar-link">Home</a>
+    
+    
+        <a href="/archives/" class="navbar-link">Archives</a>
+    
+    
+        <a href="/search" class="navbar-link">Search</a>
+    
+    
+    
+        <div class="dropdown dropdown-right">
+    <a class="navbar-link dropdown-toggle" tabindex="0">Share</a>
+    <ul class="menu share-menu">
+
+        <!-- Share Weibo -->
+        
+        <li class="menu-item">
+            <a href="http://service.weibo.com/share/share.php?appkey=&title=LKY 只有原創內容的 Blog&url=https://mosdeo.github.io&pic=/content/images/佈署LineChatbot/測試對話.png&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">Share to Weibo</a>
+        </li>
+        
+
+        <!-- Share Twitter -->
+        
+        <li class="menu-item">
+            <a href="https://twitter.com/intent/tweet?text=LKY 只有原創內容的 Blog&url=https://mosdeo.github.io&via=Lin, Kao-Yuan" target="_blank" rel="external noopener noreferrer nofollow">Share to Twitter</a>
+        </li>
+        
+
+        <!-- Share Facebook -->
+        
+        <li class="menu-item">
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://mosdeo.github.io" target="_blank" rel="external noopener noreferrer nofollow">Share to Facebook</a>
+        </li>
+        
+
+        <!-- Share Google+ -->
+        
+        <li class="menu-item">
+            <a href="https://plus.google.com/share?url=https://mosdeo.github.io" target="_blank" rel="external noopener noreferrer nofollow">Share to Google+</a>
+        </li>
+        
+
+        <!-- Share LinkedIn -->
+        
+        <li class="menu-item">
+            <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://mosdeo.github.io&title=如何快速架設開發用的臨時 Line Bot？" target="_blank" rel="external noopener noreferrer nofollow">Share to LinkedIn</a>
+        </li>
+        
+
+        <!-- Share QQ -->
+        
+        <li class="menu-item">
+            <a href="http://connect.qq.com/widget/shareqq/index.html?site=LKY 只有原創內容的 Blog&title=如何快速架設開發用的臨時 Line Bot？&summary=&pics=/content/images/佈署LineChatbot/測試對話.png&url=https://mosdeo.github.io" target="_blank" rel="external noopener noreferrer nofollow"> Share to QQ</a>
+        </li>
+        
+
+        <!-- Share Telegram -->
+        
+        <li class="menu-item">
+            <a href="https://t.me/share/url?url=https://mosdeo.github.io&text=如何快速架設開發用的臨時 Line Bot？" target="_blank" rel="external noopener noreferrer nofollow">Share to Telegram</a>
+        </li>
+        
+
+        <!-- QRCode -->
+        
+        <li class="menu-item">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOQAAADkCAAAAACtPNdRAAAEJElEQVR42u3a0U7cQBBEUf7/p5OnSAitu27NguI2d19I2MXMscS4prs//vyC14dIkSJFihT5JvJjeP17//PnPn/v8zW+XuvV9b/+zKvrXX1u+v6rdYsUuRn58o+2/GXTL3/1uem6CADWLVLkZuTVhjMBrzamaSHTpjXduKsNaly3SJEPRF6FgukPf9pwaDg4XY9Ikb8FeRWqp4d4CgfTGlKQECny6UjykG83oenhP31+OrD/yClEpMibIWkh625ff6RaJ1Lkf0bGpkkoXE0Bu9l4poIW3eSOu1oiRd4I2QZfUkwijZnLBzgIA7ToLFLkRiTdEFLhlzRTmyZsKmyRArhIkRuRqfg7bRjkQEsKW7RYTZtFIkU+CUkbrATaBvm2ORSbSyJFLkXSoE6bp9OmQwN2c/OrrpZIkUuQbSAnIYEE9HQgfqfQJVLkRuQ06EcPxGRxBEsWT8K/SJGbkak5k95LgZs8yEmwIMVodGgWKfLmyKkgdBUCpl+YFtQOQlHky8ODSJELkanpQgpZ6aF9coAmwT02iUWKXIhMAwx08RTeDgY3oR91mkWKvDkyPfBpoCahngxgkA0rrUGkyM1IUqSlnyUbFWnEtsNNlwd0kSKXIk8LyiTE06IwKVKTz46JR6TIBUg6DEQHDekBmvz/dNBQpMjNSPJQTQfeKcjT4jMJJKShO4YBkSIXIKeHKy4YwQ3hpEDcboYiRW5HksPq6QZx9V4CpQYRvZ5IkVuR7UXp5tR8TTeVrK8O6CJFLkI2D+EU4slwUyowHzWBRYpciExNm+mBTpu0dOhiug7d9MZqnUiRS5BkeKFpgBIAHTRsC2YiRT4FmRqwZKCQbmDN0AUpJF/+W6TIhUgyrHfS1CHXOhkMnAJ5NawkUuRNkaloTB/KKUy0N5WE9hRkRIrcikwH3zRYRBuwbeggSBzQRYpcgiQ/1AwzNAG9KZA1axUpcjuShuS20UMHldqBQ3KTRIrciqQDBycN17QwOqRIC2FVE1akyJsim1eziUwDFKSBdBrQRYp8ArIJ5k2TtSke49BdBAiRIjcjyaBDEwjS5pSarykopAasSJFbkSQ4U3wz8NDelLdPISJFLkLSQlIzENFsNNMGRwekxoAuUuRCZBu8yUF5Qk4BYhp2aArMIkVuRJLhBhLSaZj4zmJ2CukiRW5FToND6UBMN4mmUJVuNLlpIkU+AfnOECApRE2B4+o60+F+ChYiRW5F0j9k1PQEQZoOPEyfTwU4kSK3I1MwIIGBbB7T98j7TVFMpMjtSBKg2+EFOsTUNlrJdUSKfCqSPNSbcN80d2jov7yeSJEPRaaA0DzkU3OJNKFIgVqkyO3IFMRTg2cKBePBFiw2FZm/5dAsUuSNkGS4ITVfSVhPIeEkjOBDs0iRS5BPfokUKVKkSJGHr7/6vuYyy3UyXgAAAABJRU5ErkJggg==" alr="QRCode">
+        </li>
+        
+
+    </ul>
+</div>
+    
+    
+        <a href="/atom.xml" target="_blank" class="navbar-link">RSS</a>
+    
+</nav>
+</header>
+
+            
+    <!-- ## Post ## -->
+    <div class="post-container">
+    <div id="post-card" class="card">
+        
+            <div class="card-image lazyload" data-bg="url('/content/images/佈署LineChatbot/測試對話.png')"></div>
+        
+        <div class="card-item-container">
+            <div class="card-inner-cell">
+                <!-- # Post Header Info # -->
+                <div class="card-header">
+                    
+    <h1 class="card-title h3 mb-2">如何快速架設開發用的臨時 Line Bot？</h1>
+
+
+
+
+<div class="post-header-info">
+    <p class="post-header-info-left text-gray">
+        <img class="author-thumb lazyload" data-src="/img/default_avatar.png" src="/img/suka-lazyload.gif" alt="Lin, Kao-Yuan's Avatar">
+        <span>2017-10-06</span>
+        
+        
+            <!-- Busuanzi Post Views -->
+<span id="busuanzi_container_page_pv" hidden>
+    <span class="suka-devide-dot"></span>
+    <span></span>
+    <span id="busuanzi_value_page_pv"></span>
+    <span>Views</span>
+</span>
+        
+        
+    </p>
+    <div class="post-header-info-right">
+        
+            <div class="dropdown dropdown-right">
+<a class="dropdown-toggle" tabindex="0">Share the post</a>
+<ul class="menu share-menu">
+    <!-- Share Weibo -->
+    
+    <li class="menu-item">
+        <a href="http://service.weibo.com/share/share.php?appkey=&title=如何快速架設開發用的臨時 Line Bot？&url=https://mosdeo.github.io/2017/10/06/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E6%9E%B6%E8%A8%AD%E9%96%8B%E7%99%BC%E7%94%A8%E7%9A%84%E8%87%A8%E6%99%82%20LineBot/&pic=/content/images/佈署LineChatbot/測試對話.png&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">Share to Weibo</a>
+    </li>
+    
+
+    <!-- Share Twitter -->
+    
+    <li class="menu-item">
+        <a href="https://twitter.com/intent/tweet?text=如何快速架設開發用的臨時 Line Bot？&url=https://mosdeo.github.io/2017/10/06/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E6%9E%B6%E8%A8%AD%E9%96%8B%E7%99%BC%E7%94%A8%E7%9A%84%E8%87%A8%E6%99%82%20LineBot/&via=Lin, Kao-Yuan" target="_blank" rel="external noopener noreferrer nofollow">Share to Twitter</a>
+    </li>
+    
+
+    <!-- Share Facebook -->
+    
+    <li class="menu-item">
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://mosdeo.github.io/2017/10/06/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E6%9E%B6%E8%A8%AD%E9%96%8B%E7%99%BC%E7%94%A8%E7%9A%84%E8%87%A8%E6%99%82%20LineBot/" target="_blank" rel="external noopener noreferrer nofollow">Share to Facebook</a>
+    </li>
+    
+
+    <!-- Share Google+ -->
+    
+    <li class="menu-item">
+        <a href="https://plus.google.com/share?url=https://mosdeo.github.io/2017/10/06/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E6%9E%B6%E8%A8%AD%E9%96%8B%E7%99%BC%E7%94%A8%E7%9A%84%E8%87%A8%E6%99%82%20LineBot/" target="_blank" rel="external noopener noreferrer nofollow">Share to Google+</a>
+    </li>
+    
+
+    <!-- Share LinkedIn -->
+    
+    <li class="menu-item">
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://mosdeo.github.io/2017/10/06/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E6%9E%B6%E8%A8%AD%E9%96%8B%E7%99%BC%E7%94%A8%E7%9A%84%E8%87%A8%E6%99%82%20LineBot/&title=LKY 只有原創內容的 Blog" target="_blank" rel="external noopener noreferrer nofollow">Share to LinkedIn</a>
+    </li>
+    
+
+    <!-- Share QQ -->
+    
+    <li class="menu-item">
+        <a href="http://connect.qq.com/widget/shareqq/index.html?site=LKY 只有原創內容的 Blog&title=LKY 只有原創內容的 Blog&summary=&pics=/content/images/佈署LineChatbot/測試對話.png&url=https://mosdeo.github.io/2017/10/06/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E6%9E%B6%E8%A8%AD%E9%96%8B%E7%99%BC%E7%94%A8%E7%9A%84%E8%87%A8%E6%99%82%20LineBot/" target="_blank" rel="external noopener noreferrer nofollow"> Share to QQ</a>
+    </li>
+    
+
+    <!-- Share Telegram -->
+    
+    <li class="menu-item">
+        <a href="https://t.me/share/url?url=https://mosdeo.github.io/2017/10/06/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E6%9E%B6%E8%A8%AD%E9%96%8B%E7%99%BC%E7%94%A8%E7%9A%84%E8%87%A8%E6%99%82%20LineBot/&text=LKY 只有原創內容的 Blog" target="_blank" rel="external noopener noreferrer nofollow">Share to Telegram</a>
+    </li>
+    
+
+    <!-- QRCode -->
+    
+    <li class="menu-item">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOQAAADkCAAAAACtPNdRAAAEJElEQVR42u3a0U7cQBBEUf7/p5OnSAitu27NguI2d19I2MXMscS4prs//vyC14dIkSJFihT5JvJjeP17//PnPn/v8zW+XuvV9b/+zKvrXX1u+v6rdYsUuRn58o+2/GXTL3/1uem6CADWLVLkZuTVhjMBrzamaSHTpjXduKsNaly3SJEPRF6FgukPf9pwaDg4XY9Ikb8FeRWqp4d4CgfTGlKQECny6UjykG83oenhP31+OrD/yClEpMibIWkh625ff6RaJ1Lkf0bGpkkoXE0Bu9l4poIW3eSOu1oiRd4I2QZfUkwijZnLBzgIA7ToLFLkRiTdEFLhlzRTmyZsKmyRArhIkRuRqfg7bRjkQEsKW7RYTZtFIkU+CUkbrATaBvm2ORSbSyJFLkXSoE6bp9OmQwN2c/OrrpZIkUuQbSAnIYEE9HQgfqfQJVLkRuQ06EcPxGRxBEsWT8K/SJGbkak5k95LgZs8yEmwIMVodGgWKfLmyKkgdBUCpl+YFtQOQlHky8ODSJELkanpQgpZ6aF9coAmwT02iUWKXIhMAwx08RTeDgY3oR91mkWKvDkyPfBpoCahngxgkA0rrUGkyM1IUqSlnyUbFWnEtsNNlwd0kSKXIk8LyiTE06IwKVKTz46JR6TIBUg6DEQHDekBmvz/dNBQpMjNSPJQTQfeKcjT4jMJJKShO4YBkSIXIKeHKy4YwQ3hpEDcboYiRW5HksPq6QZx9V4CpQYRvZ5IkVuR7UXp5tR8TTeVrK8O6CJFLkI2D+EU4slwUyowHzWBRYpciExNm+mBTpu0dOhiug7d9MZqnUiRS5BkeKFpgBIAHTRsC2YiRT4FmRqwZKCQbmDN0AUpJF/+W6TIhUgyrHfS1CHXOhkMnAJ5NawkUuRNkaloTB/KKUy0N5WE9hRkRIrcikwH3zRYRBuwbeggSBzQRYpcgiQ/1AwzNAG9KZA1axUpcjuShuS20UMHldqBQ3KTRIrciqQDBycN17QwOqRIC2FVE1akyJsim1eziUwDFKSBdBrQRYp8ArIJ5k2TtSke49BdBAiRIjcjyaBDEwjS5pSarykopAasSJFbkSQ4U3wz8NDelLdPISJFLkLSQlIzENFsNNMGRwekxoAuUuRCZBu8yUF5Qk4BYhp2aArMIkVuRJLhBhLSaZj4zmJ2CukiRW5FToND6UBMN4mmUJVuNLlpIkU+AfnOECApRE2B4+o60+F+ChYiRW5F0j9k1PQEQZoOPEyfTwU4kSK3I1MwIIGBbB7T98j7TVFMpMjtSBKg2+EFOsTUNlrJdUSKfCqSPNSbcN80d2jov7yeSJEPRaaA0DzkU3OJNKFIgVqkyO3IFMRTg2cKBePBFiw2FZm/5dAsUuSNkGS4ITVfSVhPIeEkjOBDs0iRS5BPfokUKVKkSJGHr7/6vuYyy3UyXgAAAABJRU5ErkJggg==" alt="QRCode">
+    </li>
+    
+
+</ul>
+</div>
+        
+    </div>
+</div>
+                </div>
+                <div class="card-body">
+                    
+                        
+                        
+                            <div id="post-toc"><ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E9%80%99%E7%AF%87%E6%96%87%E7%AB%A0%E6%9C%83%E8%AB%87%E4%BB%80%E9%BA%BC%EF%BC%9F"><span class="post-toc-number">1.</span> <span class="post-toc-text">這篇文章會談什麼？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E9%80%99%E7%AF%87%E6%96%87%E7%AB%A0%E4%B8%8D%E8%AB%87%E4%BB%80%E9%BA%BC%EF%BC%9F"><span class="post-toc-number">2.</span> <span class="post-toc-text">這篇文章不談什麼？</span></a></li></ol></div>
+                        
+                    
+                    <article id="post-content">
+                        <h3 id="這篇文章會談什麼？">這篇文章會談什麼？</h3>
+<p>如何最方便的佈署一個 Line chatbot。要是你佈署成功了，它就只會 echo，也就是把你傳的字串吐回給你，不會產生任何新字串，證明 Server 有接收到你的訊息。</p>
+<h3 id="這篇文章不談什麼？">這篇文章不談什麼？</h3>
+<p>不會談如何讓 chatbot 調皮搗蛋、生動有趣、讓你覺得 Server 上面養了一隻真人。因為那牽涉到複雜、多變，而且沒有固定作法的機器學習。也許未來會談，但這篇文章不會。</p>
+<hr>
+<ol>
+<li>
+<p>寫程式之前，要先去申請一個 Line Developer 帳號，拿到這幾樣東西：</p>
+<ul>
+<li>Channel secret</li>
+<li>Channel access token<br>
+<img src="/content/images/%E4%BD%88%E7%BD%B2LineChatbot/Line%E5%BE%8C%E5%8F%B0chatbot%E5%BF%85%E8%A6%81keys.png" alt=""></li>
+</ul>
+</li>
+<li>
+<p>到這個 repo 的 readme 照做</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/line/line-bot-sdk-python#line-bot-sdk-python">line-bot-sdk-python</a></li>
+</ul>
+</li>
+<li>
+<p>修改 SDK 中讀取 Channel secret 和 Channel access token 的部分<br>
+把上一步拿到的 Channel secret 和 Channel access token 寫入在 *.ini 裏面，並將這兩個檔案加入 .gitignore，動態讀入 Line API</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">my_CHANNEL_ACCESS_TOKEN  = <span class="built_in">open</span>(<span class="string">&#x27;channel_access_keys/channel_access_token.ini&#x27;</span>).read()</span><br><span class="line">print(my_CHANNEL_ACCESS_TOKEN)</span><br><span class="line"></span><br><span class="line">my_CHANNEL_SECRET = <span class="built_in">open</span>(<span class="string">&quot;channel_access_keys/channel_access_secret.ini&quot;</span>).read()</span><br><span class="line">print(my_CHANNEL_SECRET)</span><br><span class="line"></span><br><span class="line">line_bot_api = LineBotApi(my_CHANNEL_ACCESS_TOKEN)</span><br><span class="line">handler = WebhookHandler(my_CHANNEL_SECRET)</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>建立 https server 取得 Webhook URL<br>
+Line 的用戶操作介面，是一張前端的皮，開發 Line Bot 就是自己掌握這張皮後面的邏輯思維。Webhook 是一個 function ，是「皮」和「腦」的傳輸管道。Webhook 是由 Server 端提供，所以架好 Server 才會有 Webhook。</p>
+<p><img src="/content/images/%E4%BD%88%E7%BD%B2LineChatbot/Line%E5%BE%8C%E5%8F%B0webhook_URL.png" alt=""></p>
+<p>要注意的是，Line 有限定這個 Webhook 一定要是 Https，那要怎麼架 Https Server 呢？</p>
+<p>我目前會採用兩種方案：</p>
+<ul>
+<li>
+<p><a target="_blank" rel="noopener" href="https://ngrok.com/">ngrok</a> 的 https local server<br>
+在開發機上 demo 測試用的，手上的電腦就是 server，關機就沒了。所以只是和暫時性的 demo 和測試。方便快速，但不能持續，因為我不能讓筆電 24 小時都開著維持連網。</p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://cloud.google.com/">GCP VM</a> 上的 remote server<br>
+由於是雲端機器，只要用 tmux 維持 process 運作就好。雖然大多數服務要錢，但是選用最便宜的 f1-micro 免費，用來完成一個 MVP(Minimum Value Product) 應該是足夠。<br>
+<strong>注意：防火牆設定</strong>：0.0.0.0/0 tcp:5000 輸入（ngrok 好像可以不用？）</p>
+</li>
+</ul>
+<p>因為不想要另外弄 https certificate（MVP就是要儘量省下麻煩，能動就好，對吧！），所以我仍然會在 remote server 跑 ngrok。</p>
+<p>我會用 tmux 維持兩個 session：</p>
+<pre><code> - session 1：ngrok 的，負責聽 local server（開了就儘量不要關，理由後面會說）  
+     <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ngrok http 5000</span><br></pre></td></tr></table></figure>
+     ![](/content/images/佈署LineChatbot/ngrok_running.jpg)  
+
+ - session 2：跑 server 程式的，可能會隨著更新，時常重新啟動）  
+     <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">export</span> FLASK_APP=app.py</span><br><span class="line">$ flask run --host=127.0.0.1 --port=5000</span><br></pre></td></tr></table></figure>
+     ![](/content/images/佈署LineChatbot/flask_running.png)  
+</code></pre>
+</li>
+<li>
+<p>把 ngrok 拿到的 Webhook URL 放到 Line Developer 後台<br>
+<img src="/content/images/%E4%BD%88%E7%BD%B2LineChatbot/%E5%BE%9Engrok%E5%A1%AB%E5%85%A5webhook.png" alt=""></p>
+</li>
+<li>
+<p>照理說，這樣應該就可以用了<br>
+<img src="/content/images/佈署LineChatbot/測試對話.png" width="60%" align="middle"/></p>
+</li>
+</ol>
+
+                    </article>
+                    
+
+
+    <blockquote id="date-expire-notification" class="post-expired-notify">This article was last updated on <span id="date-expire-num"></span> days ago, and the information described in the article may have changed.</blockquote>
+    <script>
+    (function() {
+        var dateUpdate = Date.parse("2019-09-23");
+        var nowDate = new Date();
+        var a = nowDate.getTime();
+        var b = a - dateUpdate;
+        var daysUpdateExpire = Math.floor(b/(24*3600*1000));
+        if (daysUpdateExpire >= 120) {
+            document.getElementById('date-expire-num').innerHTML = daysUpdateExpire;
+        } else {
+            document.getElementById('date-expire-notification').style.display = 'none';
+        }
+    })();
+    </script>
+
+
+<p class="post-footer-info mb-0 pt-0">Published at&nbsp;<time datetime="2017-10-05T16:00:00.000Z" itemprop="datePublished">2017-10-06</time>
+
+    , Updated at&nbsp;<time datetime="2019-09-23T02:08:50.280Z" itemprop="dateModified">2019-09-23</time>
+
+</p>
+<p class="post-footer-info mb-0 pt-2">
+
+
+
+<span class="post-tags-list mt-2">
+
+<a class="post-tags-list-item" href="/tags/%E4%BD%88%E7%BD%B2/" rel="tag">#&nbsp;佈署</a>
+
+<a class="post-tags-list-item" href="/tags/%E5%BE%8C%E7%AB%AF/" rel="tag">#&nbsp;後端</a>
+
+</span>
+
+
+</p>
+
+                </div>
+                <div class="post-nav px-2 bg-gray">
+<ul class="pagination">
+    <!-- Prev Nav -->
+    
+        <li class="page-item page-prev">
+            <a href="/2017/10/19/%E9%82%A3%E4%BA%9B%E5%B9%B4%E6%88%91%E6%89%80%E8%BF%BD%E9%80%90%E7%9A%84WindowsGUI%E5%B7%A5%E5%85%B7(%E4%B8%80)%E2%80%8A%EF%BC%9A%E9%9D%9E.Net%E5%AE%B6%E6%97%8F/" rel="prev">
+                <div class="page-item-title"><i class="icon icon-back" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">那些年我所追逐的 Windows GUI 工具(一) ：非.Net家族</div>
+            </a>
+        </li>
+    
+
+    <!-- Next Nav -->
+    
+        <li class="page-item page-next">
+            <a href="/2017/10/03/%E6%AD%A5%E4%B8%8A%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8%E7%9A%84%E5%BF%83%E8%B7%AF%E6%AD%B7%E7%A8%8B(%E4%BA%8C)/" rel="next">
+                <div class="page-item-title"><i class="icon icon-forward" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">步上資料科學的心路歷程(二)：恐慌到自信</div>
+            </a>
+        </li>
+    
+</ul>
+</div>
+
+                
+                    <!-- # Comment # -->
+                    
+                        <div class="card-footer post-comment">
+                            <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://mosdeo.github.io/2017/10/06/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E6%9E%B6%E8%A8%AD%E9%96%8B%E7%99%BC%E7%94%A8%E7%9A%84%E8%87%A8%E6%99%82%20LineBot/'; // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'https://mosdeo.github.io/2017/10/06/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E6%9E%B6%E8%A8%AD%E9%96%8B%E7%99%BC%E7%94%A8%E7%9A%84%E8%87%A8%E6%99%82%20LineBot/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+<script id="disqus-thread-script">
+    (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document;
+        var s = d.createElement('script');
+        s.src = '//mosdeo-github-io.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', + new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+                        </div>
+                    
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!-- ### Footer ### -->
+            <footer class="text-center">
+    <!-- footer copyright -->
+    
+        <p class="footer-copyright mb-0">Copyright&nbsp;©&nbsp;<span id="copyright-year"></span>
+            <a class="footer-copyright-a" href="https://mosdeo.github.io">LKY 只有原創內容的 Blog</a>
+        </p>
+
+    <!-- footer custom text -->
+    <p class="footer-text mb-0">
+    
+    </p>
+    <!-- footer develop info -->
+    <p class="footer-develop mb-0">
+        
+    <!-- Busuanzi User Views -->
+    <span id="busuanzi_container_site_uv" hidden>
+        <span></span>
+        <span id="busuanzi_value_site_uv"></span>
+        <span>Viewers</span>
+        
+            <span>|</span>
+        
+    </span>
+
+
+
+
+        
+        Powered by&nbsp;<!--
+         --><a href="https://hexo.io" target="_blank" class="footer-develop-a" rel="external nofollow noopener noreferrer">Hexo</a><span class="footer-develop-divider"></span>Theme&nbsp;-&nbsp;<!--
+         --><a href="https://github.com/SukkaW/hexo-theme-suka" target="_blank" class="footer-develop-a" rel="external noopener">Suka</a>
+    </p>
+</footer>
+
+
+        <!-- ### Import File ### -->
+        <!-- ### Footer JS Import ### -->
+
+<script>
+
+    
+window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 50
+};
+document.getElementById('copyright-year').textContent = new Date().getFullYear();
+console.log('\n %c Suka Theme (hexo-theme-suka) | © SukkaW | Verision 1.3.3 %c https://github.com/SukkaW/hexo-theme-suka \n', 'color: #fff; background: #444; padding:5px 0;', 'background: #bbb; padding:5px 0;');
+
+</script>
+
+<script src="/lib/vanilla-lazyload/lazyload.min.js" async></script>
+    <script src="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.js" async></script>
+
+
+<!-- Offset -->
+
+
+
+
+<!-- Comment -->
+
+    
+        <script id="dsq-count-scr" src="https://mosdeo-github-io.disqus.com/count.js" async></script>
+
+    
+
+
+<!-- ### Custom Footer ### -->
+
+    </body>
+
+</html>

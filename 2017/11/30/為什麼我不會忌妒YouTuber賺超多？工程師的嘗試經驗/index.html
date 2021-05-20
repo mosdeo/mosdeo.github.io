@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+
+<html lang="zh-TW">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        hexo-theme-suka © SukkaW
+        GitHub: https://github.com/SukkaW/hexo-theme-suka
+    -->
+
+    <!-- ### Resource Hint ### -->
+
+    <!-- ## DNS Prefetch ## -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+<!-- busuanzi -->
+
+    <link rel="dns-prefetch" href="//busuanzi.ibruce.info">
+
+
+<!-- comment -->
+
+
+    <link rel="dns-prefetch" href="//disqus.com">
+    <link rel="dns-prefetch" href="//mosdeo-github-io.disqus.com">
+
+
+
+
+
+
+<!-- analytics -->
+
+
+    <link rel="dns-prefetch" href="//www.google-analytics.com">
+
+
+
+
+
+
+    <!-- ## Preload ## -->
+    
+    <!-- Busuanzi -->
+    
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.js" as="script">
+
+
+
+
+
+
+
+    <!-- ### Meta & Title & Info ### -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <meta name="renderer" content="webkit">
+
+    <!-- Title -->
+    <title>為什麼我不會忌妒 YouTuber 賺超多？工程師的嘗試經驗 | LKY 只有原創內容的 Blog</title>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image&#x2F;ico" href="/img/suka-favicon.ico">
+
+    <!-- ### Import File ### -->
+    <link rel="stylesheet" href="/lib/spectre/spectre.min.css"><style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    a, a:visited {
+        color: #0070ff;
+    }
+
+    a:active, a:focus, a:hover {
+        color: #0070ff;
+        opacity: .75;
+    }
+
+    #post-content a,
+    #post-content a:hover,
+    #post-content a:focus,
+    #post-content a:visited {
+        color: #005eb9;
+        opacity: 1;
+    }
+
+    
+
+    .post-entry .card-body a {
+        color: #0070ff;
+    }
+
+    .avatar {
+        background: #444;
+    }
+
+    .navbar-link,
+    .navbar-link:visited,
+    .timeline .timeline-item .timeline-icon.icon-lg {
+        color: #0070ff;
+    }
+
+    .navbar-link:hover {
+        color: #0070ff;
+        opacity: .8;
+    }
+
+    #search-input .btn,
+    #disqus_click_btn,
+    #disqus-switch-to-direct,
+    #disqus-loadmore-button {
+        background: #727e96;
+        border-color: #727e96;
+        color: #fff;
+    }
+
+    #post-toc a.post-toc-link,
+    #post-toc a.post-toc-link:visited,
+    .share-menu.menu .menu-item>a {
+        color: #727e96;
+    }
+
+    .share-menu.menu .menu-item>a:hover,
+    .share-menu.menu .menu-item>a:focus,
+    .share-menu.menu .menu-item>a:visited {
+        color: #50596c;
+        background: #f8f9fa;
+        opacity: .85;
+    }
+</style><link rel="stylesheet" href="/css/style.min.css">
+
+
+
+
+
+
+
+
+    <!-- Prettify Theme -->
+    
+    <link rel="preload" href="/css/highlight/github.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/css/highlight/github.min.css"></noscript>
+
+
+
+
+
+<script>
+/*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+!function(t){"use strict";t.loadCSS||(t.loadCSS=function(){});var e=loadCSS.relpreload={};if(e.support=function(){var e;try{e=t.document.createElement("link").relList.supports("preload")}catch(t){e=!1}return function(){return e}}(),e.bindMediaToggle=function(t){var e=t.media||"all";function a(){t.addEventListener?t.removeEventListener("load",a):t.attachEvent&&t.detachEvent("onload",a),t.setAttribute("onload",null),t.media=e}t.addEventListener?t.addEventListener("load",a):t.attachEvent&&t.attachEvent("onload",a),setTimeout(function(){t.rel="stylesheet",t.media="only x"}),setTimeout(a,3e3)},e.poly=function(){if(!e.support())for(var a=t.document.getElementsByTagName("link"),n=0;n<a.length;n++){var o=a[n];"preload"!==o.rel||"style"!==o.getAttribute("as")||o.getAttribute("data-loadcss")||(o.setAttribute("data-loadcss",!0),e.bindMediaToggle(o))}},!e.support()){e.poly();var a=t.setInterval(e.poly,500);t.addEventListener?t.addEventListener("load",function(){e.poly(),t.clearInterval(a)}):t.attachEvent&&t.attachEvent("onload",function(){e.poly(),t.clearInterval(a)})}"undefined"!=typeof exports?exports.loadCSS=loadCSS:t.loadCSS=loadCSS}("undefined"!=typeof global?global:this);
+</script>
+
+    <!-- ### Site Verification ### -->
+    
+
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="LKY 只有原創內容的 Blog"><meta name="msapplication-starturl" content="https://mosdeo.github.io"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="LKY 只有原創內容的 Blog"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- ### The Open Graph & Twitter Card Protocol ### -->
+    <meta property="og:title" content="為什麼我不會忌妒 YouTuber 賺超多？工程師的嘗試經驗 | LKY 只有原創內容的 Blog"><meta property="og:site_name" content="LKY 只有原創內容的 Blog"><meta property="og:type" content="article"><meta property="og:url" content="https://mosdeo.github.io/2017/11/30/%E7%82%BA%E4%BB%80%E9%BA%BC%E6%88%91%E4%B8%8D%E6%9C%83%E5%BF%8C%E5%A6%92YouTuber%E8%B3%BA%E8%B6%85%E5%A4%9A%EF%BC%9F%E5%B7%A5%E7%A8%8B%E5%B8%AB%E7%9A%84%E5%98%97%E8%A9%A6%E7%B6%93%E9%A9%97/"><meta property="og:locale" content="zh-TW"><meta name="description" content="前情提要：最近網路上很多眼紅輿論，眼紅 YouTuber 超好賺，心理憤恨不平。  我不會忌妒 YouTuber 賺很多，並不是因為我人格有多高尚。 是因為我 3 年多前，曾經試過拍影片來宣揚自己想說的話，放上 YouTube 想要讓大家看到。 一開始也覺得：  「應該很簡單啊！我找一間空教室、架一支畫質好的 Webcam，稍微順一下台詞也能做到吧！」 「我在高職實習教過課、在大學當助教都這麼久了 - Lin, Kao-Yuan - LKY 只有原創內容的 Blog"><meta name="keywords" content="非關技術, 學生時期, 靠盃, 批判, 社論"><meta property="og:image" content="/content/images/cover_What_is_PWM.jpg"><meta property="og:image" content="https://mosdeo.github.io/content/images/IMG_20140726_225659_%E6%8B%8D%E7%89%87%E5%A0%B4%E5%9C%B0.jpg"><meta property="og:image" content="https://mosdeo.github.io/content/images/IMG_20140726_215819_%E6%8B%8D%E7%89%87%E8%AC%9B%E7%A8%BF.jpg"><meta property="article:published_time" content="2017-11-29T16:00:00.000Z"><meta property="article:modified_time" content="2019-09-23T02:08:50.279Z"><meta property="og:updated_time" content="2019-09-23T02:08:50.279Z"><meta property="article:author" content="Lin, Kao-Yuan"><meta property="article:tag" content="非關技術, 學生時期, 靠盃, 批判, 社論"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="/content/images/cover_What_is_PWM.jpg">
+
+    
+
+    <!-- ### Canonical link ### -->
+    <link rel="canonical" href="https://mosdeo.github.io/2017/11/30/%E7%82%BA%E4%BB%80%E9%BA%BC%E6%88%91%E4%B8%8D%E6%9C%83%E5%BF%8C%E5%A6%92YouTuber%E8%B3%BA%E8%B6%85%E5%A4%9A%EF%BC%9F%E5%B7%A5%E7%A8%8B%E5%B8%AB%E7%9A%84%E5%98%97%E8%A9%A6%E7%B6%93%E9%A9%97/">
+
+    <meta name="generator" content="Hexo 5.2.0">
+
+    <!-- ### Analytics ### -->
+    
+    <!-- Google Analytics -->
+<script>
+    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+    ga('create', 'UA-64570213-2', 'auto');
+    ga('send', 'pageview');
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+
+
+
+
+
+
+
+
+
+    <!-- ### Structured Data ### -->
+    
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "url": "https://mosdeo.github.io/2017/11/30/%E7%82%BA%E4%BB%80%E9%BA%BC%E6%88%91%E4%B8%8D%E6%9C%83%E5%BF%8C%E5%A6%92YouTuber%E8%B3%BA%E8%B6%85%E5%A4%9A%EF%BC%9F%E5%B7%A5%E7%A8%8B%E5%B8%AB%E7%9A%84%E5%98%97%E8%A9%A6%E7%B6%93%E9%A9%97/",
+    "@type": "BlogPosting",
+    "logo": "https://mosdeo.github.io/img/suka-favicon.ico",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://mosdeo.github.io/2017/11/30/%E7%82%BA%E4%BB%80%E9%BA%BC%E6%88%91%E4%B8%8D%E6%9C%83%E5%BF%8C%E5%A6%92YouTuber%E8%B3%BA%E8%B6%85%E5%A4%9A%EF%BC%9F%E5%B7%A5%E7%A8%8B%E5%B8%AB%E7%9A%84%E5%98%97%E8%A9%A6%E7%B6%93%E9%A9%97/"
+    },
+    "headline": "為什麼我不會忌妒 YouTuber 賺超多？工程師的嘗試經驗 | LKY 只有原創內容的 Blog",
+    
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://mosdeo.github.io/content/images/cover_What_is_PWM.jpg"
+    },
+    
+    "datePublished": "2017-11-29T16:00:00.000Z",
+    "dateModified": "2019-09-23T02:08:50.279Z",
+    "author": {
+        "@type": "Person",
+        "name": "Lin, Kao-Yuan",
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://mosdeo.github.io/img/default_avatar.png"
+        },
+        "description": "今之能者，謂能轉貼，至於魯蛇，皆能轉貼。不原創，何以別乎？"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "LKY 只有原創內容的 Blog",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://mosdeo.github.io/img/suka-favicon.ico"
+        }
+    },
+    
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://mosdeo.github.io/search?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+    },
+    
+    "keywords": "非關技術, 學生時期, 靠盃, 批判, 社論",
+    "description": "前情提要：最近網路上很多眼紅輿論，眼紅 YouTuber 超好賺，心理憤恨不平。  我不會忌妒 YouTuber 賺很多，並不是因為我人格有多高尚。 是因為我 3 年多前，曾經試過拍影片來宣揚自己想說的話，放上 YouTube 想要讓大家看到。 一開始也覺得：  「應該很簡單啊！我找一間空教室、架一支畫質好的 Webcam，稍微順一下台詞也能做到吧！」 「我在高職實習教過課、在大學當助教都這麼久了 - Lin, Kao-Yuan - LKY 只有原創內容的 Blog"
+}
+</script>
+
+
+
+    <!-- ### Custom Head ### -->
+    
+</head>
+
+    <body>
+            
+
+            <!-- ### Main content ### -->
+            <!-- ## Header ##-->
+<header>
+    <h1 class="header-title text-center"><a href="/">LKY 只有原創內容的 Blog</a></h1>
+
+    <p class="text-center header-slogan">
+        
+            
+                今之能者，謂能轉貼，至於魯蛇，皆能轉貼。不原創，何以別乎？
+            
+        
+    </p>
+
+    <nav class="navbar-section text-center">
+    
+        <a href="/" class="navbar-link">Home</a>
+    
+    
+        <a href="/archives/" class="navbar-link">Archives</a>
+    
+    
+        <a href="/search" class="navbar-link">Search</a>
+    
+    
+    
+        <div class="dropdown dropdown-right">
+    <a class="navbar-link dropdown-toggle" tabindex="0">Share</a>
+    <ul class="menu share-menu">
+
+        <!-- Share Weibo -->
+        
+        <li class="menu-item">
+            <a href="http://service.weibo.com/share/share.php?appkey=&title=LKY 只有原創內容的 Blog&url=https://mosdeo.github.io&pic=/content/images/cover_What_is_PWM.jpg&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">Share to Weibo</a>
+        </li>
+        
+
+        <!-- Share Twitter -->
+        
+        <li class="menu-item">
+            <a href="https://twitter.com/intent/tweet?text=LKY 只有原創內容的 Blog&url=https://mosdeo.github.io&via=Lin, Kao-Yuan" target="_blank" rel="external noopener noreferrer nofollow">Share to Twitter</a>
+        </li>
+        
+
+        <!-- Share Facebook -->
+        
+        <li class="menu-item">
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://mosdeo.github.io" target="_blank" rel="external noopener noreferrer nofollow">Share to Facebook</a>
+        </li>
+        
+
+        <!-- Share Google+ -->
+        
+        <li class="menu-item">
+            <a href="https://plus.google.com/share?url=https://mosdeo.github.io" target="_blank" rel="external noopener noreferrer nofollow">Share to Google+</a>
+        </li>
+        
+
+        <!-- Share LinkedIn -->
+        
+        <li class="menu-item">
+            <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://mosdeo.github.io&title=為什麼我不會忌妒 YouTuber 賺超多？工程師的嘗試經驗" target="_blank" rel="external noopener noreferrer nofollow">Share to LinkedIn</a>
+        </li>
+        
+
+        <!-- Share QQ -->
+        
+        <li class="menu-item">
+            <a href="http://connect.qq.com/widget/shareqq/index.html?site=LKY 只有原創內容的 Blog&title=為什麼我不會忌妒 YouTuber 賺超多？工程師的嘗試經驗&summary=&pics=/content/images/cover_What_is_PWM.jpg&url=https://mosdeo.github.io" target="_blank" rel="external noopener noreferrer nofollow"> Share to QQ</a>
+        </li>
+        
+
+        <!-- Share Telegram -->
+        
+        <li class="menu-item">
+            <a href="https://t.me/share/url?url=https://mosdeo.github.io&text=為什麼我不會忌妒 YouTuber 賺超多？工程師的嘗試經驗" target="_blank" rel="external noopener noreferrer nofollow">Share to Telegram</a>
+        </li>
+        
+
+        <!-- QRCode -->
+        
+        <li class="menu-item">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQQAAAEECAAAAADrYxXWAAAFWklEQVR42u2cSW7cQBAE+f9P01fb6K6MbM4cJMZcDFgUlxigULmI1+3nvkQgBCEIQQhCEMII4Ro+fx/zzy8vjvv/mO2Fh99dXXf1M3pMfC4hCEEISwi7m13dPH2wdNzu3Dsg6WcTqN1zCUEIQthDmIZVGlrkRsn50rAmIHfXWQ5VIQhBCEcQ0g1PDzIdQwdjGrbpXyEIQQjfgzCJlHapIoKHLGTTFyUEIQjhDAIdONPCQo0OcmwrlHZi6yMqUghCeBmENLB+6r8fc5uFIIQXQaBhSRo60+AkQQ4VV9NC9LVUWghCeBGEaZAQI4QsK0QkPTFTqCATghCEwCCkB54G0ZPhlAyZ9CCNObz8ooQgBCGMy1IKXGjAkQwaUgZLhgoFNAZBQhCCEJCAIgUpUtgiPyML1mSo0pBnOXiFIAQhPBJQbRCTxBUpb7dLVBPmCkEIQrhGAdWUuj+98LTGzJPhKAQhCCFrh0YsNYENKlAFwUaWsKY4JgQhCOFGe0J7c2SQpSWLCC66xFEDRwhCEALvJ6QbnEKTkyHaDFV6PAmLhCAEIey1Ay1sE8FDoDaGyMn/ky9VCEIQwj32E9INNcUusjSlY8jvtgMaqUghCOHlEKbQMl0shSm0uN0YMjS0JdcUghCEwP4QLIkgOnySgGqXIiKgKgNGCEIQwtZUSQOOfGgoS5edaXi3AmoJXQhCEMLWVCELSGOItmbrVPwiC9pRMUwIQhBCFciOYWYoWzRgm8WsDV9xwVsIQhBCZYSShSiZIE9MlbbARUJbIQhBCBlCGoxTiYuWLGn4QgcxLYsJQQhCYBCmB0kXJaHNZOom4UQGeBMUC0EIQrhjSYMsNukGiPnRLGYpnEnlbjSQhSAEIWyLW2nQtOIohS2N8EpiqxF32/BFCEIQAjI6miHUCC5ihNLyRmMU48EoBCEI4SgoaQxVMmhJ0EoKHkgACkEIQogCihQpJwDJKCGBb3rY6dzNYBaCEITAShpNcTMNVCrQSCEsha1EBApBCEK46mUpGZwkgCHlqniTwOCZFrhoGgtBCEKojFZatkomSCpan4Y6aTGKQ1QIQhDCdlmiISgpVk3DjSxUREg1cIQgBCHcR4MxGaTEJE0Fy8YA2YGiAI4FlBCE8GIIKdAkYoaUshrztRFQrQmzLGkIQQhCwAFIEjpUNLUGazJKyPniswhBCEIYA9lkjj5ZbmiJM5mzCVgaiDGVFoIQhBBfMtUOwtY4bUwREt6Q+xKCEISQX0rZmCDpIdOQPAlSqclaD0YhCEEIx0UtIpBIqYuepxm67cInBCEIgb+8mg6w5hg65EhITEygaMwIQQhCWEIg5QwS2NKliAYr06JzIqCEIAQhZAiNOUrEE31wGr6mcxKhtYUoBCEIIZoq1GglS1B66BTy0oCIGC6VsyQEIbwcAj1ZKl60paoUuKbjSHFkBCkEIQhhuSwlUZIGIx2A5IaTaUvKGymwFYIQhNC9qPY0YGmLGKSg1ZirJJCNZU4hCEEIMZidwpHGIKXDkAipGKw0AkoIQhBC9QfjTwcaOb4FlAKhFNYKQQhCyBCIGElDMpU00sMQM5XeRxrcQhCCEPhLJGjZsw1ZmsFLClmtuToKKCEIQQj45TBkANFi1aPA5GIvzkbLnxCEIIRtIItFRxBETfDaFrvIMKQQhSAEIXSdJVqgTEKpNVSTYEvXaRY6IQhBCGcQiLBpilZ0cSLH02s8HoxCEIIQcGAymbRkGWqA0PtEwZAQhCCEWkClkuRJgDsFwKRAShes+FxCEIIQaqOVlCyo+UEHFzFOyBcSzRghCEEIdSD7mz9CEIIQhCAEIQhh+fkDHiFln6MHiRwAAAAASUVORK5CYII=" alr="QRCode">
+        </li>
+        
+
+    </ul>
+</div>
+    
+    
+        <a href="/atom.xml" target="_blank" class="navbar-link">RSS</a>
+    
+</nav>
+</header>
+
+            
+    <!-- ## Post ## -->
+    <div class="post-container">
+    <div id="post-card" class="card">
+        
+            <div class="card-image lazyload" data-bg="url('/content/images/cover_What_is_PWM.jpg')"></div>
+        
+        <div class="card-item-container">
+            <div class="card-inner-cell">
+                <!-- # Post Header Info # -->
+                <div class="card-header">
+                    
+    <h1 class="card-title h3 mb-2">為什麼我不會忌妒 YouTuber 賺超多？工程師的嘗試經驗</h1>
+
+
+
+
+<div class="post-header-info">
+    <p class="post-header-info-left text-gray">
+        <img class="author-thumb lazyload" data-src="/img/default_avatar.png" src="/img/suka-lazyload.gif" alt="Lin, Kao-Yuan's Avatar">
+        <span>2017-11-30</span>
+        
+        
+            <!-- Busuanzi Post Views -->
+<span id="busuanzi_container_page_pv" hidden>
+    <span class="suka-devide-dot"></span>
+    <span></span>
+    <span id="busuanzi_value_page_pv"></span>
+    <span>Views</span>
+</span>
+        
+        
+    </p>
+    <div class="post-header-info-right">
+        
+            <div class="dropdown dropdown-right">
+<a class="dropdown-toggle" tabindex="0">Share the post</a>
+<ul class="menu share-menu">
+    <!-- Share Weibo -->
+    
+    <li class="menu-item">
+        <a href="http://service.weibo.com/share/share.php?appkey=&title=為什麼我不會忌妒 YouTuber 賺超多？工程師的嘗試經驗&url=https://mosdeo.github.io/2017/11/30/%E7%82%BA%E4%BB%80%E9%BA%BC%E6%88%91%E4%B8%8D%E6%9C%83%E5%BF%8C%E5%A6%92YouTuber%E8%B3%BA%E8%B6%85%E5%A4%9A%EF%BC%9F%E5%B7%A5%E7%A8%8B%E5%B8%AB%E7%9A%84%E5%98%97%E8%A9%A6%E7%B6%93%E9%A9%97/&pic=/content/images/cover_What_is_PWM.jpg&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">Share to Weibo</a>
+    </li>
+    
+
+    <!-- Share Twitter -->
+    
+    <li class="menu-item">
+        <a href="https://twitter.com/intent/tweet?text=為什麼我不會忌妒 YouTuber 賺超多？工程師的嘗試經驗&url=https://mosdeo.github.io/2017/11/30/%E7%82%BA%E4%BB%80%E9%BA%BC%E6%88%91%E4%B8%8D%E6%9C%83%E5%BF%8C%E5%A6%92YouTuber%E8%B3%BA%E8%B6%85%E5%A4%9A%EF%BC%9F%E5%B7%A5%E7%A8%8B%E5%B8%AB%E7%9A%84%E5%98%97%E8%A9%A6%E7%B6%93%E9%A9%97/&via=Lin, Kao-Yuan" target="_blank" rel="external noopener noreferrer nofollow">Share to Twitter</a>
+    </li>
+    
+
+    <!-- Share Facebook -->
+    
+    <li class="menu-item">
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://mosdeo.github.io/2017/11/30/%E7%82%BA%E4%BB%80%E9%BA%BC%E6%88%91%E4%B8%8D%E6%9C%83%E5%BF%8C%E5%A6%92YouTuber%E8%B3%BA%E8%B6%85%E5%A4%9A%EF%BC%9F%E5%B7%A5%E7%A8%8B%E5%B8%AB%E7%9A%84%E5%98%97%E8%A9%A6%E7%B6%93%E9%A9%97/" target="_blank" rel="external noopener noreferrer nofollow">Share to Facebook</a>
+    </li>
+    
+
+    <!-- Share Google+ -->
+    
+    <li class="menu-item">
+        <a href="https://plus.google.com/share?url=https://mosdeo.github.io/2017/11/30/%E7%82%BA%E4%BB%80%E9%BA%BC%E6%88%91%E4%B8%8D%E6%9C%83%E5%BF%8C%E5%A6%92YouTuber%E8%B3%BA%E8%B6%85%E5%A4%9A%EF%BC%9F%E5%B7%A5%E7%A8%8B%E5%B8%AB%E7%9A%84%E5%98%97%E8%A9%A6%E7%B6%93%E9%A9%97/" target="_blank" rel="external noopener noreferrer nofollow">Share to Google+</a>
+    </li>
+    
+
+    <!-- Share LinkedIn -->
+    
+    <li class="menu-item">
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://mosdeo.github.io/2017/11/30/%E7%82%BA%E4%BB%80%E9%BA%BC%E6%88%91%E4%B8%8D%E6%9C%83%E5%BF%8C%E5%A6%92YouTuber%E8%B3%BA%E8%B6%85%E5%A4%9A%EF%BC%9F%E5%B7%A5%E7%A8%8B%E5%B8%AB%E7%9A%84%E5%98%97%E8%A9%A6%E7%B6%93%E9%A9%97/&title=LKY 只有原創內容的 Blog" target="_blank" rel="external noopener noreferrer nofollow">Share to LinkedIn</a>
+    </li>
+    
+
+    <!-- Share QQ -->
+    
+    <li class="menu-item">
+        <a href="http://connect.qq.com/widget/shareqq/index.html?site=LKY 只有原創內容的 Blog&title=LKY 只有原創內容的 Blog&summary=&pics=/content/images/cover_What_is_PWM.jpg&url=https://mosdeo.github.io/2017/11/30/%E7%82%BA%E4%BB%80%E9%BA%BC%E6%88%91%E4%B8%8D%E6%9C%83%E5%BF%8C%E5%A6%92YouTuber%E8%B3%BA%E8%B6%85%E5%A4%9A%EF%BC%9F%E5%B7%A5%E7%A8%8B%E5%B8%AB%E7%9A%84%E5%98%97%E8%A9%A6%E7%B6%93%E9%A9%97/" target="_blank" rel="external noopener noreferrer nofollow"> Share to QQ</a>
+    </li>
+    
+
+    <!-- Share Telegram -->
+    
+    <li class="menu-item">
+        <a href="https://t.me/share/url?url=https://mosdeo.github.io/2017/11/30/%E7%82%BA%E4%BB%80%E9%BA%BC%E6%88%91%E4%B8%8D%E6%9C%83%E5%BF%8C%E5%A6%92YouTuber%E8%B3%BA%E8%B6%85%E5%A4%9A%EF%BC%9F%E5%B7%A5%E7%A8%8B%E5%B8%AB%E7%9A%84%E5%98%97%E8%A9%A6%E7%B6%93%E9%A9%97/&text=LKY 只有原創內容的 Blog" target="_blank" rel="external noopener noreferrer nofollow">Share to Telegram</a>
+    </li>
+    
+
+    <!-- QRCode -->
+    
+    <li class="menu-item">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQQAAAEECAAAAADrYxXWAAAFWklEQVR42u2cSW7cQBAE+f9P01fb6K6MbM4cJMZcDFgUlxigULmI1+3nvkQgBCEIQQhCEMII4Ro+fx/zzy8vjvv/mO2Fh99dXXf1M3pMfC4hCEEISwi7m13dPH2wdNzu3Dsg6WcTqN1zCUEIQthDmIZVGlrkRsn50rAmIHfXWQ5VIQhBCEcQ0g1PDzIdQwdjGrbpXyEIQQjfgzCJlHapIoKHLGTTFyUEIQjhDAIdONPCQo0OcmwrlHZi6yMqUghCeBmENLB+6r8fc5uFIIQXQaBhSRo60+AkQQ4VV9NC9LVUWghCeBGEaZAQI4QsK0QkPTFTqCATghCEwCCkB54G0ZPhlAyZ9CCNObz8ooQgBCGMy1IKXGjAkQwaUgZLhgoFNAZBQhCCEJCAIgUpUtgiPyML1mSo0pBnOXiFIAQhPBJQbRCTxBUpb7dLVBPmCkEIQrhGAdWUuj+98LTGzJPhKAQhCCFrh0YsNYENKlAFwUaWsKY4JgQhCOFGe0J7c2SQpSWLCC66xFEDRwhCEALvJ6QbnEKTkyHaDFV6PAmLhCAEIey1Ay1sE8FDoDaGyMn/ky9VCEIQwj32E9INNcUusjSlY8jvtgMaqUghCOHlEKbQMl0shSm0uN0YMjS0JdcUghCEwP4QLIkgOnySgGqXIiKgKgNGCEIQwtZUSQOOfGgoS5edaXi3AmoJXQhCEMLWVCELSGOItmbrVPwiC9pRMUwIQhBCFciOYWYoWzRgm8WsDV9xwVsIQhBCZYSShSiZIE9MlbbARUJbIQhBCBlCGoxTiYuWLGn4QgcxLYsJQQhCYBCmB0kXJaHNZOom4UQGeBMUC0EIQrhjSYMsNukGiPnRLGYpnEnlbjSQhSAEIWyLW2nQtOIohS2N8EpiqxF32/BFCEIQAjI6miHUCC5ihNLyRmMU48EoBCEI4SgoaQxVMmhJ0EoKHkgACkEIQogCihQpJwDJKCGBb3rY6dzNYBaCEITAShpNcTMNVCrQSCEsha1EBApBCEK46mUpGZwkgCHlqniTwOCZFrhoGgtBCEKojFZatkomSCpan4Y6aTGKQ1QIQhDCdlmiISgpVk3DjSxUREg1cIQgBCHcR4MxGaTEJE0Fy8YA2YGiAI4FlBCE8GIIKdAkYoaUshrztRFQrQmzLGkIQQhCwAFIEjpUNLUGazJKyPniswhBCEIYA9lkjj5ZbmiJM5mzCVgaiDGVFoIQhBBfMtUOwtY4bUwREt6Q+xKCEISQX0rZmCDpIdOQPAlSqclaD0YhCEEIx0UtIpBIqYuepxm67cInBCEIgb+8mg6w5hg65EhITEygaMwIQQhCWEIg5QwS2NKliAYr06JzIqCEIAQhZAiNOUrEE31wGr6mcxKhtYUoBCEIIZoq1GglS1B66BTy0oCIGC6VsyQEIbwcAj1ZKl60paoUuKbjSHFkBCkEIQhhuSwlUZIGIx2A5IaTaUvKGymwFYIQhNC9qPY0YGmLGKSg1ZirJJCNZU4hCEEIMZidwpHGIKXDkAipGKw0AkoIQhBC9QfjTwcaOb4FlAKhFNYKQQhCyBCIGElDMpU00sMQM5XeRxrcQhCCEPhLJGjZsw1ZmsFLClmtuToKKCEIQQj45TBkANFi1aPA5GIvzkbLnxCEIIRtIItFRxBETfDaFrvIMKQQhSAEIXSdJVqgTEKpNVSTYEvXaRY6IQhBCGcQiLBpilZ0cSLH02s8HoxCEIIQcGAymbRkGWqA0PtEwZAQhCCEWkClkuRJgDsFwKRAShes+FxCEIIQaqOVlCyo+UEHFzFOyBcSzRghCEEIdSD7mz9CEIIQhCAEIQhh+fkDHiFln6MHiRwAAAAASUVORK5CYII=" alt="QRCode">
+    </li>
+    
+
+</ul>
+</div>
+        
+    </div>
+</div>
+                </div>
+                <div class="card-body">
+                    
+                        
+                        
+                            <div id="post-toc"><ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%97%A2%E7%84%B6%E9%80%99%E9%BA%BC%E7%B0%A1%E5%96%AE%EF%BC%8C%E9%82%A3%E6%88%91%E7%82%BA%E4%BB%80%E9%BA%BC%E4%B8%8D%E8%87%AA%E5%B7%B1%E4%BD%9C%EF%BC%9F"><span class="post-toc-number">1.</span> <span class="post-toc-text">既然這麼簡單，那我為什麼不自己作？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%B0%8F%E5%90%83%E4%B9%9F%E6%98%AF%E3%80%82%E5%81%9A%E9%81%8E%E6%89%8D%E7%9F%A5%E9%81%93%E3%80%8C%E5%88%A5%E4%BA%BA%E5%81%9A%E5%BE%88%E7%B0%A1%E5%96%AE%EF%BC%8C%E4%BD%86%E6%98%AF%E8%87%AA%E5%B7%B1%E4%BE%86%E6%9B%B4%E8%B2%B4%E3%80%8D%E7%9A%84%E9%81%93%E7%90%86"><span class="post-toc-number">2.</span> <span class="post-toc-text">小吃也是。做過才知道「別人做很簡單，但是自己來更貴」的道理</span></a></li></ol></div>
+                        
+                    
+                    <article id="post-content">
+                        <!-- 指定被分享到 FB 上的縮圖（事後做好像沒用） -->
+<meta property="og:image" content="/content/images/cover_What_is_PWM.jpg" />
+<p>前情提要：最近網路上很多眼紅輿論，眼紅 YouTuber 超好賺，心理憤恨不平。</p>
+<iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fkrisnight%2Fposts%2F1558853857497168&width=500" width="500" height="230" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+<p>我不會忌妒 YouTuber 賺很多，並不是因為我人格有多高尚。<br>
+是因為我 3 年多前，曾經試過拍影片來宣揚自己想說的話，放上 YouTube 想要讓大家看到。</p>
+<p>一開始也覺得：</p>
+<blockquote>
+<p><strong>「應該很簡單啊！我找一間空教室、架一支畫質好的 Webcam，稍微順一下台詞也能做到吧！」</strong><br>
+<strong>「我在高職實習教過課、在大學當助教都這麼久了，上台講話和版書，應該是我已經很熟悉的優勢才對。」</strong></p>
+</blockquote>
+<hr>
+<h3 id="既然這麼簡單，那我為什麼不自己作？">既然這麼簡單，那我為什麼不自己作？</h3>
+<p>真的把 Webcam 架起來才發現，放桌上是不行的，鏡頭必須要和講者頭部同高，才會有一個正確的視角（如下圖）<br>
+<img src="/content/images/IMG_20140726_225659_拍片場地.jpg" width=90% /></p>
+<p>講稿就打在電腦上，不敢寫死。因為有些內容是講了才會覺得哪裡要改？哪裡可以更順？所以必須要可以隨時修改（如下圖）<br>
+<img src="/content/images/IMG_20140726_215819_拍片講稿.jpg" width=50% /><br>
+　<br>
+由於我不會剪接的關係，必須要一口氣到底。這就讓我重複了三四次，才拍成一次完整的影片。結果，當然是慘不忍睹，因為…</p>
+<ol>
+<li>頭會一直亂動，經常是歪的</li>
+<li>講話時一直有皺眉頭般的扭曲表情</li>
+<li>人常常跑出鏡頭外<br>
+　<br>
+　<br>
+所以，就開始針對這些問題改進：</li>
+<li>看著螢幕的即時影像，邊看邊講，注意身體姿態和表情不要扭曲。</li>
+<li>測量鏡頭邊界，標記在白板上。<br>
+　<br>
+　<br>
+然後又重來了兩次，中間還要擔心有沒有人會闖進空教室？會不會不小心被關燈？之類的各種外力狀況。然後才錄出自己勉強覺得可以妥協的成果（累了，不妥協也不行），把恥力依然滿點的影片放上 YouTube 羞恥 play。</li>
+</ol>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/JCvgHKDTiWE?rel=0" frameborder="0" allowfullscreen></iframe>
+　
+<iframe width="560" height="315" src="https://www.youtube.com/embed/npncq2YZaYY?rel=0" frameborder="0" allowfullscreen></iframe>
+　
+<p>喔對了！現在很多人不看字串標題的，所以還得自己給影片做封面、用 Photo Impact 標上顯眼的文字，這才算是完成。</p>
+<p>做完這兩部之後，我就再也沒有做了，因為真的大費周章，成果又不佳。</p>
+<hr>
+<h3 id="小吃也是。做過才知道「別人做很簡單，但是自己來更貴」的道理">小吃也是。做過才知道「別人做很簡單，但是自己來更貴」的道理</h3>
+<p>BTW，我在家裡嘗試做過蚵仔煎等小吃。我才發現，小吃之所以是小吃，而沒有成為家常菜，就是因為備料煩瑣、烹調技巧不好掌握，往往要費工夫準備大半天，才能吃到你在夜市六七成水準的菜餚。然後，最多也只煮給一家 4、5 個人吃而已，邊際成本很高、邊際效用卻很低。</p>
+<p>因此，小吃和家常菜有了區隔，小吃就不太會出現在家中廚房。小吃要出現在專職販賣食物的攤販或店面，集中生產，才能夠達到規模經濟。</p>
+<hr>
+<blockquote>
+<p><strong>很多看起來很簡單的事情，收費不低，所以不服氣，想要自己下去做。</strong><br>
+<strong>做了，才知道有很多繁瑣的細節，每一個都細節都要做到 80 分，整體看起來才會有 60 分。</strong><br>
+<strong>知道這些困難以後，下次就會心甘情願的付錢了，再也不會覺得貴。</strong></p>
+</blockquote>
+
+                    </article>
+                    
+
+
+    <blockquote id="date-expire-notification" class="post-expired-notify">This article was last updated on <span id="date-expire-num"></span> days ago, and the information described in the article may have changed.</blockquote>
+    <script>
+    (function() {
+        var dateUpdate = Date.parse("2019-09-23");
+        var nowDate = new Date();
+        var a = nowDate.getTime();
+        var b = a - dateUpdate;
+        var daysUpdateExpire = Math.floor(b/(24*3600*1000));
+        if (daysUpdateExpire >= 120) {
+            document.getElementById('date-expire-num').innerHTML = daysUpdateExpire;
+        } else {
+            document.getElementById('date-expire-notification').style.display = 'none';
+        }
+    })();
+    </script>
+
+
+<p class="post-footer-info mb-0 pt-0">Published at&nbsp;<time datetime="2017-11-29T16:00:00.000Z" itemprop="datePublished">2017-11-30</time>
+
+    , Updated at&nbsp;<time datetime="2019-09-23T02:08:50.279Z" itemprop="dateModified">2019-09-23</time>
+
+</p>
+<p class="post-footer-info mb-0 pt-2">
+
+
+
+<span class="post-tags-list mt-2">
+
+<a class="post-tags-list-item" href="/tags/%E9%9D%9E%E9%97%9C%E6%8A%80%E8%A1%93/" rel="tag">#&nbsp;非關技術</a>
+
+<a class="post-tags-list-item" href="/tags/%E5%AD%B8%E7%94%9F%E6%99%82%E6%9C%9F/" rel="tag">#&nbsp;學生時期</a>
+
+<a class="post-tags-list-item" href="/tags/%E9%9D%A0%E7%9B%83/" rel="tag">#&nbsp;靠盃</a>
+
+<a class="post-tags-list-item" href="/tags/%E6%89%B9%E5%88%A4/" rel="tag">#&nbsp;批判</a>
+
+<a class="post-tags-list-item" href="/tags/%E7%A4%BE%E8%AB%96/" rel="tag">#&nbsp;社論</a>
+
+</span>
+
+
+</p>
+
+                </div>
+                <div class="post-nav px-2 bg-gray">
+<ul class="pagination">
+    <!-- Prev Nav -->
+    
+        <li class="page-item page-prev">
+            <a href="/2017/12/01/2017%E6%9D%B1%E9%A6%AC%E4%BE%86%E8%A5%BF%E4%BA%9E%E6%97%85%E9%81%8A%E8%A8%98%EF%BC%88%E4%BA%8C%EF%BC%89/" rel="prev">
+                <div class="page-item-title"><i class="icon icon-back" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">2017 東馬來西亞旅遊記（二）：Day2 上午，海邊、十里香肉骨茶</div>
+            </a>
+        </li>
+    
+
+    <!-- Next Nav -->
+    
+        <li class="page-item page-next">
+            <a href="/2017/11/24/2017%E6%9D%B1%E9%A6%AC%E4%BE%86%E8%A5%BF%E4%BA%9E%E6%97%85%E9%81%8A%E8%A8%98%EF%BC%88%E4%B8%80%EF%BC%89/" rel="next">
+                <div class="page-item-title"><i class="icon icon-forward" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">2017 東馬來西亞旅遊記（一）：搭車、覓食、轉機，都是冒險</div>
+            </a>
+        </li>
+    
+</ul>
+</div>
+
+                
+                    <!-- # Comment # -->
+                    
+                        <div class="card-footer post-comment">
+                            <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://mosdeo.github.io/2017/11/30/%E7%82%BA%E4%BB%80%E9%BA%BC%E6%88%91%E4%B8%8D%E6%9C%83%E5%BF%8C%E5%A6%92YouTuber%E8%B3%BA%E8%B6%85%E5%A4%9A%EF%BC%9F%E5%B7%A5%E7%A8%8B%E5%B8%AB%E7%9A%84%E5%98%97%E8%A9%A6%E7%B6%93%E9%A9%97/'; // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'https://mosdeo.github.io/2017/11/30/%E7%82%BA%E4%BB%80%E9%BA%BC%E6%88%91%E4%B8%8D%E6%9C%83%E5%BF%8C%E5%A6%92YouTuber%E8%B3%BA%E8%B6%85%E5%A4%9A%EF%BC%9F%E5%B7%A5%E7%A8%8B%E5%B8%AB%E7%9A%84%E5%98%97%E8%A9%A6%E7%B6%93%E9%A9%97/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+<script id="disqus-thread-script">
+    (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document;
+        var s = d.createElement('script');
+        s.src = '//mosdeo-github-io.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', + new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+                        </div>
+                    
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!-- ### Footer ### -->
+            <footer class="text-center">
+    <!-- footer copyright -->
+    
+        <p class="footer-copyright mb-0">Copyright&nbsp;©&nbsp;<span id="copyright-year"></span>
+            <a class="footer-copyright-a" href="https://mosdeo.github.io">LKY 只有原創內容的 Blog</a>
+        </p>
+
+    <!-- footer custom text -->
+    <p class="footer-text mb-0">
+    
+    </p>
+    <!-- footer develop info -->
+    <p class="footer-develop mb-0">
+        
+    <!-- Busuanzi User Views -->
+    <span id="busuanzi_container_site_uv" hidden>
+        <span></span>
+        <span id="busuanzi_value_site_uv"></span>
+        <span>Viewers</span>
+        
+            <span>|</span>
+        
+    </span>
+
+
+
+
+        
+        Powered by&nbsp;<!--
+         --><a href="https://hexo.io" target="_blank" class="footer-develop-a" rel="external nofollow noopener noreferrer">Hexo</a><span class="footer-develop-divider"></span>Theme&nbsp;-&nbsp;<!--
+         --><a href="https://github.com/SukkaW/hexo-theme-suka" target="_blank" class="footer-develop-a" rel="external noopener">Suka</a>
+    </p>
+</footer>
+
+
+        <!-- ### Import File ### -->
+        <!-- ### Footer JS Import ### -->
+
+<script>
+
+    
+window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 50
+};
+document.getElementById('copyright-year').textContent = new Date().getFullYear();
+console.log('\n %c Suka Theme (hexo-theme-suka) | © SukkaW | Verision 1.3.3 %c https://github.com/SukkaW/hexo-theme-suka \n', 'color: #fff; background: #444; padding:5px 0;', 'background: #bbb; padding:5px 0;');
+
+</script>
+
+<script src="/lib/vanilla-lazyload/lazyload.min.js" async></script>
+    <script src="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.js" async></script>
+
+
+<!-- Offset -->
+
+
+
+
+<!-- Comment -->
+
+    
+        <script id="dsq-count-scr" src="https://mosdeo-github-io.disqus.com/count.js" async></script>
+
+    
+
+
+<!-- ### Custom Footer ### -->
+
+    </body>
+
+</html>

@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+
+<html lang="zh-TW">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        hexo-theme-suka © SukkaW
+        GitHub: https://github.com/SukkaW/hexo-theme-suka
+    -->
+
+    <!-- ### Resource Hint ### -->
+
+    <!-- ## DNS Prefetch ## -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+<!-- busuanzi -->
+
+    <link rel="dns-prefetch" href="//busuanzi.ibruce.info">
+
+
+<!-- comment -->
+
+
+    <link rel="dns-prefetch" href="//disqus.com">
+    <link rel="dns-prefetch" href="//mosdeo-github-io.disqus.com">
+
+
+
+
+
+
+<!-- analytics -->
+
+
+    <link rel="dns-prefetch" href="//www.google-analytics.com">
+
+
+
+
+
+
+    <!-- ## Preload ## -->
+    
+    <!-- Busuanzi -->
+    
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.js" as="script">
+
+
+
+
+
+
+
+    <!-- ### Meta & Title & Info ### -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <meta name="renderer" content="webkit">
+
+    <!-- Title -->
+    <title>LeetCode Concurrency Go 語言詳解：Print FooBar Alternately | LKY 只有原創內容的 Blog</title>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image&#x2F;ico" href="/img/suka-favicon.ico">
+
+    <!-- ### Import File ### -->
+    <link rel="stylesheet" href="/lib/spectre/spectre.min.css"><style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    a, a:visited {
+        color: #0070ff;
+    }
+
+    a:active, a:focus, a:hover {
+        color: #0070ff;
+        opacity: .75;
+    }
+
+    #post-content a,
+    #post-content a:hover,
+    #post-content a:focus,
+    #post-content a:visited {
+        color: #005eb9;
+        opacity: 1;
+    }
+
+    
+
+    .post-entry .card-body a {
+        color: #0070ff;
+    }
+
+    .avatar {
+        background: #444;
+    }
+
+    .navbar-link,
+    .navbar-link:visited,
+    .timeline .timeline-item .timeline-icon.icon-lg {
+        color: #0070ff;
+    }
+
+    .navbar-link:hover {
+        color: #0070ff;
+        opacity: .8;
+    }
+
+    #search-input .btn,
+    #disqus_click_btn,
+    #disqus-switch-to-direct,
+    #disqus-loadmore-button {
+        background: #727e96;
+        border-color: #727e96;
+        color: #fff;
+    }
+
+    #post-toc a.post-toc-link,
+    #post-toc a.post-toc-link:visited,
+    .share-menu.menu .menu-item>a {
+        color: #727e96;
+    }
+
+    .share-menu.menu .menu-item>a:hover,
+    .share-menu.menu .menu-item>a:focus,
+    .share-menu.menu .menu-item>a:visited {
+        color: #50596c;
+        background: #f8f9fa;
+        opacity: .85;
+    }
+</style><link rel="stylesheet" href="/css/style.min.css">
+
+
+
+
+
+
+
+
+    <!-- Prettify Theme -->
+    
+    <link rel="preload" href="/css/highlight/github.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/css/highlight/github.min.css"></noscript>
+
+
+
+
+
+<script>
+/*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+!function(t){"use strict";t.loadCSS||(t.loadCSS=function(){});var e=loadCSS.relpreload={};if(e.support=function(){var e;try{e=t.document.createElement("link").relList.supports("preload")}catch(t){e=!1}return function(){return e}}(),e.bindMediaToggle=function(t){var e=t.media||"all";function a(){t.addEventListener?t.removeEventListener("load",a):t.attachEvent&&t.detachEvent("onload",a),t.setAttribute("onload",null),t.media=e}t.addEventListener?t.addEventListener("load",a):t.attachEvent&&t.attachEvent("onload",a),setTimeout(function(){t.rel="stylesheet",t.media="only x"}),setTimeout(a,3e3)},e.poly=function(){if(!e.support())for(var a=t.document.getElementsByTagName("link"),n=0;n<a.length;n++){var o=a[n];"preload"!==o.rel||"style"!==o.getAttribute("as")||o.getAttribute("data-loadcss")||(o.setAttribute("data-loadcss",!0),e.bindMediaToggle(o))}},!e.support()){e.poly();var a=t.setInterval(e.poly,500);t.addEventListener?t.addEventListener("load",function(){e.poly(),t.clearInterval(a)}):t.attachEvent&&t.attachEvent("onload",function(){e.poly(),t.clearInterval(a)})}"undefined"!=typeof exports?exports.loadCSS=loadCSS:t.loadCSS=loadCSS}("undefined"!=typeof global?global:this);
+</script>
+
+    <!-- ### Site Verification ### -->
+    
+
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="LKY 只有原創內容的 Blog"><meta name="msapplication-starturl" content="https://mosdeo.github.io"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="LKY 只有原創內容的 Blog"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- ### The Open Graph & Twitter Card Protocol ### -->
+    <meta property="og:title" content="LeetCode Concurrency Go 語言詳解：Print FooBar Alternately | LKY 只有原創內容的 Blog"><meta property="og:site_name" content="LKY 只有原創內容的 Blog"><meta property="og:type" content="article"><meta property="og:url" content="https://mosdeo.github.io/2020/01/16/LeetCode_Concurrency_Go%E8%AA%9E%E8%A8%80%E8%A9%B3%E8%A7%A3_PrintFooBarAlternately/"><meta property="og:locale" content="zh-TW"><meta name="description" content="前言：由於 LeetCode Concurrency(併發) 還沒有 Go 語言版本，我先自行用 Go 語言來解題。為了能在 LeetCode 以外的平台獲得討論，所以我打算逐漸把自己的解題思路寫下。這是我試水溫的第一篇。 本題 LeetCode 連結： https:&#x2F;&#x2F;leetcode.com&#x2F;problems&#x2F;print-foobar-alternately&#x2F; 本題考核點？ 指定次數交替執行  - Lin, Kao-Yuan - LKY 只有原創內容的 Blog"><meta name="keywords" content="Go語言"><meta property="og:image" content="/content/images/leetcode/LeetCodeIcon_890x501.JPG"><meta property="og:image" content="https://mosdeo.github.io/content/images/leetcode/PrintFooBarAlternately%E7%A4%BA%E6%84%8F%E5%9C%9620200116.PNG"><meta property="article:published_time" content="2020-01-15T16:00:00.000Z"><meta property="article:modified_time" content="2020-02-10T01:51:04.997Z"><meta property="og:updated_time" content="2020-02-10T01:51:04.997Z"><meta property="article:author" content="Lin, Kao-Yuan"><meta property="article:tag" content="Go語言"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="/content/images/leetcode/LeetCodeIcon_890x501.JPG">
+
+    
+
+    <!-- ### Canonical link ### -->
+    <link rel="canonical" href="https://mosdeo.github.io/2020/01/16/LeetCode_Concurrency_Go%E8%AA%9E%E8%A8%80%E8%A9%B3%E8%A7%A3_PrintFooBarAlternately/">
+
+    <meta name="generator" content="Hexo 5.2.0">
+
+    <!-- ### Analytics ### -->
+    
+    <!-- Google Analytics -->
+<script>
+    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+    ga('create', 'UA-64570213-2', 'auto');
+    ga('send', 'pageview');
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+
+
+
+
+
+
+
+
+
+    <!-- ### Structured Data ### -->
+    
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "url": "https://mosdeo.github.io/2020/01/16/LeetCode_Concurrency_Go%E8%AA%9E%E8%A8%80%E8%A9%B3%E8%A7%A3_PrintFooBarAlternately/",
+    "@type": "BlogPosting",
+    "logo": "https://mosdeo.github.io/img/suka-favicon.ico",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://mosdeo.github.io/2020/01/16/LeetCode_Concurrency_Go%E8%AA%9E%E8%A8%80%E8%A9%B3%E8%A7%A3_PrintFooBarAlternately/"
+    },
+    "headline": "LeetCode Concurrency Go 語言詳解：Print FooBar Alternately | LKY 只有原創內容的 Blog",
+    
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://mosdeo.github.io/content/images/leetcode/LeetCodeIcon_890x501.JPG"
+    },
+    
+    "datePublished": "2020-01-15T16:00:00.000Z",
+    "dateModified": "2020-02-10T01:51:04.997Z",
+    "author": {
+        "@type": "Person",
+        "name": "Lin, Kao-Yuan",
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://mosdeo.github.io/img/default_avatar.png"
+        },
+        "description": "今之能者，謂能轉貼，至於魯蛇，皆能轉貼。不原創，何以別乎？"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "LKY 只有原創內容的 Blog",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://mosdeo.github.io/img/suka-favicon.ico"
+        }
+    },
+    
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://mosdeo.github.io/search?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+    },
+    
+    "keywords": "Go語言",
+    "description": "前言：由於 LeetCode Concurrency(併發) 還沒有 Go 語言版本，我先自行用 Go 語言來解題。為了能在 LeetCode 以外的平台獲得討論，所以我打算逐漸把自己的解題思路寫下。這是我試水溫的第一篇。 本題 LeetCode 連結： https://leetcode.com/problems/print-foobar-alternately/ 本題考核點？ 指定次數交替執行  - Lin, Kao-Yuan - LKY 只有原創內容的 Blog"
+}
+</script>
+
+
+
+    <!-- ### Custom Head ### -->
+    
+</head>
+
+    <body>
+            
+
+            <!-- ### Main content ### -->
+            <!-- ## Header ##-->
+<header>
+    <h1 class="header-title text-center"><a href="/">LKY 只有原創內容的 Blog</a></h1>
+
+    <p class="text-center header-slogan">
+        
+            
+                今之能者，謂能轉貼，至於魯蛇，皆能轉貼。不原創，何以別乎？
+            
+        
+    </p>
+
+    <nav class="navbar-section text-center">
+    
+        <a href="/" class="navbar-link">Home</a>
+    
+    
+        <a href="/archives/" class="navbar-link">Archives</a>
+    
+    
+        <a href="/search" class="navbar-link">Search</a>
+    
+    
+    
+        <div class="dropdown dropdown-right">
+    <a class="navbar-link dropdown-toggle" tabindex="0">Share</a>
+    <ul class="menu share-menu">
+
+        <!-- Share Weibo -->
+        
+        <li class="menu-item">
+            <a href="http://service.weibo.com/share/share.php?appkey=&title=LKY 只有原創內容的 Blog&url=https://mosdeo.github.io&pic=/content/images/leetcode/LeetCodeIcon_890x501.JPG&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">Share to Weibo</a>
+        </li>
+        
+
+        <!-- Share Twitter -->
+        
+        <li class="menu-item">
+            <a href="https://twitter.com/intent/tweet?text=LKY 只有原創內容的 Blog&url=https://mosdeo.github.io&via=Lin, Kao-Yuan" target="_blank" rel="external noopener noreferrer nofollow">Share to Twitter</a>
+        </li>
+        
+
+        <!-- Share Facebook -->
+        
+        <li class="menu-item">
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://mosdeo.github.io" target="_blank" rel="external noopener noreferrer nofollow">Share to Facebook</a>
+        </li>
+        
+
+        <!-- Share Google+ -->
+        
+        <li class="menu-item">
+            <a href="https://plus.google.com/share?url=https://mosdeo.github.io" target="_blank" rel="external noopener noreferrer nofollow">Share to Google+</a>
+        </li>
+        
+
+        <!-- Share LinkedIn -->
+        
+        <li class="menu-item">
+            <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://mosdeo.github.io&title=LeetCode Concurrency Go 語言詳解：Print FooBar Alternately" target="_blank" rel="external noopener noreferrer nofollow">Share to LinkedIn</a>
+        </li>
+        
+
+        <!-- Share QQ -->
+        
+        <li class="menu-item">
+            <a href="http://connect.qq.com/widget/shareqq/index.html?site=LKY 只有原創內容的 Blog&title=LeetCode Concurrency Go 語言詳解：Print FooBar Alternately&summary=&pics=/content/images/leetcode/LeetCodeIcon_890x501.JPG&url=https://mosdeo.github.io" target="_blank" rel="external noopener noreferrer nofollow"> Share to QQ</a>
+        </li>
+        
+
+        <!-- Share Telegram -->
+        
+        <li class="menu-item">
+            <a href="https://t.me/share/url?url=https://mosdeo.github.io&text=LeetCode Concurrency Go 語言詳解：Print FooBar Alternately" target="_blank" rel="external noopener noreferrer nofollow">Share to Telegram</a>
+        </li>
+        
+
+        <!-- QRCode -->
+        
+        <li class="menu-item">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMQAAADECAAAAADlzdG3AAADK0lEQVR42u3b207DMBBF0fz/T8N7cObsSTw0oN0XpDY0XkiO58bx9Q9ehwgRIkSIGEccxWt1zfm95Zef3l9dV90Lr0uEiCFEWkha8Oom55/pd1f3jOsSIWIQUS1itamqzUc2NEWU14gQ8UEE2dCrBV49KK4OxeqPKELEWxApaCOBWzrkyINFhIjfRFwFWukQSwFfer86FLdFsSJENBHp0PrUz23VDhEiGohYtIUgEtRVBYirg3FLVVyEiGZ/oiqC0WLaEV7kMKuCzeX1IkQMIarkPn1GimZVgkUbNOjEFiFiA4IkQ1UTMh1y3WJAVYj7cQ8RIgYQNJi72uRpkWmjpgZ91cAUIWISUSUy3YSpWkx1CKbGTqsCKELEA0S3Id9J/MlBSA7SdlIkQsRNBN2oFZgmT517pYRIhIgpRKcRngar6OFICg5oaEyEiAFEVbSqbkoSHHLoPSm2iRAxhSADUmlhKLFvBJopgRIhYhKRAkF08NwZMIGN+FZSJELEBkRnUCvh0pBKGh5OvydCxDSisyFJoEcKyk/uWVbFRYjYiOhuLlowoM38zjCYCBGTCHIY0WIx/Z6qqNZKskSIGEJ0myGpkX/ZPL9RYEDDvSJEbEbQhmIVrJHPCJYEnSJETCLooC4pKJNgjj4UUOApQsQAgjRCyIbtAMj9UFFOhIghRGoWdhJ7UiRAQ4ogEBQhYgKRgrh0Tdq0FT41WGJSJkLEEIIWvshGTQcaeSDgQS4RIgYQdDPTxaRAr7N544EoQsQAIjXaaQG4OwhMmpnxwSJCxBCCJPBp0OrJH4IMLi7fEyFiCEEGT7qHVyoCpACQNEZFiJhAkAIveQikw4ygabNGhIhpBC0EpASJLqhTuC4DVBEiBhCdBniC0AETGkjG7xEhYgBBAq+ULJGGIQE+GngXIWITgmyiu8Vm2sx/PPAuQsRmBGkWosQ9bEyy8NsbW4SIzYiUlHQPwe6wFx2aFCHiDYiq+NUZ7iIFg6rBI0LEWxBxgx29f5oigSBqaooQMYioDrM7xa7quzrN/LLRKULEEIIk7GkDkuuqhnxnsEWEiEnEX36JECFChIix1zcIBgCdCE36HgAAAABJRU5ErkJggg==" alr="QRCode">
+        </li>
+        
+
+    </ul>
+</div>
+    
+    
+        <a href="/atom.xml" target="_blank" class="navbar-link">RSS</a>
+    
+</nav>
+</header>
+
+            
+    <!-- ## Post ## -->
+    <div class="post-container">
+    <div id="post-card" class="card">
+        
+            <div class="card-image lazyload" data-bg="url('/content/images/leetcode/LeetCodeIcon_890x501.JPG')"></div>
+        
+        <div class="card-item-container">
+            <div class="card-inner-cell">
+                <!-- # Post Header Info # -->
+                <div class="card-header">
+                    
+    <h1 class="card-title h3 mb-2">LeetCode Concurrency Go 語言詳解：Print FooBar Alternately</h1>
+
+
+
+
+<div class="post-header-info">
+    <p class="post-header-info-left text-gray">
+        <img class="author-thumb lazyload" data-src="/img/default_avatar.png" src="/img/suka-lazyload.gif" alt="Lin, Kao-Yuan's Avatar">
+        <span>2020-01-16</span>
+        
+        
+            <!-- Busuanzi Post Views -->
+<span id="busuanzi_container_page_pv" hidden>
+    <span class="suka-devide-dot"></span>
+    <span></span>
+    <span id="busuanzi_value_page_pv"></span>
+    <span>Views</span>
+</span>
+        
+        
+    </p>
+    <div class="post-header-info-right">
+        
+            <div class="dropdown dropdown-right">
+<a class="dropdown-toggle" tabindex="0">Share the post</a>
+<ul class="menu share-menu">
+    <!-- Share Weibo -->
+    
+    <li class="menu-item">
+        <a href="http://service.weibo.com/share/share.php?appkey=&title=LeetCode Concurrency Go 語言詳解：Print FooBar Alternately&url=https://mosdeo.github.io/2020/01/16/LeetCode_Concurrency_Go%E8%AA%9E%E8%A8%80%E8%A9%B3%E8%A7%A3_PrintFooBarAlternately/&pic=/content/images/leetcode/LeetCodeIcon_890x501.JPG&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">Share to Weibo</a>
+    </li>
+    
+
+    <!-- Share Twitter -->
+    
+    <li class="menu-item">
+        <a href="https://twitter.com/intent/tweet?text=LeetCode Concurrency Go 語言詳解：Print FooBar Alternately&url=https://mosdeo.github.io/2020/01/16/LeetCode_Concurrency_Go%E8%AA%9E%E8%A8%80%E8%A9%B3%E8%A7%A3_PrintFooBarAlternately/&via=Lin, Kao-Yuan" target="_blank" rel="external noopener noreferrer nofollow">Share to Twitter</a>
+    </li>
+    
+
+    <!-- Share Facebook -->
+    
+    <li class="menu-item">
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://mosdeo.github.io/2020/01/16/LeetCode_Concurrency_Go%E8%AA%9E%E8%A8%80%E8%A9%B3%E8%A7%A3_PrintFooBarAlternately/" target="_blank" rel="external noopener noreferrer nofollow">Share to Facebook</a>
+    </li>
+    
+
+    <!-- Share Google+ -->
+    
+    <li class="menu-item">
+        <a href="https://plus.google.com/share?url=https://mosdeo.github.io/2020/01/16/LeetCode_Concurrency_Go%E8%AA%9E%E8%A8%80%E8%A9%B3%E8%A7%A3_PrintFooBarAlternately/" target="_blank" rel="external noopener noreferrer nofollow">Share to Google+</a>
+    </li>
+    
+
+    <!-- Share LinkedIn -->
+    
+    <li class="menu-item">
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://mosdeo.github.io/2020/01/16/LeetCode_Concurrency_Go%E8%AA%9E%E8%A8%80%E8%A9%B3%E8%A7%A3_PrintFooBarAlternately/&title=LKY 只有原創內容的 Blog" target="_blank" rel="external noopener noreferrer nofollow">Share to LinkedIn</a>
+    </li>
+    
+
+    <!-- Share QQ -->
+    
+    <li class="menu-item">
+        <a href="http://connect.qq.com/widget/shareqq/index.html?site=LKY 只有原創內容的 Blog&title=LKY 只有原創內容的 Blog&summary=&pics=/content/images/leetcode/LeetCodeIcon_890x501.JPG&url=https://mosdeo.github.io/2020/01/16/LeetCode_Concurrency_Go%E8%AA%9E%E8%A8%80%E8%A9%B3%E8%A7%A3_PrintFooBarAlternately/" target="_blank" rel="external noopener noreferrer nofollow"> Share to QQ</a>
+    </li>
+    
+
+    <!-- Share Telegram -->
+    
+    <li class="menu-item">
+        <a href="https://t.me/share/url?url=https://mosdeo.github.io/2020/01/16/LeetCode_Concurrency_Go%E8%AA%9E%E8%A8%80%E8%A9%B3%E8%A7%A3_PrintFooBarAlternately/&text=LKY 只有原創內容的 Blog" target="_blank" rel="external noopener noreferrer nofollow">Share to Telegram</a>
+    </li>
+    
+
+    <!-- QRCode -->
+    
+    <li class="menu-item">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMQAAADECAAAAADlzdG3AAADK0lEQVR42u3b207DMBBF0fz/T8N7cObsSTw0oN0XpDY0XkiO58bx9Q9ehwgRIkSIGEccxWt1zfm95Zef3l9dV90Lr0uEiCFEWkha8Oom55/pd1f3jOsSIWIQUS1itamqzUc2NEWU14gQ8UEE2dCrBV49KK4OxeqPKELEWxApaCOBWzrkyINFhIjfRFwFWukQSwFfer86FLdFsSJENBHp0PrUz23VDhEiGohYtIUgEtRVBYirg3FLVVyEiGZ/oiqC0WLaEV7kMKuCzeX1IkQMIarkPn1GimZVgkUbNOjEFiFiA4IkQ1UTMh1y3WJAVYj7cQ8RIgYQNJi72uRpkWmjpgZ91cAUIWISUSUy3YSpWkx1CKbGTqsCKELEA0S3Id9J/MlBSA7SdlIkQsRNBN2oFZgmT517pYRIhIgpRKcRngar6OFICg5oaEyEiAFEVbSqbkoSHHLoPSm2iRAxhSADUmlhKLFvBJopgRIhYhKRAkF08NwZMIGN+FZSJELEBkRnUCvh0pBKGh5OvydCxDSisyFJoEcKyk/uWVbFRYjYiOhuLlowoM38zjCYCBGTCHIY0WIx/Z6qqNZKskSIGEJ0myGpkX/ZPL9RYEDDvSJEbEbQhmIVrJHPCJYEnSJETCLooC4pKJNgjj4UUOApQsQAgjRCyIbtAMj9UFFOhIghRGoWdhJ7UiRAQ4ogEBQhYgKRgrh0Tdq0FT41WGJSJkLEEIIWvshGTQcaeSDgQS4RIgYQdDPTxaRAr7N544EoQsQAIjXaaQG4OwhMmpnxwSJCxBCCJPBp0OrJH4IMLi7fEyFiCEEGT7qHVyoCpACQNEZFiJhAkAIveQikw4ygabNGhIhpBC0EpASJLqhTuC4DVBEiBhCdBniC0AETGkjG7xEhYgBBAq+ULJGGIQE+GngXIWITgmyiu8Vm2sx/PPAuQsRmBGkWosQ9bEyy8NsbW4SIzYiUlHQPwe6wFx2aFCHiDYiq+NUZ7iIFg6rBI0LEWxBxgx29f5oigSBqaooQMYioDrM7xa7quzrN/LLRKULEEIIk7GkDkuuqhnxnsEWEiEnEX36JECFChIix1zcIBgCdCE36HgAAAABJRU5ErkJggg==" alt="QRCode">
+    </li>
+    
+
+</ul>
+</div>
+        
+    </div>
+</div>
+                </div>
+                <div class="card-body">
+                    
+                        
+                        
+                            <div id="post-toc"><ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%9C%AC%E9%A1%8C-LeetCode-%E9%80%A3%E7%B5%90%EF%BC%9A"><span class="post-toc-number">1.</span> <span class="post-toc-text">本題 LeetCode 連結：</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%9C%AC%E9%A1%8C%E8%80%83%E6%A0%B8%E9%BB%9E%EF%BC%9F"><span class="post-toc-number">2.</span> <span class="post-toc-text">本題考核點？</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E8%A7%A3%E6%B3%95%E8%88%87%E6%80%9D%E8%B7%AF%EF%BC%9A"><span class="post-toc-number">3.</span> <span class="post-toc-text">解法與思路：</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-%E6%89%80%E7%94%A8-Channel-%E5%9E%8B%E6%85%8B%E8%88%87%E5%AE%9A%E4%BD%8D%EF%BC%9F"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">1. 所用 Channel 型態與定位？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-Foo-%E8%88%87-Bar-%E5%A6%82%E4%BD%95%E4%BA%A4%E6%8E%A5%E6%A3%92%EF%BC%9F"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">2. Foo() 與 Bar() 如何交接棒？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-Foo-%E8%88%87-Bar-%E5%A6%82%E4%BD%95%E6%94%B6%E5%B0%BE%EF%BC%9F"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">3. Foo() 與 Bar() 如何收尾？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-%E8%87%AA%E5%BE%AA%E7%92%B0%E5%95%9F%E5%8B%95"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">4. 自循環啟動</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-%E7%89%B9%E5%88%A5%E6%A2%9D%E4%BB%B6%E4%B8%8B%EF%BC%8C%E7%94%A8-unbuffered-channel-%E5%8F%96%E4%BB%A3-sync-WaitGroup"><span class="post-toc-number">3.5.</span> <span class="post-toc-text">5. 特別條件下，用 unbuffered channel 取代 sync.WaitGroup</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%AE%8C%E6%95%B4%E8%A7%A3%E9%A1%8C%E7%A8%8B%E5%BC%8F%E7%A2%BC%EF%BC%9A"><span class="post-toc-number">4.</span> <span class="post-toc-text">完整解題程式碼：</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%A4%BA%E6%84%8F%E5%9C%96%EF%BC%9A"><span class="post-toc-number">5.</span> <span class="post-toc-text">示意圖：</span></a></li></ol></div>
+                        
+                    
+                    <article id="post-content">
+                        <p>前言：由於 LeetCode Concurrency(併發) 還沒有 Go 語言版本，我先自行用 Go 語言來解題。為了能在 LeetCode 以外的平台獲得討論，所以我打算逐漸把自己的解題思路寫下。這是我試水溫的第一篇。</p>
+<h2 id="本題-LeetCode-連結：">本題 LeetCode 連結：</h2>
+<p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/print-foobar-alternately/">https://leetcode.com/problems/print-foobar-alternately/</a></p>
+<h2 id="本題考核點？">本題考核點？</h2>
+<p>指定次數交替執行 <code>printFoo()</code> 與 <code>printBar()</code>。若任由兩個 goroutine 分別各自 print，不能保證其結果一定會互相交錯。</p>
+<p>goroutine 若不刻意控制，將無法保證執行的先後順序，因此本題就是要考核對 goroutine 來回交錯順序控制的能力。</p>
+<h2 id="解法與思路：">解法與思路：</h2>
+<h3 id="1-所用-Channel-型態與定位？">1. 所用 Channel 型態與定位？</h3>
+<p>本題採用三個 unbuffered channel</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> FooBar <span class="keyword">struct</span> &#123;</span><br><span class="line">	n              <span class="keyword">int</span></span><br><span class="line">	streamFooToBar <span class="keyword">chan</span> <span class="keyword">struct</span>&#123;&#125;</span><br><span class="line">	streamBarToFoo <span class="keyword">chan</span> <span class="keyword">struct</span>&#123;&#125;</span><br><span class="line">	streamEnd      <span class="keyword">chan</span> <span class="keyword">struct</span>&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>分別是:</p>
+<ul>
+<li><code>streamFooToBar</code>: <code>Foo()</code> 交棒給 <code>Bar()</code></li>
+<li><code>streamBarToFoo</code>: <code>Bar()</code> 交棒給 <code>Foo()</code></li>
+<li><code>streamEnd</code>: 結束訊號</li>
+</ul>
+<h3 id="2-Foo-與-Bar-如何交接棒？">2. <code>Foo()</code> 與 <code>Bar()</code> 如何交接棒？</h3>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(this *FooBar)</span> <span class="title">Foo</span><span class="params">(printFoo <span class="keyword">func</span>()</span>)</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; this.n; &#123;</span><br><span class="line">		<span class="comment">// printFoo() outputs &quot;foo&quot;. Do not change or remove this line.</span></span><br><span class="line">		&lt;-this.streamBarToFoo</span><br><span class="line">		printFoo()</span><br><span class="line">		i++</span><br><span class="line">		this.streamFooToBar &lt;- <span class="keyword">struct</span>&#123;&#125;&#123;&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	&lt;-this.streamBarToFoo <span class="comment">//等待 Bar() 印完最後一次</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>根據設定次數 n 重複執行</li>
+<li>每一輪都要得到 <code>Bar()</code> 交出棒，才會執行 <code>printFoo()</code> 以印出字串</li>
+<li>印出字串後，以 <code>this.streamFooToBar &lt;- struct&#123;&#125;&#123;&#125;</code> 交棒給 <code>Bar()</code></li>
+</ul>
+<p>下方的 <code>Bar()</code> 也是一樣的道理。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(this *FooBar)</span> <span class="title">Bar</span><span class="params">(printBar <span class="keyword">func</span>()</span>)</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; this.n; &#123;</span><br><span class="line">		<span class="comment">// printBar() outputs &quot;bar&quot;. Do not change or remove this line.</span></span><br><span class="line">		&lt;-this.streamFooToBar</span><br><span class="line">		printBar()</span><br><span class="line">		i++</span><br><span class="line">		this.streamBarToFoo &lt;- <span class="keyword">struct</span>&#123;&#125;&#123;&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	this.streamEnd &lt;- <span class="keyword">struct</span>&#123;&#125;&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-Foo-與-Bar-如何收尾？">3. <code>Foo()</code> 與 <code>Bar()</code> 如何收尾？</h3>
+<p>這裡要特別注意的是，<code>Foo()</code> 與 <code>Bar()</code> 只有差異在最後一行，用意是什麼？</p>
+<p>多個 goroutine 用 unbuffered channel 互相交接棒，會有一個尷尬的情況，就是互為消費者、又互為生產者，因此先 return 的 goroutine 沒事，但是後 return 的 goroutine 會由於消費者消失，send to channel 的時候發生 Deadlock。</p>
+<p>根據本題遊戲規則， <code>printBar()</code> 一定要比 <code>printFoo()</code> 晚執行，因此不做特別處理的話，會在 <code>Bar()</code> 試圖做最後一次交棒時，由於消費者消失發生 Deadlock。</p>
+<p>我的應對方式，就是讓 <code>Foo()</code> return 前做一次無特別作用的接棒，這樣就可以避免 <code>Bar()</code> return 前找不到消費者的問題。</p>
+<h3 id="4-自循環啟動">4. 自循環啟動</h3>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fooBar.streamBarToFoo &lt;- <span class="keyword">struct</span>&#123;&#125;&#123;&#125; <span class="comment">//啟動</span></span><br></pre></td></tr></table></figure>
+<p>前面說過，本題解法採用 <code>Foo()</code> 與 <code>Bar()</code> 彼此循環交棒的方式，因此不能自行啟動，需要外界給訊號，所以在 <code>main()</code> 執行各個 <code>goroutine</code> 以後以 <code>fooBar.streamBarToFoo &lt;- struct&#123;&#125;&#123;&#125;</code> ，讓 <code>main()</code> 假裝自己是 <code>Bar()</code> 交棒給 <code>Foo()</code>，以啟動交接棒循環。</p>
+<h3 id="5-特別條件下，用-unbuffered-channel-取代-sync-WaitGroup">5. 特別條件下，用 unbuffered channel 取代 sync.WaitGroup</h3>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;-fooBar.streamEnd                  <span class="comment">//as wg.Wait()</span></span><br></pre></td></tr></table></figure>
+<p>為了等待多個 goroutine 都結束再往下，一般來說用 <code>sync.WaitGroup.Wait()</code> 是標準做法。但這一題還有更輕量的方法。</p>
+<p>雖然這一題是 Concurrency，但是各個 goroutine 的結束順序已經被定死，我們很清楚知道誰負責收尾，所以讓負責收尾的 goroutine send to unbuffered channel，然後在 <code>main()</code> read 掉，這樣就不需要使用 sync.WaitGroup</p>
+<p>執行各個 goroutine 以後，<code>main()</code> 會由於 <code>&lt;-fooBar.streamEnd</code> 還沒有被傳入而被卡住，這就相當於 <code>sync.WaitGroup.Wait()</code> 的作用了。</p>
+<p>由於是 <code>Bar()</code> 會做最後一次有意義的執行，因此讓 <code>Bar()</code> return 之前執行 <code>this.streamEnd &lt;- struct&#123;&#125;&#123;&#125;</code>，這就相當於交棒給 <code>main()</code>， <code>main()</code> 終於可以從被卡住的 <code>&lt;-fooBar.streamEnd</code> 往下（因為終於有東西可以讀），就像便秘了三天突然暢通一樣！</p>
+<h2 id="完整解題程式碼：">完整解題程式碼：</h2>
+<p><a target="_blank" rel="noopener" href="https://play.golang.org/p/YsXKHbxpOCT">https://play.golang.org/p/YsXKHbxpOCT</a></p>
+<h2 id="示意圖：">示意圖：</h2>
+<p><img src="/content/images/leetcode/PrintFooBarAlternately%E7%A4%BA%E6%84%8F%E5%9C%9620200116.PNG" alt=""></p>
+
+                    </article>
+                    
+
+
+    <blockquote id="date-expire-notification" class="post-expired-notify">This article was last updated on <span id="date-expire-num"></span> days ago, and the information described in the article may have changed.</blockquote>
+    <script>
+    (function() {
+        var dateUpdate = Date.parse("2020-02-10");
+        var nowDate = new Date();
+        var a = nowDate.getTime();
+        var b = a - dateUpdate;
+        var daysUpdateExpire = Math.floor(b/(24*3600*1000));
+        if (daysUpdateExpire >= 120) {
+            document.getElementById('date-expire-num').innerHTML = daysUpdateExpire;
+        } else {
+            document.getElementById('date-expire-notification').style.display = 'none';
+        }
+    })();
+    </script>
+
+
+<p class="post-footer-info mb-0 pt-0">Published at&nbsp;<time datetime="2020-01-15T16:00:00.000Z" itemprop="datePublished">2020-01-16</time>
+
+    , Updated at&nbsp;<time datetime="2020-02-10T01:51:04.997Z" itemprop="dateModified">2020-02-10</time>
+
+</p>
+<p class="post-footer-info mb-0 pt-2">
+
+
+
+<span class="post-tags-list mt-2">
+
+<a class="post-tags-list-item" href="/tags/Go%E8%AA%9E%E8%A8%80/" rel="tag">#&nbsp;Go語言</a>
+
+</span>
+
+
+</p>
+
+                </div>
+                <div class="post-nav px-2 bg-gray">
+<ul class="pagination">
+    <!-- Prev Nav -->
+    
+        <li class="page-item page-prev">
+            <a href="/2020/01/19/LeetCode_Concurrency_Go%E8%AA%9E%E8%A8%80%E8%A9%B3%E8%A7%A3_PrintInOrder/" rel="prev">
+                <div class="page-item-title"><i class="icon icon-back" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">LeetCode Concurrency Go 語言詳解：Print In Order</div>
+            </a>
+        </li>
+    
+
+    <!-- Next Nav -->
+    
+        <li class="page-item page-next">
+            <a href="/2019/10/10/%E5%9C%A8%20macOS%20%E4%B8%8A%E5%AE%89%E8%A3%9D%20OpenCV%20%E9%81%87%E5%88%B0%E7%9A%84%E5%9C%B0%E9%9B%B7/" rel="next">
+                <div class="page-item-title"><i class="icon icon-forward" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">解決在 macOS 上安裝 OpenCV 遇到「‘opencv2/opencv.hpp’ file not found」地雷</div>
+            </a>
+        </li>
+    
+</ul>
+</div>
+
+                
+                    <!-- # Comment # -->
+                    
+                        <div class="card-footer post-comment">
+                            <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://mosdeo.github.io/2020/01/16/LeetCode_Concurrency_Go%E8%AA%9E%E8%A8%80%E8%A9%B3%E8%A7%A3_PrintFooBarAlternately/'; // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'https://mosdeo.github.io/2020/01/16/LeetCode_Concurrency_Go%E8%AA%9E%E8%A8%80%E8%A9%B3%E8%A7%A3_PrintFooBarAlternately/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+<script id="disqus-thread-script">
+    (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document;
+        var s = d.createElement('script');
+        s.src = '//mosdeo-github-io.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', + new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+                        </div>
+                    
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!-- ### Footer ### -->
+            <footer class="text-center">
+    <!-- footer copyright -->
+    
+        <p class="footer-copyright mb-0">Copyright&nbsp;©&nbsp;<span id="copyright-year"></span>
+            <a class="footer-copyright-a" href="https://mosdeo.github.io">LKY 只有原創內容的 Blog</a>
+        </p>
+
+    <!-- footer custom text -->
+    <p class="footer-text mb-0">
+    
+    </p>
+    <!-- footer develop info -->
+    <p class="footer-develop mb-0">
+        
+    <!-- Busuanzi User Views -->
+    <span id="busuanzi_container_site_uv" hidden>
+        <span></span>
+        <span id="busuanzi_value_site_uv"></span>
+        <span>Viewers</span>
+        
+            <span>|</span>
+        
+    </span>
+
+
+
+
+        
+        Powered by&nbsp;<!--
+         --><a href="https://hexo.io" target="_blank" class="footer-develop-a" rel="external nofollow noopener noreferrer">Hexo</a><span class="footer-develop-divider"></span>Theme&nbsp;-&nbsp;<!--
+         --><a href="https://github.com/SukkaW/hexo-theme-suka" target="_blank" class="footer-develop-a" rel="external noopener">Suka</a>
+    </p>
+</footer>
+
+
+        <!-- ### Import File ### -->
+        <!-- ### Footer JS Import ### -->
+
+<script>
+
+    
+window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 50
+};
+document.getElementById('copyright-year').textContent = new Date().getFullYear();
+console.log('\n %c Suka Theme (hexo-theme-suka) | © SukkaW | Verision 1.3.3 %c https://github.com/SukkaW/hexo-theme-suka \n', 'color: #fff; background: #444; padding:5px 0;', 'background: #bbb; padding:5px 0;');
+
+</script>
+
+<script src="/lib/vanilla-lazyload/lazyload.min.js" async></script>
+    <script src="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.js" async></script>
+
+
+<!-- Offset -->
+
+
+
+
+<!-- Comment -->
+
+    
+        <script id="dsq-count-scr" src="https://mosdeo-github-io.disqus.com/count.js" async></script>
+
+    
+
+
+<!-- ### Custom Footer ### -->
+
+    </body>
+
+</html>

@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+
+<html lang="zh-TW">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        hexo-theme-suka © SukkaW
+        GitHub: https://github.com/SukkaW/hexo-theme-suka
+    -->
+
+    <!-- ### Resource Hint ### -->
+
+    <!-- ## DNS Prefetch ## -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+<!-- busuanzi -->
+
+    <link rel="dns-prefetch" href="//busuanzi.ibruce.info">
+
+
+<!-- comment -->
+
+
+    <link rel="dns-prefetch" href="//disqus.com">
+    <link rel="dns-prefetch" href="//mosdeo-github-io.disqus.com">
+
+
+
+
+
+
+<!-- analytics -->
+
+
+    <link rel="dns-prefetch" href="//www.google-analytics.com">
+
+
+
+
+
+
+    <!-- ## Preload ## -->
+    
+    <!-- Busuanzi -->
+    
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.js" as="script">
+
+
+
+
+
+
+
+    <!-- ### Meta & Title & Info ### -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <meta name="renderer" content="webkit">
+
+    <!-- Title -->
+    <title>GeoPandas 畫出生動的色塊地圖 | LKY 只有原創內容的 Blog</title>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image&#x2F;ico" href="/img/suka-favicon.ico">
+
+    <!-- ### Import File ### -->
+    <link rel="stylesheet" href="/lib/spectre/spectre.min.css"><style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    a, a:visited {
+        color: #0070ff;
+    }
+
+    a:active, a:focus, a:hover {
+        color: #0070ff;
+        opacity: .75;
+    }
+
+    #post-content a,
+    #post-content a:hover,
+    #post-content a:focus,
+    #post-content a:visited {
+        color: #005eb9;
+        opacity: 1;
+    }
+
+    
+
+    .post-entry .card-body a {
+        color: #0070ff;
+    }
+
+    .avatar {
+        background: #444;
+    }
+
+    .navbar-link,
+    .navbar-link:visited,
+    .timeline .timeline-item .timeline-icon.icon-lg {
+        color: #0070ff;
+    }
+
+    .navbar-link:hover {
+        color: #0070ff;
+        opacity: .8;
+    }
+
+    #search-input .btn,
+    #disqus_click_btn,
+    #disqus-switch-to-direct,
+    #disqus-loadmore-button {
+        background: #727e96;
+        border-color: #727e96;
+        color: #fff;
+    }
+
+    #post-toc a.post-toc-link,
+    #post-toc a.post-toc-link:visited,
+    .share-menu.menu .menu-item>a {
+        color: #727e96;
+    }
+
+    .share-menu.menu .menu-item>a:hover,
+    .share-menu.menu .menu-item>a:focus,
+    .share-menu.menu .menu-item>a:visited {
+        color: #50596c;
+        background: #f8f9fa;
+        opacity: .85;
+    }
+</style><link rel="stylesheet" href="/css/style.min.css">
+
+
+
+
+
+
+
+
+    <!-- Prettify Theme -->
+    
+    <link rel="preload" href="/css/highlight/github.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/css/highlight/github.min.css"></noscript>
+
+
+
+
+
+<script>
+/*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+!function(t){"use strict";t.loadCSS||(t.loadCSS=function(){});var e=loadCSS.relpreload={};if(e.support=function(){var e;try{e=t.document.createElement("link").relList.supports("preload")}catch(t){e=!1}return function(){return e}}(),e.bindMediaToggle=function(t){var e=t.media||"all";function a(){t.addEventListener?t.removeEventListener("load",a):t.attachEvent&&t.detachEvent("onload",a),t.setAttribute("onload",null),t.media=e}t.addEventListener?t.addEventListener("load",a):t.attachEvent&&t.attachEvent("onload",a),setTimeout(function(){t.rel="stylesheet",t.media="only x"}),setTimeout(a,3e3)},e.poly=function(){if(!e.support())for(var a=t.document.getElementsByTagName("link"),n=0;n<a.length;n++){var o=a[n];"preload"!==o.rel||"style"!==o.getAttribute("as")||o.getAttribute("data-loadcss")||(o.setAttribute("data-loadcss",!0),e.bindMediaToggle(o))}},!e.support()){e.poly();var a=t.setInterval(e.poly,500);t.addEventListener?t.addEventListener("load",function(){e.poly(),t.clearInterval(a)}):t.attachEvent&&t.attachEvent("onload",function(){e.poly(),t.clearInterval(a)})}"undefined"!=typeof exports?exports.loadCSS=loadCSS:t.loadCSS=loadCSS}("undefined"!=typeof global?global:this);
+</script>
+
+    <!-- ### Site Verification ### -->
+    
+
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="LKY 只有原創內容的 Blog"><meta name="msapplication-starturl" content="https://mosdeo.github.io"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="LKY 只有原創內容的 Blog"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- ### The Open Graph & Twitter Card Protocol ### -->
+    <meta property="og:title" content="GeoPandas 畫出生動的色塊地圖 | LKY 只有原創內容的 Blog"><meta property="og:site_name" content="LKY 只有原創內容的 Blog"><meta property="og:type" content="article"><meta property="og:url" content="https://mosdeo.github.io/2017/08/10/2017_0810_%E7%94%A8_GeoPandas_%E7%95%AB%E5%87%BA%E7%94%9F%E5%8B%95%E7%9A%84%E8%89%B2%E5%A1%8A%E5%9C%B0%E5%9C%96/"><meta property="og:locale" content="zh-TW"><meta name="description" content="本文需要基礎：必須要會使用 Python，若熟悉 Pandas 則可以快至一日內上手。 問題：假如你的簡報，要同時表達台中市各區的數值（例如人口數、空氣品質之類的），並強調彼此間的差異，你會怎麼做呢？  是表格？     南屯區 烏日區 中區 … 龍井區 清水區 梧棲區     0.417 0.720 0.000 … 0.085 0.039 0.169       還是長條圖？    如果直接放一 - Lin, Kao-Yuan - LKY 只有原創內容的 Blog"><meta name="keywords" content="GIS, 地理資訊系統, 資料視覺化, Pandas, 圖表技巧"><meta property="og:image" content="/content/images/%E5%8F%B0%E4%B8%AD%E5%B8%82%E5%90%84%E5%8D%80%E5%81%87%E6%95%B8%E5%AD%97%E5%9C%B0%E5%9C%96_Blues.png"><meta property="og:image" content="https://mosdeo.github.io/content/images/%E5%8F%B0%E4%B8%AD%E5%B8%82%E5%90%84%E5%8D%80%E5%81%87%E6%95%B8%E5%AD%97%E9%95%B7%E6%A2%9D%E5%9C%96.png"><meta property="og:image" content="https://mosdeo.github.io/content/images/%E5%8F%B0%E4%B8%AD%E5%B8%82%E5%90%84%E5%8D%80%E5%81%87%E6%95%B8%E5%AD%97%E5%9C%B0%E5%9C%96.png"><meta property="og:image" content="https://mosdeo.github.io/content/images/%E5%8F%B0%E4%B8%AD%E5%B8%82%E5%90%84%E5%8D%80%E5%81%87%E6%95%B8%E5%AD%97%E5%9C%B0%E5%9C%96_Blues.png"><meta property="article:published_time" content="2017-08-09T16:00:00.000Z"><meta property="article:modified_time" content="2019-09-23T02:08:50.355Z"><meta property="og:updated_time" content="2019-09-23T02:08:50.355Z"><meta property="article:author" content="Lin, Kao-Yuan"><meta property="article:tag" content="GIS, 地理資訊系統, 資料視覺化, Pandas, 圖表技巧"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="/content/images/%E5%8F%B0%E4%B8%AD%E5%B8%82%E5%90%84%E5%8D%80%E5%81%87%E6%95%B8%E5%AD%97%E5%9C%B0%E5%9C%96_Blues.png">
+
+    
+
+    <!-- ### Canonical link ### -->
+    <link rel="canonical" href="https://mosdeo.github.io/2017/08/10/2017_0810_%E7%94%A8_GeoPandas_%E7%95%AB%E5%87%BA%E7%94%9F%E5%8B%95%E7%9A%84%E8%89%B2%E5%A1%8A%E5%9C%B0%E5%9C%96/">
+
+    <meta name="generator" content="Hexo 5.2.0">
+
+    <!-- ### Analytics ### -->
+    
+    <!-- Google Analytics -->
+<script>
+    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+    ga('create', 'UA-64570213-2', 'auto');
+    ga('send', 'pageview');
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+
+
+
+
+
+
+
+
+
+    <!-- ### Structured Data ### -->
+    
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "url": "https://mosdeo.github.io/2017/08/10/2017_0810_%E7%94%A8_GeoPandas_%E7%95%AB%E5%87%BA%E7%94%9F%E5%8B%95%E7%9A%84%E8%89%B2%E5%A1%8A%E5%9C%B0%E5%9C%96/",
+    "@type": "BlogPosting",
+    "logo": "https://mosdeo.github.io/img/suka-favicon.ico",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://mosdeo.github.io/2017/08/10/2017_0810_%E7%94%A8_GeoPandas_%E7%95%AB%E5%87%BA%E7%94%9F%E5%8B%95%E7%9A%84%E8%89%B2%E5%A1%8A%E5%9C%B0%E5%9C%96/"
+    },
+    "headline": "GeoPandas 畫出生動的色塊地圖 | LKY 只有原創內容的 Blog",
+    
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://mosdeo.github.io/content/images/%E5%8F%B0%E4%B8%AD%E5%B8%82%E5%90%84%E5%8D%80%E5%81%87%E6%95%B8%E5%AD%97%E5%9C%B0%E5%9C%96_Blues.png"
+    },
+    
+    "datePublished": "2017-08-09T16:00:00.000Z",
+    "dateModified": "2019-09-23T02:08:50.355Z",
+    "author": {
+        "@type": "Person",
+        "name": "Lin, Kao-Yuan",
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://mosdeo.github.io/img/default_avatar.png"
+        },
+        "description": "今之能者，謂能轉貼，至於魯蛇，皆能轉貼。不原創，何以別乎？"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "LKY 只有原創內容的 Blog",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://mosdeo.github.io/img/suka-favicon.ico"
+        }
+    },
+    
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://mosdeo.github.io/search?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+    },
+    
+    "keywords": "GIS, 地理資訊系統, 資料視覺化, Pandas, 圖表技巧",
+    "description": "本文需要基礎：必須要會使用 Python，若熟悉 Pandas 則可以快至一日內上手。 問題：假如你的簡報，要同時表達台中市各區的數值（例如人口數、空氣品質之類的），並強調彼此間的差異，你會怎麼做呢？  是表格？     南屯區 烏日區 中區 … 龍井區 清水區 梧棲區     0.417 0.720 0.000 … 0.085 0.039 0.169       還是長條圖？    如果直接放一 - Lin, Kao-Yuan - LKY 只有原創內容的 Blog"
+}
+</script>
+
+
+
+    <!-- ### Custom Head ### -->
+    
+</head>
+
+    <body>
+            
+
+            <!-- ### Main content ### -->
+            <!-- ## Header ##-->
+<header>
+    <h1 class="header-title text-center"><a href="/">LKY 只有原創內容的 Blog</a></h1>
+
+    <p class="text-center header-slogan">
+        
+            
+                今之能者，謂能轉貼，至於魯蛇，皆能轉貼。不原創，何以別乎？
+            
+        
+    </p>
+
+    <nav class="navbar-section text-center">
+    
+        <a href="/" class="navbar-link">Home</a>
+    
+    
+        <a href="/archives/" class="navbar-link">Archives</a>
+    
+    
+        <a href="/search" class="navbar-link">Search</a>
+    
+    
+    
+        <div class="dropdown dropdown-right">
+    <a class="navbar-link dropdown-toggle" tabindex="0">Share</a>
+    <ul class="menu share-menu">
+
+        <!-- Share Weibo -->
+        
+        <li class="menu-item">
+            <a href="http://service.weibo.com/share/share.php?appkey=&title=LKY 只有原創內容的 Blog&url=https://mosdeo.github.io&pic=/content/images/台中市各區假數字地圖_Blues.png&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">Share to Weibo</a>
+        </li>
+        
+
+        <!-- Share Twitter -->
+        
+        <li class="menu-item">
+            <a href="https://twitter.com/intent/tweet?text=LKY 只有原創內容的 Blog&url=https://mosdeo.github.io&via=Lin, Kao-Yuan" target="_blank" rel="external noopener noreferrer nofollow">Share to Twitter</a>
+        </li>
+        
+
+        <!-- Share Facebook -->
+        
+        <li class="menu-item">
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://mosdeo.github.io" target="_blank" rel="external noopener noreferrer nofollow">Share to Facebook</a>
+        </li>
+        
+
+        <!-- Share Google+ -->
+        
+        <li class="menu-item">
+            <a href="https://plus.google.com/share?url=https://mosdeo.github.io" target="_blank" rel="external noopener noreferrer nofollow">Share to Google+</a>
+        </li>
+        
+
+        <!-- Share LinkedIn -->
+        
+        <li class="menu-item">
+            <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://mosdeo.github.io&title=GeoPandas 畫出生動的色塊地圖" target="_blank" rel="external noopener noreferrer nofollow">Share to LinkedIn</a>
+        </li>
+        
+
+        <!-- Share QQ -->
+        
+        <li class="menu-item">
+            <a href="http://connect.qq.com/widget/shareqq/index.html?site=LKY 只有原創內容的 Blog&title=GeoPandas 畫出生動的色塊地圖&summary=&pics=/content/images/台中市各區假數字地圖_Blues.png&url=https://mosdeo.github.io" target="_blank" rel="external noopener noreferrer nofollow"> Share to QQ</a>
+        </li>
+        
+
+        <!-- Share Telegram -->
+        
+        <li class="menu-item">
+            <a href="https://t.me/share/url?url=https://mosdeo.github.io&text=GeoPandas 畫出生動的色塊地圖" target="_blank" rel="external noopener noreferrer nofollow">Share to Telegram</a>
+        </li>
+        
+
+        <!-- QRCode -->
+        
+        <li class="menu-item">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANQAAADUCAAAAADBtVLEAAADqElEQVR42u3d22rjQBBFUf//TydPgcS06uzq2FLJbL2ESeyWlqAvdYF5fH3g9RAlSpQoUR+HehTXz99XP/8M9vS7nfGOxv/9+2pcUaImoZaTbjFY9eCr71X41eee8auXUY4pStQgVDWh6Q1W30sviHyePKcoUXdBpc+sJvrRhK8WnKPFovWcokTdAHX0INVCkQ6eZFOnhwFRoqai0uGTbMariZ0WkeqlkBcpStRE1CsSJWf8fHs2SZSoF6Bw8v0guCPJmOr7JHn5tqqHKFFvQFVBHk3E0ImdMFXQSdCiRE1ApeCss3jQJA0BpETQ8t6iRA1AkWRLCgI7i0caLwWIR8GrKFFTUEeTnC4IKdGfEi50A08vSpSo6ahqwJ1C9U4jFi3yiRI1CUWKbGQzTYFcOrySgDEuXqJEDUJVASAtRHcaHknQ2E2aihI1AUUmOt08aTBH/07GFyVqIio1gJBGRVIY7yZwSACJM7SiRJ2ESo25qdmKHFB3gkRyv7KQLUrUhaidG6fmDvJv8rCt4FOUqAGobjGNTO5OsS7dt3XgFiVqEKqbkEwH0FceWHFjpChRA1DkQaqGqx04SeDQJI8oUdNQncRJVcSmD5QOxnQxEiVqMoo2+tJCc9ooU2KTFLBFiZqO6iZZSBIyNZSQQzEdR5SoKSjSBEKTH6SJKt2TIA/vIUrUAFSatHTxIAtAapDsBpPolC5K1MkoMqFT4qMqYO80ZBGEKFGTUTsLBHkJ9LC88/JidV6UqAtRpDGDNjGipviQuKmKEWXjiShRA1C0UWp3U+wUG2gA2somiRJ1ASoFb1Uw2d3EOxt1WlxEiZqI6gxOigWkYEaKabT4IErURFRqmqIbYbe5o5MUTQuGKFFTUCShSIK3zkOQRYIW9lB1XpSoE1GkMFYdZFOjVGcR2T04ixI1CbXTQEU2VHpg7QaXW8lMUaIuQqXEf5n0IIXmZsMWKaqLEjURVSVIqmaO6rDbLc51i+MoQytK1IUoknDpBpV403zk/4i4WoBEiZqEIsWs9CCk6E033u4hN0a+okSdjEpXHKj5UtIBlTSO4FO6KFEXoMiETEUyskmSAkK1UafnESVqEooW07pJz+5m3CnELZ9ZlKhBKLJA0ARK52BKEKQgKErUnVC0cYokQMkLqDbpsgAuStQNUJ3Gqf9stNUGTponRYmahuoWwkizYXeDpuPhhUKUqItQtNmJJjOrCU2aP+jhuDzQihJ1EeqTLlGiRIkS9THXNxAGNvNndghIAAAAAElFTkSuQmCC" alr="QRCode">
+        </li>
+        
+
+    </ul>
+</div>
+    
+    
+        <a href="/atom.xml" target="_blank" class="navbar-link">RSS</a>
+    
+</nav>
+</header>
+
+            
+    <!-- ## Post ## -->
+    <div class="post-container">
+    <div id="post-card" class="card">
+        
+            <div class="card-image lazyload" data-bg="url('/content/images/台中市各區假數字地圖_Blues.png')"></div>
+        
+        <div class="card-item-container">
+            <div class="card-inner-cell">
+                <!-- # Post Header Info # -->
+                <div class="card-header">
+                    
+    <h1 class="card-title h3 mb-2">GeoPandas 畫出生動的色塊地圖</h1>
+
+
+
+
+<div class="post-header-info">
+    <p class="post-header-info-left text-gray">
+        <img class="author-thumb lazyload" data-src="/img/default_avatar.png" src="/img/suka-lazyload.gif" alt="Lin, Kao-Yuan's Avatar">
+        <span>2017-08-10</span>
+        
+        
+            <!-- Busuanzi Post Views -->
+<span id="busuanzi_container_page_pv" hidden>
+    <span class="suka-devide-dot"></span>
+    <span></span>
+    <span id="busuanzi_value_page_pv"></span>
+    <span>Views</span>
+</span>
+        
+        
+    </p>
+    <div class="post-header-info-right">
+        
+            <div class="dropdown dropdown-right">
+<a class="dropdown-toggle" tabindex="0">Share the post</a>
+<ul class="menu share-menu">
+    <!-- Share Weibo -->
+    
+    <li class="menu-item">
+        <a href="http://service.weibo.com/share/share.php?appkey=&title=GeoPandas 畫出生動的色塊地圖&url=https://mosdeo.github.io/2017/08/10/2017_0810_%E7%94%A8_GeoPandas_%E7%95%AB%E5%87%BA%E7%94%9F%E5%8B%95%E7%9A%84%E8%89%B2%E5%A1%8A%E5%9C%B0%E5%9C%96/&pic=/content/images/台中市各區假數字地圖_Blues.png&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">Share to Weibo</a>
+    </li>
+    
+
+    <!-- Share Twitter -->
+    
+    <li class="menu-item">
+        <a href="https://twitter.com/intent/tweet?text=GeoPandas 畫出生動的色塊地圖&url=https://mosdeo.github.io/2017/08/10/2017_0810_%E7%94%A8_GeoPandas_%E7%95%AB%E5%87%BA%E7%94%9F%E5%8B%95%E7%9A%84%E8%89%B2%E5%A1%8A%E5%9C%B0%E5%9C%96/&via=Lin, Kao-Yuan" target="_blank" rel="external noopener noreferrer nofollow">Share to Twitter</a>
+    </li>
+    
+
+    <!-- Share Facebook -->
+    
+    <li class="menu-item">
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://mosdeo.github.io/2017/08/10/2017_0810_%E7%94%A8_GeoPandas_%E7%95%AB%E5%87%BA%E7%94%9F%E5%8B%95%E7%9A%84%E8%89%B2%E5%A1%8A%E5%9C%B0%E5%9C%96/" target="_blank" rel="external noopener noreferrer nofollow">Share to Facebook</a>
+    </li>
+    
+
+    <!-- Share Google+ -->
+    
+    <li class="menu-item">
+        <a href="https://plus.google.com/share?url=https://mosdeo.github.io/2017/08/10/2017_0810_%E7%94%A8_GeoPandas_%E7%95%AB%E5%87%BA%E7%94%9F%E5%8B%95%E7%9A%84%E8%89%B2%E5%A1%8A%E5%9C%B0%E5%9C%96/" target="_blank" rel="external noopener noreferrer nofollow">Share to Google+</a>
+    </li>
+    
+
+    <!-- Share LinkedIn -->
+    
+    <li class="menu-item">
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://mosdeo.github.io/2017/08/10/2017_0810_%E7%94%A8_GeoPandas_%E7%95%AB%E5%87%BA%E7%94%9F%E5%8B%95%E7%9A%84%E8%89%B2%E5%A1%8A%E5%9C%B0%E5%9C%96/&title=LKY 只有原創內容的 Blog" target="_blank" rel="external noopener noreferrer nofollow">Share to LinkedIn</a>
+    </li>
+    
+
+    <!-- Share QQ -->
+    
+    <li class="menu-item">
+        <a href="http://connect.qq.com/widget/shareqq/index.html?site=LKY 只有原創內容的 Blog&title=LKY 只有原創內容的 Blog&summary=&pics=/content/images/台中市各區假數字地圖_Blues.png&url=https://mosdeo.github.io/2017/08/10/2017_0810_%E7%94%A8_GeoPandas_%E7%95%AB%E5%87%BA%E7%94%9F%E5%8B%95%E7%9A%84%E8%89%B2%E5%A1%8A%E5%9C%B0%E5%9C%96/" target="_blank" rel="external noopener noreferrer nofollow"> Share to QQ</a>
+    </li>
+    
+
+    <!-- Share Telegram -->
+    
+    <li class="menu-item">
+        <a href="https://t.me/share/url?url=https://mosdeo.github.io/2017/08/10/2017_0810_%E7%94%A8_GeoPandas_%E7%95%AB%E5%87%BA%E7%94%9F%E5%8B%95%E7%9A%84%E8%89%B2%E5%A1%8A%E5%9C%B0%E5%9C%96/&text=LKY 只有原創內容的 Blog" target="_blank" rel="external noopener noreferrer nofollow">Share to Telegram</a>
+    </li>
+    
+
+    <!-- QRCode -->
+    
+    <li class="menu-item">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANQAAADUCAAAAADBtVLEAAADqElEQVR42u3d22rjQBBFUf//TydPgcS06uzq2FLJbL2ESeyWlqAvdYF5fH3g9RAlSpQoUR+HehTXz99XP/8M9vS7nfGOxv/9+2pcUaImoZaTbjFY9eCr71X41eee8auXUY4pStQgVDWh6Q1W30sviHyePKcoUXdBpc+sJvrRhK8WnKPFovWcokTdAHX0INVCkQ6eZFOnhwFRoqai0uGTbMariZ0WkeqlkBcpStRE1CsSJWf8fHs2SZSoF6Bw8v0guCPJmOr7JHn5tqqHKFFvQFVBHk3E0ImdMFXQSdCiRE1ApeCss3jQJA0BpETQ8t6iRA1AkWRLCgI7i0caLwWIR8GrKFFTUEeTnC4IKdGfEi50A08vSpSo6ahqwJ1C9U4jFi3yiRI1CUWKbGQzTYFcOrySgDEuXqJEDUJVASAtRHcaHknQ2E2aihI1AUUmOt08aTBH/07GFyVqIio1gJBGRVIY7yZwSACJM7SiRJ2ESo25qdmKHFB3gkRyv7KQLUrUhaidG6fmDvJv8rCt4FOUqAGobjGNTO5OsS7dt3XgFiVqEKqbkEwH0FceWHFjpChRA1DkQaqGqx04SeDQJI8oUdNQncRJVcSmD5QOxnQxEiVqMoo2+tJCc9ooU2KTFLBFiZqO6iZZSBIyNZSQQzEdR5SoKSjSBEKTH6SJKt2TIA/vIUrUAFSatHTxIAtAapDsBpPolC5K1MkoMqFT4qMqYO80ZBGEKFGTUTsLBHkJ9LC88/JidV6UqAtRpDGDNjGipviQuKmKEWXjiShRA1C0UWp3U+wUG2gA2somiRJ1ASoFb1Uw2d3EOxt1WlxEiZqI6gxOigWkYEaKabT4IErURFRqmqIbYbe5o5MUTQuGKFFTUCShSIK3zkOQRYIW9lB1XpSoE1GkMFYdZFOjVGcR2T04ixI1CbXTQEU2VHpg7QaXW8lMUaIuQqXEf5n0IIXmZsMWKaqLEjURVSVIqmaO6rDbLc51i+MoQytK1IUoknDpBpV403zk/4i4WoBEiZqEIsWs9CCk6E033u4hN0a+okSdjEpXHKj5UtIBlTSO4FO6KFEXoMiETEUyskmSAkK1UafnESVqEooW07pJz+5m3CnELZ9ZlKhBKLJA0ARK52BKEKQgKErUnVC0cYokQMkLqDbpsgAuStQNUJ3Gqf9stNUGTponRYmahuoWwkizYXeDpuPhhUKUqItQtNmJJjOrCU2aP+jhuDzQihJ1EeqTLlGiRIkS9THXNxAGNvNndghIAAAAAElFTkSuQmCC" alt="QRCode">
+    </li>
+    
+
+</ul>
+</div>
+        
+    </div>
+</div>
+                </div>
+                <div class="card-body">
+                    
+                        
+                        
+                            <div id="post-toc"><ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%94%A8-Python-%E7%95%AB%E5%9C%B0%E5%9C%96%E7%9A%84%E5%A5%BD%E5%B9%AB%E6%89%8B-GeoPandas"><span class="post-toc-number">1.</span> <span class="post-toc-text">用 Python 畫地圖的好幫手 - GeoPandas</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%8F%AA%E8%A6%81-5-%E5%80%8B%E6%AD%A5%E9%A9%9F%EF%BC%8C%E7%95%AB%E5%87%BA%E8%87%AA%E5%B7%B1%E6%B1%BA%E5%AE%9A%E5%90%84%E5%8D%80%E9%A1%8F%E8%89%B2%E7%9A%84%E8%87%BA%E4%B8%AD%E5%9C%B0%E5%9C%96%EF%BC%81"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">只要 5 個步驟，畫出自己決定各區顏色的臺中地圖！</span></a></li></ol></li></ol></div>
+                        
+                    
+                    <article id="post-content">
+                        <p>本文需要基礎：必須要會使用 Python，若熟悉 Pandas 則可以快至一日內上手。</p>
+<p>問題：假如你的簡報，要同時表達台中市各區的數值（例如人口數、空氣品質之類的），並強調彼此間的差異，你會怎麼做呢？</p>
+<ul>
+<li>是表格？</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">南屯區</th>
+<th style="text-align:center">烏日區</th>
+<th style="text-align:center">中區</th>
+<th>…</th>
+<th style="text-align:center">龍井區</th>
+<th style="text-align:center">清水區</th>
+<th style="text-align:center">梧棲區</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0.417</td>
+<td style="text-align:center">0.720</td>
+<td style="text-align:center">0.000</td>
+<td>…</td>
+<td style="text-align:center">0.085</td>
+<td style="text-align:center">0.039</td>
+<td style="text-align:center">0.169</td>
+</tr>
+</tbody>
+</table>
+</br>
+<ul>
+<li>
+<p>還是長條圖？<br>
+<img src="/content/images/%E5%8F%B0%E4%B8%AD%E5%B8%82%E5%90%84%E5%8D%80%E5%81%87%E6%95%B8%E5%AD%97%E9%95%B7%E6%A2%9D%E5%9C%96.png" alt=""></p>
+</li>
+<li>
+<p>如果直接放一張地圖呢？是不是會更加生動？<br>
+<img src="/content/images/%E5%8F%B0%E4%B8%AD%E5%B8%82%E5%90%84%E5%8D%80%E5%81%87%E6%95%B8%E5%AD%97%E5%9C%B0%E5%9C%96.png" alt=""></p>
+</li>
+</ul>
+<hr>
+<h2 id="用-Python-畫地圖的好幫手-GeoPandas">用 Python 畫地圖的好幫手 - GeoPandas</h2>
+<h3 id="只要-5-個步驟，畫出自己決定各區顏色的臺中地圖！">只要 5 個步驟，畫出自己決定各區顏色的臺中地圖！</h3>
+<p><strong>0. 下載圖資</strong><br>
+這個函式庫沒有內建台灣圖資喔！要到<a target="_blank" rel="noopener" href="http://data.gov.tw/node/7440">這裡</a>下載 SHP 格式的「台灣村里界圖」</p>
+<p><strong>1. 安裝 GeoPandas</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install geopandas</span><br></pre></td></tr></table></figure>
+<p><strong>2. 引入必要函式庫</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> geopandas <span class="keyword">as</span> gp</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br></pre></td></tr></table></figure>
+<p>要是這一步執行出錯，可能是剛才沒安裝成功。</p>
+<p><strong>3. 讀取圖資</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">villages_shp = gp.read_file(<span class="string">&quot;town_shp/TOWN_MOI_1060525.shp&quot;</span>) <span class="comment">#全台灣村里界圖</span></span><br><span class="line">taichung_shp = villages_shp.query(<span class="string">&#x27;COUNTYNAME==&quot;臺中市&quot;&#x27;</span>) <span class="comment">#臺中市村里界圖</span></span><br></pre></td></tr></table></figure>
+<p>前 5 筆資料看起來就像這樣</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">_</th>
+<th style="text-align:center">COUNTYCODE</th>
+<th style="text-align:center">COUNTYID</th>
+<th style="text-align:center">COUNTYNAME</th>
+<th style="text-align:center">TOWNCODE</th>
+<th style="text-align:center">TOWNENG</th>
+<th style="text-align:center">TOWNID</th>
+<th style="text-align:center">TOWNNAME</th>
+<th style="text-align:center">geometry</th>
+<th style="text-align:center">dummy number</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">12</td>
+<td style="text-align:center">66000</td>
+<td style="text-align:center">B</td>
+<td style="text-align:center">臺中市</td>
+<td style="text-align:center">66000070</td>
+<td style="text-align:center">Nantun District</td>
+<td style="text-align:center">B07</td>
+<td style="text-align:center">南屯區</td>
+<td style="text-align:center">POLYGON ((120.6080591220001 24.12669994800007,…</td>
+<td style="text-align:center">0.417022</td>
+</tr>
+<tr>
+<td style="text-align:center">13</td>
+<td style="text-align:center">66000</td>
+<td style="text-align:center">B</td>
+<td style="text-align:center">臺中市</td>
+<td style="text-align:center">66000230</td>
+<td style="text-align:center">Wuri District</td>
+<td style="text-align:center">L15</td>
+<td style="text-align:center">烏日區</td>
+<td style="text-align:center">POLYGON ((120.6080591220001 24.12669994800007,…</td>
+<td style="text-align:center">0.720324</td>
+</tr>
+<tr>
+<td style="text-align:center">244</td>
+<td style="text-align:center">66000</td>
+<td style="text-align:center">B</td>
+<td style="text-align:center">臺中市</td>
+<td style="text-align:center">66000010</td>
+<td style="text-align:center">Zhong District</td>
+<td style="text-align:center">B01</td>
+<td style="text-align:center">中區</td>
+<td style="text-align:center">POLYGON ((120.6857662670001 24.14327484100005,…</td>
+<td style="text-align:center">0.000114</td>
+</tr>
+<tr>
+<td style="text-align:center">245</td>
+<td style="text-align:center">66000</td>
+<td style="text-align:center">B</td>
+<td style="text-align:center">臺中市</td>
+<td style="text-align:center">66000020</td>
+<td style="text-align:center">E. District</td>
+<td style="text-align:center">B02</td>
+<td style="text-align:center">東區</td>
+<td style="text-align:center">POLYGON ((120.700333524 24.15095274500004, 120…</td>
+<td style="text-align:center">0.302333</td>
+</tr>
+<tr>
+<td style="text-align:center">246</td>
+<td style="text-align:center">66000</td>
+<td style="text-align:center">B</td>
+<td style="text-align:center">臺中市</td>
+<td style="text-align:center">66000030</td>
+<td style="text-align:center">S. District</td>
+<td style="text-align:center">B04</td>
+<td style="text-align:center">南區</td>
+<td style="text-align:center">POLYGON ~((120.685349072 24.12172426600006, 120…</td>
+<td style="text-align:center">0.146756</td>
+</tr>
+</tbody>
+</table>
+<p><strong>4. 給臺中各區數值</strong><br>
+為了方便快速學會這個工具，本例子先用隨機亂數產生。應用上可能會是人口密度、公司行號數目等有意義的資料。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#隨機產生臺中各區數值</span></span><br><span class="line">taichung_shp[<span class="string">&#x27;dummy number&#x27;</span>] = np.random.ranf(taichung_shp.index.size)</span><br></pre></td></tr></table></figure>
+<p><strong>5. 畫出地圖</strong><br>
+GeoPandas 的 GeoDataFrame，和 Pandas 的 DataFrame 同樣內建 plot() 方法，但前者 override 成直接畫出地圖。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">taichung_shp.plot(</span><br><span class="line">    cmap=plt.cm.Blues, <span class="comment">#指定顏色</span></span><br><span class="line">    column=<span class="string">&#x27;dummy number&#x27;</span> <span class="comment">#指定從自身的這個 column 讀取顏色深度</span></span><br><span class="line">)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p>輸出：<br>
+<img src="/content/images/%E5%8F%B0%E4%B8%AD%E5%B8%82%E5%90%84%E5%8D%80%E5%81%87%E6%95%B8%E5%AD%97%E5%9C%B0%E5%9C%96_Blues.png" alt=""></p>
+<p>關於作者：<br>
+<a href="https://mosdeo.github.io/">@LKY</a> 自認不夠資格叫作 Data Scientist 的資料科學工程師，最近關注救災、救護相關的 Open Data。</p>
+
+                    </article>
+                    
+
+
+    <blockquote id="date-expire-notification" class="post-expired-notify">This article was last updated on <span id="date-expire-num"></span> days ago, and the information described in the article may have changed.</blockquote>
+    <script>
+    (function() {
+        var dateUpdate = Date.parse("2019-09-23");
+        var nowDate = new Date();
+        var a = nowDate.getTime();
+        var b = a - dateUpdate;
+        var daysUpdateExpire = Math.floor(b/(24*3600*1000));
+        if (daysUpdateExpire >= 120) {
+            document.getElementById('date-expire-num').innerHTML = daysUpdateExpire;
+        } else {
+            document.getElementById('date-expire-notification').style.display = 'none';
+        }
+    })();
+    </script>
+
+
+<p class="post-footer-info mb-0 pt-0">Published at&nbsp;<time datetime="2017-08-09T16:00:00.000Z" itemprop="datePublished">2017-08-10</time>
+
+    , Updated at&nbsp;<time datetime="2019-09-23T02:08:50.355Z" itemprop="dateModified">2019-09-23</time>
+
+</p>
+<p class="post-footer-info mb-0 pt-2">
+
+
+
+<span class="post-tags-list mt-2">
+
+<a class="post-tags-list-item" href="/tags/GIS/" rel="tag">#&nbsp;GIS</a>
+
+<a class="post-tags-list-item" href="/tags/%E5%9C%B0%E7%90%86%E8%B3%87%E8%A8%8A%E7%B3%BB%E7%B5%B1/" rel="tag">#&nbsp;地理資訊系統</a>
+
+<a class="post-tags-list-item" href="/tags/%E8%B3%87%E6%96%99%E8%A6%96%E8%A6%BA%E5%8C%96/" rel="tag">#&nbsp;資料視覺化</a>
+
+<a class="post-tags-list-item" href="/tags/Pandas/" rel="tag">#&nbsp;Pandas</a>
+
+<a class="post-tags-list-item" href="/tags/%E5%9C%96%E8%A1%A8%E6%8A%80%E5%B7%A7/" rel="tag">#&nbsp;圖表技巧</a>
+
+</span>
+
+
+</p>
+
+                </div>
+                <div class="post-nav px-2 bg-gray">
+<ul class="pagination">
+    <!-- Prev Nav -->
+    
+        <li class="page-item page-prev">
+            <a href="/2017/08/18/%E8%BB%9F%E9%AB%94%E5%B7%A5%E7%A8%8B%E5%B8%AB%EF%BC%9A%E5%8F%B0%E7%81%A3%E9%82%84%E5%9C%A8%E3%80%8CAI%E5%85%83%E5%B9%B4%E3%80%8D%EF%BC%9F%E6%97%A9%E5%9C%A8%E5%8D%81%E5%B9%B4%E5%89%8D%E5%B0%B1%E4%BE%86%E4%B8%8D%E5%8F%8A%E4%BA%86/" rel="prev">
+                <div class="page-item-title"><i class="icon icon-back" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">(傳送門) 軟體工程師：台灣還在「AI元年」？早在十年前就來不及了</div>
+            </a>
+        </li>
+    
+
+    <!-- Next Nav -->
+    
+        <li class="page-item page-next">
+            <a href="/2017/07/20/2017_0720_%E8%BC%AA%E8%83%8E%E4%B9%9F%E8%83%BD%E7%99%BC%E9%9B%BB%EF%BC%9F%E4%BB%8B%E7%B4%B9%206%20%E6%9C%88%E5%89%9B%E9%80%9A%E9%81%8E%E7%9A%84%E6%96%B0%E4%B8%AD%E8%8F%AF%E6%B0%91%E5%9C%8B%E5%B0%88%E5%88%A9/" rel="next">
+                <div class="page-item-title"><i class="icon icon-forward" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">輪胎也能發電？介紹今年 6 月新通過的台灣專利</div>
+            </a>
+        </li>
+    
+</ul>
+</div>
+
+                
+                    <!-- # Comment # -->
+                    
+                        <div class="card-footer post-comment">
+                            <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://mosdeo.github.io/2017/08/10/2017_0810_%E7%94%A8_GeoPandas_%E7%95%AB%E5%87%BA%E7%94%9F%E5%8B%95%E7%9A%84%E8%89%B2%E5%A1%8A%E5%9C%B0%E5%9C%96/'; // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'https://mosdeo.github.io/2017/08/10/2017_0810_%E7%94%A8_GeoPandas_%E7%95%AB%E5%87%BA%E7%94%9F%E5%8B%95%E7%9A%84%E8%89%B2%E5%A1%8A%E5%9C%B0%E5%9C%96/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+<script id="disqus-thread-script">
+    (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document;
+        var s = d.createElement('script');
+        s.src = '//mosdeo-github-io.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', + new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+                        </div>
+                    
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!-- ### Footer ### -->
+            <footer class="text-center">
+    <!-- footer copyright -->
+    
+        <p class="footer-copyright mb-0">Copyright&nbsp;©&nbsp;<span id="copyright-year"></span>
+            <a class="footer-copyright-a" href="https://mosdeo.github.io">LKY 只有原創內容的 Blog</a>
+        </p>
+
+    <!-- footer custom text -->
+    <p class="footer-text mb-0">
+    
+    </p>
+    <!-- footer develop info -->
+    <p class="footer-develop mb-0">
+        
+    <!-- Busuanzi User Views -->
+    <span id="busuanzi_container_site_uv" hidden>
+        <span></span>
+        <span id="busuanzi_value_site_uv"></span>
+        <span>Viewers</span>
+        
+            <span>|</span>
+        
+    </span>
+
+
+
+
+        
+        Powered by&nbsp;<!--
+         --><a href="https://hexo.io" target="_blank" class="footer-develop-a" rel="external nofollow noopener noreferrer">Hexo</a><span class="footer-develop-divider"></span>Theme&nbsp;-&nbsp;<!--
+         --><a href="https://github.com/SukkaW/hexo-theme-suka" target="_blank" class="footer-develop-a" rel="external noopener">Suka</a>
+    </p>
+</footer>
+
+
+        <!-- ### Import File ### -->
+        <!-- ### Footer JS Import ### -->
+
+<script>
+
+    
+window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 50
+};
+document.getElementById('copyright-year').textContent = new Date().getFullYear();
+console.log('\n %c Suka Theme (hexo-theme-suka) | © SukkaW | Verision 1.3.3 %c https://github.com/SukkaW/hexo-theme-suka \n', 'color: #fff; background: #444; padding:5px 0;', 'background: #bbb; padding:5px 0;');
+
+</script>
+
+<script src="/lib/vanilla-lazyload/lazyload.min.js" async></script>
+    <script src="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.js" async></script>
+
+
+<!-- Offset -->
+
+
+
+
+<!-- Comment -->
+
+    
+        <script id="dsq-count-scr" src="https://mosdeo-github-io.disqus.com/count.js" async></script>
+
+    
+
+
+<!-- ### Custom Footer ### -->
+
+    </body>
+
+</html>

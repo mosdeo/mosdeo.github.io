@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+
+<html lang="zh-TW">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        hexo-theme-suka © SukkaW
+        GitHub: https://github.com/SukkaW/hexo-theme-suka
+    -->
+
+    <!-- ### Resource Hint ### -->
+
+    <!-- ## DNS Prefetch ## -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+<!-- busuanzi -->
+
+    <link rel="dns-prefetch" href="//busuanzi.ibruce.info">
+
+
+<!-- comment -->
+
+
+    <link rel="dns-prefetch" href="//disqus.com">
+    <link rel="dns-prefetch" href="//mosdeo-github-io.disqus.com">
+
+
+
+
+
+
+<!-- analytics -->
+
+
+    <link rel="dns-prefetch" href="//www.google-analytics.com">
+
+
+
+
+
+
+    <!-- ## Preload ## -->
+    
+    <!-- Busuanzi -->
+    
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.js" as="script">
+
+
+
+
+
+
+
+    <!-- ### Meta & Title & Info ### -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <meta name="renderer" content="webkit">
+
+    <!-- Title -->
+    <title>(流動筆記)資料分析文化 | LKY 只有原創內容的 Blog</title>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image&#x2F;ico" href="/img/suka-favicon.ico">
+
+    <!-- ### Import File ### -->
+    <link rel="stylesheet" href="/lib/spectre/spectre.min.css"><style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    a, a:visited {
+        color: #0070ff;
+    }
+
+    a:active, a:focus, a:hover {
+        color: #0070ff;
+        opacity: .75;
+    }
+
+    #post-content a,
+    #post-content a:hover,
+    #post-content a:focus,
+    #post-content a:visited {
+        color: #005eb9;
+        opacity: 1;
+    }
+
+    
+
+    .post-entry .card-body a {
+        color: #0070ff;
+    }
+
+    .avatar {
+        background: #444;
+    }
+
+    .navbar-link,
+    .navbar-link:visited,
+    .timeline .timeline-item .timeline-icon.icon-lg {
+        color: #0070ff;
+    }
+
+    .navbar-link:hover {
+        color: #0070ff;
+        opacity: .8;
+    }
+
+    #search-input .btn,
+    #disqus_click_btn,
+    #disqus-switch-to-direct,
+    #disqus-loadmore-button {
+        background: #727e96;
+        border-color: #727e96;
+        color: #fff;
+    }
+
+    #post-toc a.post-toc-link,
+    #post-toc a.post-toc-link:visited,
+    .share-menu.menu .menu-item>a {
+        color: #727e96;
+    }
+
+    .share-menu.menu .menu-item>a:hover,
+    .share-menu.menu .menu-item>a:focus,
+    .share-menu.menu .menu-item>a:visited {
+        color: #50596c;
+        background: #f8f9fa;
+        opacity: .85;
+    }
+</style><link rel="stylesheet" href="/css/style.min.css">
+
+
+
+
+
+
+
+
+    <!-- Prettify Theme -->
+    
+    <link rel="preload" href="/css/highlight/github.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/css/highlight/github.min.css"></noscript>
+
+
+
+
+
+<script>
+/*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+!function(t){"use strict";t.loadCSS||(t.loadCSS=function(){});var e=loadCSS.relpreload={};if(e.support=function(){var e;try{e=t.document.createElement("link").relList.supports("preload")}catch(t){e=!1}return function(){return e}}(),e.bindMediaToggle=function(t){var e=t.media||"all";function a(){t.addEventListener?t.removeEventListener("load",a):t.attachEvent&&t.detachEvent("onload",a),t.setAttribute("onload",null),t.media=e}t.addEventListener?t.addEventListener("load",a):t.attachEvent&&t.attachEvent("onload",a),setTimeout(function(){t.rel="stylesheet",t.media="only x"}),setTimeout(a,3e3)},e.poly=function(){if(!e.support())for(var a=t.document.getElementsByTagName("link"),n=0;n<a.length;n++){var o=a[n];"preload"!==o.rel||"style"!==o.getAttribute("as")||o.getAttribute("data-loadcss")||(o.setAttribute("data-loadcss",!0),e.bindMediaToggle(o))}},!e.support()){e.poly();var a=t.setInterval(e.poly,500);t.addEventListener?t.addEventListener("load",function(){e.poly(),t.clearInterval(a)}):t.attachEvent&&t.attachEvent("onload",function(){e.poly(),t.clearInterval(a)})}"undefined"!=typeof exports?exports.loadCSS=loadCSS:t.loadCSS=loadCSS}("undefined"!=typeof global?global:this);
+</script>
+
+    <!-- ### Site Verification ### -->
+    
+
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="LKY 只有原創內容的 Blog"><meta name="msapplication-starturl" content="https://mosdeo.github.io"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="LKY 只有原創內容的 Blog"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- ### The Open Graph & Twitter Card Protocol ### -->
+    <meta property="og:title" content="(流動筆記)資料分析文化 | LKY 只有原創內容的 Blog"><meta property="og:site_name" content="LKY 只有原創內容的 Blog"><meta property="og:type" content="article"><meta property="og:url" content="https://mosdeo.github.io/2017/09/11/note_%E8%B3%87%E6%96%99%E5%88%86%E6%9E%90%E6%96%87%E5%8C%96/"><meta property="og:locale" content="zh-TW"><meta name="description" content="由於不時會在網路上看，其他資料科學工作者分享他們自己的心路歷程，看了都頗有同感。所以我決定開闢一篇文章用來收錄這些心聲。 個人實際從事資料科學工作的經驗中，發現最大的困難，不像學生時期都集中在技術面，而是文化面。文化面的障礙經驗，和當下的 context 有關，很難有意識的立即說清楚，所以特別需要筆記。 玩數據就不要玻璃心，尊重一下這場遊戲的基本邏輯  「專業和價值」只是擋箭牌，擋掉媒體人適應新變 - Lin, Kao-Yuan - LKY 只有原創內容的 Blog"><meta name="keywords" content="數據分析, 資料科學, 筆記, 管理"><meta property="og:image" content="https://mosdeo.github.io/content/images/%E9%99%8D%E7%B6%AD1.png"><meta property="article:published_time" content="2017-09-10T16:00:00.000Z"><meta property="article:modified_time" content="2019-09-13T09:57:44.940Z"><meta property="og:updated_time" content="2019-09-13T09:57:44.940Z"><meta property="article:author" content="Lin, Kao-Yuan"><meta property="article:tag" content="數據分析, 資料科學, 筆記, 管理"><meta name="twitter:card" content="summary">
+
+    
+
+    <!-- ### Canonical link ### -->
+    <link rel="canonical" href="https://mosdeo.github.io/2017/09/11/note_%E8%B3%87%E6%96%99%E5%88%86%E6%9E%90%E6%96%87%E5%8C%96/">
+
+    <meta name="generator" content="Hexo 5.2.0">
+
+    <!-- ### Analytics ### -->
+    
+    <!-- Google Analytics -->
+<script>
+    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+    ga('create', 'UA-64570213-2', 'auto');
+    ga('send', 'pageview');
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+
+
+
+
+
+
+
+
+
+    <!-- ### Structured Data ### -->
+    
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "url": "https://mosdeo.github.io/2017/09/11/note_%E8%B3%87%E6%96%99%E5%88%86%E6%9E%90%E6%96%87%E5%8C%96/",
+    "@type": "BlogPosting",
+    "logo": "https://mosdeo.github.io/img/suka-favicon.ico",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://mosdeo.github.io/2017/09/11/note_%E8%B3%87%E6%96%99%E5%88%86%E6%9E%90%E6%96%87%E5%8C%96/"
+    },
+    "headline": "(流動筆記)資料分析文化 | LKY 只有原創內容的 Blog",
+    
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://mosdeo.github.io/img/suka-favicon.ico"
+    },
+    
+    "datePublished": "2017-09-10T16:00:00.000Z",
+    "dateModified": "2019-09-13T09:57:44.940Z",
+    "author": {
+        "@type": "Person",
+        "name": "Lin, Kao-Yuan",
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://mosdeo.github.io/img/default_avatar.png"
+        },
+        "description": "今之能者，謂能轉貼，至於魯蛇，皆能轉貼。不原創，何以別乎？"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "LKY 只有原創內容的 Blog",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://mosdeo.github.io/img/suka-favicon.ico"
+        }
+    },
+    
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://mosdeo.github.io/search?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+    },
+    
+    "keywords": "數據分析, 資料科學, 筆記, 管理",
+    "description": "由於不時會在網路上看，其他資料科學工作者分享他們自己的心路歷程，看了都頗有同感。所以我決定開闢一篇文章用來收錄這些心聲。 個人實際從事資料科學工作的經驗中，發現最大的困難，不像學生時期都集中在技術面，而是文化面。文化面的障礙經驗，和當下的 context 有關，很難有意識的立即說清楚，所以特別需要筆記。 玩數據就不要玻璃心，尊重一下這場遊戲的基本邏輯  「專業和價值」只是擋箭牌，擋掉媒體人適應新變 - Lin, Kao-Yuan - LKY 只有原創內容的 Blog"
+}
+</script>
+
+
+
+    <!-- ### Custom Head ### -->
+    
+</head>
+
+    <body>
+            
+
+            <!-- ### Main content ### -->
+            <!-- ## Header ##-->
+<header>
+    <h1 class="header-title text-center"><a href="/">LKY 只有原創內容的 Blog</a></h1>
+
+    <p class="text-center header-slogan">
+        
+            
+                今之能者，謂能轉貼，至於魯蛇，皆能轉貼。不原創，何以別乎？
+            
+        
+    </p>
+
+    <nav class="navbar-section text-center">
+    
+        <a href="/" class="navbar-link">Home</a>
+    
+    
+        <a href="/archives/" class="navbar-link">Archives</a>
+    
+    
+        <a href="/search" class="navbar-link">Search</a>
+    
+    
+    
+        <div class="dropdown dropdown-right">
+    <a class="navbar-link dropdown-toggle" tabindex="0">Share</a>
+    <ul class="menu share-menu">
+
+        <!-- Share Weibo -->
+        
+        <li class="menu-item">
+            <a href="http://service.weibo.com/share/share.php?appkey=&title=LKY 只有原創內容的 Blog&url=https://mosdeo.github.io&pic=https://mosdeo.github.io/img/suka-favicon.ico&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">Share to Weibo</a>
+        </li>
+        
+
+        <!-- Share Twitter -->
+        
+        <li class="menu-item">
+            <a href="https://twitter.com/intent/tweet?text=LKY 只有原創內容的 Blog&url=https://mosdeo.github.io&via=Lin, Kao-Yuan" target="_blank" rel="external noopener noreferrer nofollow">Share to Twitter</a>
+        </li>
+        
+
+        <!-- Share Facebook -->
+        
+        <li class="menu-item">
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://mosdeo.github.io" target="_blank" rel="external noopener noreferrer nofollow">Share to Facebook</a>
+        </li>
+        
+
+        <!-- Share Google+ -->
+        
+        <li class="menu-item">
+            <a href="https://plus.google.com/share?url=https://mosdeo.github.io" target="_blank" rel="external noopener noreferrer nofollow">Share to Google+</a>
+        </li>
+        
+
+        <!-- Share LinkedIn -->
+        
+        <li class="menu-item">
+            <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://mosdeo.github.io&title=(流動筆記)資料分析文化" target="_blank" rel="external noopener noreferrer nofollow">Share to LinkedIn</a>
+        </li>
+        
+
+        <!-- Share QQ -->
+        
+        <li class="menu-item">
+            <a href="http://connect.qq.com/widget/shareqq/index.html?site=LKY 只有原創內容的 Blog&title=(流動筆記)資料分析文化&summary=&pics=https://mosdeo.github.io/img/suka-favicon.ico&url=https://mosdeo.github.io" target="_blank" rel="external noopener noreferrer nofollow"> Share to QQ</a>
+        </li>
+        
+
+        <!-- Share Telegram -->
+        
+        <li class="menu-item">
+            <a href="https://t.me/share/url?url=https://mosdeo.github.io&text=(流動筆記)資料分析文化" target="_blank" rel="external noopener noreferrer nofollow">Share to Telegram</a>
+        </li>
+        
+
+        <!-- QRCode -->
+        
+        <li class="menu-item">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAAAAAAYplnuAAACrklEQVR42u3b0U7rQAxF0f7/T8NrpWZ89pmEqCi7L0jQJitX19hjm9fPP3y9RIsWLfqB6Nfwen/P+9ej7x19ZnU9+v6P94gWDdGH/+kXF0wPMV13+h5yiBZdoBPsKOBWN1rdnKBXDtGi70CnwE1JZIUXLfpO9OpzKUE0RZlo0VegaSFzdNFVEK7Qf17liX48egqSO79edhoX/Wg0Ld6Xv/BBMZR+dnnXVPSj0VMgTEV+kzRS8UXuL1o0RdObTDeaksMUrE0SEy26QacPt4dYcqglAfhxLdGiAToNNkmyoQOhthmJMqJo0YuDbUKSxgxp/Kzuh5KZaNEQ3Rw+zxQ86R8gLQaIFk3QKRnsNG7apvo0OB2rPNGiQ99jShYpMdCHSoOi8ZeAaNEFeropDaz0efJzVDCJFg3707TIpwuApPiaAh11TUWLDs0auhCbgpEOgEhgihbdoGmANO+hBX88yIoWfQKdipz0ECRB0eHT8qFFi4Zo0vyjA04y0CQJLC4TihYN0O2BIDUcmwZOGlKJFk3RJPjIATQtvdCDbrWkIlr0MNAny4BTIKZATYFbFUyiRYNDQLp4CqIzQYoPIKJFAzRatoaLWOSBpobM9oKsaNHDH+fQpZV2iYUsEqbBq2jRNLmk4Ttp3tCiqR1OoQakaNFhQZYMd1JzvUk02wWTaNEATYp10nwkySQlFdRhEi06FEykqbI7BJ0SGloIFy26RLfLUGQIRBcGUKNHtGiAJk0WMtCkQ9S4XDVcU7Rogk5DolSYp0ZmSjbN4Va0aIomAUgOvKSh0wZpPNiKFg0OAXSA1DwkSUAp4EWLvgpNFllxgiib7NuBKFp0iaZDeFKUnTqNixZdFky00KeFFGnc4yUV0aI3Dra0eE+DziZYUSCKFr3Zn/6ml2jRokU/CP0LkJkZ947VWzQAAAAASUVORK5CYII=" alr="QRCode">
+        </li>
+        
+
+    </ul>
+</div>
+    
+    
+        <a href="/atom.xml" target="_blank" class="navbar-link">RSS</a>
+    
+</nav>
+</header>
+
+            
+    <!-- ## Post ## -->
+    <div class="post-container">
+    <div id="post-card" class="card">
+        
+        <div class="card-item-container">
+            <div class="card-inner-cell">
+                <!-- # Post Header Info # -->
+                <div class="card-header">
+                    
+    <h1 class="card-title h3 mb-2">(流動筆記)資料分析文化</h1>
+
+
+
+
+<div class="post-header-info">
+    <p class="post-header-info-left text-gray">
+        <img class="author-thumb lazyload" data-src="/img/default_avatar.png" src="/img/suka-lazyload.gif" alt="Lin, Kao-Yuan's Avatar">
+        <span>2017-09-11</span>
+        
+        
+            <!-- Busuanzi Post Views -->
+<span id="busuanzi_container_page_pv" hidden>
+    <span class="suka-devide-dot"></span>
+    <span></span>
+    <span id="busuanzi_value_page_pv"></span>
+    <span>Views</span>
+</span>
+        
+        
+    </p>
+    <div class="post-header-info-right">
+        
+            <div class="dropdown dropdown-right">
+<a class="dropdown-toggle" tabindex="0">Share the post</a>
+<ul class="menu share-menu">
+    <!-- Share Weibo -->
+    
+    <li class="menu-item">
+        <a href="http://service.weibo.com/share/share.php?appkey=&title=(流動筆記)資料分析文化&url=https://mosdeo.github.io/2017/09/11/note_%E8%B3%87%E6%96%99%E5%88%86%E6%9E%90%E6%96%87%E5%8C%96/&pic=https://mosdeo.github.io/img/suka-favicon.ico&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">Share to Weibo</a>
+    </li>
+    
+
+    <!-- Share Twitter -->
+    
+    <li class="menu-item">
+        <a href="https://twitter.com/intent/tweet?text=(流動筆記)資料分析文化&url=https://mosdeo.github.io/2017/09/11/note_%E8%B3%87%E6%96%99%E5%88%86%E6%9E%90%E6%96%87%E5%8C%96/&via=Lin, Kao-Yuan" target="_blank" rel="external noopener noreferrer nofollow">Share to Twitter</a>
+    </li>
+    
+
+    <!-- Share Facebook -->
+    
+    <li class="menu-item">
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://mosdeo.github.io/2017/09/11/note_%E8%B3%87%E6%96%99%E5%88%86%E6%9E%90%E6%96%87%E5%8C%96/" target="_blank" rel="external noopener noreferrer nofollow">Share to Facebook</a>
+    </li>
+    
+
+    <!-- Share Google+ -->
+    
+    <li class="menu-item">
+        <a href="https://plus.google.com/share?url=https://mosdeo.github.io/2017/09/11/note_%E8%B3%87%E6%96%99%E5%88%86%E6%9E%90%E6%96%87%E5%8C%96/" target="_blank" rel="external noopener noreferrer nofollow">Share to Google+</a>
+    </li>
+    
+
+    <!-- Share LinkedIn -->
+    
+    <li class="menu-item">
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://mosdeo.github.io/2017/09/11/note_%E8%B3%87%E6%96%99%E5%88%86%E6%9E%90%E6%96%87%E5%8C%96/&title=LKY 只有原創內容的 Blog" target="_blank" rel="external noopener noreferrer nofollow">Share to LinkedIn</a>
+    </li>
+    
+
+    <!-- Share QQ -->
+    
+    <li class="menu-item">
+        <a href="http://connect.qq.com/widget/shareqq/index.html?site=LKY 只有原創內容的 Blog&title=LKY 只有原創內容的 Blog&summary=&pics=https://mosdeo.github.io/img/suka-favicon.ico&url=https://mosdeo.github.io/2017/09/11/note_%E8%B3%87%E6%96%99%E5%88%86%E6%9E%90%E6%96%87%E5%8C%96/" target="_blank" rel="external noopener noreferrer nofollow"> Share to QQ</a>
+    </li>
+    
+
+    <!-- Share Telegram -->
+    
+    <li class="menu-item">
+        <a href="https://t.me/share/url?url=https://mosdeo.github.io/2017/09/11/note_%E8%B3%87%E6%96%99%E5%88%86%E6%9E%90%E6%96%87%E5%8C%96/&text=LKY 只有原創內容的 Blog" target="_blank" rel="external noopener noreferrer nofollow">Share to Telegram</a>
+    </li>
+    
+
+    <!-- QRCode -->
+    
+    <li class="menu-item">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAAAAAAYplnuAAACrklEQVR42u3b0U7rQAxF0f7/T8NrpWZ89pmEqCi7L0jQJitX19hjm9fPP3y9RIsWLfqB6Nfwen/P+9ej7x19ZnU9+v6P94gWDdGH/+kXF0wPMV13+h5yiBZdoBPsKOBWN1rdnKBXDtGi70CnwE1JZIUXLfpO9OpzKUE0RZlo0VegaSFzdNFVEK7Qf17liX48egqSO79edhoX/Wg0Ld6Xv/BBMZR+dnnXVPSj0VMgTEV+kzRS8UXuL1o0RdObTDeaksMUrE0SEy26QacPt4dYcqglAfhxLdGiAToNNkmyoQOhthmJMqJo0YuDbUKSxgxp/Kzuh5KZaNEQ3Rw+zxQ86R8gLQaIFk3QKRnsNG7apvo0OB2rPNGiQ99jShYpMdCHSoOi8ZeAaNEFeropDaz0efJzVDCJFg3707TIpwuApPiaAh11TUWLDs0auhCbgpEOgEhgihbdoGmANO+hBX88yIoWfQKdipz0ECRB0eHT8qFFi4Zo0vyjA04y0CQJLC4TihYN0O2BIDUcmwZOGlKJFk3RJPjIATQtvdCDbrWkIlr0MNAny4BTIKZATYFbFUyiRYNDQLp4CqIzQYoPIKJFAzRatoaLWOSBpobM9oKsaNHDH+fQpZV2iYUsEqbBq2jRNLmk4Ttp3tCiqR1OoQakaNFhQZYMd1JzvUk02wWTaNEATYp10nwkySQlFdRhEi06FEykqbI7BJ0SGloIFy26RLfLUGQIRBcGUKNHtGiAJk0WMtCkQ9S4XDVcU7Rogk5DolSYp0ZmSjbN4Va0aIomAUgOvKSh0wZpPNiKFg0OAXSA1DwkSUAp4EWLvgpNFllxgiib7NuBKFp0iaZDeFKUnTqNixZdFky00KeFFGnc4yUV0aI3Dra0eE+DziZYUSCKFr3Zn/6ml2jRokU/CP0LkJkZ947VWzQAAAAASUVORK5CYII=" alt="QRCode">
+    </li>
+    
+
+</ul>
+</div>
+        
+    </div>
+</div>
+                </div>
+                <div class="card-body">
+                    
+                        
+                        
+                            <div id="post-toc"><ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%8E%A9%E6%95%B8%E6%93%9A%E5%B0%B1%E4%B8%8D%E8%A6%81%E7%8E%BB%E7%92%83%E5%BF%83%EF%BC%8C%E5%B0%8A%E9%87%8D%E4%B8%80%E4%B8%8B%E9%80%99%E5%A0%B4%E9%81%8A%E6%88%B2%E7%9A%84%E5%9F%BA%E6%9C%AC%E9%82%8F%E8%BC%AF"><span class="post-toc-number">1.</span> <span class="post-toc-text">玩數據就不要玻璃心，尊重一下這場遊戲的基本邏輯</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E8%AE%93%E8%B3%87%E6%96%99%E5%88%86%E6%9E%90%E8%9E%8D%E5%85%A5%E7%B5%84%E7%B9%94"><span class="post-toc-number">2.</span> <span class="post-toc-text">讓資料分析融入組織</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%85%88%E6%9C%89%E8%BB%9F%E9%AB%94%E8%88%87%E6%95%B8%E6%93%9A%E6%96%87%E5%8C%96%EF%BC%8C%E6%89%8D%E6%9C%89-AI"><span class="post-toc-number">3.</span> <span class="post-toc-text">先有軟體與數據文化，才有 AI</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E8%B3%87%E6%96%99%E5%B0%88%E6%A1%88%E7%9A%84%E5%AE%8C%E6%95%B4%E6%B5%81%E7%A8%8B-1%EF%BC%9AInformation-in"><span class="post-toc-number">4.</span> <span class="post-toc-text">資料專案的完整流程 1：Information-in</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E9%AB%98%E8%B3%AA%E9%87%8F%E6%95%B8%E6%93%9A%E9%9B%86%E5%93%AA%E8%A3%A1%E4%BE%86%EF%BC%9F%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E5%85%AC%E5%8F%B8%E7%9A%84%E5%8D%81%E5%A4%A7%E6%95%B8%E6%93%9A%E8%92%90%E9%9B%86%E7%AD%96%E7%95%A5"><span class="post-toc-number">5.</span> <span class="post-toc-text">高質量數據集哪裡來？機器學習公司的十大數據蒐集策略</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%9C%AA%E6%9D%A5-3-5-%E5%B9%B4%E5%86%85%EF%BC%8C%E5%93%AA%E4%B8%AA%E6%96%B9%E5%90%91%E7%9A%84%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%BA%BA%E6%89%8D%E6%9C%80%E7%B4%A7%E7%BC%BA%EF%BC%9F"><span class="post-toc-number">6.</span> <span class="post-toc-text">未来 3~5 年内，哪个方向的机器学习人才最紧缺？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E3%80%8C%E6%89%93%E9%80%A0%E4%BA%BA%E5%B7%A5%E6%99%BA%E6%85%A7%E5%9C%98%E9%9A%8A%E3%80%8D%E7%AD%86%E8%A8%98%EF%BC%882017-09-02%EF%BC%89"><span class="post-toc-number">7.</span> <span class="post-toc-text">「打造人工智慧團隊」筆記（2017.09.02）</span></a></li></ol></div>
+                        
+                    
+                    <article id="post-content">
+                        <p><img src="/content/images/%E9%99%8D%E7%B6%AD1.png" alt=""></p>
+<p>由於不時會在網路上看，其他資料科學工作者分享他們自己的心路歷程，看了都頗有同感。所以我決定開闢一篇文章用來收錄這些心聲。</p>
+<p>個人實際從事資料科學工作的經驗中，發現最大的困難，不像學生時期都集中在技術面，而是文化面。文化面的障礙經驗，和當下的 context 有關，很難有意識的立即說清楚，所以特別需要筆記。</p>
+<h3 id="玩數據就不要玻璃心，尊重一下這場遊戲的基本邏輯"><a target="_blank" rel="noopener" href="https://medium.com/@xiaotong/%E5%A4%A7%E4%BD%AC-%E7%8E%A9%E6%95%B8%E6%93%9A%E5%B0%B1%E4%B8%8D%E8%A6%81%E7%8E%BB%E7%92%83%E5%BF%83-%E5%B0%8A%E9%87%8D%E4%B8%80%E4%B8%8B%E9%80%99%E5%A0%B4%E9%81%8A%E6%88%B2%E7%9A%84%E5%9F%BA%E6%9C%AC%E9%82%8F%E8%BC%AF-f8139f9ababe">玩數據就不要玻璃心，尊重一下這場遊戲的基本邏輯</a></h3>
+<ul>
+<li>「專業和價值」只是擋箭牌，擋掉媒體人適應新變化、不得不做出改變時的心理痛苦</li>
+</ul>
+<h3 id="讓資料分析融入組織"><a target="_blank" rel="noopener" href="https://www.hbrtaiwan.com/article_content_AR0007288.html">讓資料分析融入組織</a></h3>
+<ul>
+<li>領導團隊必須明白，成功需要勇氣，因為一旦踏上這個旅程，資料分析的見解常常會顯示，必須做出修改路線的決定。領導人必須誠實面對自己，想清楚是否願意把這些見解納入決策過程，並讓自己與團隊為這麼做負起責任。</li>
+<li>文化抗拒也可能成為比預期更大的阻礙。</li>
+</ul>
+<h3 id="先有軟體與數據文化，才有-AI"><a target="_blank" rel="noopener" href="https://data.leafwind.tw/build-software-engineering-and-data-culture-before-doing-ai-6e345986f872">先有軟體與數據文化，才有 AI</a></h3>
+<ul>
+<li>長年缺乏的軟體環境與無結構化的資料，要如何提供養分給機器學習？業界知道資料的重要性嗎？業界的 training data 哪裡來？大數據喊了很久，業界有在積極收集、處理、分析資料嗎？</li>
+<li>近年深度學習（deep learning）正夯，在校園徵才時聽聞不少實驗室都開始在做深度學習，可以說，只要是理工的實驗室，做深度學習就一點也不奇怪；但我卻發現有些案例只專注於研究深度學習，其他基礎的機器學習模型並不熟、甚至不會。或許這只是特例，但我卻開始擔心這是常態。</li>
+</ul>
+<h3 id="資料專案的完整流程-1：Information-in"><a target="_blank" rel="noopener" href="https://taweihuang.hpd.io/2016/09/14/%E8%B3%87%E6%96%99%E5%B0%88%E6%A1%88%E7%9A%84%E5%AE%8C%E6%95%B4%E6%B5%81%E7%A8%8B-1%EF%BC%9Ainformation-in/">資料專案的完整流程 1：Information-in</a></h3>
+<ul>
+<li>常常會希望跟我們合作的人有明確一點的描述，你資料的「變數」與「樣本」有哪些，對你來說什麼叫做「有趣」，你想要拿「有趣的事情」做些什麼。所以當有人直接叫我從資料找出重要的資訊時，我心中最真實的想法是：我怎麼知道要拿來幹嘛啦！！！</li>
+<li>這些步驟需要許多不同專業的人互相合作，才能解決實務上的問題。我認為，不應該強求成為一個「全能的資料科學家」(畢竟我並不是天才)，我想成為的是一個「T 型資料科學家」，對於所有資料分析的議題有基本認識，對於統計、電腦科學、或是領域知識其中一項有著朝深入的了解。</li>
+</ul>
+<h3 id="高質量數據集哪裡來？機器學習公司的十大數據蒐集策略"><a target="_blank" rel="noopener" href="https://weiwenku.net/d/100941811#new">高質量數據集哪裡來？機器學習公司的十大數據蒐集策略</a></h3>
+<ul>
+<li>不幸的是，初創公司往往在一開始只有有限的或沒有標籤的數據，這一情況會阻礙創始人在構建數據驅動的產品方面取得重大進展。因此，在僱傭數據科學團隊或建立昂貴的核心基礎設施之前，從一開始就值得探索一套數據收集策略。</li>
+<li>挑戰在於說服早期用戶在機器學習的好處完全發揮作用之前保持使用該產品(因為首先需要數據來訓練和微調算法)。</li>
+</ul>
+<h3 id="未来-3-5-年内，哪个方向的机器学习人才最紧缺？"><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/63883507/answer/227019715">未来 3~5 年内，哪个方向的机器学习人才最紧缺？</a></h3>
+<ul>
+<li>已有工作／研究經驗的朋友，要試著利用自己的工作經歷。舉例，不要做機器學習裡最擅長投資的人，而要做金融領域中最擅長機器學習的專家，這才是你的價值主張（value proposition）</li>
+</ul>
+<h3 id="「打造人工智慧團隊」筆記（2017-09-02）">「打造人工智慧團隊」筆記（2017.09.02）</h3>
+<ul>
+<li>
+<p>科學定義</p>
+<ul>
+<li>系統性</li>
+<li>一般化</li>
+<li>可驗證</li>
+</ul>
+</li>
+<li>
+<p>資料科學定義</p>
+<ul>
+<li>可以從資料裏面追求知識的活動</li>
+</ul>
+</li>
+<li>
+<p>選才</p>
+<ul>
+<li>這方面專長的人不太會在市場上流動</li>
+<li>創意、細心。細心最重要</li>
+<li>湖人隊有自己的資料分析師</li>
+<li>建議不要外包資料分析工作，因為太難定規格。但 model training 很好定誤差，可以外包</li>
+</ul>
+</li>
+<li>
+<p>Big Data</p>
+<ul>
+<li>資料大到被逼著擺脫傳傳統單機處理，必須換到分散式架構、或其他特殊工具。</li>
+<li>太多公司瘋 Hadoop，但絕大部分台灣公司資料量沒有多到這樣，10 萬元單機能解決就不必走分散式系統。</li>
+</ul>
+</li>
+<li>
+<p>很多公司組完資料科學團隊，最常見就是會被誤用</p>
+<ul>
+<li>資料倉儲團隊</li>
+<li>報表產生器
+<ul>
+<li>看報表只是潛層應用，驅動產品或流程改變才是實在的作用</li>
+<li>超過 3 個維度的資料被視覺化以後，都是片面的，因為視覺化最多只能呈獻 3 個維度。而絕大多數有價值的資料也超過 3 個維度，所以只靠視覺化資料做決策參考是危險的。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+                    </article>
+                    
+
+
+    <blockquote id="date-expire-notification" class="post-expired-notify">This article was last updated on <span id="date-expire-num"></span> days ago, and the information described in the article may have changed.</blockquote>
+    <script>
+    (function() {
+        var dateUpdate = Date.parse("2019-09-13");
+        var nowDate = new Date();
+        var a = nowDate.getTime();
+        var b = a - dateUpdate;
+        var daysUpdateExpire = Math.floor(b/(24*3600*1000));
+        if (daysUpdateExpire >= 120) {
+            document.getElementById('date-expire-num').innerHTML = daysUpdateExpire;
+        } else {
+            document.getElementById('date-expire-notification').style.display = 'none';
+        }
+    })();
+    </script>
+
+
+<p class="post-footer-info mb-0 pt-0">Published at&nbsp;<time datetime="2017-09-10T16:00:00.000Z" itemprop="datePublished">2017-09-11</time>
+
+    , Updated at&nbsp;<time datetime="2019-09-13T09:57:44.940Z" itemprop="dateModified">2019-09-13</time>
+
+</p>
+<p class="post-footer-info mb-0 pt-2">
+
+
+
+<span class="post-tags-list mt-2">
+
+<a class="post-tags-list-item" href="/tags/%E6%95%B8%E6%93%9A%E5%88%86%E6%9E%90/" rel="tag">#&nbsp;數據分析</a>
+
+<a class="post-tags-list-item" href="/tags/%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8/" rel="tag">#&nbsp;資料科學</a>
+
+<a class="post-tags-list-item" href="/tags/%E7%AD%86%E8%A8%98/" rel="tag">#&nbsp;筆記</a>
+
+<a class="post-tags-list-item" href="/tags/%E7%AE%A1%E7%90%86/" rel="tag">#&nbsp;管理</a>
+
+</span>
+
+
+</p>
+
+                </div>
+                <div class="post-nav px-2 bg-gray">
+<ul class="pagination">
+    <!-- Prev Nav -->
+    
+        <li class="page-item page-prev">
+            <a href="/2017/10/02/%E6%AD%A5%E4%B8%8A%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8%E7%9A%84%E5%BF%83%E8%B7%AF%E6%AD%B7%E7%A8%8B(%E4%B8%80)/" rel="prev">
+                <div class="page-item-title"><i class="icon icon-back" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">步上資料科學的心路歷程(一)：動機與緣起</div>
+            </a>
+        </li>
+    
+
+    <!-- Next Nav -->
+    
+        <li class="page-item page-next">
+            <a href="/2017/08/29/%E3%80%8C%E7%82%BA%E4%BB%80%E9%BA%BC%E4%BD%A0%E7%9A%84%E9%A1%9E%E7%A5%9E%E7%B6%93%E6%A8%A1%E5%9E%8B%E4%BC%B0%E6%B8%AC%E7%B5%90%E6%9E%9C%E4%B8%8D%E7%A9%A9%E5%AE%9A%EF%BC%9F%E3%80%8D/" rel="next">
+                <div class="page-item-title"><i class="icon icon-forward" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">「為什麼你的類神經模型估測結果不穩定？」</div>
+            </a>
+        </li>
+    
+</ul>
+</div>
+
+                
+                    <!-- # Comment # -->
+                    
+                        <div class="card-footer post-comment">
+                            <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://mosdeo.github.io/2017/09/11/note_%E8%B3%87%E6%96%99%E5%88%86%E6%9E%90%E6%96%87%E5%8C%96/'; // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'https://mosdeo.github.io/2017/09/11/note_%E8%B3%87%E6%96%99%E5%88%86%E6%9E%90%E6%96%87%E5%8C%96/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+<script id="disqus-thread-script">
+    (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document;
+        var s = d.createElement('script');
+        s.src = '//mosdeo-github-io.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', + new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+                        </div>
+                    
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!-- ### Footer ### -->
+            <footer class="text-center">
+    <!-- footer copyright -->
+    
+        <p class="footer-copyright mb-0">Copyright&nbsp;©&nbsp;<span id="copyright-year"></span>
+            <a class="footer-copyright-a" href="https://mosdeo.github.io">LKY 只有原創內容的 Blog</a>
+        </p>
+
+    <!-- footer custom text -->
+    <p class="footer-text mb-0">
+    
+    </p>
+    <!-- footer develop info -->
+    <p class="footer-develop mb-0">
+        
+    <!-- Busuanzi User Views -->
+    <span id="busuanzi_container_site_uv" hidden>
+        <span></span>
+        <span id="busuanzi_value_site_uv"></span>
+        <span>Viewers</span>
+        
+            <span>|</span>
+        
+    </span>
+
+
+
+
+        
+        Powered by&nbsp;<!--
+         --><a href="https://hexo.io" target="_blank" class="footer-develop-a" rel="external nofollow noopener noreferrer">Hexo</a><span class="footer-develop-divider"></span>Theme&nbsp;-&nbsp;<!--
+         --><a href="https://github.com/SukkaW/hexo-theme-suka" target="_blank" class="footer-develop-a" rel="external noopener">Suka</a>
+    </p>
+</footer>
+
+
+        <!-- ### Import File ### -->
+        <!-- ### Footer JS Import ### -->
+
+<script>
+
+    
+window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 50
+};
+document.getElementById('copyright-year').textContent = new Date().getFullYear();
+console.log('\n %c Suka Theme (hexo-theme-suka) | © SukkaW | Verision 1.3.3 %c https://github.com/SukkaW/hexo-theme-suka \n', 'color: #fff; background: #444; padding:5px 0;', 'background: #bbb; padding:5px 0;');
+
+</script>
+
+<script src="/lib/vanilla-lazyload/lazyload.min.js" async></script>
+    <script src="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.js" async></script>
+
+
+<!-- Offset -->
+
+
+
+
+<!-- Comment -->
+
+    
+        <script id="dsq-count-scr" src="https://mosdeo-github-io.disqus.com/count.js" async></script>
+
+    
+
+
+<!-- ### Custom Footer ### -->
+
+    </body>
+
+</html>
