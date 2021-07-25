@@ -57,7 +57,7 @@
     <meta name="renderer" content="webkit">
 
     <!-- Title -->
-    <title>Docker部署測試用文章 | LKY 只有原創內容的 Blog</title>
+    <title>如何在Apple Silicon上安裝OpenCV與TensorFlow給Python用？ | LKY 只有原創內容的 Blog</title>
 
     <!-- Favicons -->
     <link rel="icon" type="image&#x2F;ico" href="/img/suka-favicon.ico">
@@ -157,12 +157,12 @@
     <link rel="alternate" type="application/atom+xml" href="/atom.xml"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="LKY 只有原創內容的 Blog"><meta name="msapplication-starturl" content="https://mosdeo.github.io"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="LKY 只有原創內容的 Blog"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
     <!-- ### The Open Graph & Twitter Card Protocol ### -->
-    <meta property="og:title" content="Docker部署測試用文章 | LKY 只有原創內容的 Blog"><meta property="og:site_name" content="LKY 只有原創內容的 Blog"><meta property="og:type" content="article"><meta property="og:url" content="https://mosdeo.github.io/2021/07/24/Docker%E9%83%A8%E7%BD%B2%E6%B8%AC%E8%A9%A6%E7%94%A8%E6%96%87%E7%AB%A0/"><meta property="og:locale" content="zh-TW"><meta name="description" content="驗證是不是可以 Docker 部署？ 成功的話，我就不用在新電腦上搞麻煩的 node 與 hexo 環境了。   這一條拖了一年多的 to do list，終於在今天完成了（淚～） 但其實寫之前就想很久了，真要算下來都不只兩年了。 原始碼：https:&#x2F;&#x2F;github.com&#x2F;mosdeo&#x2F;HexoContainer - Lin, Kao-Yuan - LKY 只有原創內容的 Blog"><meta name="keywords" content="docker"><meta property="og:image" content="https://memento-mori.jp/blog/wp-content/uploads/2017/12/docker.jpg"><meta property="og:image" content="https://mosdeo.github.io/content/images/hexo_into_docker.png"><meta property="article:published_time" content="2021-07-24T16:00:00.000Z"><meta property="article:modified_time" content="2021-07-25T17:06:57.832Z"><meta property="og:updated_time" content="2021-07-25T17:06:57.832Z"><meta property="article:author" content="Lin, Kao-Yuan"><meta property="article:tag" content="docker"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://memento-mori.jp/blog/wp-content/uploads/2017/12/docker.jpg">
+    <meta property="og:title" content="如何在Apple Silicon上安裝OpenCV與TensorFlow給Python用？ | LKY 只有原創內容的 Blog"><meta property="og:site_name" content="LKY 只有原創內容的 Blog"><meta property="og:type" content="article"><meta property="og:url" content="https://mosdeo.github.io/2021/07/24/%E5%A6%82%E4%BD%95%E5%9C%A8Apple%20Silicon%E4%B8%8A%E5%AE%89%E8%A3%9DOpenCV%E8%88%87TensorFlow%E7%B5%A6Python%E7%94%A8%EF%BC%9F/"><meta property="og:locale" content="zh-TW"><meta name="description" content="我來證明 Apple Silicon 現在也可以煉丹了！ 下圖是筆者在 Apple Silicon 上跑起了 OpenCV 4.5.3 與 TensorFlow 2.5.0。  在朋友推坑之下，筆者入手了 Apple Silicon (以下簡稱M1) MacBook。 這兩天做完相容性驗證之後，準備把舊的 Intel MacBook 賣掉。  相容性驗證有哪些項目？主要驗證我常用的 OpenCV、 - Lin, Kao-Yuan - LKY 只有原創內容的 Blog"><meta property="og:image" content="https://memento-mori.jp/blog/wp-content/uploads/2017/12/docker.jpg"><meta property="og:image" content="https://mosdeo.github.io/2021/07/24/%E5%A6%82%E4%BD%95%E5%9C%A8Apple%20Silicon%E4%B8%8A%E5%AE%89%E8%A3%9DOpenCV%E8%88%87TensorFlow%E7%B5%A6Python%E7%94%A8%EF%BC%9F/content/images/install_opencv_and_tensorflow_for_python_on_applesilicon/run_in_terminal.png"><meta property="og:image" content="https://mosdeo.github.io/2021/07/24/%E5%A6%82%E4%BD%95%E5%9C%A8Apple%20Silicon%E4%B8%8A%E5%AE%89%E8%A3%9DOpenCV%E8%88%87TensorFlow%E7%B5%A6Python%E7%94%A8%EF%BC%9F/content/images/install_opencv_and_tensorflow_for_python_on_applesilicon/apple_trade_in_apply_done.png"><meta property="article:published_time" content="2021-07-24T16:00:00.000Z"><meta property="article:modified_time" content="2021-07-25T17:04:19.809Z"><meta property="og:updated_time" content="2021-07-25T17:04:19.809Z"><meta property="article:author" content="Lin, Kao-Yuan"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://memento-mori.jp/blog/wp-content/uploads/2017/12/docker.jpg">
 
     
 
     <!-- ### Canonical link ### -->
-    <link rel="canonical" href="https://mosdeo.github.io/2021/07/24/Docker%E9%83%A8%E7%BD%B2%E6%B8%AC%E8%A9%A6%E7%94%A8%E6%96%87%E7%AB%A0/">
+    <link rel="canonical" href="https://mosdeo.github.io/2021/07/24/%E5%A6%82%E4%BD%95%E5%9C%A8Apple%20Silicon%E4%B8%8A%E5%AE%89%E8%A3%9DOpenCV%E8%88%87TensorFlow%E7%B5%A6Python%E7%94%A8%EF%BC%9F/">
 
     <meta name="generator" content="Hexo 5.2.0">
 
@@ -192,14 +192,14 @@
 <script type="application/ld+json">
 {
     "@context": "http://schema.org",
-    "url": "https://mosdeo.github.io/2021/07/24/Docker%E9%83%A8%E7%BD%B2%E6%B8%AC%E8%A9%A6%E7%94%A8%E6%96%87%E7%AB%A0/",
+    "url": "https://mosdeo.github.io/2021/07/24/%E5%A6%82%E4%BD%95%E5%9C%A8Apple%20Silicon%E4%B8%8A%E5%AE%89%E8%A3%9DOpenCV%E8%88%87TensorFlow%E7%B5%A6Python%E7%94%A8%EF%BC%9F/",
     "@type": "BlogPosting",
     "logo": "https://mosdeo.github.io/img/suka-favicon.ico",
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "https://mosdeo.github.io/2021/07/24/Docker%E9%83%A8%E7%BD%B2%E6%B8%AC%E8%A9%A6%E7%94%A8%E6%96%87%E7%AB%A0/"
+        "@id": "https://mosdeo.github.io/2021/07/24/%E5%A6%82%E4%BD%95%E5%9C%A8Apple%20Silicon%E4%B8%8A%E5%AE%89%E8%A3%9DOpenCV%E8%88%87TensorFlow%E7%B5%A6Python%E7%94%A8%EF%BC%9F/"
     },
-    "headline": "Docker部署測試用文章 | LKY 只有原創內容的 Blog",
+    "headline": "如何在Apple Silicon上安裝OpenCV與TensorFlow給Python用？ | LKY 只有原創內容的 Blog",
     
     "image": {
         "@type": "ImageObject",
@@ -207,7 +207,7 @@
     },
     
     "datePublished": "2021-07-24T16:00:00.000Z",
-    "dateModified": "2021-07-25T17:06:57.832Z",
+    "dateModified": "2021-07-25T17:04:19.809Z",
     "author": {
         "@type": "Person",
         "name": "Lin, Kao-Yuan",
@@ -232,8 +232,8 @@
         "query-input": "required name=search_term_string"
     },
     
-    "keywords": "docker",
-    "description": "驗證是不是可以 Docker 部署？ 成功的話，我就不用在新電腦上搞麻煩的 node 與 hexo 環境了。   這一條拖了一年多的 to do list，終於在今天完成了（淚～） 但其實寫之前就想很久了，真要算下來都不只兩年了。 原始碼：https://github.com/mosdeo/HexoContainer - Lin, Kao-Yuan - LKY 只有原創內容的 Blog"
+    "keywords": "",
+    "description": "我來證明 Apple Silicon 現在也可以煉丹了！ 下圖是筆者在 Apple Silicon 上跑起了 OpenCV 4.5.3 與 TensorFlow 2.5.0。  在朋友推坑之下，筆者入手了 Apple Silicon (以下簡稱M1) MacBook。 這兩天做完相容性驗證之後，準備把舊的 Intel MacBook 賣掉。  相容性驗證有哪些項目？主要驗證我常用的 OpenCV、 - Lin, Kao-Yuan - LKY 只有原創內容的 Blog"
 }
 </script>
 
@@ -306,28 +306,28 @@
         <!-- Share LinkedIn -->
         
         <li class="menu-item">
-            <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://mosdeo.github.io&title=Docker部署測試用文章" target="_blank" rel="external noopener noreferrer nofollow">Share to LinkedIn</a>
+            <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://mosdeo.github.io&title=如何在Apple Silicon上安裝OpenCV與TensorFlow給Python用？" target="_blank" rel="external noopener noreferrer nofollow">Share to LinkedIn</a>
         </li>
         
 
         <!-- Share QQ -->
         
         <li class="menu-item">
-            <a href="http://connect.qq.com/widget/shareqq/index.html?site=LKY 只有原創內容的 Blog&title=Docker部署測試用文章&summary=&pics=https://memento-mori.jp/blog/wp-content/uploads/2017/12/docker.jpg&url=https://mosdeo.github.io" target="_blank" rel="external noopener noreferrer nofollow"> Share to QQ</a>
+            <a href="http://connect.qq.com/widget/shareqq/index.html?site=LKY 只有原創內容的 Blog&title=如何在Apple Silicon上安裝OpenCV與TensorFlow給Python用？&summary=&pics=https://memento-mori.jp/blog/wp-content/uploads/2017/12/docker.jpg&url=https://mosdeo.github.io" target="_blank" rel="external noopener noreferrer nofollow"> Share to QQ</a>
         </li>
         
 
         <!-- Share Telegram -->
         
         <li class="menu-item">
-            <a href="https://t.me/share/url?url=https://mosdeo.github.io&text=Docker部署測試用文章" target="_blank" rel="external noopener noreferrer nofollow">Share to Telegram</a>
+            <a href="https://t.me/share/url?url=https://mosdeo.github.io&text=如何在Apple Silicon上安裝OpenCV與TensorFlow給Python用？" target="_blank" rel="external noopener noreferrer nofollow">Share to Telegram</a>
         </li>
         
 
         <!-- QRCode -->
         
         <li class="menu-item">
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAAAAAAYplnuAAACqElEQVR42u3dS07DQBBFUe9/0zBFKFXvvsZBinw9CVE+Po7odP0E19cHHpdo0aJFPxB9LcfPx3//PN3/fUueTxyiRTfol7/0w4nJ469OmB5LDtGiW/SrBTi94YaZTpwuDDlEi74BvS2caQOisG1hixb9LjTdFKYgZ8K+/dtD9OPRa6ACEoMNsX0Ib4nyRD8enRLb/7q9NRsX/Vh0LPoNBZepCEOShy1huKVqKvrR6JNgZoLSDWW68HRxokUTNDnZFORf4EjvQwIx0aJbNHpBUcihxfhU0Iw7omjRAE2amQl0d5FHtOgGnYIaEuhvF9I0PGPDVbRogE5DJakoWW0Oy/O3REC06AZNFk8apEobRHoN/UBEiyboEyQtjpPkmRR4RItu0GmhpESXDptsRfstwR6jPNGiQ464FbVToJOGsWjTqU5sRYsOC/EkeW2LkqRBWn17iBZ92NDfipOk8EigVbFGtOilANk06eni3Qo86Xxjo1+06AKNm+pgYGVrAtFGfpysES06oNuCYjtkRQZiYsFHtGiAbhYS2XBSUE82orHQL1o0RG/Nx1R4Ic36uigzLWLRogGanDAhSRJ7wUO06L+iSeBPh6jSkAkt2MfEVrToUPegm0gqPG5BP02a1w9MtGiI3lCnA1ip+dM8V7Tokz5iU5xJDZ2myZ82INGiWzQdHNwWWoNoGqWiRZ+gt5P9ZYglDavQQVvRok/QpMmZEs92E2mKOKJFt2iyUaSg/ySQogV20aIbNAHQBXuSWKQgKWbjokUvBchtoWxJAg3wSUAlWvRdaNp0Tw0kkjjQpBln46JFH/4h+Db4Pyn44IBJtOib/rlBi0qDK2QAS7ToE3QqrGwLkwTy5KK3ARXRohs0SWzJACwtmNMCp2jRJ+hPOkSLFi36QehvKsKLaUOWp88AAAAASUVORK5CYII=" alr="QRCode">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOQAAADkCAAAAACtPNdRAAAEKElEQVR42u3d22rcUBBE0fn/n3aeAiZounadiUEt73lJiG3pLIW0+gZ5ff2Cz0ukSJEiRYr8EPkaPt+//vf3lxf79udX3z9d999rXv3Z1b3TuUWK3IycDn518SvAdPOra797AOm69NwiRW5HXt1kOtR0s3dBi+LSdfG5RYp8IHIKIOSF/+5n0tdIwBMp8jcim8SABph04OlePxpdRYq8ETIVqeklPyGbAJIezI9UISJF3gzZBoe7/Ppfu3UiRd4EGYcm8KJTcp8a0TSpmALOR1MtkSJvhGybTuTw5OGkJDs1zqamlkiRT0CSYee7BCINYNOwlg5cU5KPqxCRIm+MnF7C7yDty326DnkIU0E9NqRFilyIpAsMbeOLLC3RRCQtVFSNLJEilyDJcIccJiUHpFk9FfAk8IkU+QRkU8ym7yeBIg1z0kA4Nd5EityKPHmRvzsQXeAljewpIOElQ5EiFyLTEsOnCXxaBiTN4lR0o+aySJGLkE1Dlxbb7eJTk/zThy5S5GZkGu6QRhJdNKIDoBRsUuIuUuRGJPmHTZZrydIEbRjThlZslIkUuRRJi9a0tEQWFlKB3g5wx78AkSIXIk8by1/hQxvQ073I0sYYMEWKXIhslgJTsJqSiKbgTk0qWkyLFPkEJFmCSI3i2GCCzS96HpzxiBS5AEmbQm1DmCYI7XIECYIiRW5GkiS4HcJORS2BTY1oMpgVKXI78pOhDHlQ7fUqyLRsKFLkUiQpTOnQlA5kSaF9VCiLFLkcSZZ2E6J9qTcLFTTwiBT5FCRJzE8WakkgGZcaXvw/XDjuoIsUeUMkXZ5Ni0xkGemkQE9F+DgIFilyIXL6h39687YIJ0sQZBAkUuQTkDTYtC/50ySbFtnTwxMpcjMyNZnJMtJ0iOlAdPBLE5FYhYgUuQA5vZDTMKhJJprGMinOUXIvUuQDkE0DigYKMjSiD7caQIkUuRCZlvII5nQIO73s6XDpaIFQpMgFyPRiJoGDfD8JVm2AevtzIkUuRJKhJnkZk8YYaUqTAJOSeZEiNyPTQWjy3S7ypuZWO+yJ3TqRIpcg6YBnOgBBtI2udD/08yJFLkSShi0d1tKAQJtVKaFPi0siRW5E0qBDG87Nwi8pnJvEfUwGRIpchEwDTrL0QBtPBJOKc7KoJFLkVmQTGNoBEQlmUzKRiua4nCFS5FIkGaKSQrdZLqID3SYwjs1lkSIXIpvBSptsk4HQdHDygPDmskiRN0aSBlaTiNOv04dHivOYDIgUuQxJhztkQHr64k8LvCcFtEiRm5FkIHoyFKX4lAwcXU+kyAciyTC1HdTSYrkdxB4HHpEilyHbwU5KJEgB/ulAVqTI7UiSCI9NI7BsRALTlPhPjefL+4kUuRRJBimkWCZFNkmwUwKf8CJFbkY++SNSpEiRIkUefv4A36d0wLYldXAAAAAASUVORK5CYII=" alr="QRCode">
         </li>
         
 
@@ -352,7 +352,7 @@
                 <!-- # Post Header Info # -->
                 <div class="card-header">
                     
-    <h1 class="card-title h3 mb-2">Docker部署測試用文章</h1>
+    <h1 class="card-title h3 mb-2">如何在Apple Silicon上安裝OpenCV與TensorFlow給Python用？</h1>
 
 
 
@@ -381,56 +381,56 @@
     <!-- Share Weibo -->
     
     <li class="menu-item">
-        <a href="http://service.weibo.com/share/share.php?appkey=&title=Docker部署測試用文章&url=https://mosdeo.github.io/2021/07/24/Docker%E9%83%A8%E7%BD%B2%E6%B8%AC%E8%A9%A6%E7%94%A8%E6%96%87%E7%AB%A0/&pic=https://memento-mori.jp/blog/wp-content/uploads/2017/12/docker.jpg&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">Share to Weibo</a>
+        <a href="http://service.weibo.com/share/share.php?appkey=&title=如何在Apple Silicon上安裝OpenCV與TensorFlow給Python用？&url=https://mosdeo.github.io/2021/07/24/%E5%A6%82%E4%BD%95%E5%9C%A8Apple%20Silicon%E4%B8%8A%E5%AE%89%E8%A3%9DOpenCV%E8%88%87TensorFlow%E7%B5%A6Python%E7%94%A8%EF%BC%9F/&pic=https://memento-mori.jp/blog/wp-content/uploads/2017/12/docker.jpg&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">Share to Weibo</a>
     </li>
     
 
     <!-- Share Twitter -->
     
     <li class="menu-item">
-        <a href="https://twitter.com/intent/tweet?text=Docker部署測試用文章&url=https://mosdeo.github.io/2021/07/24/Docker%E9%83%A8%E7%BD%B2%E6%B8%AC%E8%A9%A6%E7%94%A8%E6%96%87%E7%AB%A0/&via=Lin, Kao-Yuan" target="_blank" rel="external noopener noreferrer nofollow">Share to Twitter</a>
+        <a href="https://twitter.com/intent/tweet?text=如何在Apple Silicon上安裝OpenCV與TensorFlow給Python用？&url=https://mosdeo.github.io/2021/07/24/%E5%A6%82%E4%BD%95%E5%9C%A8Apple%20Silicon%E4%B8%8A%E5%AE%89%E8%A3%9DOpenCV%E8%88%87TensorFlow%E7%B5%A6Python%E7%94%A8%EF%BC%9F/&via=Lin, Kao-Yuan" target="_blank" rel="external noopener noreferrer nofollow">Share to Twitter</a>
     </li>
     
 
     <!-- Share Facebook -->
     
     <li class="menu-item">
-        <a href="https://www.facebook.com/sharer/sharer.php?u=https://mosdeo.github.io/2021/07/24/Docker%E9%83%A8%E7%BD%B2%E6%B8%AC%E8%A9%A6%E7%94%A8%E6%96%87%E7%AB%A0/" target="_blank" rel="external noopener noreferrer nofollow">Share to Facebook</a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://mosdeo.github.io/2021/07/24/%E5%A6%82%E4%BD%95%E5%9C%A8Apple%20Silicon%E4%B8%8A%E5%AE%89%E8%A3%9DOpenCV%E8%88%87TensorFlow%E7%B5%A6Python%E7%94%A8%EF%BC%9F/" target="_blank" rel="external noopener noreferrer nofollow">Share to Facebook</a>
     </li>
     
 
     <!-- Share Google+ -->
     
     <li class="menu-item">
-        <a href="https://plus.google.com/share?url=https://mosdeo.github.io/2021/07/24/Docker%E9%83%A8%E7%BD%B2%E6%B8%AC%E8%A9%A6%E7%94%A8%E6%96%87%E7%AB%A0/" target="_blank" rel="external noopener noreferrer nofollow">Share to Google+</a>
+        <a href="https://plus.google.com/share?url=https://mosdeo.github.io/2021/07/24/%E5%A6%82%E4%BD%95%E5%9C%A8Apple%20Silicon%E4%B8%8A%E5%AE%89%E8%A3%9DOpenCV%E8%88%87TensorFlow%E7%B5%A6Python%E7%94%A8%EF%BC%9F/" target="_blank" rel="external noopener noreferrer nofollow">Share to Google+</a>
     </li>
     
 
     <!-- Share LinkedIn -->
     
     <li class="menu-item">
-        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://mosdeo.github.io/2021/07/24/Docker%E9%83%A8%E7%BD%B2%E6%B8%AC%E8%A9%A6%E7%94%A8%E6%96%87%E7%AB%A0/&title=LKY 只有原創內容的 Blog" target="_blank" rel="external noopener noreferrer nofollow">Share to LinkedIn</a>
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://mosdeo.github.io/2021/07/24/%E5%A6%82%E4%BD%95%E5%9C%A8Apple%20Silicon%E4%B8%8A%E5%AE%89%E8%A3%9DOpenCV%E8%88%87TensorFlow%E7%B5%A6Python%E7%94%A8%EF%BC%9F/&title=LKY 只有原創內容的 Blog" target="_blank" rel="external noopener noreferrer nofollow">Share to LinkedIn</a>
     </li>
     
 
     <!-- Share QQ -->
     
     <li class="menu-item">
-        <a href="http://connect.qq.com/widget/shareqq/index.html?site=LKY 只有原創內容的 Blog&title=LKY 只有原創內容的 Blog&summary=&pics=https://memento-mori.jp/blog/wp-content/uploads/2017/12/docker.jpg&url=https://mosdeo.github.io/2021/07/24/Docker%E9%83%A8%E7%BD%B2%E6%B8%AC%E8%A9%A6%E7%94%A8%E6%96%87%E7%AB%A0/" target="_blank" rel="external noopener noreferrer nofollow"> Share to QQ</a>
+        <a href="http://connect.qq.com/widget/shareqq/index.html?site=LKY 只有原創內容的 Blog&title=LKY 只有原創內容的 Blog&summary=&pics=https://memento-mori.jp/blog/wp-content/uploads/2017/12/docker.jpg&url=https://mosdeo.github.io/2021/07/24/%E5%A6%82%E4%BD%95%E5%9C%A8Apple%20Silicon%E4%B8%8A%E5%AE%89%E8%A3%9DOpenCV%E8%88%87TensorFlow%E7%B5%A6Python%E7%94%A8%EF%BC%9F/" target="_blank" rel="external noopener noreferrer nofollow"> Share to QQ</a>
     </li>
     
 
     <!-- Share Telegram -->
     
     <li class="menu-item">
-        <a href="https://t.me/share/url?url=https://mosdeo.github.io/2021/07/24/Docker%E9%83%A8%E7%BD%B2%E6%B8%AC%E8%A9%A6%E7%94%A8%E6%96%87%E7%AB%A0/&text=LKY 只有原創內容的 Blog" target="_blank" rel="external noopener noreferrer nofollow">Share to Telegram</a>
+        <a href="https://t.me/share/url?url=https://mosdeo.github.io/2021/07/24/%E5%A6%82%E4%BD%95%E5%9C%A8Apple%20Silicon%E4%B8%8A%E5%AE%89%E8%A3%9DOpenCV%E8%88%87TensorFlow%E7%B5%A6Python%E7%94%A8%EF%BC%9F/&text=LKY 只有原創內容的 Blog" target="_blank" rel="external noopener noreferrer nofollow">Share to Telegram</a>
     </li>
     
 
     <!-- QRCode -->
     
     <li class="menu-item">
-        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAAAAAAYplnuAAACqElEQVR42u3dS07DQBBFUe9/0zBFKFXvvsZBinw9CVE+Po7odP0E19cHHpdo0aJFPxB9LcfPx3//PN3/fUueTxyiRTfol7/0w4nJ469OmB5LDtGiW/SrBTi94YaZTpwuDDlEi74BvS2caQOisG1hixb9LjTdFKYgZ8K+/dtD9OPRa6ACEoMNsX0Ib4nyRD8enRLb/7q9NRsX/Vh0LPoNBZepCEOShy1huKVqKvrR6JNgZoLSDWW68HRxokUTNDnZFORf4EjvQwIx0aJbNHpBUcihxfhU0Iw7omjRAE2amQl0d5FHtOgGnYIaEuhvF9I0PGPDVbRogE5DJakoWW0Oy/O3REC06AZNFk8apEobRHoN/UBEiyboEyQtjpPkmRR4RItu0GmhpESXDptsRfstwR6jPNGiQ464FbVToJOGsWjTqU5sRYsOC/EkeW2LkqRBWn17iBZ92NDfipOk8EigVbFGtOilANk06eni3Qo86Xxjo1+06AKNm+pgYGVrAtFGfpysES06oNuCYjtkRQZiYsFHtGiAbhYS2XBSUE82orHQL1o0RG/Nx1R4Ic36uigzLWLRogGanDAhSRJ7wUO06L+iSeBPh6jSkAkt2MfEVrToUPegm0gqPG5BP02a1w9MtGiI3lCnA1ip+dM8V7Tokz5iU5xJDZ2myZ82INGiWzQdHNwWWoNoGqWiRZ+gt5P9ZYglDavQQVvRok/QpMmZEs92E2mKOKJFt2iyUaSg/ySQogV20aIbNAHQBXuSWKQgKWbjokUvBchtoWxJAg3wSUAlWvRdaNp0Tw0kkjjQpBln46JFH/4h+Db4Pyn44IBJtOib/rlBi0qDK2QAS7ToE3QqrGwLkwTy5KK3ARXRohs0SWzJACwtmNMCp2jRJ+hPOkSLFi36QehvKsKLaUOWp88AAAAASUVORK5CYII=" alt="QRCode">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOQAAADkCAAAAACtPNdRAAAEKElEQVR42u3d22rcUBBE0fn/n3aeAiZounadiUEt73lJiG3pLIW0+gZ5ff2Cz0ukSJEiRYr8EPkaPt+//vf3lxf79udX3z9d999rXv3Z1b3TuUWK3IycDn518SvAdPOra797AOm69NwiRW5HXt1kOtR0s3dBi+LSdfG5RYp8IHIKIOSF/+5n0tdIwBMp8jcim8SABph04OlePxpdRYq8ETIVqeklPyGbAJIezI9UISJF3gzZBoe7/Ppfu3UiRd4EGYcm8KJTcp8a0TSpmALOR1MtkSJvhGybTuTw5OGkJDs1zqamlkiRT0CSYee7BCINYNOwlg5cU5KPqxCRIm+MnF7C7yDty326DnkIU0E9NqRFilyIpAsMbeOLLC3RRCQtVFSNLJEilyDJcIccJiUHpFk9FfAk8IkU+QRkU8ym7yeBIg1z0kA4Nd5EityKPHmRvzsQXeAljewpIOElQ5EiFyLTEsOnCXxaBiTN4lR0o+aySJGLkE1Dlxbb7eJTk/zThy5S5GZkGu6QRhJdNKIDoBRsUuIuUuRGJPmHTZZrydIEbRjThlZslIkUuRRJi9a0tEQWFlKB3g5wx78AkSIXIk8by1/hQxvQ073I0sYYMEWKXIhslgJTsJqSiKbgTk0qWkyLFPkEJFmCSI3i2GCCzS96HpzxiBS5AEmbQm1DmCYI7XIECYIiRW5GkiS4HcJORS2BTY1oMpgVKXI78pOhDHlQ7fUqyLRsKFLkUiQpTOnQlA5kSaF9VCiLFLkcSZZ2E6J9qTcLFTTwiBT5FCRJzE8WakkgGZcaXvw/XDjuoIsUeUMkXZ5Ni0xkGemkQE9F+DgIFilyIXL6h39687YIJ0sQZBAkUuQTkDTYtC/50ySbFtnTwxMpcjMyNZnJMtJ0iOlAdPBLE5FYhYgUuQA5vZDTMKhJJprGMinOUXIvUuQDkE0DigYKMjSiD7caQIkUuRCZlvII5nQIO73s6XDpaIFQpMgFyPRiJoGDfD8JVm2AevtzIkUuRJKhJnkZk8YYaUqTAJOSeZEiNyPTQWjy3S7ypuZWO+yJ3TqRIpcg6YBnOgBBtI2udD/08yJFLkSShi0d1tKAQJtVKaFPi0siRW5E0qBDG87Nwi8pnJvEfUwGRIpchEwDTrL0QBtPBJOKc7KoJFLkVmQTGNoBEQlmUzKRiua4nCFS5FIkGaKSQrdZLqID3SYwjs1lkSIXIpvBSptsk4HQdHDygPDmskiRN0aSBlaTiNOv04dHivOYDIgUuQxJhztkQHr64k8LvCcFtEiRm5FkIHoyFKX4lAwcXU+kyAciyTC1HdTSYrkdxB4HHpEilyHbwU5KJEgB/ulAVqTI7UiSCI9NI7BsRALTlPhPjefL+4kUuRRJBimkWCZFNkmwUwKf8CJFbkY++SNSpEiRIkUefv4A36d0wLYldXAAAAAASUVORK5CYII=" alt="QRCode">
     </li>
     
 
@@ -446,13 +446,14 @@
                         
                     
                     <article id="post-content">
-                        <p>驗證是不是可以 Docker 部署？</p>
-<p>成功的話，我就不用在新電腦上搞麻煩的 node 與 hexo 環境了。</p>
-<hr>
-<p><img src="/content/images/hexo_into_docker.png" alt=""></p>
-<p>這一條拖了一年多的 to do list，終於在今天完成了（淚～）</p>
-<p>但其實寫之前就想很久了，真要算下來都不只兩年了。</p>
-<p>原始碼：https://github.com/mosdeo/HexoContainer</p>
+                        <p>我來證明 Apple Silicon 現在也可以煉丹了！</p>
+<p>下圖是筆者在 Apple Silicon 上跑起了 OpenCV 4.5.3 與 TensorFlow 2.5.0。</p>
+<p><img src="content/images/install_opencv_and_tensorflow_for_python_on_applesilicon/run_in_terminal.png" alt=""></p>
+<p>在朋友推坑之下，筆者入手了 Apple Silicon (以下簡稱M1) MacBook。</p>
+<p>這兩天做完相容性驗證之後，準備把舊的 Intel MacBook 賣掉。</p>
+<p><img src="content/images/install_opencv_and_tensorflow_for_python_on_applesilicon/apple_trade_in_apply_done.png" alt=""></p>
+<p>相容性驗證有哪些項目？主要驗證我常用的 OpenCV、scikit、numpy、TensorFlow 等套件如何安裝？能不能正常跑？</p>
+<p>經過大量苦逼無聊的工作後，發現目前還是不能常規無痛安裝，必須以 workaround 的手段安裝。</p>
 
                     </article>
                     
@@ -477,18 +478,12 @@
 
 <p class="post-footer-info mb-0 pt-0">Published at&nbsp;<time datetime="2021-07-24T16:00:00.000Z" itemprop="datePublished">2021-07-25</time>
 
-    , Updated at&nbsp;<time datetime="2021-07-25T17:06:57.832Z" itemprop="dateModified">2021-07-26</time>
+    , Updated at&nbsp;<time datetime="2021-07-25T17:04:19.809Z" itemprop="dateModified">2021-07-26</time>
 
 </p>
 <p class="post-footer-info mb-0 pt-2">
 
 
-
-<span class="post-tags-list mt-2">
-
-<a class="post-tags-list-item" href="/tags/docker/" rel="tag">#&nbsp;docker</a>
-
-</span>
 
 
 </p>
@@ -498,13 +493,20 @@
 <ul class="pagination">
     <!-- Prev Nav -->
     
+        <li class="page-item page-prev">
+            <a href="/2021/07/24/Docker%E9%83%A8%E7%BD%B2%E6%B8%AC%E8%A9%A6%E7%94%A8%E6%96%87%E7%AB%A0/" rel="prev">
+                <div class="page-item-title"><i class="icon icon-back" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">Docker部署測試用文章</div>
+            </a>
+        </li>
+    
 
     <!-- Next Nav -->
     
         <li class="page-item page-next">
-            <a href="/2021/07/24/%E5%A6%82%E4%BD%95%E5%9C%A8Apple%20Silicon%E4%B8%8A%E5%AE%89%E8%A3%9DOpenCV%E8%88%87TensorFlow%E7%B5%A6Python%E7%94%A8%EF%BC%9F/" rel="next">
+            <a href="/2021/05/18/%E8%BF%91%E6%9C%9F%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E5%B7%A5%E4%BD%9C%E8%B8%A9%E5%88%B0%E7%9A%845%E5%80%8B%E5%9D%91/" rel="next">
                 <div class="page-item-title"><i class="icon icon-forward" aria-hidden="true"></i></div>
-                <div class="page-item-subtitle">如何在Apple Silicon上安裝OpenCV與TensorFlow給Python用？</div>
+                <div class="page-item-subtitle">近期機器學習工作踩到的5個坑</div>
             </a>
         </li>
     
@@ -518,8 +520,8 @@
                             <div id="disqus_thread"></div>
 <script>
     var disqus_config = function () {
-        this.page.url = 'https://mosdeo.github.io/2021/07/24/Docker%E9%83%A8%E7%BD%B2%E6%B8%AC%E8%A9%A6%E7%94%A8%E6%96%87%E7%AB%A0/'; // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = 'https://mosdeo.github.io/2021/07/24/Docker%E9%83%A8%E7%BD%B2%E6%B8%AC%E8%A9%A6%E7%94%A8%E6%96%87%E7%AB%A0/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.url = 'https://mosdeo.github.io/2021/07/24/%E5%A6%82%E4%BD%95%E5%9C%A8Apple%20Silicon%E4%B8%8A%E5%AE%89%E8%A3%9DOpenCV%E8%88%87TensorFlow%E7%B5%A6Python%E7%94%A8%EF%BC%9F/'; // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'https://mosdeo.github.io/2021/07/24/%E5%A6%82%E4%BD%95%E5%9C%A8Apple%20Silicon%E4%B8%8A%E5%AE%89%E8%A3%9DOpenCV%E8%88%87TensorFlow%E7%B5%A6Python%E7%94%A8%EF%BC%9F/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 </script>
 <script id="disqus-thread-script">
