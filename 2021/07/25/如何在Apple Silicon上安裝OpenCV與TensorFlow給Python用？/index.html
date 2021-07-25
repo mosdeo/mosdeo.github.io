@@ -157,7 +157,7 @@
     <link rel="alternate" type="application/atom+xml" href="/atom.xml"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="LKY 只有原創內容的 Blog"><meta name="msapplication-starturl" content="https://mosdeo.github.io"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="LKY 只有原創內容的 Blog"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
     <!-- ### The Open Graph & Twitter Card Protocol ### -->
-    <meta property="og:title" content="如何在 Apple Silicon 上安裝 OpenCV 4.5.3 與 TensorFlow 2.5 給 Python 用？ | LKY 只有原創內容的 Blog"><meta property="og:site_name" content="LKY 只有原創內容的 Blog"><meta property="og:type" content="article"><meta property="og:url" content="https://mosdeo.github.io/2021/07/25/%E5%A6%82%E4%BD%95%E5%9C%A8Apple%20Silicon%E4%B8%8A%E5%AE%89%E8%A3%9DOpenCV%E8%88%87TensorFlow%E7%B5%A6Python%E7%94%A8%EF%BC%9F/"><meta property="og:locale" content="zh-TW"><meta name="description" content="我來證明 Apple Silicon 現在也可以煉丹了！  下圖是筆者在 Apple Silicon 上跑起了 OpenCV 4.5.3 與 TensorFlow 2.5.0。  在朋友推坑之下，筆者入手了 Apple Silicon (以下簡稱M1) MacBook。 這兩天做完相容性驗證之後，準備把舊的 Intel MacBook 賣掉。  （好尷尬啊，台灣人沒有中國大陸身份證，不知道 Ap - Lin, Kao-Yuan - LKY 只有原創內容的 Blog"><meta name="keywords" content="數據分析, 機器學習, 資料科學, AI"><meta property="og:image" content="/content/images/install_opencv_and_tensorflow_for_python_on_applesilicon/m1_cut.png"><meta property="og:image" content="https://mosdeo.github.io/content/images/install_opencv_and_tensorflow_for_python_on_applesilicon/about_the_mac.png"><meta property="og:image" content="https://mosdeo.github.io/content/images/install_opencv_and_tensorflow_for_python_on_applesilicon/run_in_terminal.png"><meta property="og:image" content="https://mosdeo.github.io/content/images/install_opencv_and_tensorflow_for_python_on_applesilicon/apple_trade_in_apply_done.jpg"><meta property="og:image" content="https://mosdeo.github.io/content/images/install_opencv_and_tensorflow_for_python_on_applesilicon/conda_switch.png"><meta property="og:image" content="https://mosdeo.github.io/content/images/install_opencv_and_tensorflow_for_python_on_applesilicon/numpy_import_test.png"><meta property="og:image" content="https://mosdeo.github.io/content/images/install_opencv_and_tensorflow_for_python_on_applesilicon/make_j8.png"><meta property="article:published_time" content="2021-07-25T16:00:00.000Z"><meta property="article:modified_time" content="2021-07-25T19:30:13.727Z"><meta property="og:updated_time" content="2021-07-25T19:30:13.727Z"><meta property="article:author" content="Lin, Kao-Yuan"><meta property="article:tag" content="數據分析, 機器學習, 資料科學, AI"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="/content/images/install_opencv_and_tensorflow_for_python_on_applesilicon/m1_cut.png">
+    <meta property="og:title" content="如何在 Apple Silicon 上安裝 OpenCV 4.5.3 與 TensorFlow 2.5 給 Python 用？ | LKY 只有原創內容的 Blog"><meta property="og:site_name" content="LKY 只有原創內容的 Blog"><meta property="og:type" content="article"><meta property="og:url" content="https://mosdeo.github.io/2021/07/25/%E5%A6%82%E4%BD%95%E5%9C%A8Apple%20Silicon%E4%B8%8A%E5%AE%89%E8%A3%9DOpenCV%E8%88%87TensorFlow%E7%B5%A6Python%E7%94%A8%EF%BC%9F/"><meta property="og:locale" content="zh-TW"><meta name="description" content="我來證明 Apple Silicon 現在也可以煉丹了！  下圖是筆者在 Apple Silicon 上跑起了 OpenCV 4.5.3 與 TensorFlow 2.5.0。  在朋友推坑之下，筆者入手了 Apple Silicon (以下簡稱M1) MacBook。 這兩天做完相容性驗證之後，準備把舊的 Intel MacBook 賣掉。  （好尷尬啊，台灣人沒有中國大陸身份證，不知道 Ap - Lin, Kao-Yuan - LKY 只有原創內容的 Blog"><meta name="keywords" content="數據分析, 機器學習, 資料科學, AI"><meta property="og:image" content="/content/images/install_opencv_and_tensorflow_for_python_on_applesilicon/m1_cut.png"><meta property="og:image" content="https://mosdeo.github.io/content/images/install_opencv_and_tensorflow_for_python_on_applesilicon/about_the_mac.png"><meta property="og:image" content="https://mosdeo.github.io/content/images/install_opencv_and_tensorflow_for_python_on_applesilicon/run_in_terminal.png"><meta property="og:image" content="https://mosdeo.github.io/content/images/install_opencv_and_tensorflow_for_python_on_applesilicon/apple_trade_in_apply_done.jpg"><meta property="og:image" content="https://mosdeo.github.io/content/images/install_opencv_and_tensorflow_for_python_on_applesilicon/conda_switch.png"><meta property="og:image" content="https://mosdeo.github.io/content/images/install_opencv_and_tensorflow_for_python_on_applesilicon/numpy_import_test.png"><meta property="og:image" content="https://mosdeo.github.io/content/images/install_opencv_and_tensorflow_for_python_on_applesilicon/make_j8.png"><meta property="article:published_time" content="2021-07-25T16:00:00.000Z"><meta property="article:modified_time" content="2021-07-25T20:35:49.254Z"><meta property="og:updated_time" content="2021-07-25T20:35:49.254Z"><meta property="article:author" content="Lin, Kao-Yuan"><meta property="article:tag" content="數據分析, 機器學習, 資料科學, AI"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="/content/images/install_opencv_and_tensorflow_for_python_on_applesilicon/m1_cut.png">
 
     
 
@@ -207,7 +207,7 @@
     },
     
     "datePublished": "2021-07-25T16:00:00.000Z",
-    "dateModified": "2021-07-25T19:30:13.727Z",
+    "dateModified": "2021-07-25T20:35:49.254Z",
     "author": {
         "@type": "Person",
         "name": "Lin, Kao-Yuan",
@@ -261,66 +261,66 @@
 
     <nav class="navbar-section text-center">
     
-        <a href="/" class="navbar-link">Home</a>
+        <a href="/" class="navbar-link">首页</a>
     
     
-        <a href="/archives/" class="navbar-link">Archives</a>
+        <a href="/archives/" class="navbar-link">归档</a>
     
     
-        <a href="/search" class="navbar-link">Search</a>
+        <a href="/search" class="navbar-link">搜索</a>
     
     
     
         <div class="dropdown dropdown-right">
-    <a class="navbar-link dropdown-toggle" tabindex="0">Share</a>
+    <a class="navbar-link dropdown-toggle" tabindex="0">分享</a>
     <ul class="menu share-menu">
 
         <!-- Share Weibo -->
         
         <li class="menu-item">
-            <a href="http://service.weibo.com/share/share.php?appkey=&title=LKY 只有原創內容的 Blog&url=https://mosdeo.github.io&pic=/content/images/install_opencv_and_tensorflow_for_python_on_applesilicon/m1_cut.png&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">Share to Weibo</a>
+            <a href="http://service.weibo.com/share/share.php?appkey=&title=LKY 只有原創內容的 Blog&url=https://mosdeo.github.io&pic=/content/images/install_opencv_and_tensorflow_for_python_on_applesilicon/m1_cut.png&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">分享到微博</a>
         </li>
         
 
         <!-- Share Twitter -->
         
         <li class="menu-item">
-            <a href="https://twitter.com/intent/tweet?text=LKY 只有原創內容的 Blog&url=https://mosdeo.github.io&via=Lin, Kao-Yuan" target="_blank" rel="external noopener noreferrer nofollow">Share to Twitter</a>
+            <a href="https://twitter.com/intent/tweet?text=LKY 只有原創內容的 Blog&url=https://mosdeo.github.io&via=Lin, Kao-Yuan" target="_blank" rel="external noopener noreferrer nofollow">分享到 Twitter</a>
         </li>
         
 
         <!-- Share Facebook -->
         
         <li class="menu-item">
-            <a href="https://www.facebook.com/sharer/sharer.php?u=https://mosdeo.github.io" target="_blank" rel="external noopener noreferrer nofollow">Share to Facebook</a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://mosdeo.github.io" target="_blank" rel="external noopener noreferrer nofollow">分享到 Facebook</a>
         </li>
         
 
         <!-- Share Google+ -->
         
         <li class="menu-item">
-            <a href="https://plus.google.com/share?url=https://mosdeo.github.io" target="_blank" rel="external noopener noreferrer nofollow">Share to Google+</a>
+            <a href="https://plus.google.com/share?url=https://mosdeo.github.io" target="_blank" rel="external noopener noreferrer nofollow">分享到 Google+</a>
         </li>
         
 
         <!-- Share LinkedIn -->
         
         <li class="menu-item">
-            <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://mosdeo.github.io&title=如何在 Apple Silicon 上安裝 OpenCV 4.5.3 與 TensorFlow 2.5 給 Python 用？" target="_blank" rel="external noopener noreferrer nofollow">Share to LinkedIn</a>
+            <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://mosdeo.github.io&title=如何在 Apple Silicon 上安裝 OpenCV 4.5.3 與 TensorFlow 2.5 給 Python 用？" target="_blank" rel="external noopener noreferrer nofollow">分享到 LinkedIn</a>
         </li>
         
 
         <!-- Share QQ -->
         
         <li class="menu-item">
-            <a href="http://connect.qq.com/widget/shareqq/index.html?site=LKY 只有原創內容的 Blog&title=如何在 Apple Silicon 上安裝 OpenCV 4.5.3 與 TensorFlow 2.5 給 Python 用？&summary=&pics=/content/images/install_opencv_and_tensorflow_for_python_on_applesilicon/m1_cut.png&url=https://mosdeo.github.io" target="_blank" rel="external noopener noreferrer nofollow"> Share to QQ</a>
+            <a href="http://connect.qq.com/widget/shareqq/index.html?site=LKY 只有原創內容的 Blog&title=如何在 Apple Silicon 上安裝 OpenCV 4.5.3 與 TensorFlow 2.5 給 Python 用？&summary=&pics=/content/images/install_opencv_and_tensorflow_for_python_on_applesilicon/m1_cut.png&url=https://mosdeo.github.io" target="_blank" rel="external noopener noreferrer nofollow"> 分享到 QQ</a>
         </li>
         
 
         <!-- Share Telegram -->
         
         <li class="menu-item">
-            <a href="https://t.me/share/url?url=https://mosdeo.github.io&text=如何在 Apple Silicon 上安裝 OpenCV 4.5.3 與 TensorFlow 2.5 給 Python 用？" target="_blank" rel="external noopener noreferrer nofollow">Share to Telegram</a>
+            <a href="https://t.me/share/url?url=https://mosdeo.github.io&text=如何在 Apple Silicon 上安裝 OpenCV 4.5.3 與 TensorFlow 2.5 給 Python 用？" target="_blank" rel="external noopener noreferrer nofollow">分享到 Telegram</a>
         </li>
         
 
@@ -376,54 +376,54 @@
     <div class="post-header-info-right">
         
             <div class="dropdown dropdown-right">
-<a class="dropdown-toggle" tabindex="0">Share the post</a>
+<a class="dropdown-toggle" tabindex="0">分享本文</a>
 <ul class="menu share-menu">
     <!-- Share Weibo -->
     
     <li class="menu-item">
-        <a href="http://service.weibo.com/share/share.php?appkey=&title=如何在 Apple Silicon 上安裝 OpenCV 4.5.3 與 TensorFlow 2.5 給 Python 用？&url=https://mosdeo.github.io/2021/07/25/%E5%A6%82%E4%BD%95%E5%9C%A8Apple%20Silicon%E4%B8%8A%E5%AE%89%E8%A3%9DOpenCV%E8%88%87TensorFlow%E7%B5%A6Python%E7%94%A8%EF%BC%9F/&pic=/content/images/install_opencv_and_tensorflow_for_python_on_applesilicon/m1_cut.png&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">Share to Weibo</a>
+        <a href="http://service.weibo.com/share/share.php?appkey=&title=如何在 Apple Silicon 上安裝 OpenCV 4.5.3 與 TensorFlow 2.5 給 Python 用？&url=https://mosdeo.github.io/2021/07/25/%E5%A6%82%E4%BD%95%E5%9C%A8Apple%20Silicon%E4%B8%8A%E5%AE%89%E8%A3%9DOpenCV%E8%88%87TensorFlow%E7%B5%A6Python%E7%94%A8%EF%BC%9F/&pic=/content/images/install_opencv_and_tensorflow_for_python_on_applesilicon/m1_cut.png&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">分享到微博</a>
     </li>
     
 
     <!-- Share Twitter -->
     
     <li class="menu-item">
-        <a href="https://twitter.com/intent/tweet?text=如何在 Apple Silicon 上安裝 OpenCV 4.5.3 與 TensorFlow 2.5 給 Python 用？&url=https://mosdeo.github.io/2021/07/25/%E5%A6%82%E4%BD%95%E5%9C%A8Apple%20Silicon%E4%B8%8A%E5%AE%89%E8%A3%9DOpenCV%E8%88%87TensorFlow%E7%B5%A6Python%E7%94%A8%EF%BC%9F/&via=Lin, Kao-Yuan" target="_blank" rel="external noopener noreferrer nofollow">Share to Twitter</a>
+        <a href="https://twitter.com/intent/tweet?text=如何在 Apple Silicon 上安裝 OpenCV 4.5.3 與 TensorFlow 2.5 給 Python 用？&url=https://mosdeo.github.io/2021/07/25/%E5%A6%82%E4%BD%95%E5%9C%A8Apple%20Silicon%E4%B8%8A%E5%AE%89%E8%A3%9DOpenCV%E8%88%87TensorFlow%E7%B5%A6Python%E7%94%A8%EF%BC%9F/&via=Lin, Kao-Yuan" target="_blank" rel="external noopener noreferrer nofollow">分享到 Twitter</a>
     </li>
     
 
     <!-- Share Facebook -->
     
     <li class="menu-item">
-        <a href="https://www.facebook.com/sharer/sharer.php?u=https://mosdeo.github.io/2021/07/25/%E5%A6%82%E4%BD%95%E5%9C%A8Apple%20Silicon%E4%B8%8A%E5%AE%89%E8%A3%9DOpenCV%E8%88%87TensorFlow%E7%B5%A6Python%E7%94%A8%EF%BC%9F/" target="_blank" rel="external noopener noreferrer nofollow">Share to Facebook</a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://mosdeo.github.io/2021/07/25/%E5%A6%82%E4%BD%95%E5%9C%A8Apple%20Silicon%E4%B8%8A%E5%AE%89%E8%A3%9DOpenCV%E8%88%87TensorFlow%E7%B5%A6Python%E7%94%A8%EF%BC%9F/" target="_blank" rel="external noopener noreferrer nofollow">分享到 Facebook</a>
     </li>
     
 
     <!-- Share Google+ -->
     
     <li class="menu-item">
-        <a href="https://plus.google.com/share?url=https://mosdeo.github.io/2021/07/25/%E5%A6%82%E4%BD%95%E5%9C%A8Apple%20Silicon%E4%B8%8A%E5%AE%89%E8%A3%9DOpenCV%E8%88%87TensorFlow%E7%B5%A6Python%E7%94%A8%EF%BC%9F/" target="_blank" rel="external noopener noreferrer nofollow">Share to Google+</a>
+        <a href="https://plus.google.com/share?url=https://mosdeo.github.io/2021/07/25/%E5%A6%82%E4%BD%95%E5%9C%A8Apple%20Silicon%E4%B8%8A%E5%AE%89%E8%A3%9DOpenCV%E8%88%87TensorFlow%E7%B5%A6Python%E7%94%A8%EF%BC%9F/" target="_blank" rel="external noopener noreferrer nofollow">分享到 Google+</a>
     </li>
     
 
     <!-- Share LinkedIn -->
     
     <li class="menu-item">
-        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://mosdeo.github.io/2021/07/25/%E5%A6%82%E4%BD%95%E5%9C%A8Apple%20Silicon%E4%B8%8A%E5%AE%89%E8%A3%9DOpenCV%E8%88%87TensorFlow%E7%B5%A6Python%E7%94%A8%EF%BC%9F/&title=LKY 只有原創內容的 Blog" target="_blank" rel="external noopener noreferrer nofollow">Share to LinkedIn</a>
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://mosdeo.github.io/2021/07/25/%E5%A6%82%E4%BD%95%E5%9C%A8Apple%20Silicon%E4%B8%8A%E5%AE%89%E8%A3%9DOpenCV%E8%88%87TensorFlow%E7%B5%A6Python%E7%94%A8%EF%BC%9F/&title=LKY 只有原創內容的 Blog" target="_blank" rel="external noopener noreferrer nofollow">分享到 LinkedIn</a>
     </li>
     
 
     <!-- Share QQ -->
     
     <li class="menu-item">
-        <a href="http://connect.qq.com/widget/shareqq/index.html?site=LKY 只有原創內容的 Blog&title=LKY 只有原創內容的 Blog&summary=&pics=/content/images/install_opencv_and_tensorflow_for_python_on_applesilicon/m1_cut.png&url=https://mosdeo.github.io/2021/07/25/%E5%A6%82%E4%BD%95%E5%9C%A8Apple%20Silicon%E4%B8%8A%E5%AE%89%E8%A3%9DOpenCV%E8%88%87TensorFlow%E7%B5%A6Python%E7%94%A8%EF%BC%9F/" target="_blank" rel="external noopener noreferrer nofollow"> Share to QQ</a>
+        <a href="http://connect.qq.com/widget/shareqq/index.html?site=LKY 只有原創內容的 Blog&title=LKY 只有原創內容的 Blog&summary=&pics=/content/images/install_opencv_and_tensorflow_for_python_on_applesilicon/m1_cut.png&url=https://mosdeo.github.io/2021/07/25/%E5%A6%82%E4%BD%95%E5%9C%A8Apple%20Silicon%E4%B8%8A%E5%AE%89%E8%A3%9DOpenCV%E8%88%87TensorFlow%E7%B5%A6Python%E7%94%A8%EF%BC%9F/" target="_blank" rel="external noopener noreferrer nofollow"> 分享到 QQ</a>
     </li>
     
 
     <!-- Share Telegram -->
     
     <li class="menu-item">
-        <a href="https://t.me/share/url?url=https://mosdeo.github.io/2021/07/25/%E5%A6%82%E4%BD%95%E5%9C%A8Apple%20Silicon%E4%B8%8A%E5%AE%89%E8%A3%9DOpenCV%E8%88%87TensorFlow%E7%B5%A6Python%E7%94%A8%EF%BC%9F/&text=LKY 只有原創內容的 Blog" target="_blank" rel="external noopener noreferrer nofollow">Share to Telegram</a>
+        <a href="https://t.me/share/url?url=https://mosdeo.github.io/2021/07/25/%E5%A6%82%E4%BD%95%E5%9C%A8Apple%20Silicon%E4%B8%8A%E5%AE%89%E8%A3%9DOpenCV%E8%88%87TensorFlow%E7%B5%A6Python%E7%94%A8%EF%BC%9F/&text=LKY 只有原創內容的 Blog" target="_blank" rel="external noopener noreferrer nofollow">分享到 Telegram</a>
     </li>
     
 
@@ -534,7 +534,7 @@
 <li>TensorFlow 2.5.0</li>
 </ul>
 <p>另外這些常用的 package 都這樣安裝：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">conda install matplotlib</span><br><span class="line">conda install scikit-image</span><br><span class="line">conda install scikit-learn</span><br><span class="line">conda install scikit-learn</span><br><span class="line">conda install pandas</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">conda install matplotlib</span><br><span class="line">conda install scikit-image</span><br><span class="line">conda install scikit-learn</span><br><span class="line">conda install pandas</span><br></pre></td></tr></table></figure>
 <p>以後使用之前，都必須要先 <code>conda activate</code> 進入虛擬環境，這是目前還有一點不完美的地方。</p>
 <h2 id="參考資料">參考資料</h2>
 <ul>
@@ -546,7 +546,7 @@
                     
 
 
-    <blockquote id="date-expire-notification" class="post-expired-notify">This article was last updated on <span id="date-expire-num"></span> days ago, and the information described in the article may have changed.</blockquote>
+    <blockquote id="date-expire-notification" class="post-expired-notify">本文最后更新于 <span id="date-expire-num"></span> 天前，文中所描述的信息可能已发生改变</blockquote>
     <script>
     (function() {
         var dateUpdate = Date.parse("2021-07-26");
@@ -563,7 +563,7 @@
     </script>
 
 
-<p class="post-footer-info mb-0 pt-0">Published at&nbsp;<time datetime="2021-07-25T16:00:00.000Z" itemprop="datePublished">2021-07-26</time>
+<p class="post-footer-info mb-0 pt-0">本文发表于&nbsp;<time datetime="2021-07-25T16:00:00.000Z" itemprop="datePublished">2021-07-26</time>
 
 </p>
 <p class="post-footer-info mb-0 pt-2">
