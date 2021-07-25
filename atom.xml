@@ -6,7 +6,7 @@
   <link href="https://mosdeo.github.io/atom.xml" rel="self"/>
   
   <link href="https://mosdeo.github.io/"/>
-  <updated>2021-07-25T17:06:57.832Z</updated>
+  <updated>2021-07-25T19:30:13.727Z</updated>
   <id>https://mosdeo.github.io/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>如何在 Apple Silicon 上安裝 OpenCV 4.5.3 與 TensorFlow 2.5 給 Python 用？</title>
+    <link href="https://mosdeo.github.io/2021/07/25/%E5%A6%82%E4%BD%95%E5%9C%A8Apple%20Silicon%E4%B8%8A%E5%AE%89%E8%A3%9DOpenCV%E8%88%87TensorFlow%E7%B5%A6Python%E7%94%A8%EF%BC%9F/"/>
+    <id>https://mosdeo.github.io/2021/07/25/%E5%A6%82%E4%BD%95%E5%9C%A8Apple%20Silicon%E4%B8%8A%E5%AE%89%E8%A3%9DOpenCV%E8%88%87TensorFlow%E7%B5%A6Python%E7%94%A8%EF%BC%9F/</id>
+    <published>2021-07-25T16:00:00.000Z</published>
+    <updated>2021-07-25T19:30:13.727Z</updated>
+    
+    <content type="html"><![CDATA[<p>我來證明 Apple Silicon 現在也可以煉丹了！</p><p><img src="/content/images/install_opencv_and_tensorflow_for_python_on_applesilicon/about_the_mac.png" alt=""></p><p>下圖是筆者在 Apple Silicon 上跑起了 OpenCV 4.5.3 與 TensorFlow 2.5.0。</p><p><img src="/content/images/install_opencv_and_tensorflow_for_python_on_applesilicon/run_in_terminal.png" alt=""></p><p>在朋友推坑之下，筆者入手了 Apple Silicon (以下簡稱M1) MacBook。</p><p>這兩天做完相容性驗證之後，準備把舊的 Intel MacBook 賣掉。</p><p><img src="/content/images/install_opencv_and_tensorflow_for_python_on_applesilicon/apple_trade_in_apply_done.jpg" alt=""></p><p>（好尷尬啊，台灣人沒有中國大陸身份證，不知道 Apple 會怎麼處理？）</p><hr><p>相容性驗證有哪些項目？主要驗證我常用的 OpenCV、scikit、numpy、TensorFlow 等套件如何安裝？能不能正常跑？</p><p>經過大量苦逼無聊的工作後，發現目前還是不能常規無痛安裝，必須以 workaround 的手段安裝。</p><h2 id="坑有哪些？">坑有哪些？</h2><ul><li>目前網上充斥各種過時、有錯誤的野生安裝方法。</li><li>就算最多人參考的<a href="https://sayak.dev/install-opencv-m1/">國外大神帖子</a>，也有過時或出錯的地方，造成安裝完全失敗。</li></ul><p>經過我徹夜摸索後，修正國外大神帖子中部分問題，終於跑通一套可以正確安裝 OpenCV 當下最新版（4.5.3）與 TensorFlow 2.5.0（僅限 Apple 分支） 的流程。</p><p>以從頭乾淨安裝來說，目前各種 Python 的數據科學 package 幾乎只能走 conda 安裝，疑似還是要依賴 Rostta2？這部分我就不懂，有請熟悉編譯器或虛擬機器的大神補充。</p><h2 id="Step-0-安裝-Xcode-與-brew">Step 0: 安裝 Xcode 與 brew</h2><p>這步驟我覺得對 macOS 上的開發者來說是必備且熟練了，所以懶得寫。</p><p>記得 brew 要安裝 Apple Silicon 用的版本。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ which brew</span><br><span class="line">&#x2F;opt&#x2F;homebrew&#x2F;bin&#x2F;brew</span><br></pre></td></tr></table></figure><p>Apple Silicon 用的 brew 版本，路徑是 opt 開頭的。</p><h2 id="Step-1-安裝-Conda">Step 1: 安裝 Conda</h2><p>這個連結，下載並執行：</p><p><a href="https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-arm64.sh">https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-arm64.sh</a></p><p>這裡就會包含有針對 Apple Silicon 最佳化的 Python 3.9，也一併安裝。</p><hr><p>我沒有要做環境隔離，所以直接 <code>conda activate</code> 進入到名為 base 的 conda env。</p><p>你嘗試下圖的指令，看是不是跟我一樣？</p><p><img src="/content/images/install_opencv_and_tensorflow_for_python_on_applesilicon/conda_switch.png" alt=""></p><p>這代表成功切換虛擬環境，並用上 Python 3.9</p><h2 id="Step-2-安裝-Numpy（in-tensorflow-deps）">Step 2: 安裝 Numpy（in tensorflow-deps）</h2><h3 id="小心有坑！">小心有坑！</h3><p>按照國外大神提供的步驟，在這一步就出錯，走不下去，原因是內容有些過時了。</p><p>你照做就會看到以下的錯誤：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ (base) ➜ pip install --upgrade --no-dependencies --force numpy-1.18.5-cp38-cp38-macosx_11_0_arm64.whl</span><br><span class="line"></span><br><span class="line">ERROR: numpy-1.18.5-cp38-cp38-macosx_11_0_arm64.whl is not a supported wheel on this platform.</span><br></pre></td></tr></table></figure><p>原因：這個 numpy 包的「cp38」代表是給 Python 3.8，版本號多或少一點都不行！可是最多也只出到 3.8，但指定的 conda 環境已經變成 Python 3.9，而且為了 M1 優化也是從 Python 3.9 開始，所以這邊就衝突了。那這個坑怎麼辦呢？</p><h3 id="我已出坑">我已出坑</h3><p>不論只安裝 OpenCV 與 TensorFlow 其中哪一個，這一步都是必要的前置步驟。</p><p>這邊直接安裝 Apple 官方提供的 tensorflow-deps，會聯同 numpy 一起搞定。上面單獨安裝一個 .whl 的步驟就不用了。</p><p><code>conda install -c apple tensorflow-deps</code></p><p>安裝完以後測試看看，有 numpy 版本號出現就是可以了。</p><p><code>python -c &quot;import numpy as np;print(np.__version__)&quot;</code></p><p><img src="/content/images/install_opencv_and_tensorflow_for_python_on_applesilicon/numpy_import_test.png" alt=""></p><h2 id="Step-3-編譯-OpenCV">Step 3: 編譯 OpenCV</h2><p>通常說到編譯，就會想到等很久。還好我們用的是 Apple Silicon，所以這次很快，我記得開始編譯之後就去洗澡，洗完出來剛好完成。</p><p>在家目錄下載 OpenCV 與他的延伸套件、解壓縮、進入編譯資料夾。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cd ~</span><br><span class="line">wget -O opencv.zip https:&#x2F;&#x2F;github.com&#x2F;opencv&#x2F;opencv&#x2F;archive&#x2F;4.5.3.zip</span><br><span class="line">wget -O opencv_contrib.zip https:&#x2F;&#x2F;github.com&#x2F;opencv&#x2F;opencv_contrib&#x2F;archive&#x2F;4.5.3.zip</span><br><span class="line">unzip opencv.zip</span><br><span class="line">unzip opencv_contrib.zip</span><br><span class="line">cd opencv-4.5.3</span><br><span class="line">mkdir build &amp;&amp; cd build</span><br></pre></td></tr></table></figure><p>然後 cmake</p><h3 id="小心有坑！-v2">小心有坑！</h3><p>外國大神提供的指令這邊有錯，照做會得到這個錯誤。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Make Error: The source directory &quot;&#x2F;Users&#x2F;lky&#x2F;opencv-4.5.3&#x2F;_&quot; does not exist.</span><br><span class="line">Specify --help for usage, or press the help button on the CMake GUI.</span><br></pre></td></tr></table></figure><h3 id="我已出坑-v2">我已出坑</h3><p>我撞牆多次後，已經為大家修正。</p><p>首先在 conda 環境下輸入 <code>which python</code>，得到以下結果：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(base) ➜  ~ which python</span><br><span class="line">&#x2F;Users&#x2F;lky&#x2F;miniforge3&#x2F;bin&#x2F;python</span><br></pre></td></tr></table></figure><p>然後把輸出的路徑放到以下 cmake 指令中，PYTHON3_EXECUTABLE 後面那串</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">cmake \</span><br><span class="line">  -DCMAKE_SYSTEM_PROCESSOR&#x3D;arm64 \</span><br><span class="line">  -DCMAKE_OSX_ARCHITECTURES&#x3D;arm64 \</span><br><span class="line">  -DWITH_OPENJPEG&#x3D;OFF \</span><br><span class="line">  -DWITH_IPP&#x3D;OFF \</span><br><span class="line">  -D CMAKE_BUILD_TYPE&#x3D;RELEASE \</span><br><span class="line">  -D CMAKE_INSTALL_PREFIX&#x3D;&#x2F;usr&#x2F;local \</span><br><span class="line">  -D OPENCV_EXTRA_MODULES_PATH&#x3D;~&#x2F;opencv_contrib-4.5.3&#x2F;modules \</span><br><span class="line">  -D PYTHON3_EXECUTABLE&#x3D;&lt;替換成 which python 給你的輸出&gt; \</span><br><span class="line">  -D BUILD_opencv_python2&#x3D;OFF \</span><br><span class="line">  -D BUILD_opencv_python3&#x3D;ON \</span><br><span class="line">  -D INSTALL_PYTHON_EXAMPLES&#x3D;ON \</span><br><span class="line">  -D INSTALL_C_EXAMPLES&#x3D;OFF \</span><br><span class="line">  -D OPENCV_ENABLE_NONFREE&#x3D;ON \</span><br><span class="line">  -D BUILD_EXAMPLES&#x3D;ON ..&#x2F;</span><br></pre></td></tr></table></figure><p>接著輸入 <code>make -j8</code>，這就是編譯的步驟。</p><p>j8 就是用八個核心，目前能買到的 Apple Silicon 都是八個核心，所以也沒有改多的空間了。</p><p>給大家看看我編譯的過程：</p><p><img src="/content/images/install_opencv_and_tensorflow_for_python_on_applesilicon/make_j8.png" alt=""></p><p>編譯完成後，執行 <code>sudo make install</code>，這一步就算完成了。</p><h2 id="Step-4-連結-OpenCV">Step 4: 連結 OpenCV</h2><p>將 macOS 上的 OpenCV 4 符號鏈接到虛擬環境 site-packages</p><p>輸入 <code>mdfind cv2.cpython</code> 應該能看到這兩行以「.so」結尾的路徑，其他的路徑不管他</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(base) ➜  ~ mdfind cv2.cpython</span><br><span class="line">&#x2F;Users&#x2F;lky&#x2F;opencv-4.5.3&#x2F;build&#x2F;lib&#x2F;python3&#x2F;cv2.cpython-39-darwin.so</span><br><span class="line">&#x2F;usr&#x2F;local&#x2F;lib&#x2F;python3.9&#x2F;site-packages&#x2F;cv2&#x2F;python-3.9&#x2F;cv2.cpython-39-darwin.so</span><br><span class="line">...(其他的路徑不管他)...</span><br></pre></td></tr></table></figure><p>我們要在虛擬環境的 site-packages 中產生一個假的「cv2.so」，實際上是連結到剛才編譯出來的那個「cv2.cpython-39-darwin.so」</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd &#x2F;Users&#x2F;&lt;你的使用者名稱&gt;&#x2F;miniforge3&#x2F;lib&#x2F;python3.9&#x2F;site-packages</span><br><span class="line">ln -s &#x2F;usr&#x2F;local&#x2F;lib&#x2F;python3.9&#x2F;site-packages&#x2F;cv2&#x2F;python-3.9&#x2F;cv2.cpython-39-darwin.so cv2.so </span><br><span class="line"></span><br></pre></td></tr></table></figure><p>這一步做完，OpenCV 應該就安裝到 Python 能用了。來測試一下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda activate</span><br><span class="line">python -c &quot;import cv2 as cv;print(cv.__version__)&quot;</span><br></pre></td></tr></table></figure><p>結果應該要出現「4.5.3」。</p><h2 id="Step-5-安裝-TensorFlow">Step 5: 安裝 TensorFlow</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda activate</span><br><span class="line">python -m pip install tensorflow-macos</span><br></pre></td></tr></table></figure><p>這一步做完，TensorFlow 應該就安裝到 Python 能用了。來測試一下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda activate</span><br><span class="line">python -c &quot;import tensorflow as tf;print(tf.__version__);print(tf.reduce_sum(tf.random.normal([1000, 1000])))&quot;</span><br></pre></td></tr></table></figure><p>結果應該要出現「2.5.0」還有以下隨機內容的 Tensor：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tf.Tensor(-48.841095, shape&#x3D;(), dtype&#x3D;float32)</span><br></pre></td></tr></table></figure><p>到這裡，以下這些套件就安裝完成：</p><ul><li>針對 Apple Silicon 最佳化的 Python 3.9</li><li>OpenCV 4.5.3</li><li>TensorFlow 2.5.0</li></ul><p>另外這些常用的 package 都這樣安裝：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">conda install matplotlib</span><br><span class="line">conda install scikit-image</span><br><span class="line">conda install scikit-learn</span><br><span class="line">conda install scikit-learn</span><br><span class="line">conda install pandas</span><br></pre></td></tr></table></figure><p>以後使用之前，都必須要先 <code>conda activate</code> 進入虛擬環境，這是目前還有一點不完美的地方。</p><h2 id="參考資料">參考資料</h2><ul><li>國外大神 <a href="https://sayak.dev/install-opencv-m1/">https://sayak.dev/install-opencv-m1/</a></li><li>Apple 官方的 TensorFlow 插件 <a href="https://developer.apple.com/metal/tensorflow-plugin/">https://developer.apple.com/metal/tensorflow-plugin/</a></li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;我來證明 Apple Silicon 現在也可以煉丹了！&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/content/images/install_opencv_and_tensorflow_for_python_on_applesilicon/about_the_mac.png&quot;</summary>
+      
+    
+    
+    
+    
+    <category term="數據分析" scheme="https://mosdeo.github.io/tags/%E6%95%B8%E6%93%9A%E5%88%86%E6%9E%90/"/>
+    
+    <category term="機器學習" scheme="https://mosdeo.github.io/tags/%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92/"/>
+    
+    <category term="資料科學" scheme="https://mosdeo.github.io/tags/%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8/"/>
+    
+    <category term="AI" scheme="https://mosdeo.github.io/tags/AI/"/>
+    
+  </entry>
   
   <entry>
     <title>Docker部署測試用文章</title>
@@ -39,28 +68,6 @@
     
     
     <category term="docker" scheme="https://mosdeo.github.io/tags/docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>如何在Apple Silicon上安裝OpenCV與TensorFlow給Python用？</title>
-    <link href="https://mosdeo.github.io/2021/07/24/%E5%A6%82%E4%BD%95%E5%9C%A8Apple%20Silicon%E4%B8%8A%E5%AE%89%E8%A3%9DOpenCV%E8%88%87TensorFlow%E7%B5%A6Python%E7%94%A8%EF%BC%9F/"/>
-    <id>https://mosdeo.github.io/2021/07/24/%E5%A6%82%E4%BD%95%E5%9C%A8Apple%20Silicon%E4%B8%8A%E5%AE%89%E8%A3%9DOpenCV%E8%88%87TensorFlow%E7%B5%A6Python%E7%94%A8%EF%BC%9F/</id>
-    <published>2021-07-24T16:00:00.000Z</published>
-    <updated>2021-07-25T17:04:19.809Z</updated>
-    
-    <content type="html"><![CDATA[<p>我來證明 Apple Silicon 現在也可以煉丹了！</p><p>下圖是筆者在 Apple Silicon 上跑起了 OpenCV 4.5.3 與 TensorFlow 2.5.0。</p><p><img src="content/images/install_opencv_and_tensorflow_for_python_on_applesilicon/run_in_terminal.png" alt=""></p><p>在朋友推坑之下，筆者入手了 Apple Silicon (以下簡稱M1) MacBook。</p><p>這兩天做完相容性驗證之後，準備把舊的 Intel MacBook 賣掉。</p><p><img src="content/images/install_opencv_and_tensorflow_for_python_on_applesilicon/apple_trade_in_apply_done.png" alt=""></p><p>相容性驗證有哪些項目？主要驗證我常用的 OpenCV、scikit、numpy、TensorFlow 等套件如何安裝？能不能正常跑？</p><p>經過大量苦逼無聊的工作後，發現目前還是不能常規無痛安裝，必須以 workaround 的手段安裝。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;我來證明 Apple Silicon 現在也可以煉丹了！&lt;/p&gt;
-&lt;p&gt;下圖是筆者在 Apple Silicon 上跑起了 OpenCV 4.5.3 與 TensorFlow 2.5.0。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;content/images/install_op</summary>
-      
-    
-    
-    
     
   </entry>
   
@@ -145,9 +152,9 @@
     
     <category term="資料科學" scheme="https://mosdeo.github.io/tags/%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8/"/>
     
-    <category term="批判" scheme="https://mosdeo.github.io/tags/%E6%89%B9%E5%88%A4/"/>
-    
     <category term="靠盃" scheme="https://mosdeo.github.io/tags/%E9%9D%A0%E7%9B%83/"/>
+    
+    <category term="批判" scheme="https://mosdeo.github.io/tags/%E6%89%B9%E5%88%A4/"/>
     
     <category term="技術" scheme="https://mosdeo.github.io/tags/%E6%8A%80%E8%A1%93/"/>
     
