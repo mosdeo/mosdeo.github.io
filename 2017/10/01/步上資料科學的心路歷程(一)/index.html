@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+
+<html lang="zh-TW">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        hexo-theme-suka © SukkaW
+        GitHub: https://github.com/SukkaW/hexo-theme-suka
+    -->
+
+    <!-- ### Resource Hint ### -->
+
+    <!-- ## DNS Prefetch ## -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+<!-- busuanzi -->
+
+    <link rel="dns-prefetch" href="//busuanzi.ibruce.info">
+
+
+<!-- comment -->
+
+
+    <link rel="dns-prefetch" href="//disqus.com">
+    <link rel="dns-prefetch" href="//mosdeo-github-io.disqus.com">
+
+
+
+
+
+
+<!-- analytics -->
+
+
+    <link rel="dns-prefetch" href="//www.google-analytics.com">
+
+
+
+
+
+
+    <!-- ## Preload ## -->
+    
+    <!-- Busuanzi -->
+    
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.js" as="script">
+
+
+
+
+
+
+
+    <!-- ### Meta & Title & Info ### -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <meta name="renderer" content="webkit">
+
+    <!-- Title -->
+    <title>步上資料科學的心路歷程(一)：動機與緣起 | LKY 只有原創內容的 Blog</title>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image&#x2F;ico" href="/img/suka-favicon.ico">
+
+    <!-- ### Import File ### -->
+    <link rel="stylesheet" href="/lib/spectre/spectre.min.css"><style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    a, a:visited {
+        color: #0070ff;
+    }
+
+    a:active, a:focus, a:hover {
+        color: #0070ff;
+        opacity: .75;
+    }
+
+    #post-content a,
+    #post-content a:hover,
+    #post-content a:focus,
+    #post-content a:visited {
+        color: #005eb9;
+        opacity: 1;
+    }
+
+    
+
+    .post-entry .card-body a {
+        color: #0070ff;
+    }
+
+    .avatar {
+        background: #444;
+    }
+
+    .navbar-link,
+    .navbar-link:visited,
+    .timeline .timeline-item .timeline-icon.icon-lg {
+        color: #0070ff;
+    }
+
+    .navbar-link:hover {
+        color: #0070ff;
+        opacity: .8;
+    }
+
+    #search-input .btn,
+    #disqus_click_btn,
+    #disqus-switch-to-direct,
+    #disqus-loadmore-button {
+        background: #727e96;
+        border-color: #727e96;
+        color: #fff;
+    }
+
+    #post-toc a.post-toc-link,
+    #post-toc a.post-toc-link:visited,
+    .share-menu.menu .menu-item>a {
+        color: #727e96;
+    }
+
+    .share-menu.menu .menu-item>a:hover,
+    .share-menu.menu .menu-item>a:focus,
+    .share-menu.menu .menu-item>a:visited {
+        color: #50596c;
+        background: #f8f9fa;
+        opacity: .85;
+    }
+</style><link rel="stylesheet" href="/css/style.min.css">
+
+
+
+
+
+
+
+
+    <!-- Prettify Theme -->
+    
+    <link rel="preload" href="/css/highlight/github.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/css/highlight/github.min.css"></noscript>
+
+
+
+
+
+<script>
+/*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+!function(t){"use strict";t.loadCSS||(t.loadCSS=function(){});var e=loadCSS.relpreload={};if(e.support=function(){var e;try{e=t.document.createElement("link").relList.supports("preload")}catch(t){e=!1}return function(){return e}}(),e.bindMediaToggle=function(t){var e=t.media||"all";function a(){t.addEventListener?t.removeEventListener("load",a):t.attachEvent&&t.detachEvent("onload",a),t.setAttribute("onload",null),t.media=e}t.addEventListener?t.addEventListener("load",a):t.attachEvent&&t.attachEvent("onload",a),setTimeout(function(){t.rel="stylesheet",t.media="only x"}),setTimeout(a,3e3)},e.poly=function(){if(!e.support())for(var a=t.document.getElementsByTagName("link"),n=0;n<a.length;n++){var o=a[n];"preload"!==o.rel||"style"!==o.getAttribute("as")||o.getAttribute("data-loadcss")||(o.setAttribute("data-loadcss",!0),e.bindMediaToggle(o))}},!e.support()){e.poly();var a=t.setInterval(e.poly,500);t.addEventListener?t.addEventListener("load",function(){e.poly(),t.clearInterval(a)}):t.attachEvent&&t.attachEvent("onload",function(){e.poly(),t.clearInterval(a)})}"undefined"!=typeof exports?exports.loadCSS=loadCSS:t.loadCSS=loadCSS}("undefined"!=typeof global?global:this);
+</script>
+
+    <!-- ### Site Verification ### -->
+    
+
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="LKY 只有原創內容的 Blog"><meta name="msapplication-starturl" content="https://mosdeo.github.io"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="LKY 只有原創內容的 Blog"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- ### The Open Graph & Twitter Card Protocol ### -->
+    <meta property="og:title" content="步上資料科學的心路歷程(一)：動機與緣起 | LKY 只有原創內容的 Blog"><meta property="og:site_name" content="LKY 只有原創內容的 Blog"><meta property="og:type" content="article"><meta property="og:url" content="https://mosdeo.github.io/2017/10/01/%E6%AD%A5%E4%B8%8A%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8%E7%9A%84%E5%BF%83%E8%B7%AF%E6%AD%B7%E7%A8%8B(%E4%B8%80)/"><meta property="og:locale" content="zh-TW"><meta name="description" content="最近幾年資料科學正夯，你是為了什麼才進入這個領域？是跟風趕流行？還是為了其他目的？ 因為最近有網友問到我學機器學習的歷程，也剛好和同事討論到，所以我決定把這幾年的心路歷程好好寫下來。  2011 上半年 這一年我修了大學部「機械視覺」，因為我覺得能讓電腦會「看」東西很屌，這是我入門影像處理的課。要用 VB6，不依賴任何函式庫，以 pixel by pixel 的方式學習二值化、灰階化、色彩空間換算 - Lin, Kao-Yuan - LKY 只有原創內容的 Blog"><meta name="keywords" content="學生時期, 數據分析, 機器學習, 資料科學, AI"><meta property="og:image" content="/content/images/myway_DataSci/Pain63.JPG"><meta property="og:image" content="https://mosdeo.github.io/content/images/myway_DataSci/%E4%BB%A5%E6%96%B0%E5%9E%8B%E5%8B%95%E6%85%8B%E8%BC%AA%E5%BB%93%E6%8A%80%E8%A1%93%E5%AE%8C%E6%88%90%E5%8F%AF%E8%BF%BD%E8%B9%A4%E4%BB%BB%E6%84%8F%E5%BD%A2%E7%8B%80%E7%89%A9%E9%AB%94%E4%B9%8B%E5%BC%B7%E5%81%A5%E5%BD%B1%E5%83%8F%E4%BC%BA%E6%9C%8D%E7%B3%BB%E7%B5%B1p85%E5%B1%80%E9%83%A8%E6%88%AA%E5%9C%96.png"><meta property="og:image" content="https://mosdeo.github.io/content/images/myway_DataSci/%E4%BB%A3%E8%A1%A8%E6%80%A7%E7%85%A7%E7%89%873.jpg"><meta property="og:image" content="https://mosdeo.github.io/content/images/fly.JPG"><meta property="og:image" content="https://mosdeo.github.io/content/images/myway_DataSci/%E9%90%98%E5%9C%8B%E4%BA%AE-%E5%BD%B1%E5%83%8F%E8%99%95%E7%90%86%E8%88%87%E9%9B%BB%E8%85%A6%E8%A6%96%E8%A6%BA.jpg"><meta property="og:image" content="https://mosdeo.github.io/content/images/myway_DataSci/Pain63.JPG"><meta property="article:published_time" content="2017-10-01T16:00:00.000Z"><meta property="article:modified_time" content="2019-09-23T02:08:50.348Z"><meta property="og:updated_time" content="2019-09-23T02:08:50.348Z"><meta property="article:author" content="Lin, Kao-Yuan"><meta property="article:tag" content="學生時期, 數據分析, 機器學習, 資料科學, AI"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="/content/images/myway_DataSci/Pain63.JPG">
+
+    
+
+    <!-- ### Canonical link ### -->
+    <link rel="canonical" href="https://mosdeo.github.io/2017/10/01/%E6%AD%A5%E4%B8%8A%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8%E7%9A%84%E5%BF%83%E8%B7%AF%E6%AD%B7%E7%A8%8B(%E4%B8%80)/">
+
+    <meta name="generator" content="Hexo 5.2.0">
+
+    <!-- ### Analytics ### -->
+    
+    <!-- Google Analytics -->
+<script>
+    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+    ga('create', 'UA-64570213-2', 'auto');
+    ga('send', 'pageview');
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+
+
+
+
+
+
+
+
+
+    <!-- ### Structured Data ### -->
+    
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "url": "https://mosdeo.github.io/2017/10/01/%E6%AD%A5%E4%B8%8A%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8%E7%9A%84%E5%BF%83%E8%B7%AF%E6%AD%B7%E7%A8%8B(%E4%B8%80)/",
+    "@type": "BlogPosting",
+    "logo": "https://mosdeo.github.io/img/suka-favicon.ico",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://mosdeo.github.io/2017/10/01/%E6%AD%A5%E4%B8%8A%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8%E7%9A%84%E5%BF%83%E8%B7%AF%E6%AD%B7%E7%A8%8B(%E4%B8%80)/"
+    },
+    "headline": "步上資料科學的心路歷程(一)：動機與緣起 | LKY 只有原創內容的 Blog",
+    
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://mosdeo.github.io/content/images/myway_DataSci/Pain63.JPG"
+    },
+    
+    "datePublished": "2017-10-01T16:00:00.000Z",
+    "dateModified": "2019-09-23T02:08:50.348Z",
+    "author": {
+        "@type": "Person",
+        "name": "Lin, Kao-Yuan",
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://mosdeo.github.io/img/default_avatar.png"
+        },
+        "description": "今之能者，謂能轉貼，至於魯蛇，皆能轉貼。不原創，何以別乎？"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "LKY 只有原創內容的 Blog",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://mosdeo.github.io/img/suka-favicon.ico"
+        }
+    },
+    
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://mosdeo.github.io/search?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+    },
+    
+    "keywords": "學生時期, 數據分析, 機器學習, 資料科學, AI",
+    "description": "最近幾年資料科學正夯，你是為了什麼才進入這個領域？是跟風趕流行？還是為了其他目的？ 因為最近有網友問到我學機器學習的歷程，也剛好和同事討論到，所以我決定把這幾年的心路歷程好好寫下來。  2011 上半年 這一年我修了大學部「機械視覺」，因為我覺得能讓電腦會「看」東西很屌，這是我入門影像處理的課。要用 VB6，不依賴任何函式庫，以 pixel by pixel 的方式學習二值化、灰階化、色彩空間換算 - Lin, Kao-Yuan - LKY 只有原創內容的 Blog"
+}
+</script>
+
+
+
+    <!-- ### Custom Head ### -->
+    
+</head>
+
+    <body>
+            
+
+            <!-- ### Main content ### -->
+            <!-- ## Header ##-->
+<header>
+    <h1 class="header-title text-center"><a href="/">LKY 只有原創內容的 Blog</a></h1>
+
+    <p class="text-center header-slogan">
+        
+            
+                今之能者，謂能轉貼，至於魯蛇，皆能轉貼。不原創，何以別乎？
+            
+        
+    </p>
+
+    <nav class="navbar-section text-center">
+    
+        <a href="/" class="navbar-link">首页</a>
+    
+    
+        <a href="/archives/" class="navbar-link">归档</a>
+    
+    
+        <a href="/search" class="navbar-link">搜索</a>
+    
+    
+    
+        <div class="dropdown dropdown-right">
+    <a class="navbar-link dropdown-toggle" tabindex="0">分享</a>
+    <ul class="menu share-menu">
+
+        <!-- Share Weibo -->
+        
+        <li class="menu-item">
+            <a href="http://service.weibo.com/share/share.php?appkey=&title=LKY 只有原創內容的 Blog&url=https://mosdeo.github.io&pic=/content/images/myway_DataSci/Pain63.JPG&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">分享到微博</a>
+        </li>
+        
+
+        <!-- Share Twitter -->
+        
+        <li class="menu-item">
+            <a href="https://twitter.com/intent/tweet?text=LKY 只有原創內容的 Blog&url=https://mosdeo.github.io&via=Lin, Kao-Yuan" target="_blank" rel="external noopener noreferrer nofollow">分享到 Twitter</a>
+        </li>
+        
+
+        <!-- Share Facebook -->
+        
+        <li class="menu-item">
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://mosdeo.github.io" target="_blank" rel="external noopener noreferrer nofollow">分享到 Facebook</a>
+        </li>
+        
+
+        <!-- Share Google+ -->
+        
+        <li class="menu-item">
+            <a href="https://plus.google.com/share?url=https://mosdeo.github.io" target="_blank" rel="external noopener noreferrer nofollow">分享到 Google+</a>
+        </li>
+        
+
+        <!-- Share LinkedIn -->
+        
+        <li class="menu-item">
+            <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://mosdeo.github.io&title=步上資料科學的心路歷程(一)：動機與緣起" target="_blank" rel="external noopener noreferrer nofollow">分享到 LinkedIn</a>
+        </li>
+        
+
+        <!-- Share QQ -->
+        
+        <li class="menu-item">
+            <a href="http://connect.qq.com/widget/shareqq/index.html?site=LKY 只有原創內容的 Blog&title=步上資料科學的心路歷程(一)：動機與緣起&summary=&pics=/content/images/myway_DataSci/Pain63.JPG&url=https://mosdeo.github.io" target="_blank" rel="external noopener noreferrer nofollow"> 分享到 QQ</a>
+        </li>
+        
+
+        <!-- Share Telegram -->
+        
+        <li class="menu-item">
+            <a href="https://t.me/share/url?url=https://mosdeo.github.io&text=步上資料科學的心路歷程(一)：動機與緣起" target="_blank" rel="external noopener noreferrer nofollow">分享到 Telegram</a>
+        </li>
+        
+
+        <!-- QRCode -->
+        
+        <li class="menu-item">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANQAAADUCAAAAADBtVLEAAADoElEQVR42u3a246jQAxF0fz/T8+8tnqCzz5MLgZtXhJ1E6iFRJXL9uPPDY+HKFGiRIm6HeoxHEf//+diP8599r9nv5vudXTtaZyiRG1CPX3pfp4MQL8HdTTQo+/Pfv/seuP9RYlahJouQgba/O3ofgkZxylK1AVQacFrBpQmnWkxFyXqTqi0UB4NLAXJ0/cJKkrUFVDpZSWbQxqstoN9eZQuStSbUeml3vL50mySKFFvQsWke5nUJC96uua0qL+k6iFK1BtRTUI+JfdJMJsWXHK/w+SoKFELUCloTXia5JwSm6kYRzalokRtQZHk/vSdFuuOJoejh0InD1GitqFoMr9JqryimJYecNwkihL1JRRJEjYvcSp604Yr8htRojajpomCbgLpYtsU7UhxW5SoTaj0IqaNIR34mabEdG2UoRUl6sMoUlxOBQSS7GyaSGgBPM5+okR9AdUmQ+jmj/ytaR5GCVdRohag2obeFAinxZIs7s3/cCVRlKgPos40N5Gg83/PIxPWWPUQJWoBqmnebQdwdkEnDV2iRG1DpcTG1JxIoW0DFU2cihK1DZUaqNJLTzZ4dHJozolRuihRX0DRF5ICKCglKFMzCKp6iBL1JRRJUE4LZHqZyQaxDXBFiboainymzeOZjWEqfI8JVlGilqHIC94kVGgDFX1Q8R6iRC1FtRs7ukmsE/4p0SJK1EIUWUBT82Bq5GgC2SkxGpuwRIlahGqSHKlBOP2GJEwpLHa8iBL1YVRzQxLokiIdLUyQBRhFFKJEfRDVJOvTIkk3iqnwQJM5okRtRaVAdfqeCnGkQDAmKIsEjyhRW1BN80dKetImrCbwTY2VokRtQtEXNSUpyYJJziVJ1DpKFyXqg6gzjbtNYia94LQ4QDavokRtQ9HkJVlkSTKyaVBJzSqiRG1BpQ0hKQaQRsY2MJ6KcYeTmChRS1CpOE2DULJ5TIFuKnCPC7soUUtRJEnSJGnIREALEeNEJUrUIlRqwCCNWM3DoRu/pgAnStQG1ASijVFt8iY9sDYJJErUJlQ6SPIyBa/poZAGErQRFSVqAeoxHCmwJIkW+kmKAqmZRZSoLaiU2CSbQhLcpomFBM9j4CtK1CIUKRpPTYpNEpJuHukhStSVUKRpiiYp46BA4nQcjyhRF0LRzd20AJNCNj33JROFKFFvRLWNIjSAJcFpM0mgopsoUV9GpcTLmaRkmgRSkNwu/qJEbUHd6RAlSpQoUbc5/gJAJTMvebFm2wAAAABJRU5ErkJggg==" alr="QRCode">
+        </li>
+        
+
+    </ul>
+</div>
+    
+    
+        <a href="/atom.xml" target="_blank" class="navbar-link">RSS</a>
+    
+</nav>
+</header>
+
+            
+    <!-- ## Post ## -->
+    <div class="post-container">
+    <div id="post-card" class="card">
+        
+            <div class="card-image lazyload" data-bg="url('/content/images/myway_DataSci/Pain63.JPG')"></div>
+        
+        <div class="card-item-container">
+            <div class="card-inner-cell">
+                <!-- # Post Header Info # -->
+                <div class="card-header">
+                    
+    <h1 class="card-title h3 mb-2">步上資料科學的心路歷程(一)：動機與緣起</h1>
+
+
+
+
+<div class="post-header-info">
+    <p class="post-header-info-left text-gray">
+        <img class="author-thumb lazyload" data-src="/img/default_avatar.png" src="/img/suka-lazyload.gif" alt="Lin, Kao-Yuan's Avatar">
+        <span>2017-10-02</span>
+        
+        
+            <!-- Busuanzi Post Views -->
+<span id="busuanzi_container_page_pv" hidden>
+    <span class="suka-devide-dot"></span>
+    <span></span>
+    <span id="busuanzi_value_page_pv"></span>
+    <span>Views</span>
+</span>
+        
+        
+    </p>
+    <div class="post-header-info-right">
+        
+            <div class="dropdown dropdown-right">
+<a class="dropdown-toggle" tabindex="0">分享本文</a>
+<ul class="menu share-menu">
+    <!-- Share Weibo -->
+    
+    <li class="menu-item">
+        <a href="http://service.weibo.com/share/share.php?appkey=&title=步上資料科學的心路歷程(一)：動機與緣起&url=https://mosdeo.github.io/2017/10/01/%E6%AD%A5%E4%B8%8A%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8%E7%9A%84%E5%BF%83%E8%B7%AF%E6%AD%B7%E7%A8%8B(%E4%B8%80)/&pic=/content/images/myway_DataSci/Pain63.JPG&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">分享到微博</a>
+    </li>
+    
+
+    <!-- Share Twitter -->
+    
+    <li class="menu-item">
+        <a href="https://twitter.com/intent/tweet?text=步上資料科學的心路歷程(一)：動機與緣起&url=https://mosdeo.github.io/2017/10/01/%E6%AD%A5%E4%B8%8A%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8%E7%9A%84%E5%BF%83%E8%B7%AF%E6%AD%B7%E7%A8%8B(%E4%B8%80)/&via=Lin, Kao-Yuan" target="_blank" rel="external noopener noreferrer nofollow">分享到 Twitter</a>
+    </li>
+    
+
+    <!-- Share Facebook -->
+    
+    <li class="menu-item">
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://mosdeo.github.io/2017/10/01/%E6%AD%A5%E4%B8%8A%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8%E7%9A%84%E5%BF%83%E8%B7%AF%E6%AD%B7%E7%A8%8B(%E4%B8%80)/" target="_blank" rel="external noopener noreferrer nofollow">分享到 Facebook</a>
+    </li>
+    
+
+    <!-- Share Google+ -->
+    
+    <li class="menu-item">
+        <a href="https://plus.google.com/share?url=https://mosdeo.github.io/2017/10/01/%E6%AD%A5%E4%B8%8A%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8%E7%9A%84%E5%BF%83%E8%B7%AF%E6%AD%B7%E7%A8%8B(%E4%B8%80)/" target="_blank" rel="external noopener noreferrer nofollow">分享到 Google+</a>
+    </li>
+    
+
+    <!-- Share LinkedIn -->
+    
+    <li class="menu-item">
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://mosdeo.github.io/2017/10/01/%E6%AD%A5%E4%B8%8A%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8%E7%9A%84%E5%BF%83%E8%B7%AF%E6%AD%B7%E7%A8%8B(%E4%B8%80)/&title=LKY 只有原創內容的 Blog" target="_blank" rel="external noopener noreferrer nofollow">分享到 LinkedIn</a>
+    </li>
+    
+
+    <!-- Share QQ -->
+    
+    <li class="menu-item">
+        <a href="http://connect.qq.com/widget/shareqq/index.html?site=LKY 只有原創內容的 Blog&title=LKY 只有原創內容的 Blog&summary=&pics=/content/images/myway_DataSci/Pain63.JPG&url=https://mosdeo.github.io/2017/10/01/%E6%AD%A5%E4%B8%8A%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8%E7%9A%84%E5%BF%83%E8%B7%AF%E6%AD%B7%E7%A8%8B(%E4%B8%80)/" target="_blank" rel="external noopener noreferrer nofollow"> 分享到 QQ</a>
+    </li>
+    
+
+    <!-- Share Telegram -->
+    
+    <li class="menu-item">
+        <a href="https://t.me/share/url?url=https://mosdeo.github.io/2017/10/01/%E6%AD%A5%E4%B8%8A%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8%E7%9A%84%E5%BF%83%E8%B7%AF%E6%AD%B7%E7%A8%8B(%E4%B8%80)/&text=LKY 只有原創內容的 Blog" target="_blank" rel="external noopener noreferrer nofollow">分享到 Telegram</a>
+    </li>
+    
+
+    <!-- QRCode -->
+    
+    <li class="menu-item">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANQAAADUCAAAAADBtVLEAAADoElEQVR42u3a246jQAxF0fz/T8+8tnqCzz5MLgZtXhJ1E6iFRJXL9uPPDY+HKFGiRIm6HeoxHEf//+diP8599r9nv5vudXTtaZyiRG1CPX3pfp4MQL8HdTTQo+/Pfv/seuP9RYlahJouQgba/O3ofgkZxylK1AVQacFrBpQmnWkxFyXqTqi0UB4NLAXJ0/cJKkrUFVDpZSWbQxqstoN9eZQuStSbUeml3vL50mySKFFvQsWke5nUJC96uua0qL+k6iFK1BtRTUI+JfdJMJsWXHK/w+SoKFELUCloTXia5JwSm6kYRzalokRtQZHk/vSdFuuOJoejh0InD1GitqFoMr9JqryimJYecNwkihL1JRRJEjYvcSp604Yr8htRojajpomCbgLpYtsU7UhxW5SoTaj0IqaNIR34mabEdG2UoRUl6sMoUlxOBQSS7GyaSGgBPM5+okR9AdUmQ+jmj/ytaR5GCVdRohag2obeFAinxZIs7s3/cCVRlKgPos40N5Gg83/PIxPWWPUQJWoBqmnebQdwdkEnDV2iRG1DpcTG1JxIoW0DFU2cihK1DZUaqNJLTzZ4dHJozolRuihRX0DRF5ICKCglKFMzCKp6iBL1JRRJUE4LZHqZyQaxDXBFiboainymzeOZjWEqfI8JVlGilqHIC94kVGgDFX1Q8R6iRC1FtRs7ukmsE/4p0SJK1EIUWUBT82Bq5GgC2SkxGpuwRIlahGqSHKlBOP2GJEwpLHa8iBL1YVRzQxLokiIdLUyQBRhFFKJEfRDVJOvTIkk3iqnwQJM5okRtRaVAdfqeCnGkQDAmKIsEjyhRW1BN80dKetImrCbwTY2VokRtQtEXNSUpyYJJziVJ1DpKFyXqg6gzjbtNYia94LQ4QDavokRtQ9HkJVlkSTKyaVBJzSqiRG1BpQ0hKQaQRsY2MJ6KcYeTmChRS1CpOE2DULJ5TIFuKnCPC7soUUtRJEnSJGnIREALEeNEJUrUIlRqwCCNWM3DoRu/pgAnStQG1ASijVFt8iY9sDYJJErUJlQ6SPIyBa/poZAGErQRFSVqAeoxHCmwJIkW+kmKAqmZRZSoLaiU2CSbQhLcpomFBM9j4CtK1CIUKRpPTYpNEpJuHukhStSVUKRpiiYp46BA4nQcjyhRF0LRzd20AJNCNj33JROFKFFvRLWNIjSAJcFpM0mgopsoUV9GpcTLmaRkmgRSkNwu/qJEbUHd6RAlSpQoUbc5/gJAJTMvebFm2wAAAABJRU5ErkJggg==" alt="QRCode">
+    </li>
+    
+
+</ul>
+</div>
+        
+    </div>
+</div>
+                </div>
+                <div class="card-body">
+                    
+                        
+                        
+                            <div id="post-toc"><ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2011-%E4%B8%8A%E5%8D%8A%E5%B9%B4"><span class="post-toc-number">1.</span> <span class="post-toc-text">2011 上半年</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2011-%E4%B8%8B%E5%8D%8A%E5%B9%B4"><span class="post-toc-number">2.</span> <span class="post-toc-text">2011 下半年</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2012-%E5%B9%B4"><span class="post-toc-number">3.</span> <span class="post-toc-text">2012 年</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2013-%E5%B9%B4"><span class="post-toc-number">4.</span> <span class="post-toc-text">2013 年</span></a></li></ol></div>
+                        
+                    
+                    <article id="post-content">
+                        <p>最近幾年資料科學正夯，你是為了什麼才進入這個領域？是跟風趕流行？還是為了其他目的？<br>
+因為最近有網友問到我學機器學習的歷程，也剛好和同事討論到，所以我決定把這幾年的心路歷程好好寫下來。</p>
+<hr>
+<h3 id="2011-上半年">2011 上半年</h3>
+<p>這一年我修了大學部「機械視覺」，因為我覺得能讓電腦會「看」東西很屌，這是我入門影像處理的課。要用 VB6，不依賴任何函式庫，以 pixel by pixel 的方式學習二值化、灰階化、色彩空間換算、增長侵蝕、線或圓的偵測等等。</p>
+<p>那時候我還是用 Atom 小筆電，所以 VB6 用起來特別吃力，加上也不太喜歡 VB6 的語法，所以想要用 C++ 寫寫看，就開始入門 OpenCV。我還記得光是把 OpenCV 裝起來可以動就花了兩周。</p>
+<p>要做期末專題，題目怎麼選呢？當時老師播了一個老舊的實驗影片，是他博班學妹的研究成果，影片中就是一個人，裝了馬達的攝影機會追蹤她的頭，不論她怎麼轉方向、用手遮蔽，攝影機就是能上下左右快速追蹤，抓到他的頭部位置正確。</p>
+<p><strong>看了覺得「哇～～超屌，我也想要做出這個！」</strong></p>
+<p>（原影片沒有獲得公開許可，所以我只能放那篇<a target="_blank" rel="noopener" href="http://handle.ncl.edu.tw/11296/ndltd/40709382862479134735">論文</a>的截圖）<br>
+<img src="/content/images/myway_DataSci/%E4%BB%A5%E6%96%B0%E5%9E%8B%E5%8B%95%E6%85%8B%E8%BC%AA%E5%BB%93%E6%8A%80%E8%A1%93%E5%AE%8C%E6%88%90%E5%8F%AF%E8%BF%BD%E8%B9%A4%E4%BB%BB%E6%84%8F%E5%BD%A2%E7%8B%80%E7%89%A9%E9%AB%94%E4%B9%8B%E5%BC%B7%E5%81%A5%E5%BD%B1%E5%83%8F%E4%BC%BA%E6%9C%8D%E7%B3%BB%E7%B5%B1p85%E5%B1%80%E9%83%A8%E6%88%AA%E5%9C%96.png" alt=""></p>
+<p>後來我用，OpenCV 內建現成的 viola jones 物件完成人臉追蹤、現成的 DAQ 完成直流馬達控制，讓這兩者可以交互回授連動，就完成了這個期末專題。當時看起來很屌，但現在回想起來很空虛，因為只是整合了影像和馬達，照一個簡單的控制邏輯互動，並沒有自己做出什麼稱得上電腦視覺的演算法，工藝水準自然也比不上上圖那篇多年前的碩論。</p>
+<h3 id="2011-下半年">2011 下半年</h3>
+<p>這一年我在做<a target="_blank" rel="noopener" href="http://web.ntnu.edu.tw/~60132057A/File/FaceTrackingPlatform.pdf">大學專題</a>，其實就繼續做那個追蹤人臉的攝影機馬達平台，嘗試做的更精密、定位更快速、更滑順。</p>
+<p>當時 OpenCV 還沒有繁體中文書，就連簡體書都還沒有出到 2.X 版(C++ 版)，我就已經把 OpenCV 摸熟，會用這些現成電腦視覺功能，但用膩了之後想要做到更細、更靈活，會遇到很多困難。</p>
+<p>影像部份只是 call OpenCV 所以就沒什麼難的，那時候重點，都放在解決自幹馬達控制模組的各種軔體(firmware)、硬體問題。</p>
+<p>比賽時被一個專題評審問到：「你的馬達平台能不能分辨不同人，只追蹤特定的人？」，那是一個半導體專長的老師，我根本不知道怎麼回答他，嚇到不敢說自己只是 call function。但是這個問題，之後就一直成為我的心魔。</p>
+<p>就算能夠存取 pixel value，自己能想得出來的方法組合也很有限，找了一些電腦視覺的書來看，發現都蠻困難的，猶豫自己是不是要去修課？</p>
+<img src="/content/images/myway_DataSci/代表性照片3.jpg" width="40%"/>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/T-BAkotvkUI" frameborder="0" align="middle" allowfullscreen></iframe>
+<h3 id="2012-年">2012 年</h3>
+<p>這一年我去讀了體育運動相關的碩士班，這是從大學參加游泳校隊、高強度身體訓練成為我生活重心以來的願望。這是原先規劃的人生方向，念得不順利以後，才發只是一個支線任務。雖然這對我人生影響不小，但我在這條支線上，沒做什麼和資料科學有關的事，所以就不細講了。</p>
+<img src="/content/images/fly.JPG" width="40%"/>
+<p align="middle">2008.6.17 彰化縣立體育場游泳池</p>
+<h3 id="2013-年">2013 年</h3>
+<p><img src="/content/images/myway_DataSci/%E9%90%98%E5%9C%8B%E4%BA%AE-%E5%BD%B1%E5%83%8F%E8%99%95%E7%90%86%E8%88%87%E9%9B%BB%E8%85%A6%E8%A6%96%E8%A6%BA.jpg" alt=""></p>
+<p>這一年我在機電工程系碩士班讀研究所，想做影像處理，修了電腦視覺的課，知道一些 base on rule 的影像辨識技巧。但學了之後，其實是有點失望的，因為每一個演算法都要寫很久，也很難應付特例，不管怎麼調整，都是有一好、沒兩好。</p>
+<p>那時候天真不懂事，所以給自己想了一個很難的題目「痛苦表情辨識」。為什麼想做這個呢？</p>
+<img src="/content/images/myway_DataSci/Pain63.JPG" width="40%"/>
+<p>學生的時候經常上健身房，去久了大多都是熟面孔。發現有些人只用跑步機，從來不用其他器材，跑久了速度也都沒變過。隨著一天天過去，但是有些人的表情會愈跑愈輕鬆。我心理就好奇：</p>
+<ul>
+<li>「假如一開始跑很辛苦，就算速度不變，跑久了還是會體能越來越好、越來越輕鬆，直到遇到瓶頸為止。」</li>
+<li>「如果運動表現不變，那能不能從表情變化得知體能進步水準？一開始很猙獰，到後來很輕鬆，這個變化可以用電腦視覺測量出來嗎？」</li>
+</ul>
+<p>然後就開啟了這個研究。</p>
+<p>–</p>
+<p>這時候，我對機器學習還很陌生，只知道用在辨識很強大、可以解決很多 by rule 難以應付的特例。但機器學習的數學似乎特別困難？好像要很好的機率統計基礎？我也不知道，眼前一片未知，然後就笨笨的找了一門機器學習的課去修，先上再說。</p>
+<p>結果就是都聽不懂，被當了，我除了 k-mean 之外什麼都沒學會。</p>
+<p>（待續）</p>
+
+                    </article>
+                    
+
+
+    <blockquote id="date-expire-notification" class="post-expired-notify">本文最后更新于 <span id="date-expire-num"></span> 天前，文中所描述的信息可能已发生改变</blockquote>
+    <script>
+    (function() {
+        var dateUpdate = Date.parse("2019-09-23");
+        var nowDate = new Date();
+        var a = nowDate.getTime();
+        var b = a - dateUpdate;
+        var daysUpdateExpire = Math.floor(b/(24*3600*1000));
+        if (daysUpdateExpire >= 120) {
+            document.getElementById('date-expire-num').innerHTML = daysUpdateExpire;
+        } else {
+            document.getElementById('date-expire-notification').style.display = 'none';
+        }
+    })();
+    </script>
+
+
+<p class="post-footer-info mb-0 pt-0">本文发表于&nbsp;<time datetime="2017-10-01T16:00:00.000Z" itemprop="datePublished">2017-10-02</time>
+
+    , 最后修改于&nbsp;<time datetime="2019-09-23T02:08:50.348Z" itemprop="dateModified">2019-09-23</time>
+
+</p>
+<p class="post-footer-info mb-0 pt-2">
+
+
+
+<span class="post-tags-list mt-2">
+
+<a class="post-tags-list-item" href="/tags/%E5%AD%B8%E7%94%9F%E6%99%82%E6%9C%9F/" rel="tag">#&nbsp;學生時期</a>
+
+<a class="post-tags-list-item" href="/tags/%E6%95%B8%E6%93%9A%E5%88%86%E6%9E%90/" rel="tag">#&nbsp;數據分析</a>
+
+<a class="post-tags-list-item" href="/tags/%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92/" rel="tag">#&nbsp;機器學習</a>
+
+<a class="post-tags-list-item" href="/tags/%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8/" rel="tag">#&nbsp;資料科學</a>
+
+<a class="post-tags-list-item" href="/tags/AI/" rel="tag">#&nbsp;AI</a>
+
+</span>
+
+
+</p>
+
+                </div>
+                <div class="post-nav px-2 bg-gray">
+<ul class="pagination">
+    <!-- Prev Nav -->
+    
+        <li class="page-item page-prev">
+            <a href="/2017/10/02/%E6%AD%A5%E4%B8%8A%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8%E7%9A%84%E5%BF%83%E8%B7%AF%E6%AD%B7%E7%A8%8B(%E4%BA%8C)/" rel="prev">
+                <div class="page-item-title"><i class="icon icon-back" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">步上資料科學的心路歷程(二)：恐慌到自信</div>
+            </a>
+        </li>
+    
+
+    <!-- Next Nav -->
+    
+        <li class="page-item page-next">
+            <a href="/2017/09/10/note_%E8%B3%87%E6%96%99%E5%88%86%E6%9E%90%E6%96%87%E5%8C%96/" rel="next">
+                <div class="page-item-title"><i class="icon icon-forward" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">(流動筆記)資料分析文化</div>
+            </a>
+        </li>
+    
+</ul>
+</div>
+
+                
+                    <!-- # Comment # -->
+                    
+                        <div class="card-footer post-comment">
+                            <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://mosdeo.github.io/2017/10/01/%E6%AD%A5%E4%B8%8A%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8%E7%9A%84%E5%BF%83%E8%B7%AF%E6%AD%B7%E7%A8%8B(%E4%B8%80)/'; // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'https://mosdeo.github.io/2017/10/01/%E6%AD%A5%E4%B8%8A%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8%E7%9A%84%E5%BF%83%E8%B7%AF%E6%AD%B7%E7%A8%8B(%E4%B8%80)/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+<script id="disqus-thread-script">
+    (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document;
+        var s = d.createElement('script');
+        s.src = '//mosdeo-github-io.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', + new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+                        </div>
+                    
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!-- ### Footer ### -->
+            <footer class="text-center">
+    <!-- footer copyright -->
+    
+        <p class="footer-copyright mb-0">Copyright&nbsp;©&nbsp;<span id="copyright-year"></span>
+            <a class="footer-copyright-a" href="https://mosdeo.github.io">LKY 只有原創內容的 Blog</a>
+        </p>
+
+    <!-- footer custom text -->
+    <p class="footer-text mb-0">
+    
+    </p>
+    <!-- footer develop info -->
+    <p class="footer-develop mb-0">
+        
+    <!-- Busuanzi User Views -->
+    <span id="busuanzi_container_site_uv" hidden>
+        <span></span>
+        <span id="busuanzi_value_site_uv"></span>
+        <span>Viewers</span>
+        
+            <span>|</span>
+        
+    </span>
+
+
+
+
+        
+        Powered by&nbsp;<!--
+         --><a href="https://hexo.io" target="_blank" class="footer-develop-a" rel="external nofollow noopener noreferrer">Hexo</a><span class="footer-develop-divider"></span>Theme&nbsp;-&nbsp;<!--
+         --><a href="https://github.com/SukkaW/hexo-theme-suka" target="_blank" class="footer-develop-a" rel="external noopener">Suka</a>
+    </p>
+</footer>
+
+
+        <!-- ### Import File ### -->
+        <!-- ### Footer JS Import ### -->
+
+<script>
+
+    
+window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 50
+};
+document.getElementById('copyright-year').textContent = new Date().getFullYear();
+console.log('\n %c Suka Theme (hexo-theme-suka) | © SukkaW | Verision 1.3.3 %c https://github.com/SukkaW/hexo-theme-suka \n', 'color: #fff; background: #444; padding:5px 0;', 'background: #bbb; padding:5px 0;');
+
+</script>
+
+<script src="/lib/vanilla-lazyload/lazyload.min.js" async></script>
+    <script src="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.js" async></script>
+
+
+<!-- Offset -->
+
+
+
+
+<!-- Comment -->
+
+    
+        <script id="dsq-count-scr" src="https://mosdeo-github-io.disqus.com/count.js" async></script>
+
+    
+
+
+<!-- ### Custom Footer ### -->
+
+    </body>
+
+</html>

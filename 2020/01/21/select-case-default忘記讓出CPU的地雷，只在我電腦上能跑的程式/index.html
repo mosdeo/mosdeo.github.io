@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+
+<html lang="zh-TW">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        hexo-theme-suka © SukkaW
+        GitHub: https://github.com/SukkaW/hexo-theme-suka
+    -->
+
+    <!-- ### Resource Hint ### -->
+
+    <!-- ## DNS Prefetch ## -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+<!-- busuanzi -->
+
+    <link rel="dns-prefetch" href="//busuanzi.ibruce.info">
+
+
+<!-- comment -->
+
+
+    <link rel="dns-prefetch" href="//disqus.com">
+    <link rel="dns-prefetch" href="//mosdeo-github-io.disqus.com">
+
+
+
+
+
+
+<!-- analytics -->
+
+
+    <link rel="dns-prefetch" href="//www.google-analytics.com">
+
+
+
+
+
+
+    <!-- ## Preload ## -->
+    
+    <!-- Busuanzi -->
+    
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.js" as="script">
+
+
+
+
+
+
+
+    <!-- ### Meta & Title & Info ### -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <meta name="renderer" content="webkit">
+
+    <!-- Title -->
+    <title>select-case-default 忘記讓出 CPU 的地雷，只在我電腦上能跑的程式 | LKY 只有原創內容的 Blog</title>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image&#x2F;ico" href="/img/suka-favicon.ico">
+
+    <!-- ### Import File ### -->
+    <link rel="stylesheet" href="/lib/spectre/spectre.min.css"><style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    a, a:visited {
+        color: #0070ff;
+    }
+
+    a:active, a:focus, a:hover {
+        color: #0070ff;
+        opacity: .75;
+    }
+
+    #post-content a,
+    #post-content a:hover,
+    #post-content a:focus,
+    #post-content a:visited {
+        color: #005eb9;
+        opacity: 1;
+    }
+
+    
+
+    .post-entry .card-body a {
+        color: #0070ff;
+    }
+
+    .avatar {
+        background: #444;
+    }
+
+    .navbar-link,
+    .navbar-link:visited,
+    .timeline .timeline-item .timeline-icon.icon-lg {
+        color: #0070ff;
+    }
+
+    .navbar-link:hover {
+        color: #0070ff;
+        opacity: .8;
+    }
+
+    #search-input .btn,
+    #disqus_click_btn,
+    #disqus-switch-to-direct,
+    #disqus-loadmore-button {
+        background: #727e96;
+        border-color: #727e96;
+        color: #fff;
+    }
+
+    #post-toc a.post-toc-link,
+    #post-toc a.post-toc-link:visited,
+    .share-menu.menu .menu-item>a {
+        color: #727e96;
+    }
+
+    .share-menu.menu .menu-item>a:hover,
+    .share-menu.menu .menu-item>a:focus,
+    .share-menu.menu .menu-item>a:visited {
+        color: #50596c;
+        background: #f8f9fa;
+        opacity: .85;
+    }
+</style><link rel="stylesheet" href="/css/style.min.css">
+
+
+
+
+
+
+
+
+    <!-- Prettify Theme -->
+    
+    <link rel="preload" href="/css/highlight/github.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/css/highlight/github.min.css"></noscript>
+
+
+
+
+
+<script>
+/*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+!function(t){"use strict";t.loadCSS||(t.loadCSS=function(){});var e=loadCSS.relpreload={};if(e.support=function(){var e;try{e=t.document.createElement("link").relList.supports("preload")}catch(t){e=!1}return function(){return e}}(),e.bindMediaToggle=function(t){var e=t.media||"all";function a(){t.addEventListener?t.removeEventListener("load",a):t.attachEvent&&t.detachEvent("onload",a),t.setAttribute("onload",null),t.media=e}t.addEventListener?t.addEventListener("load",a):t.attachEvent&&t.attachEvent("onload",a),setTimeout(function(){t.rel="stylesheet",t.media="only x"}),setTimeout(a,3e3)},e.poly=function(){if(!e.support())for(var a=t.document.getElementsByTagName("link"),n=0;n<a.length;n++){var o=a[n];"preload"!==o.rel||"style"!==o.getAttribute("as")||o.getAttribute("data-loadcss")||(o.setAttribute("data-loadcss",!0),e.bindMediaToggle(o))}},!e.support()){e.poly();var a=t.setInterval(e.poly,500);t.addEventListener?t.addEventListener("load",function(){e.poly(),t.clearInterval(a)}):t.attachEvent&&t.attachEvent("onload",function(){e.poly(),t.clearInterval(a)})}"undefined"!=typeof exports?exports.loadCSS=loadCSS:t.loadCSS=loadCSS}("undefined"!=typeof global?global:this);
+</script>
+
+    <!-- ### Site Verification ### -->
+    
+
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="LKY 只有原創內容的 Blog"><meta name="msapplication-starturl" content="https://mosdeo.github.io"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="LKY 只有原創內容的 Blog"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- ### The Open Graph & Twitter Card Protocol ### -->
+    <meta property="og:title" content="select-case-default 忘記讓出 CPU 的地雷，只在我電腦上能跑的程式 | LKY 只有原創內容的 Blog"><meta property="og:site_name" content="LKY 只有原創內容的 Blog"><meta property="og:type" content="article"><meta property="og:url" content="https://mosdeo.github.io/2020/01/21/select-case-default%E5%BF%98%E8%A8%98%E8%AE%93%E5%87%BACPU%E7%9A%84%E5%9C%B0%E9%9B%B7%EF%BC%8C%E5%8F%AA%E5%9C%A8%E6%88%91%E9%9B%BB%E8%85%A6%E4%B8%8A%E8%83%BD%E8%B7%91%E7%9A%84%E7%A8%8B%E5%BC%8F/"><meta property="og:locale" content="zh-TW"><meta name="description" content="這一篇其實是為了要補充上一篇「LeetCode Concurrency Go 語言詳解：Print Zero Even Odd」沒寫到的細節，但所要解釋的概念，是針對 mulit-channel 管理上可能會犯的錯誤，與 LeetCode 比較沒關係，只是我剛好在解這一題 LeetCode 時學到的，所以最後決定將這部分獨立成一篇文章介紹。 為什麼說是地雷？當程式在自己的電腦上正常，我會很容易以為 - Lin, Kao-Yuan - LKY 只有原創內容的 Blog"><meta name="keywords" content="Go語言"><meta property="og:image" content="/content/images/bomb_man.jpg"><meta property="article:published_time" content="2020-01-21T16:00:00.000Z"><meta property="article:modified_time" content="2020-01-22T06:14:06.307Z"><meta property="og:updated_time" content="2020-01-22T06:14:06.307Z"><meta property="article:author" content="Lin, Kao-Yuan"><meta property="article:tag" content="Go語言"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="/content/images/bomb_man.jpg">
+
+    
+
+    <!-- ### Canonical link ### -->
+    <link rel="canonical" href="https://mosdeo.github.io/2020/01/21/select-case-default%E5%BF%98%E8%A8%98%E8%AE%93%E5%87%BACPU%E7%9A%84%E5%9C%B0%E9%9B%B7%EF%BC%8C%E5%8F%AA%E5%9C%A8%E6%88%91%E9%9B%BB%E8%85%A6%E4%B8%8A%E8%83%BD%E8%B7%91%E7%9A%84%E7%A8%8B%E5%BC%8F/">
+
+    <meta name="generator" content="Hexo 5.2.0">
+
+    <!-- ### Analytics ### -->
+    
+    <!-- Google Analytics -->
+<script>
+    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+    ga('create', 'UA-64570213-2', 'auto');
+    ga('send', 'pageview');
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+
+
+
+
+
+
+
+
+
+    <!-- ### Structured Data ### -->
+    
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "url": "https://mosdeo.github.io/2020/01/21/select-case-default%E5%BF%98%E8%A8%98%E8%AE%93%E5%87%BACPU%E7%9A%84%E5%9C%B0%E9%9B%B7%EF%BC%8C%E5%8F%AA%E5%9C%A8%E6%88%91%E9%9B%BB%E8%85%A6%E4%B8%8A%E8%83%BD%E8%B7%91%E7%9A%84%E7%A8%8B%E5%BC%8F/",
+    "@type": "BlogPosting",
+    "logo": "https://mosdeo.github.io/img/suka-favicon.ico",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://mosdeo.github.io/2020/01/21/select-case-default%E5%BF%98%E8%A8%98%E8%AE%93%E5%87%BACPU%E7%9A%84%E5%9C%B0%E9%9B%B7%EF%BC%8C%E5%8F%AA%E5%9C%A8%E6%88%91%E9%9B%BB%E8%85%A6%E4%B8%8A%E8%83%BD%E8%B7%91%E7%9A%84%E7%A8%8B%E5%BC%8F/"
+    },
+    "headline": "select-case-default 忘記讓出 CPU 的地雷，只在我電腦上能跑的程式 | LKY 只有原創內容的 Blog",
+    
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://mosdeo.github.io/content/images/bomb_man.jpg"
+    },
+    
+    "datePublished": "2020-01-21T16:00:00.000Z",
+    "dateModified": "2020-01-22T06:14:06.307Z",
+    "author": {
+        "@type": "Person",
+        "name": "Lin, Kao-Yuan",
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://mosdeo.github.io/img/default_avatar.png"
+        },
+        "description": "今之能者，謂能轉貼，至於魯蛇，皆能轉貼。不原創，何以別乎？"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "LKY 只有原創內容的 Blog",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://mosdeo.github.io/img/suka-favicon.ico"
+        }
+    },
+    
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://mosdeo.github.io/search?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+    },
+    
+    "keywords": "Go語言",
+    "description": "這一篇其實是為了要補充上一篇「LeetCode Concurrency Go 語言詳解：Print Zero Even Odd」沒寫到的細節，但所要解釋的概念，是針對 mulit-channel 管理上可能會犯的錯誤，與 LeetCode 比較沒關係，只是我剛好在解這一題 LeetCode 時學到的，所以最後決定將這部分獨立成一篇文章介紹。 為什麼說是地雷？當程式在自己的電腦上正常，我會很容易以為 - Lin, Kao-Yuan - LKY 只有原創內容的 Blog"
+}
+</script>
+
+
+
+    <!-- ### Custom Head ### -->
+    
+</head>
+
+    <body>
+            
+
+            <!-- ### Main content ### -->
+            <!-- ## Header ##-->
+<header>
+    <h1 class="header-title text-center"><a href="/">LKY 只有原創內容的 Blog</a></h1>
+
+    <p class="text-center header-slogan">
+        
+            
+                今之能者，謂能轉貼，至於魯蛇，皆能轉貼。不原創，何以別乎？
+            
+        
+    </p>
+
+    <nav class="navbar-section text-center">
+    
+        <a href="/" class="navbar-link">首页</a>
+    
+    
+        <a href="/archives/" class="navbar-link">归档</a>
+    
+    
+        <a href="/search" class="navbar-link">搜索</a>
+    
+    
+    
+        <div class="dropdown dropdown-right">
+    <a class="navbar-link dropdown-toggle" tabindex="0">分享</a>
+    <ul class="menu share-menu">
+
+        <!-- Share Weibo -->
+        
+        <li class="menu-item">
+            <a href="http://service.weibo.com/share/share.php?appkey=&title=LKY 只有原創內容的 Blog&url=https://mosdeo.github.io&pic=/content/images/bomb_man.jpg&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">分享到微博</a>
+        </li>
+        
+
+        <!-- Share Twitter -->
+        
+        <li class="menu-item">
+            <a href="https://twitter.com/intent/tweet?text=LKY 只有原創內容的 Blog&url=https://mosdeo.github.io&via=Lin, Kao-Yuan" target="_blank" rel="external noopener noreferrer nofollow">分享到 Twitter</a>
+        </li>
+        
+
+        <!-- Share Facebook -->
+        
+        <li class="menu-item">
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://mosdeo.github.io" target="_blank" rel="external noopener noreferrer nofollow">分享到 Facebook</a>
+        </li>
+        
+
+        <!-- Share Google+ -->
+        
+        <li class="menu-item">
+            <a href="https://plus.google.com/share?url=https://mosdeo.github.io" target="_blank" rel="external noopener noreferrer nofollow">分享到 Google+</a>
+        </li>
+        
+
+        <!-- Share LinkedIn -->
+        
+        <li class="menu-item">
+            <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://mosdeo.github.io&title=select-case-default 忘記讓出 CPU 的地雷，只在我電腦上能跑的程式" target="_blank" rel="external noopener noreferrer nofollow">分享到 LinkedIn</a>
+        </li>
+        
+
+        <!-- Share QQ -->
+        
+        <li class="menu-item">
+            <a href="http://connect.qq.com/widget/shareqq/index.html?site=LKY 只有原創內容的 Blog&title=select-case-default 忘記讓出 CPU 的地雷，只在我電腦上能跑的程式&summary=&pics=/content/images/bomb_man.jpg&url=https://mosdeo.github.io" target="_blank" rel="external noopener noreferrer nofollow"> 分享到 QQ</a>
+        </li>
+        
+
+        <!-- Share Telegram -->
+        
+        <li class="menu-item">
+            <a href="https://t.me/share/url?url=https://mosdeo.github.io&text=select-case-default 忘記讓出 CPU 的地雷，只在我電腦上能跑的程式" target="_blank" rel="external noopener noreferrer nofollow">分享到 Telegram</a>
+        </li>
+        
+
+        <!-- QRCode -->
+        
+        <li class="menu-item">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQQAAAEECAAAAADrYxXWAAAFY0lEQVR42u2cwW5aQRRD+f+fTleVqoSxjwe6aDlsEqU8mHeQbnxtN48vH18PEQhBCEIQghCEECE8wuP7v3+/5vv36TV///zPrz8O9eS9yM/TuU5nEYIQhHCGcDpQusnTtenGKYz0/NN7nq45PVcIQhBChnA6/KtA2kHT+5+gPcoD35cQhCCEGQIB0wTSs+uo0EpiqZ1bCEIQwt8ZjGTY3SxDpxtrgMjzhSAEIbwGYRU65JokrtogpAtTE3Fv2SKFIIQPg0AXkX/t61vdZiEI4UMg1NByWIzS4kMG5el7YrI04/alVFoIQvggCMT0bOZIEzYJVlt6aHjTzJunzxGCEITwdDAuhYx1ILUDt8LHUt5IH9LTD04IQhBCFEuk7ECAraWJNCCb8bIGQUIQghAyhCaCWihLC1lJIJFDk0WOCDAhCEEIGQIxUpZBSAIQMihpCENF12y0CkEIHwqBGhWLaUELnqt4WkxgEtwKQQhCOHuMrWjdBiUphq/FS1riWMvjQhCCEPIClQKVZJi2g5BlqgmkpezdBnD97SAEIQgB/+cqanaSQxHwy4LVhNdc0hCCED4YAhl8NybKKmKWpWsxU+OHIQQhCKGGL6ScsQyfFrAsZY8m2Mh1QhCCEHajlZQl08+poCLvnUrhpNxx7TYLQQgfDIEGmOTNSGm7mh3QcGmCqA12IQhBCOfwhQwhMsTIIE2vk8yXpQyCRJwQhCCEuECRsBWXoi4KngRqK4USAScEIQiBlzQWY7MFtEsBixgsaXDTgogQhCAE1llqIUu72TQgafGCLknLQIwmjxCEIIRjIEsCV3JTzXRtRc3FSCXDNX5AQhCCECKEm/CTDEMazCyFMBK0VONFCEIQwlEs0dCULk7tWlLKXEMhssQJQQhCeMzhy7LotCDm3YXxW0O2/nYQghCE8EVFRhJEZJDS8hYVXmuJ7LhoCUEIQqgLVBtsNLClZe6b8HcRYDE4EoIQhFAD2RZ40qLmrclCxQ4RXEl0CUEIQnhtgSKChZokdMFZih1Xry0EIQhhGoxpUSFljmaIkgC2FTnIuV767SAEIXwYhGU5IuEJMWIX4EuwQ40WIQhBCB0CGUytILUMJgKeLm23Ak4IQhBCh7CGLs1EvQlYVoBtkToaP0IQghDiAkUP2ALXFrosSxW9lpS8hCAEIewQlpC0hS/E/Fhu6GZQplKJEIQghPwH7cmLtLCGFi2oiboUQCkwIQhBCBlCG2xkOK5lDyJ+yOsuIuvHmYQgBCE8FUvEzGhhKFmOSMmzBbQEJAmMhCAEIfAF6vQmq/ghBc9W5G4f1nLOo1gSghCEcGW0vrJokfCGBL9k2NIgRwhCEMJ5d1iMzjSMyMJDyuJkeK4fShyMQhCCEK6KUEmYNON0AUlehwi3JMCEIAQhnMVSO/Aa0JJrUwC0CDBcyhCCEIQwDcYkalpRs4kUuiDR71vRtIEVghCE0AfjIkqIQbIsTk180WUpDdoavghBCEJAf+iFGC60DLoM0LUItggnIQhBCLyztBilS6GCDLIEkpixk3ksBCEI4elgXMMSKqbWG2umDDVQsVkkBCEIIUIgN0mNFmLOkhIWCVaI6VIXKCEIQQjocbuskOFKi1pL6LOcTQhCEEIfjGuAeluwvrlBMgTp6wpBCEJguUM77LokLYM2ia1Xnn88sxCEIIRY0jiKiouyRCthtYG8iDNiGFdTRQhCEMIXFSmtFNkWI1LOJMOTLke44CEEIQjhGgINU4jwamYqMXdR4HpT8BaCEIQw/bGnd4gsKm6a2CIg4s+FIAQhXButKzAqlm4GHH2vBk8IQhDCHsj+zw8hCEEIQhCCEITw9PELFqljvS0FGzwAAAAASUVORK5CYII=" alr="QRCode">
+        </li>
+        
+
+    </ul>
+</div>
+    
+    
+        <a href="/atom.xml" target="_blank" class="navbar-link">RSS</a>
+    
+</nav>
+</header>
+
+            
+    <!-- ## Post ## -->
+    <div class="post-container">
+    <div id="post-card" class="card">
+        
+            <div class="card-image lazyload" data-bg="url('/content/images/bomb_man.jpg')"></div>
+        
+        <div class="card-item-container">
+            <div class="card-inner-cell">
+                <!-- # Post Header Info # -->
+                <div class="card-header">
+                    
+    <h1 class="card-title h3 mb-2">select-case-default 忘記讓出 CPU 的地雷，只在我電腦上能跑的程式</h1>
+
+
+
+
+<div class="post-header-info">
+    <p class="post-header-info-left text-gray">
+        <img class="author-thumb lazyload" data-src="/img/default_avatar.png" src="/img/suka-lazyload.gif" alt="Lin, Kao-Yuan's Avatar">
+        <span>2020-01-22</span>
+        
+        
+            <!-- Busuanzi Post Views -->
+<span id="busuanzi_container_page_pv" hidden>
+    <span class="suka-devide-dot"></span>
+    <span></span>
+    <span id="busuanzi_value_page_pv"></span>
+    <span>Views</span>
+</span>
+        
+        
+    </p>
+    <div class="post-header-info-right">
+        
+            <div class="dropdown dropdown-right">
+<a class="dropdown-toggle" tabindex="0">分享本文</a>
+<ul class="menu share-menu">
+    <!-- Share Weibo -->
+    
+    <li class="menu-item">
+        <a href="http://service.weibo.com/share/share.php?appkey=&title=select-case-default 忘記讓出 CPU 的地雷，只在我電腦上能跑的程式&url=https://mosdeo.github.io/2020/01/21/select-case-default%E5%BF%98%E8%A8%98%E8%AE%93%E5%87%BACPU%E7%9A%84%E5%9C%B0%E9%9B%B7%EF%BC%8C%E5%8F%AA%E5%9C%A8%E6%88%91%E9%9B%BB%E8%85%A6%E4%B8%8A%E8%83%BD%E8%B7%91%E7%9A%84%E7%A8%8B%E5%BC%8F/&pic=/content/images/bomb_man.jpg&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">分享到微博</a>
+    </li>
+    
+
+    <!-- Share Twitter -->
+    
+    <li class="menu-item">
+        <a href="https://twitter.com/intent/tweet?text=select-case-default 忘記讓出 CPU 的地雷，只在我電腦上能跑的程式&url=https://mosdeo.github.io/2020/01/21/select-case-default%E5%BF%98%E8%A8%98%E8%AE%93%E5%87%BACPU%E7%9A%84%E5%9C%B0%E9%9B%B7%EF%BC%8C%E5%8F%AA%E5%9C%A8%E6%88%91%E9%9B%BB%E8%85%A6%E4%B8%8A%E8%83%BD%E8%B7%91%E7%9A%84%E7%A8%8B%E5%BC%8F/&via=Lin, Kao-Yuan" target="_blank" rel="external noopener noreferrer nofollow">分享到 Twitter</a>
+    </li>
+    
+
+    <!-- Share Facebook -->
+    
+    <li class="menu-item">
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://mosdeo.github.io/2020/01/21/select-case-default%E5%BF%98%E8%A8%98%E8%AE%93%E5%87%BACPU%E7%9A%84%E5%9C%B0%E9%9B%B7%EF%BC%8C%E5%8F%AA%E5%9C%A8%E6%88%91%E9%9B%BB%E8%85%A6%E4%B8%8A%E8%83%BD%E8%B7%91%E7%9A%84%E7%A8%8B%E5%BC%8F/" target="_blank" rel="external noopener noreferrer nofollow">分享到 Facebook</a>
+    </li>
+    
+
+    <!-- Share Google+ -->
+    
+    <li class="menu-item">
+        <a href="https://plus.google.com/share?url=https://mosdeo.github.io/2020/01/21/select-case-default%E5%BF%98%E8%A8%98%E8%AE%93%E5%87%BACPU%E7%9A%84%E5%9C%B0%E9%9B%B7%EF%BC%8C%E5%8F%AA%E5%9C%A8%E6%88%91%E9%9B%BB%E8%85%A6%E4%B8%8A%E8%83%BD%E8%B7%91%E7%9A%84%E7%A8%8B%E5%BC%8F/" target="_blank" rel="external noopener noreferrer nofollow">分享到 Google+</a>
+    </li>
+    
+
+    <!-- Share LinkedIn -->
+    
+    <li class="menu-item">
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://mosdeo.github.io/2020/01/21/select-case-default%E5%BF%98%E8%A8%98%E8%AE%93%E5%87%BACPU%E7%9A%84%E5%9C%B0%E9%9B%B7%EF%BC%8C%E5%8F%AA%E5%9C%A8%E6%88%91%E9%9B%BB%E8%85%A6%E4%B8%8A%E8%83%BD%E8%B7%91%E7%9A%84%E7%A8%8B%E5%BC%8F/&title=LKY 只有原創內容的 Blog" target="_blank" rel="external noopener noreferrer nofollow">分享到 LinkedIn</a>
+    </li>
+    
+
+    <!-- Share QQ -->
+    
+    <li class="menu-item">
+        <a href="http://connect.qq.com/widget/shareqq/index.html?site=LKY 只有原創內容的 Blog&title=LKY 只有原創內容的 Blog&summary=&pics=/content/images/bomb_man.jpg&url=https://mosdeo.github.io/2020/01/21/select-case-default%E5%BF%98%E8%A8%98%E8%AE%93%E5%87%BACPU%E7%9A%84%E5%9C%B0%E9%9B%B7%EF%BC%8C%E5%8F%AA%E5%9C%A8%E6%88%91%E9%9B%BB%E8%85%A6%E4%B8%8A%E8%83%BD%E8%B7%91%E7%9A%84%E7%A8%8B%E5%BC%8F/" target="_blank" rel="external noopener noreferrer nofollow"> 分享到 QQ</a>
+    </li>
+    
+
+    <!-- Share Telegram -->
+    
+    <li class="menu-item">
+        <a href="https://t.me/share/url?url=https://mosdeo.github.io/2020/01/21/select-case-default%E5%BF%98%E8%A8%98%E8%AE%93%E5%87%BACPU%E7%9A%84%E5%9C%B0%E9%9B%B7%EF%BC%8C%E5%8F%AA%E5%9C%A8%E6%88%91%E9%9B%BB%E8%85%A6%E4%B8%8A%E8%83%BD%E8%B7%91%E7%9A%84%E7%A8%8B%E5%BC%8F/&text=LKY 只有原創內容的 Blog" target="_blank" rel="external noopener noreferrer nofollow">分享到 Telegram</a>
+    </li>
+    
+
+    <!-- QRCode -->
+    
+    <li class="menu-item">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQQAAAEECAAAAADrYxXWAAAFY0lEQVR42u2cwW5aQRRD+f+fTleVqoSxjwe6aDlsEqU8mHeQbnxtN48vH18PEQhBCEIQghCEECE8wuP7v3+/5vv36TV///zPrz8O9eS9yM/TuU5nEYIQhHCGcDpQusnTtenGKYz0/NN7nq45PVcIQhBChnA6/KtA2kHT+5+gPcoD35cQhCCEGQIB0wTSs+uo0EpiqZ1bCEIQwt8ZjGTY3SxDpxtrgMjzhSAEIbwGYRU65JokrtogpAtTE3Fv2SKFIIQPg0AXkX/t61vdZiEI4UMg1NByWIzS4kMG5el7YrI04/alVFoIQvggCMT0bOZIEzYJVlt6aHjTzJunzxGCEITwdDAuhYx1ILUDt8LHUt5IH9LTD04IQhBCFEuk7ECAraWJNCCb8bIGQUIQghAyhCaCWihLC1lJIJFDk0WOCDAhCEEIGQIxUpZBSAIQMihpCENF12y0CkEIHwqBGhWLaUELnqt4WkxgEtwKQQhCOHuMrWjdBiUphq/FS1riWMvjQhCCEPIClQKVZJi2g5BlqgmkpezdBnD97SAEIQgB/+cqanaSQxHwy4LVhNdc0hCCED4YAhl8NybKKmKWpWsxU+OHIQQhCKGGL6ScsQyfFrAsZY8m2Mh1QhCCEHajlZQl08+poCLvnUrhpNxx7TYLQQgfDIEGmOTNSGm7mh3QcGmCqA12IQhBCOfwhQwhMsTIIE2vk8yXpQyCRJwQhCCEuECRsBWXoi4KngRqK4USAScEIQiBlzQWY7MFtEsBixgsaXDTgogQhCAE1llqIUu72TQgafGCLknLQIwmjxCEIIRjIEsCV3JTzXRtRc3FSCXDNX5AQhCCECKEm/CTDEMazCyFMBK0VONFCEIQwlEs0dCULk7tWlLKXEMhssQJQQhCeMzhy7LotCDm3YXxW0O2/nYQghCE8EVFRhJEZJDS8hYVXmuJ7LhoCUEIQqgLVBtsNLClZe6b8HcRYDE4EoIQhFAD2RZ40qLmrclCxQ4RXEl0CUEIQnhtgSKChZokdMFZih1Xry0EIQhhGoxpUSFljmaIkgC2FTnIuV767SAEIXwYhGU5IuEJMWIX4EuwQ40WIQhBCB0CGUytILUMJgKeLm23Ak4IQhBCh7CGLs1EvQlYVoBtkToaP0IQghDiAkUP2ALXFrosSxW9lpS8hCAEIewQlpC0hS/E/Fhu6GZQplKJEIQghPwH7cmLtLCGFi2oiboUQCkwIQhBCBlCG2xkOK5lDyJ+yOsuIuvHmYQgBCE8FUvEzGhhKFmOSMmzBbQEJAmMhCAEIfAF6vQmq/ghBc9W5G4f1nLOo1gSghCEcGW0vrJokfCGBL9k2NIgRwhCEMJ5d1iMzjSMyMJDyuJkeK4fShyMQhCCEK6KUEmYNON0AUlehwi3JMCEIAQhnMVSO/Aa0JJrUwC0CDBcyhCCEIQwDcYkalpRs4kUuiDR71vRtIEVghCE0AfjIkqIQbIsTk180WUpDdoavghBCEJAf+iFGC60DLoM0LUItggnIQhBCLyztBilS6GCDLIEkpixk3ksBCEI4elgXMMSKqbWG2umDDVQsVkkBCEIIUIgN0mNFmLOkhIWCVaI6VIXKCEIQQjocbuskOFKi1pL6LOcTQhCEEIfjGuAeluwvrlBMgTp6wpBCEJguUM77LokLYM2ia1Xnn88sxCEIIRY0jiKiouyRCthtYG8iDNiGFdTRQhCEMIXFSmtFNkWI1LOJMOTLke44CEEIQjhGgINU4jwamYqMXdR4HpT8BaCEIQw/bGnd4gsKm6a2CIg4s+FIAQhXButKzAqlm4GHH2vBk8IQhDCHsj+zw8hCEEIQhCCEITw9PELFqljvS0FGzwAAAAASUVORK5CYII=" alt="QRCode">
+    </li>
+    
+
+</ul>
+</div>
+        
+    </div>
+</div>
+                </div>
+                <div class="card-body">
+                    
+                        
+                        
+                            <div id="post-toc"><ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E8%A3%9C%E5%85%85%EF%BC%9A%E6%88%91%E8%B8%A9%E5%88%B0%E7%9A%84-select-case-default-%E5%9C%B0%E9%9B%B7"><span class="post-toc-number">1.</span> <span class="post-toc-text">補充：我踩到的 select-case-default 地雷</span></a></li></ol></div>
+                        
+                    
+                    <article id="post-content">
+                        <p>這一篇其實是為了要補充上一篇<a href="https://mosdeo.github.io/2020/01/21/LeetCode_Concurrency_Go%E8%AA%9E%E8%A8%80%E8%A9%B3%E8%A7%A3_PrintZeroEvenOdd/">「LeetCode Concurrency Go 語言詳解：Print Zero Even Odd」</a>沒寫到的細節，但所要解釋的概念，是針對 mulit-channel 管理上可能會犯的錯誤，與 LeetCode 比較沒關係，只是我剛好在解這一題 LeetCode 時學到的，所以最後決定將這部分獨立成一篇文章介紹。</p>
+<p>為什麼說是地雷？當程式在自己的電腦上正常，我會很容易以為自己是對的，而且這個現象與作業系統的排程細節有關，很難找一個明確的環境原因。</p>
+<h2 id="補充：我踩到的-select-case-default-地雷">補充：我踩到的 select-case-default 地雷</h2>
+<p>你可以看到，我的解題程式碼 default 那段是這麼寫的：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">default</span>:</span><br><span class="line">	runtime.Gosched()</span><br><span class="line">	<span class="comment">//&lt;-time.After(time.Microsecond)</span></span><br><span class="line">	i--</span><br></pre></td></tr></table></figure>
+<p>以上其實是被高人「指點」後的。原本是這麼寫：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">default</span>:</span><br><span class="line">	i--</span><br></pre></td></tr></table></figure>
+<p>這樣在我的 MacBook 依然正常，但是拿到 The Go Playground 上面就掛了，你可以自己修改程式碼（那篇解題文章最後有程式連結），在 The Go Playground 上試看看會怎樣？</p>
+<hr>
+<p>原因是，雖然 select-case-default 會隨機均勻的嘗試每一個 case-default，但是並不會主動把 CPU 控制權交出去，需要用 <code>runtime.Gosched()</code> 或 <code>&lt;-time.After(time.Microsecond)</code> 把 CPU 讓出給其他 goroutine。否則，其他的 goroutine 將可能沒有機會動作。</p>
+<p>C# 裡的 <code>Application.DoEvents()</code> 也是一樣的意思，讓別的事件有機會被觸發。</p>
+<hr>
+<p>那為什麼我的 MacBook 正常跑完？難道是 CPU 使用數量限制嗎？我們來看看這兩個平台可用的邏輯處理器數量：</p>
+<ul>
+<li>The Go Playground: runtime.NumCPU=1</li>
+<li>MacBook Air 2018:  runtime.NumCPU=4</li>
+</ul>
+<p>好的，我的 MacBook 果然有比較多邏輯處理器可用，但也不足以說明這就是原因。</p>
+<p>於是，我索性在筆電上的程式碼開頭加上一行 <code>runtime.GOMAXPROCS(1)</code> 限制此程式與 The Go Playground 一樣，只能用一個邏輯 CPU。結果，字出來是變慢了，好像古老的打字機那樣，但也是順利正確的跑完了，無法重現 The Go Playground 上發生的錯誤。所以這樣的 bug，真的很難在不同平台上重現，是很不容易發現的地雷。</p>
+
+                    </article>
+                    
+
+
+    <blockquote id="date-expire-notification" class="post-expired-notify">本文最后更新于 <span id="date-expire-num"></span> 天前，文中所描述的信息可能已发生改变</blockquote>
+    <script>
+    (function() {
+        var dateUpdate = Date.parse("2020-01-22");
+        var nowDate = new Date();
+        var a = nowDate.getTime();
+        var b = a - dateUpdate;
+        var daysUpdateExpire = Math.floor(b/(24*3600*1000));
+        if (daysUpdateExpire >= 120) {
+            document.getElementById('date-expire-num').innerHTML = daysUpdateExpire;
+        } else {
+            document.getElementById('date-expire-notification').style.display = 'none';
+        }
+    })();
+    </script>
+
+
+<p class="post-footer-info mb-0 pt-0">本文发表于&nbsp;<time datetime="2020-01-21T16:00:00.000Z" itemprop="datePublished">2020-01-22</time>
+
+</p>
+<p class="post-footer-info mb-0 pt-2">
+
+
+
+<span class="post-tags-list mt-2">
+
+<a class="post-tags-list-item" href="/tags/Go%E8%AA%9E%E8%A8%80/" rel="tag">#&nbsp;Go語言</a>
+
+</span>
+
+
+</p>
+
+                </div>
+                <div class="post-nav px-2 bg-gray">
+<ul class="pagination">
+    <!-- Prev Nav -->
+    
+        <li class="page-item page-prev">
+            <a href="/2020/02/22/LeetCode_Concurrency_Go%E8%AA%9E%E8%A8%80%E8%A9%B3%E8%A7%A3_FizzBuzzMultithreaded/" rel="prev">
+                <div class="page-item-title"><i class="icon icon-back" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">LeetCode Concurrency Go 語言詳解：Fizz Buzz Multithreaded</div>
+            </a>
+        </li>
+    
+
+    <!-- Next Nav -->
+    
+        <li class="page-item page-next">
+            <a href="/2020/01/20/LeetCode_Concurrency_Go%E8%AA%9E%E8%A8%80%E8%A9%B3%E8%A7%A3_PrintZeroEvenOdd/" rel="next">
+                <div class="page-item-title"><i class="icon icon-forward" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">LeetCode Concurrency Go 語言詳解：Print Zero Even Odd</div>
+            </a>
+        </li>
+    
+</ul>
+</div>
+
+                
+                    <!-- # Comment # -->
+                    
+                        <div class="card-footer post-comment">
+                            <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://mosdeo.github.io/2020/01/21/select-case-default%E5%BF%98%E8%A8%98%E8%AE%93%E5%87%BACPU%E7%9A%84%E5%9C%B0%E9%9B%B7%EF%BC%8C%E5%8F%AA%E5%9C%A8%E6%88%91%E9%9B%BB%E8%85%A6%E4%B8%8A%E8%83%BD%E8%B7%91%E7%9A%84%E7%A8%8B%E5%BC%8F/'; // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'https://mosdeo.github.io/2020/01/21/select-case-default%E5%BF%98%E8%A8%98%E8%AE%93%E5%87%BACPU%E7%9A%84%E5%9C%B0%E9%9B%B7%EF%BC%8C%E5%8F%AA%E5%9C%A8%E6%88%91%E9%9B%BB%E8%85%A6%E4%B8%8A%E8%83%BD%E8%B7%91%E7%9A%84%E7%A8%8B%E5%BC%8F/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+<script id="disqus-thread-script">
+    (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document;
+        var s = d.createElement('script');
+        s.src = '//mosdeo-github-io.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', + new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+                        </div>
+                    
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!-- ### Footer ### -->
+            <footer class="text-center">
+    <!-- footer copyright -->
+    
+        <p class="footer-copyright mb-0">Copyright&nbsp;©&nbsp;<span id="copyright-year"></span>
+            <a class="footer-copyright-a" href="https://mosdeo.github.io">LKY 只有原創內容的 Blog</a>
+        </p>
+
+    <!-- footer custom text -->
+    <p class="footer-text mb-0">
+    
+    </p>
+    <!-- footer develop info -->
+    <p class="footer-develop mb-0">
+        
+    <!-- Busuanzi User Views -->
+    <span id="busuanzi_container_site_uv" hidden>
+        <span></span>
+        <span id="busuanzi_value_site_uv"></span>
+        <span>Viewers</span>
+        
+            <span>|</span>
+        
+    </span>
+
+
+
+
+        
+        Powered by&nbsp;<!--
+         --><a href="https://hexo.io" target="_blank" class="footer-develop-a" rel="external nofollow noopener noreferrer">Hexo</a><span class="footer-develop-divider"></span>Theme&nbsp;-&nbsp;<!--
+         --><a href="https://github.com/SukkaW/hexo-theme-suka" target="_blank" class="footer-develop-a" rel="external noopener">Suka</a>
+    </p>
+</footer>
+
+
+        <!-- ### Import File ### -->
+        <!-- ### Footer JS Import ### -->
+
+<script>
+
+    
+window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 50
+};
+document.getElementById('copyright-year').textContent = new Date().getFullYear();
+console.log('\n %c Suka Theme (hexo-theme-suka) | © SukkaW | Verision 1.3.3 %c https://github.com/SukkaW/hexo-theme-suka \n', 'color: #fff; background: #444; padding:5px 0;', 'background: #bbb; padding:5px 0;');
+
+</script>
+
+<script src="/lib/vanilla-lazyload/lazyload.min.js" async></script>
+    <script src="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.js" async></script>
+
+
+<!-- Offset -->
+
+
+
+
+<!-- Comment -->
+
+    
+        <script id="dsq-count-scr" src="https://mosdeo-github-io.disqus.com/count.js" async></script>
+
+    
+
+
+<!-- ### Custom Footer ### -->
+
+    </body>
+
+</html>
