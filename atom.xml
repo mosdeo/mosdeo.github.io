@@ -6,7 +6,7 @@
   <link href="https://mosdeo.github.io/atom.xml" rel="self"/>
   
   <link href="https://mosdeo.github.io/"/>
-  <updated>2021-07-28T07:00:49.106Z</updated>
+  <updated>2021-08-04T05:50:42.405Z</updated>
   <id>https://mosdeo.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>中國大陸 Apple Trade In 過程全記錄，委託第三方的服務果然翻車</title>
+    <link href="https://mosdeo.github.io/2021/08/03/AppleTrade-in%E9%81%8E%E7%A8%8B/"/>
+    <id>https://mosdeo.github.io/2021/08/03/AppleTrade-in%E9%81%8E%E7%A8%8B/</id>
+    <published>2021-08-03T16:00:00.000Z</published>
+    <updated>2021-08-04T05:50:42.405Z</updated>
+    
+    <content type="html"><![CDATA[<h1>換 Apple Silicon，出清 Intel</h1><p>由於買了新的 M1 MacBook Air，做完數據移轉、相容性驗證之後，舊的 Intel MacBook Air 就「食之無味、棄之可惜」了。</p><p>算一算賣給蘋果官方還有 3000 元可以拿！於是就開啟了人生第一次 Apple Trade In。</p><p><img src="/content/images/apple_trade_in/IMG_8498.jpg" alt="新舊Mac之間正在使用TB3線數據移轉"></p><hr><h1>這輩子換過這麼多電腦，為什麼這是第一次 trade-in？</h1><p>要是還在台灣，處理舊機的首選通常是上 PTT 或蝦皮賣掉，自己搓合賣家，能拿到比較好的價錢。例如我的 Intel MacBook 當初就是在 PTT 上買到的；確認可用以後，又在蝦皮上把 ThinkPad 賣掉。</p><p>但中國大陸有特殊的民情，自己上閒魚等平台找買家，過程非常耗時耗力噁心人，所以第三方收二手機的情況很發達，願意買二手機的情況也比台灣少很多，甚至買二手機被認為是丟臉的事。</p><hr><h1>申請 Apple Trade In</h1><p>線上申請完以後，就會看到如下畫面：</p><p><img src="/content/images/apple_trade_in/apple_trade_in_apply_done.jpg" alt=""></p><p>好尷尬啊，台灣人沒有中國大陸身份證，不知道 Apple 會怎麼處理？</p><p>當天就會收到這個簡訊：</p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">【爱锋派】Apple Trade In 换购计划 - </span><br><span class="line">尊敬的客户，欢迎您在 Apple 官网参与 Apple Trade In 换购计划。</span><br><span class="line">您的折抵编号为2125XXXX。</span><br><span class="line">请访问 http://portal-blit.ifengpai.com/portal/v1/schedule/EGPXXXX 预约承运商上门收取折抵设备的时间, 或者取消折抵换购</span><br></pre></td></tr></table></figure><p>點連結進去，挑選收件時間。</p><p>收件前一天還會收到這個提醒簡訊：</p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">【爱锋派】Apple Trade In 换购计划 - </span><br><span class="line">尊敬的客户，感谢您在Apple官网参与 Apple Trade In 换购计划。</span><br><span class="line">您的折抵编号为2125XXXX。您预约上门取件的时间是2021-07-27。</span><br><span class="line">如果您想更改上门取件时间，请在今晚12点前访问 http://portal-blit.ifengpai.com/portal/v1/schedule/XYGXXXX 并选择新的取件时间。</span><br><span class="line">根据《邮件快件实名收寄管理办法》，取件时请准备好有效身份证件以供承运商查验。</span><br><span class="line">如果您的地址超出承运商服务范围，我们将及时与您联系。</span><br></pre></td></tr></table></figure><p>收件當天早上還會收到這個提醒簡訊：</p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">【顺丰速运】顺丰小哥1326830XXXX正上门收件，运单尾号3853，验证码1808。谢谢！</span><br></pre></td></tr></table></figure><p>整個過程的提醒，都相當貼心到位。</p><hr><h1>交機給順豐小哥</h1><p><img src="/content/images/apple_trade_in/IMG_8519.jpg" alt=""></p><h1>在 FindMy 上目送我的筆電最後一程</h1><p>交機前，我先刪除一些敏感數據、登出服務，但是我故意沒有登出 Apple ID、關閉 Find My，我想看能不能在路上追蹤到？因為蘋果裝置本身就如同一個 AirTag，感覺會挺好玩的。</p><p>果然，當天下午就一路從廣州移動到深圳寶安區。</p><p><img src="/content/images/apple_trade_in/mac_ontheway_banao_2.png" alt=""></p><p>隔天早上出現在鄭州。</p><p><img src="/content/images/apple_trade_in/mac_ontheway_zhengzhou.jpg" alt=""></p><p>但中間會有很長的間斷，我猜可能是這樣：</p><ul><li>送貨車廂為金屬外殼，所以遮蔽了 WiFi 與藍牙訊號。</li><li>在高速公路、郊區等路段，路上距離別的車比較遠，送貨小哥自己又不是用 iPhone，所以就長時間沒辦法連線定位。</li><li>偶爾在中途收件、轉運的時候，貨物可以暴露在 iDeviec 的訊號之下，就能把位置傳回來我手中。</li></ul><h2 id="工廠打電話來要機器登入密碼">工廠打電話來要機器登入密碼</h2><p>這也算是有點在我預期中的，所以我就把密碼告訴他們，然後在 Find My 上執行清除數據。並且在大約一個小時後顯示清除完成（只是顯示，後面會詳述）。</p><p><img src="/content/images/apple_trade_in/IMG_8539.PNG" alt=""><br><img src="/content/images/apple_trade_in/IMG_8540.PNG" alt=""></p><p>沒想到，事情並不如我想得這麼順利。</p><h1>工廠又反覆打電話來，說我沒有清除數據，多次要求我重做</h1><p>第二天，是一個操北方口音的女人打電話來，要我執行清除數據，我說：<br>「昨天下午就做過了啊！你們打來要密碼之後我就主動清除了。」<br>「你們有聯網嗎？是不是沒有聯網？」<br>她表示不太清楚狀況，會轉告工廠。</p><p>第三天，是一個男人打電話來，聽起來應該是第一線執行的員工，又說我沒有清除數據，並且為了證明，說可以登入我的電腦，看到哪些數據等等（我不太擔心，敏感數據交付順豐之前都已經刪除）。</p><p>我再次確認，他說已經聯網。</p><p>這一次，我半信半疑的拿出手機照做，看到畫面上顯示這台電腦的狀態是「Erased now」（如下圖），而且我沒辦法再做更多操控的動作，只能看到這台電腦的「電量、是否充電中、位置」。至於「電量、是否充電中、位置」，是不是暫存的歷史訊息？我跟電話中的小哥核對後，都與現況相符，巧合的機率不高，應該是即時訊息。</p><p><img src="/content/images/apple_trade_in/IMG_3093.PNG" alt=""></p><p>也就是說，透過 Find My 清除自己電腦中的數據後，唯一能掌握的訊息應該就是「電量、是否充電中、位置」。</p><p>我把狀況轉告給電話中的小哥，他又做出以下要求：</p><p>「你還有其他蘋果裝置嗎？」<br>「其他蘋果裝置也顯示已抹除嗎？」<br>「你用瀏覽器登入 iCloud 看看，是不是也已清除？」</p><p>此時，我已經非常的不耐煩，但是怕 trade-in 失敗造成更多麻煩，只好先照做。</p><p>我用不同的裝置在瀏覽器上登入 iCloud（如下圖），結果也是一樣，已經清除過，不能再清除。只多了「播放聲音」的功能。</p><p><img src="/content/images/apple_trade_in/IMG_3083.PNG" alt=""></p><p>我反覆描述這個狀況後，電話另一端的小哥才放棄，說再看看怎麼辦。</p><p>第三天，是一個週六早上，我正在外頭忙，他們又打電話來。這次電話中又是不同人，似乎把狀況搞得比較清楚了，說我之前做的那些動作需要「電腦當下聯網」才會生效，請我重新做一次。（難道前幾次電話處理，都不是當下聯網？）</p><p>這次我又不耐煩地拿出平板打開 Find My，終於有點「新東西」了！顯示出在鄭州工廠的那台電腦，並且是未清除的狀態，可以進行所有常規操作。</p><p>這一次清除，電話中的小哥立刻就說有在清除了。但我在忙、可能也沒耐心了，沒把之前的清除訊息再打一次。之後就按照指示把電腦從 Find My 中移除。</p><p>到這邊，麻煩的溝通才算告一段落。</p><h2 id="收到確認簡訊、上傳證件、錢到帳">收到確認簡訊、上傳證件、錢到帳</h2><p>接下來幾天就陸續收到這些簡訊。</p><p>週日下午3點：</p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">【爱锋派】Apple Trade In 换购计划 - </span><br><span class="line">尊敬的客户，我们已收到您的设备。</span><br><span class="line">我们的团队对设备进行检测后，会再次联系您。</span><br><span class="line">如有问题，您可以联系爱锋派客服热线：4008210742。</span><br></pre></td></tr></table></figure><p>週日下午5點：</p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">【爱锋派】Apple Trade In 换购计划 - </span><br><span class="line">尊敬的客户，我们对MacBook Air进行检测后，确认评估价值与人民币3000.0元的初始估价一致。</span><br><span class="line">根据国家相关部门的规定，请在这里上传您的二代身份证正反面照片，审核照片后，我们将在 2 个工作日内给您付款。</span><br><span class="line">地址: https://reuserecycle.ifengpai.com/order/statusQuery 如有问题，您可以联系爱锋派客服热线：4008210742。</span><br></pre></td></tr></table></figure><p>幸好上傳沒有阻擋台胞證，有跳出視窗說是人工審核，要等。</p><p><img src="/content/images/apple_trade_in/upload_credentials.png" alt=""></p><p>週一下午5點：</p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">【爱锋派】Apple Trade In 换购计划 - </span><br><span class="line">尊敬的客户，我们已经给您付款，付款金额为人民币 3000.0 元。</span><br><span class="line">感谢您选择爱锋派进行Apple Trade In 换购计划。</span><br><span class="line">如有问题，您可以联系爱锋派客服热线：4008210742</span><br></pre></td></tr></table></figure><p><img src="/content/images/apple_trade_in/received3000.jpg" alt=""></p><h1>結論</h1><h2 id="電話通知清除與移除的過程，極不專業，帶給用戶很多麻煩">電話通知清除與移除的過程，極不專業，帶給用戶很多麻煩</h2><p>這部分過程都寫了，就不再詳述。</p><p>畢竟回收舊機器還是比較髒的事，原廠摸透流程後，大多就會包給第三方做，就難免有這些小缺點。</p><h2 id="作為台灣人特別需要噴-Apple-有缺失的地方">作為台灣人特別需要噴 Apple 有缺失的地方</h2><p>整個流程都說要「二代身份证」，這對於在中國大陸各種日常生活系統上，經常因為證件不符，習慣被拒絕使用的台灣人來說，是特別不友善的用詞。</p><p>真的考慮的夠，就不會寫「上传您的二代身份证正反面照片」，因為在字面上已經排除收其他證件的可能。應該寫「有效身分證件」。</p><p>都寫了要「二代身份证」還拿台胞證硬闖，我在中國大陸生活兩年多，這是第一次成功！一般遇到這種情況，我都會基於成功率太低的經驗放棄，這次是憑著對蘋果的信任，還有果粉朋友的話，才硬著頭皮把流程走到底。</p><p>果粉朋友的話是這麼說的：</p><blockquote><p>那放心，水果对第三方要求很高，会考虑到港台中国居民<br>只有 sb 私企才不考虑港澳台的中国居民，你又懒得投诉<br>所以转人工审核了，我不信他们只收内地身份证的</p></blockquote><p>（我也不確定，是不是這樣才轉人工審核？或許不論什麼證件都人工審核？）</p><p>換句話說，蘋果只寫了收「二代身份证」，卻還讓台胞證硬闖成功，也是變相鼓勵在中國大陸生活卻沒有「二代身份证」的人，不去遵守字面上的系統規範，鼓勵試探規則底限與漏洞，這種作風非常的不蘋果，也不是高端品牌應該有的作法。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1&gt;換 Apple Silicon，出清 Intel&lt;/h1&gt;
+&lt;p&gt;由於買了新的 M1 MacBook Air，做完數據移轉、相容性驗證之後，舊的 Intel MacBook Air 就「食之無味、棄之可惜」了。&lt;/p&gt;
+&lt;p&gt;算一算賣給蘋果官方還有 3000 元可以拿！於</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>如何在 Apple Silicon 上安裝 OpenCV 4.5.3 與 TensorFlow 2.5 給 Python 用？</title>
@@ -152,9 +174,9 @@
     
     <category term="資料科學" scheme="https://mosdeo.github.io/tags/%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8/"/>
     
-    <category term="靠盃" scheme="https://mosdeo.github.io/tags/%E9%9D%A0%E7%9B%83/"/>
-    
     <category term="批判" scheme="https://mosdeo.github.io/tags/%E6%89%B9%E5%88%A4/"/>
+    
+    <category term="靠盃" scheme="https://mosdeo.github.io/tags/%E9%9D%A0%E7%9B%83/"/>
     
     <category term="技術" scheme="https://mosdeo.github.io/tags/%E6%8A%80%E8%A1%93/"/>
     
@@ -512,30 +534,6 @@
     <category term="批判" scheme="https://mosdeo.github.io/tags/%E6%89%B9%E5%88%A4/"/>
     
     <category term="開源" scheme="https://mosdeo.github.io/tags/%E9%96%8B%E6%BA%90/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>聽華工周冬雨分享中國大陸重考生的經驗</title>
-    <link href="https://mosdeo.github.io/2018/11/23/%E8%81%BD%E8%8F%AF%E5%B7%A5%E5%91%A8%E5%86%AC%E9%9B%A8%E5%88%86%E4%BA%AB%E4%B8%AD%E5%9C%8B%E9%87%8D%E8%80%83%E7%94%9F%E7%9A%84%E7%B6%93%E9%A9%97/"/>
-    <id>https://mosdeo.github.io/2018/11/23/%E8%81%BD%E8%8F%AF%E5%B7%A5%E5%91%A8%E5%86%AC%E9%9B%A8%E5%88%86%E4%BA%AB%E4%B8%AD%E5%9C%8B%E9%87%8D%E8%80%83%E7%94%9F%E7%9A%84%E7%B6%93%E9%A9%97/</id>
-    <published>2018-11-23T16:00:00.000Z</published>
-    <updated>2021-02-02T06:45:21.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>昨天早上游泳完，搭公車去上班的路上，聊了一個神韻相似周冬雨的妹，原來是華南理工大學的食品科學博士生，正要到我公司附近的公務機關辦護照。剛好她出了一些狀況，要辦到下午，所以就約她吃了午餐。<br>　<br><img src="/content/images/%E4%B8%AD%E5%9C%8B%E5%A4%A7%E9%99%B8%E8%A1%97%E6%99%AF/%E8%81%BD%E8%8F%AF%E5%B7%A5%E5%91%A8%E5%86%AC%E9%9B%A8%E5%88%86%E4%BA%AB%E4%B8%AD%E5%9C%8B%E5%A4%A7%E9%99%B8%E9%87%8D%E8%80%83%E7%94%9F%E7%9A%84%E7%B6%93%E9%A9%97.jpg" alt=""></p><p>聊天中得知她曾「复讀高四」，同等於台灣的重考。但中國大陸叫做「复讀」是有原因的，雖然目的與台灣的重考相同，但制度差異下手段有別，「复讀」的確是更貼切的形容。</p><p>在台灣，學籍與升學考試是各自獨立的事務，你脫離學校以後，就算是一個社會人還是可以去考大學；在中國大陸不行，你一定要在高中有學籍才能報考大學，那高中畢業了想重考怎麼辦？你就要找一間願意收你的高中念高四。也會有類似台灣補習班的機構，但是不能幫你報名考大學，也不能像台灣一樣不依靠任何機構自己去報名大學入學考試，這就是中國大陸叫「复讀」而不叫做「重考」的由來。</p><p>Q1：這是高中轉學考嗎？<br>A1：不算。你就想成念高中可以 fork 好了。</p><p>Q2：fork 到另一間高中的高四，就可以再拿一張高中畢業證書?<br>A2：是的，沒錯。</p><p>中國大陸考大學最強的就是「衡水中學」，但若拿台灣的建中來比喻，並不恰當，因為建中可以放飛自我，但衡水中學是軍事化管理，連吃飯都有固定座位、專人打飯收餐盤，吃完就可以空手離開座位、讓你連邊吃邊聊天的機會都沒有。</p><p>這位華工周冬雨當初就想去衡水中學讀高四，但是花了3萬RMB 還不夠（費用依你前次考大學成績決定，若前一次考上北京理工，可能只要花幾千 RMB），還得找關係，找了一位學校裡的主任，談好認他當舅舅再請他吃頓飯就可以，但該位主任最後還是怕出事，反悔了。<br>　<br>這段重考的經歷，對台灣人來說非常特別，但她說，這只是中國大陸复讀生普遍有的經驗而已。</p><p>（照片左邊是當天早上拍的）<br>（照片右邊是受訪者本人）</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;昨天早上游泳完，搭公車去上班的路上，聊了一個神韻相似周冬雨的妹，原來是華南理工大學的食品科學博士生，正要到我公司附近的公務機關辦護照。剛好她出了一些狀況，要辦到下午，所以就約她吃了午餐。&lt;br&gt;
-　&lt;br&gt;
-&lt;img src=&quot;/content/images/%E4%B8%</summary>
-      
-    
-    
-    
-    
-    <category term="大陸" scheme="https://mosdeo.github.io/tags/%E5%A4%A7%E9%99%B8/"/>
     
   </entry>
   
