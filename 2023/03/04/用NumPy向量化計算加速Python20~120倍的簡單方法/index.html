@@ -57,7 +57,7 @@
     <meta name="renderer" content="webkit">
 
     <!-- Title -->
-    <title>用 NumPy 向量化計算加速 Python 20~120 倍的簡單方法 | LKY 只有原創內容的 Blog</title>
+    <title>用 Numpy 向量化加速 Python：千萬級矩形面積計算變快 16~177 倍 | LKY 只有原創內容的 Blog</title>
 
     <!-- Favicons -->
     <link rel="icon" type="image&#x2F;ico" href="/img/suka-favicon.ico">
@@ -157,7 +157,7 @@
     <link rel="alternate" type="application/atom+xml" href="/atom.xml"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="LKY 只有原創內容的 Blog"><meta name="msapplication-starturl" content="https://mosdeo.github.io"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="LKY 只有原創內容的 Blog"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
     <!-- ### The Open Graph & Twitter Card Protocol ### -->
-    <meta property="og:title" content="用 NumPy 向量化計算加速 Python 20~120 倍的簡單方法 | LKY 只有原創內容的 Blog"><meta property="og:site_name" content="LKY 只有原創內容的 Blog"><meta property="og:type" content="article"><meta property="og:url" content="https://mosdeo.github.io/2023/03/04/%E7%94%A8NumPy%E5%90%91%E9%87%8F%E5%8C%96%E8%A8%88%E7%AE%97%E5%8A%A0%E9%80%9FPython20~120%E5%80%8D%E7%9A%84%E7%B0%A1%E5%96%AE%E6%96%B9%E6%B3%95/"><meta property="og:locale" content="zh-TW"><meta name="description" content="Python 簡單易用，可以很快速的驗證各種演算法。但是到了真的要實際應用時，Python 的毛病就會凸顯，往往就是慢！而且慢的很難受。 我也熟悉 Go 或 C# 這些靜態型別的語言，但是欠缺各式各樣方便好用的套件，難以快速的驗證各種演算法。 這篇文章我們來看看如何用 NumPy 來加速 Python 的效能，並且用一個簡單的例子來說明。 需求是：計算 1780 萬個矩形的面積 入門的人怎麼寫？速 - Lin, Kao-Yuan - LKY 只有原創內容的 Blog"><meta name="keywords" content="數據分析, 資料科學, 筆記"><meta property="article:published_time" content="2023-03-04T16:00:00.000Z"><meta property="article:modified_time" content="2023-03-05T16:45:29.310Z"><meta property="og:updated_time" content="2023-03-05T16:45:29.310Z"><meta property="article:author" content="Lin, Kao-Yuan"><meta property="article:tag" content="數據分析, 資料科學, 筆記"><meta name="twitter:card" content="summary">
+    <meta property="og:title" content="用 Numpy 向量化加速 Python：千萬級矩形面積計算變快 16~177 倍 | LKY 只有原創內容的 Blog"><meta property="og:site_name" content="LKY 只有原創內容的 Blog"><meta property="og:type" content="article"><meta property="og:url" content="https://mosdeo.github.io/2023/03/04/%E7%94%A8NumPy%E5%90%91%E9%87%8F%E5%8C%96%E8%A8%88%E7%AE%97%E5%8A%A0%E9%80%9FPython20~120%E5%80%8D%E7%9A%84%E7%B0%A1%E5%96%AE%E6%96%B9%E6%B3%95/"><meta property="og:locale" content="zh-TW"><meta name="description" content="Python 簡單易用，可以很快速的驗證各種演算法。但是到了真的要實際應用時，Python 的毛病就會凸顯，往往就是慢！而且慢的很難受。 我也熟悉 Go 或 C# 這些靜態型別的語言，但是欠缺各式各樣方便好用的套件，難以快速的驗證各種演算法。 這篇文章我們來看看如何用 NumPy 來加速 Python 的效能，並且用一個簡單的例子來說明。 需求是：計算 1780 萬個矩形的面積 入門的人怎麼寫？速 - Lin, Kao-Yuan - LKY 只有原創內容的 Blog"><meta name="keywords" content="筆記, 數據分析, 資料科學"><meta property="article:published_time" content="2023-03-04T16:00:00.000Z"><meta property="article:modified_time" content="2023-03-06T02:54:08.759Z"><meta property="og:updated_time" content="2023-03-06T02:54:08.759Z"><meta property="article:author" content="Lin, Kao-Yuan"><meta property="article:tag" content="筆記, 數據分析, 資料科學"><meta name="twitter:card" content="summary">
 
     
 
@@ -199,7 +199,7 @@
         "@type": "WebPage",
         "@id": "https://mosdeo.github.io/2023/03/04/%E7%94%A8NumPy%E5%90%91%E9%87%8F%E5%8C%96%E8%A8%88%E7%AE%97%E5%8A%A0%E9%80%9FPython20~120%E5%80%8D%E7%9A%84%E7%B0%A1%E5%96%AE%E6%96%B9%E6%B3%95/"
     },
-    "headline": "用 NumPy 向量化計算加速 Python 20~120 倍的簡單方法 | LKY 只有原創內容的 Blog",
+    "headline": "用 Numpy 向量化加速 Python：千萬級矩形面積計算變快 16~177 倍 | LKY 只有原創內容的 Blog",
     
     "image": {
         "@type": "ImageObject",
@@ -207,7 +207,7 @@
     },
     
     "datePublished": "2023-03-04T16:00:00.000Z",
-    "dateModified": "2023-03-05T16:45:29.310Z",
+    "dateModified": "2023-03-06T02:54:08.759Z",
     "author": {
         "@type": "Person",
         "name": "Lin, Kao-Yuan",
@@ -232,7 +232,7 @@
         "query-input": "required name=search_term_string"
     },
     
-    "keywords": "數據分析, 資料科學, 筆記",
+    "keywords": "筆記, 數據分析, 資料科學",
     "description": "Python 簡單易用，可以很快速的驗證各種演算法。但是到了真的要實際應用時，Python 的毛病就會凸顯，往往就是慢！而且慢的很難受。 我也熟悉 Go 或 C# 這些靜態型別的語言，但是欠缺各式各樣方便好用的套件，難以快速的驗證各種演算法。 這篇文章我們來看看如何用 NumPy 來加速 Python 的效能，並且用一個簡單的例子來說明。 需求是：計算 1780 萬個矩形的面積 入門的人怎麼寫？速 - Lin, Kao-Yuan - LKY 只有原創內容的 Blog"
 }
 </script>
@@ -261,66 +261,66 @@
 
     <nav class="navbar-section text-center">
     
-        <a href="/" class="navbar-link">首页</a>
+        <a href="/" class="navbar-link">Home</a>
     
     
-        <a href="/archives/" class="navbar-link">归档</a>
+        <a href="/archives/" class="navbar-link">Archives</a>
     
     
-        <a href="/search" class="navbar-link">搜索</a>
+        <a href="/search" class="navbar-link">Search</a>
     
     
     
         <div class="dropdown dropdown-right">
-    <a class="navbar-link dropdown-toggle" tabindex="0">分享</a>
+    <a class="navbar-link dropdown-toggle" tabindex="0">Share</a>
     <ul class="menu share-menu">
 
         <!-- Share Weibo -->
         
         <li class="menu-item">
-            <a href="http://service.weibo.com/share/share.php?appkey=&title=LKY 只有原創內容的 Blog&url=https://mosdeo.github.io&pic=https://mosdeo.github.io/img/suka-favicon.ico&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">分享到微博</a>
+            <a href="http://service.weibo.com/share/share.php?appkey=&title=LKY 只有原創內容的 Blog&url=https://mosdeo.github.io&pic=https://mosdeo.github.io/img/suka-favicon.ico&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">Share to Weibo</a>
         </li>
         
 
         <!-- Share Twitter -->
         
         <li class="menu-item">
-            <a href="https://twitter.com/intent/tweet?text=LKY 只有原創內容的 Blog&url=https://mosdeo.github.io&via=Lin, Kao-Yuan" target="_blank" rel="external noopener noreferrer nofollow">分享到 Twitter</a>
+            <a href="https://twitter.com/intent/tweet?text=LKY 只有原創內容的 Blog&url=https://mosdeo.github.io&via=Lin, Kao-Yuan" target="_blank" rel="external noopener noreferrer nofollow">Share to Twitter</a>
         </li>
         
 
         <!-- Share Facebook -->
         
         <li class="menu-item">
-            <a href="https://www.facebook.com/sharer/sharer.php?u=https://mosdeo.github.io" target="_blank" rel="external noopener noreferrer nofollow">分享到 Facebook</a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://mosdeo.github.io" target="_blank" rel="external noopener noreferrer nofollow">Share to Facebook</a>
         </li>
         
 
         <!-- Share Google+ -->
         
         <li class="menu-item">
-            <a href="https://plus.google.com/share?url=https://mosdeo.github.io" target="_blank" rel="external noopener noreferrer nofollow">分享到 Google+</a>
+            <a href="https://plus.google.com/share?url=https://mosdeo.github.io" target="_blank" rel="external noopener noreferrer nofollow">Share to Google+</a>
         </li>
         
 
         <!-- Share LinkedIn -->
         
         <li class="menu-item">
-            <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://mosdeo.github.io&title=用 NumPy 向量化計算加速 Python 20~120 倍的簡單方法" target="_blank" rel="external noopener noreferrer nofollow">分享到 LinkedIn</a>
+            <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://mosdeo.github.io&title=用 Numpy 向量化加速 Python：千萬級矩形面積計算變快 16~177 倍" target="_blank" rel="external noopener noreferrer nofollow">Share to LinkedIn</a>
         </li>
         
 
         <!-- Share QQ -->
         
         <li class="menu-item">
-            <a href="http://connect.qq.com/widget/shareqq/index.html?site=LKY 只有原創內容的 Blog&title=用 NumPy 向量化計算加速 Python 20~120 倍的簡單方法&summary=&pics=https://mosdeo.github.io/img/suka-favicon.ico&url=https://mosdeo.github.io" target="_blank" rel="external noopener noreferrer nofollow"> 分享到 QQ</a>
+            <a href="http://connect.qq.com/widget/shareqq/index.html?site=LKY 只有原創內容的 Blog&title=用 Numpy 向量化加速 Python：千萬級矩形面積計算變快 16~177 倍&summary=&pics=https://mosdeo.github.io/img/suka-favicon.ico&url=https://mosdeo.github.io" target="_blank" rel="external noopener noreferrer nofollow"> Share to QQ</a>
         </li>
         
 
         <!-- Share Telegram -->
         
         <li class="menu-item">
-            <a href="https://t.me/share/url?url=https://mosdeo.github.io&text=用 NumPy 向量化計算加速 Python 20~120 倍的簡單方法" target="_blank" rel="external noopener noreferrer nofollow">分享到 Telegram</a>
+            <a href="https://t.me/share/url?url=https://mosdeo.github.io&text=用 Numpy 向量化加速 Python：千萬級矩形面積計算變快 16~177 倍" target="_blank" rel="external noopener noreferrer nofollow">Share to Telegram</a>
         </li>
         
 
@@ -350,7 +350,7 @@
                 <!-- # Post Header Info # -->
                 <div class="card-header">
                     
-    <h1 class="card-title h3 mb-2">用 NumPy 向量化計算加速 Python 20~120 倍的簡單方法</h1>
+    <h1 class="card-title h3 mb-2">用 Numpy 向量化加速 Python：千萬級矩形面積計算變快 16~177 倍</h1>
 
 
 
@@ -374,54 +374,54 @@
     <div class="post-header-info-right">
         
             <div class="dropdown dropdown-right">
-<a class="dropdown-toggle" tabindex="0">分享本文</a>
+<a class="dropdown-toggle" tabindex="0">Share the post</a>
 <ul class="menu share-menu">
     <!-- Share Weibo -->
     
     <li class="menu-item">
-        <a href="http://service.weibo.com/share/share.php?appkey=&title=用 NumPy 向量化計算加速 Python 20~120 倍的簡單方法&url=https://mosdeo.github.io/2023/03/04/%E7%94%A8NumPy%E5%90%91%E9%87%8F%E5%8C%96%E8%A8%88%E7%AE%97%E5%8A%A0%E9%80%9FPython20~120%E5%80%8D%E7%9A%84%E7%B0%A1%E5%96%AE%E6%96%B9%E6%B3%95/&pic=https://mosdeo.github.io/img/suka-favicon.ico&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">分享到微博</a>
+        <a href="http://service.weibo.com/share/share.php?appkey=&title=用 Numpy 向量化加速 Python：千萬級矩形面積計算變快 16~177 倍&url=https://mosdeo.github.io/2023/03/04/%E7%94%A8NumPy%E5%90%91%E9%87%8F%E5%8C%96%E8%A8%88%E7%AE%97%E5%8A%A0%E9%80%9FPython20~120%E5%80%8D%E7%9A%84%E7%B0%A1%E5%96%AE%E6%96%B9%E6%B3%95/&pic=https://mosdeo.github.io/img/suka-favicon.ico&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">Share to Weibo</a>
     </li>
     
 
     <!-- Share Twitter -->
     
     <li class="menu-item">
-        <a href="https://twitter.com/intent/tweet?text=用 NumPy 向量化計算加速 Python 20~120 倍的簡單方法&url=https://mosdeo.github.io/2023/03/04/%E7%94%A8NumPy%E5%90%91%E9%87%8F%E5%8C%96%E8%A8%88%E7%AE%97%E5%8A%A0%E9%80%9FPython20~120%E5%80%8D%E7%9A%84%E7%B0%A1%E5%96%AE%E6%96%B9%E6%B3%95/&via=Lin, Kao-Yuan" target="_blank" rel="external noopener noreferrer nofollow">分享到 Twitter</a>
+        <a href="https://twitter.com/intent/tweet?text=用 Numpy 向量化加速 Python：千萬級矩形面積計算變快 16~177 倍&url=https://mosdeo.github.io/2023/03/04/%E7%94%A8NumPy%E5%90%91%E9%87%8F%E5%8C%96%E8%A8%88%E7%AE%97%E5%8A%A0%E9%80%9FPython20~120%E5%80%8D%E7%9A%84%E7%B0%A1%E5%96%AE%E6%96%B9%E6%B3%95/&via=Lin, Kao-Yuan" target="_blank" rel="external noopener noreferrer nofollow">Share to Twitter</a>
     </li>
     
 
     <!-- Share Facebook -->
     
     <li class="menu-item">
-        <a href="https://www.facebook.com/sharer/sharer.php?u=https://mosdeo.github.io/2023/03/04/%E7%94%A8NumPy%E5%90%91%E9%87%8F%E5%8C%96%E8%A8%88%E7%AE%97%E5%8A%A0%E9%80%9FPython20~120%E5%80%8D%E7%9A%84%E7%B0%A1%E5%96%AE%E6%96%B9%E6%B3%95/" target="_blank" rel="external noopener noreferrer nofollow">分享到 Facebook</a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://mosdeo.github.io/2023/03/04/%E7%94%A8NumPy%E5%90%91%E9%87%8F%E5%8C%96%E8%A8%88%E7%AE%97%E5%8A%A0%E9%80%9FPython20~120%E5%80%8D%E7%9A%84%E7%B0%A1%E5%96%AE%E6%96%B9%E6%B3%95/" target="_blank" rel="external noopener noreferrer nofollow">Share to Facebook</a>
     </li>
     
 
     <!-- Share Google+ -->
     
     <li class="menu-item">
-        <a href="https://plus.google.com/share?url=https://mosdeo.github.io/2023/03/04/%E7%94%A8NumPy%E5%90%91%E9%87%8F%E5%8C%96%E8%A8%88%E7%AE%97%E5%8A%A0%E9%80%9FPython20~120%E5%80%8D%E7%9A%84%E7%B0%A1%E5%96%AE%E6%96%B9%E6%B3%95/" target="_blank" rel="external noopener noreferrer nofollow">分享到 Google+</a>
+        <a href="https://plus.google.com/share?url=https://mosdeo.github.io/2023/03/04/%E7%94%A8NumPy%E5%90%91%E9%87%8F%E5%8C%96%E8%A8%88%E7%AE%97%E5%8A%A0%E9%80%9FPython20~120%E5%80%8D%E7%9A%84%E7%B0%A1%E5%96%AE%E6%96%B9%E6%B3%95/" target="_blank" rel="external noopener noreferrer nofollow">Share to Google+</a>
     </li>
     
 
     <!-- Share LinkedIn -->
     
     <li class="menu-item">
-        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://mosdeo.github.io/2023/03/04/%E7%94%A8NumPy%E5%90%91%E9%87%8F%E5%8C%96%E8%A8%88%E7%AE%97%E5%8A%A0%E9%80%9FPython20~120%E5%80%8D%E7%9A%84%E7%B0%A1%E5%96%AE%E6%96%B9%E6%B3%95/&title=LKY 只有原創內容的 Blog" target="_blank" rel="external noopener noreferrer nofollow">分享到 LinkedIn</a>
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://mosdeo.github.io/2023/03/04/%E7%94%A8NumPy%E5%90%91%E9%87%8F%E5%8C%96%E8%A8%88%E7%AE%97%E5%8A%A0%E9%80%9FPython20~120%E5%80%8D%E7%9A%84%E7%B0%A1%E5%96%AE%E6%96%B9%E6%B3%95/&title=LKY 只有原創內容的 Blog" target="_blank" rel="external noopener noreferrer nofollow">Share to LinkedIn</a>
     </li>
     
 
     <!-- Share QQ -->
     
     <li class="menu-item">
-        <a href="http://connect.qq.com/widget/shareqq/index.html?site=LKY 只有原創內容的 Blog&title=LKY 只有原創內容的 Blog&summary=&pics=https://mosdeo.github.io/img/suka-favicon.ico&url=https://mosdeo.github.io/2023/03/04/%E7%94%A8NumPy%E5%90%91%E9%87%8F%E5%8C%96%E8%A8%88%E7%AE%97%E5%8A%A0%E9%80%9FPython20~120%E5%80%8D%E7%9A%84%E7%B0%A1%E5%96%AE%E6%96%B9%E6%B3%95/" target="_blank" rel="external noopener noreferrer nofollow"> 分享到 QQ</a>
+        <a href="http://connect.qq.com/widget/shareqq/index.html?site=LKY 只有原創內容的 Blog&title=LKY 只有原創內容的 Blog&summary=&pics=https://mosdeo.github.io/img/suka-favicon.ico&url=https://mosdeo.github.io/2023/03/04/%E7%94%A8NumPy%E5%90%91%E9%87%8F%E5%8C%96%E8%A8%88%E7%AE%97%E5%8A%A0%E9%80%9FPython20~120%E5%80%8D%E7%9A%84%E7%B0%A1%E5%96%AE%E6%96%B9%E6%B3%95/" target="_blank" rel="external noopener noreferrer nofollow"> Share to QQ</a>
     </li>
     
 
     <!-- Share Telegram -->
     
     <li class="menu-item">
-        <a href="https://t.me/share/url?url=https://mosdeo.github.io/2023/03/04/%E7%94%A8NumPy%E5%90%91%E9%87%8F%E5%8C%96%E8%A8%88%E7%AE%97%E5%8A%A0%E9%80%9FPython20~120%E5%80%8D%E7%9A%84%E7%B0%A1%E5%96%AE%E6%96%B9%E6%B3%95/&text=LKY 只有原創內容的 Blog" target="_blank" rel="external noopener noreferrer nofollow">分享到 Telegram</a>
+        <a href="https://t.me/share/url?url=https://mosdeo.github.io/2023/03/04/%E7%94%A8NumPy%E5%90%91%E9%87%8F%E5%8C%96%E8%A8%88%E7%AE%97%E5%8A%A0%E9%80%9FPython20~120%E5%80%8D%E7%9A%84%E7%B0%A1%E5%96%AE%E6%96%B9%E6%B3%95/&text=LKY 只有原創內容的 Blog" target="_blank" rel="external noopener noreferrer nofollow">Share to Telegram</a>
     </li>
     
 
@@ -442,7 +442,7 @@
                     
                         
                         
-                            <div id="post-toc"><ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%85%A5%E9%96%80%E7%9A%84%E4%BA%BA%E6%80%8E%E9%BA%BC%E5%AF%AB%EF%BC%9F%E9%80%9F%E5%BA%A6%E5%AE%9A%E7%BE%A9%E7%82%BA-1x"><span class="post-toc-number">1.</span> <span class="post-toc-text">入門的人怎麼寫？速度定義為 1x</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%94%A8-NumPy-%E5%90%91%E9%87%8F%E5%8C%96%E8%A8%88%E7%AE%97-%E7%B0%A1%E5%96%AE%E7%89%88-%EF%BC%8C%E9%80%9F%E5%BA%A6-20x"><span class="post-toc-number">2.</span> <span class="post-toc-text">用 NumPy 向量化計算(簡單版)，速度 20x</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%94%A8-NumPy-%E5%90%91%E9%87%8F%E5%8C%96%E8%A8%88%E7%AE%97-%E9%80%B2%E9%9A%8E%E7%89%88%EF%BC%8C%E4%BD%BF%E7%94%A8np-ptp-%EF%BC%8C%E9%80%9F%E5%BA%A6-22x"><span class="post-toc-number">3.</span> <span class="post-toc-text">用 NumPy 向量化計算(進階版，使用np.ptp)，速度 22x</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%94%A8-NumPy-%E5%90%91%E9%87%8F%E5%8C%96%E8%A8%88%E7%AE%97-%E9%80%B2%E9%9A%8E%E7%89%88%EF%BC%8C%E7%9B%B4%E6%8E%A5%E5%8F%96%E5%B7%AE%E5%80%BC%EF%BC%8C%E7%84%B6%E5%BE%8C%E7%B5%95%E5%B0%8D%E5%80%BC%E7%9B%B8%E4%B9%98-%EF%BC%8C%E9%80%9F%E5%BA%A6-120x"><span class="post-toc-number">4.</span> <span class="post-toc-text">用 NumPy 向量化計算(進階版，直接取差值，然後絕對值相乘)，速度 120x</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%B8%BD%E7%B5%90"><span class="post-toc-number">5.</span> <span class="post-toc-text">總結</span></a></li></ol></div>
+                            <div id="post-toc"><ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%85%A5%E9%96%80%E7%9A%84%E4%BA%BA%E6%80%8E%E9%BA%BC%E5%AF%AB%EF%BC%9F%E9%80%9F%E5%BA%A6%E5%AE%9A%E7%BE%A9%E7%82%BA-1x"><span class="post-toc-number">1.</span> <span class="post-toc-text">入門的人怎麼寫？速度定義為 1x</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%94%A8-NumPy-%E5%90%91%E9%87%8F%E5%8C%96%E8%A8%88%E7%AE%97-%E7%B0%A1%E5%96%AE%E7%89%88-%EF%BC%8C%E9%80%9F%E5%BA%A6-16x"><span class="post-toc-number">2.</span> <span class="post-toc-text">用 NumPy 向量化計算(簡單版)，速度 16x</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%94%A8-NumPy-%E5%90%91%E9%87%8F%E5%8C%96%E8%A8%88%E7%AE%97-%E9%80%B2%E9%9A%8E%E7%89%88%EF%BC%8C%E4%BD%BF%E7%94%A8np-ptp-%EF%BC%8C%E9%80%9F%E5%BA%A6-22x"><span class="post-toc-number">3.</span> <span class="post-toc-text">用 NumPy 向量化計算(進階版，使用np.ptp)，速度 22x</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%94%A8-NumPy-%E5%90%91%E9%87%8F%E5%8C%96%E8%A8%88%E7%AE%97-%E9%80%B2%E9%9A%8E%E7%89%88%EF%BC%8C%E7%9B%B4%E6%8E%A5%E5%8F%96%E5%B7%AE%E5%80%BC%EF%BC%8C%E7%84%B6%E5%BE%8C%E7%B5%95%E5%B0%8D%E5%80%BC%E7%9B%B8%E4%B9%98-%EF%BC%8C%E9%80%9F%E5%BA%A6-177x"><span class="post-toc-number">4.</span> <span class="post-toc-text">用 NumPy 向量化計算(進階版，直接取差值，然後絕對值相乘)，速度 177x</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%9B%B4%E5%BF%AB%E7%9A%84%E6%96%B9%E6%B3%95%EF%BC%8C%E8%A6%81%E6%B3%A8%E6%84%8F%E5%85%B6%E4%BB%96%E7%9A%84%E9%A2%A8%E9%9A%AA"><span class="post-toc-number">5.</span> <span class="post-toc-text">更快的方法，要注意其他的風險</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%B8%BD%E7%B5%90"><span class="post-toc-number">6.</span> <span class="post-toc-text">總結</span></a></li></ol></div>
                         
                     
                     <article id="post-content">
@@ -451,48 +451,54 @@
 <p>這篇文章我們來看看如何用 NumPy 來加速 Python 的效能，並且用一個簡單的例子來說明。</p>
 <p>需求是：計算 1780 萬個矩形的面積</p>
 <h2 id="入門的人怎麼寫？速度定義為-1x">入門的人怎麼寫？速度定義為 1x</h2>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> NumPy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="comment"># 隨機產生 1780 萬個矩形的兩個對角點座標，為什麼用這個數字呢？因為178是我的身高</span></span><br><span class="line">rects = np.random.randint(<span class="number">0</span>, <span class="number">100</span>, (<span class="number">17800000</span>, <span class="number">2</span>, <span class="number">2</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 計算這些矩形的面積，使用 for 迴圈</span></span><br><span class="line">start_time = time.time()</span><br><span class="line">area = []</span><br><span class="line"><span class="keyword">for</span> rect <span class="keyword">in</span> rects:</span><br><span class="line">    area.append((<span class="built_in">abs</span>(rect[<span class="number">0</span>][<span class="number">0</span>] - rect[<span class="number">0</span>][<span class="number">1</span>]) * <span class="built_in">abs</span>(rect[<span class="number">1</span>][<span class="number">0</span>] - rect[<span class="number">1</span>][<span class="number">1</span>])))</span><br><span class="line">elapsed_time_for_loop = time.time() - start_time</span><br><span class="line">print(<span class="string">&quot;檢驗結果: %s&quot;</span> % (<span class="built_in">sum</span>(area)))</span><br><span class="line">print(<span class="string">&quot;Elapsed time: %s&quot;</span> % (elapsed_time_for_loop))</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> NumPy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="comment"># 隨機產生 1780 萬個矩形的兩個對角點座標，為什麼用這個數字呢？因為178是我的身高</span></span><br><span class="line">np.random.seed(<span class="number">0</span>) <span class="comment"># 固定隨機種子，讓每次執行的結果都一樣，方便大家比較</span></span><br><span class="line">rects = np.random.randint(<span class="number">0</span>, <span class="number">100</span>, (<span class="number">17800000</span>, <span class="number">2</span>, <span class="number">2</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 計算這些矩形的面積，使用 for 迴圈</span></span><br><span class="line">start_time = time.time()</span><br><span class="line">area = []</span><br><span class="line"><span class="keyword">for</span> rect <span class="keyword">in</span> rects:</span><br><span class="line">    area.append((<span class="built_in">abs</span>(rect[<span class="number">0</span>][<span class="number">0</span>] - rect[<span class="number">0</span>][<span class="number">1</span>]) * <span class="built_in">abs</span>(rect[<span class="number">1</span>][<span class="number">0</span>] - rect[<span class="number">1</span>][<span class="number">1</span>])))</span><br><span class="line">elapsed_time_for_loop = time.time() - start_time</span><br><span class="line">print(<span class="string">&quot;檢驗結果: %s&quot;</span> % (<span class="built_in">sum</span>(area)))</span><br><span class="line">print(<span class="string">&quot;Elapsed time: %s&quot;</span> % (elapsed_time_for_loop))</span><br></pre></td></tr></table></figure>
 <p>輸出如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">檢驗結果: 19770934247</span><br><span class="line">Elapsed time: 17.075181007385254</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">檢驗結果: 19769742257</span><br><span class="line">Elapsed time: 16.575732946395874</span><br></pre></td></tr></table></figure>
 <p>上面這個程式碼，就是一般初學者最直覺，用 for loop 寫出來的程式碼，但是效能很差，因為:</p>
 <ul>
 <li>Python 是動態型別，所以每次迴圈都要去判斷型別，並且要去做型別轉換。</li>
 <li>而且 for 迴圈一次只能處理一個矩形，數據頻繁的進出往來 RAM 與 CPU，效能也很差。</li>
 </ul>
 <hr>
-<h2 id="用-NumPy-向量化計算-簡單版-，速度-20x">用 NumPy 向量化計算(簡單版)，速度 20x</h2>
+<h2 id="用-NumPy-向量化計算-簡單版-，速度-16x">用 NumPy 向量化計算(簡單版)，速度 16x</h2>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> NumPy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="comment"># 隨機產生 1780 萬個矩形的兩個對角點座標，為什麼用這個數字呢？因為178是我的身高</span></span><br><span class="line">rects = np.random.randint(<span class="number">0</span>, <span class="number">100</span>, (<span class="number">17800000</span>, <span class="number">2</span>, <span class="number">2</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 計算這些矩形的面積，使用最簡單的向量化</span></span><br><span class="line">start_time = time.time()</span><br><span class="line">min_x = np.<span class="built_in">min</span>(rects[:, <span class="number">0</span>], axis=<span class="number">1</span>)</span><br><span class="line">max_x = np.<span class="built_in">max</span>(rects[:, <span class="number">0</span>], axis=<span class="number">1</span>)</span><br><span class="line">min_y = np.<span class="built_in">min</span>(rects[:, <span class="number">1</span>], axis=<span class="number">1</span>)</span><br><span class="line">max_y = np.<span class="built_in">max</span>(rects[:, <span class="number">1</span>], axis=<span class="number">1</span>)</span><br><span class="line">area = (max_x - min_x) * (max_y - min_y)</span><br><span class="line">elapsed_time_vectorlize = time.time() - start_time</span><br><span class="line">print(<span class="string">&quot;檢驗結果: %s&quot;</span> % (<span class="built_in">sum</span>(area)))</span><br><span class="line">print(<span class="string">&quot;Elapsed time: %s&quot;</span> % (elapsed_time_vectorlize))</span><br></pre></td></tr></table></figure>
 <p>輸出如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">檢驗結果: 19770934247</span><br><span class="line">Elapsed time: 0.8194129467010498</span><br></pre></td></tr></table></figure>
-<p>上面這個程式碼，就是用 NumPy 向量化計算的方式，效能提升了 20 倍。<br>
-為什麼快？</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">檢驗結果: 19769742257</span><br><span class="line">Elapsed time: 1.0222868919372559</span><br></pre></td></tr></table></figure>
+<p>上面這個程式碼，直接把矩形的兩個對角點座標的XY值，分別按照大小取出來，成為四個 Nx1 矩陣。然後只做1次矩陣化的面積運算，就算完了 N 個矩形的面積，效能提升了 16 倍。</p>
+<p>為什麼快？</p>
 <ul>
 <li>因為 NumPy 是靜態型別，所以不用每次迴圈都去判斷型別，並且不用去做型別轉換。</li>
-<li>而且 NumPy 可以一次處理多個矩形，數據不用頻繁的進出 RAM 與 CPU，效能更好。</li>
+<li>一次處理多個矩形，數據不用頻繁的進出 RAM 與 CPU，效能更好。</li>
 </ul>
+<p>當演算法被正確地向量化時，CPU 僅需一條指令完成這行程式碼，而不是對每個 i 進行獨立操作。理想情況下，any(result)操作將只發生於 CPU 內部而不用將數據傳回 RAM。</p>
 <hr>
 <h2 id="用-NumPy-向量化計算-進階版，使用np-ptp-，速度-22x">用 NumPy 向量化計算(進階版，使用np.ptp)，速度 22x</h2>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 以上重複部份程式碼省略</span></span><br><span class="line"><span class="comment"># 計算這些矩形的面積，使用np.ptp向量化</span></span><br><span class="line">start_time = time.time()</span><br><span class="line">area = np.ptp(rects[:, <span class="number">0</span>], axis=<span class="number">1</span>) * np.ptp(rects[:, <span class="number">1</span>], axis=<span class="number">1</span>)</span><br><span class="line">elapsed_time_ptp = time.time() - start_time</span><br><span class="line">print(<span class="string">&quot;檢驗結果: %s&quot;</span> % (<span class="built_in">sum</span>(area)))</span><br><span class="line">print(<span class="string">&quot;Elapsed time: %s&quot;</span> % (elapsed_time_ptp))</span><br></pre></td></tr></table></figure>
 <p>輸出如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">檢驗結果: 19770934247</span><br><span class="line">Elapsed time: 0.7510981559753418</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">檢驗結果: 19769742257</span><br><span class="line">Elapsed time: 0.7305142879486084</span><br></pre></td></tr></table></figure>
 <p>上面這個程式碼，就是用 NumPy 向量化計算的方式，效能提升了 22 倍。<br>
 為什麼又更快？</p>
 <p>因為 np.ptp 的意思就是「peak to peak」，把「最大值、最小值、取差值」的計算合併成一個函式，所以效能更好。</p>
 <hr>
-<h2 id="用-NumPy-向量化計算-進階版，直接取差值，然後絕對值相乘-，速度-120x">用 NumPy 向量化計算(進階版，直接取差值，然後絕對值相乘)，速度 120x</h2>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 以上重複部份程式碼省略</span></span><br><span class="line"><span class="comment"># 計算這些矩形的面積，直接取絕對值相乘</span></span><br><span class="line">start_time = time.time()</span><br><span class="line"><span class="comment"># area = np.abs(rects[:, 0, 0] - rects[:, 0, 1]) * np.abs(rects[:, 1, 0] - rects[:, 1, 1])</span></span><br><span class="line">area = np.<span class="built_in">abs</span>(np.diff(rects[:, <span class="number">0</span>], axis=<span class="number">1</span>)) * np.<span class="built_in">abs</span>(np.diff(rects[:, <span class="number">1</span>], axis=<span class="number">1</span>))</span><br><span class="line">elapsed_time_diff_abs = time.time() - start_time</span><br><span class="line">print(<span class="string">&quot;檢驗結果: %s&quot;</span> % (<span class="built_in">sum</span>(area)))</span><br><span class="line">print(<span class="string">&quot;Elapsed time: %s&quot;</span> % (elapsed_time_diff_abs))</span><br></pre></td></tr></table></figure>
+<h2 id="用-NumPy-向量化計算-進階版，直接取差值，然後絕對值相乘-，速度-177x">用 NumPy 向量化計算(進階版，直接取差值，然後絕對值相乘)，速度 177x</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 以上重複部份程式碼省略</span></span><br><span class="line"><span class="comment"># 計算這些矩形的面積，直接取絕對值相乘</span></span><br><span class="line">start_time = time.time()</span><br><span class="line">area = np.<span class="built_in">abs</span>(rects[:, <span class="number">0</span>, <span class="number">0</span>] - rects[:, <span class="number">0</span>, <span class="number">1</span>]) * np.<span class="built_in">abs</span>(rects[:, <span class="number">1</span>, <span class="number">0</span>] - rects[:, <span class="number">1</span>, <span class="number">1</span>])</span><br><span class="line"><span class="comment"># 下面這種方法更快一點，但可能會發生 Exception has occurred: _ArrayMemoryError</span></span><br><span class="line"><span class="comment"># area = np.abs(np.diff(rects[:, 0], axis=1)) * np.abs(np.diff(rects[:, 1], axis=1)).flatten()</span></span><br><span class="line">elapsed_time_diff_abs = time.time() - start_time</span><br><span class="line">print(<span class="string">&quot;檢驗結果: %s&quot;</span> % (<span class="built_in">sum</span>(area)))</span><br><span class="line">print(<span class="string">&quot;Elapsed time: %s&quot;</span> % (elapsed_time_diff_abs))</span><br></pre></td></tr></table></figure>
 <p>輸出如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">檢驗結果: [19770934247]</span><br><span class="line">Elapsed time: 0.09990715980529785</span><br></pre></td></tr></table></figure>
-<p>上面這個程式碼，就是用 NumPy 向量化計算的方式，效能提升了 120 倍。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">檢驗結果: 19769742257</span><br><span class="line">Elapsed time: 0.09360003471374512</span><br></pre></td></tr></table></figure>
+<p>上面這個程式碼，就是用 NumPy 向量化計算的方式，效能提升了 177 倍。</p>
 <p>為什麼又更快？</p>
 <p>老實說，到這裡已經到了我的知識盲區了。</p>
-<p>不論是 slicing 或者進出 RAM 與 CPU 的次數，看起來都一樣，但是效能卻可以從 22 倍提升到 120 倍。我猜測可能是因為 np.ptp 有些限制導致速度比較慢。</p>
-<p>可以看到在最後一段程式碼中，有一個被我註解的地方，不用 np.diff 也可以達到同樣的效果，但是效能卻比 np.diff 還要差一點點，原因是？這點也在我的知識盲區內。</p>
+<p>不論是 slicing 或者進出 RAM 與 CPU 的次數，與前一種方法看起來都一樣，但是效能卻可以從 22 倍提升到 177 倍。我猜測可能是因為 np.ptp 有些限制導致速度比較慢。</p>
 <p>用 NumPy 就是這樣，通常會比只用單純的 Python 快很多，但是各種不同用法的效能差異卻很大。</p>
 <p>想達到最好的效能，有沒有一次到位的方法？除非有時間仔細鑽研 NumPy 的底層原理，不然我覺得沒有，只能一步一步的嘗試，並且不斷的優化。</p>
+<h2 id="更快的方法，要注意其他的風險">更快的方法，要注意其他的風險</h2>
+<p>可以看到在最後一段程式碼中，有一個被我註解的地方。</p>
+<p>用 np.diff 也可以達到同樣的效果，還更快一點，而且我完全想不出原因是什麼？</p>
+<p>但是我開了 Docker 之後，就會發生爆記憶體的錯誤：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Exception has occurred: _ArrayMemoryError</span><br><span class="line">Unable to allocate 2.25 PiB <span class="keyword">for</span> an array with shape (17800000, 17800000) and data <span class="built_in">type</span> int64</span><br><span class="line">  File <span class="string">&quot;/Users/xxx/demo_vectorlize.py&quot;</span>, line 44, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    area = np.abs(np.diff(rects[:, 0], axis=1)) * np.abs(np.diff(rects[:, 1], axis=1)).flatten()</span><br><span class="line">           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span><br><span class="line">numpy.core._exceptions._ArrayMemoryError: Unable to allocate 2.25 PiB <span class="keyword">for</span> an array with shape (17800000, 17800000) and data <span class="built_in">type</span> int64</span><br></pre></td></tr></table></figure>
+<p>可以看到 np.diff 跟記憶體要了一塊 N x N 的空間，而 N 高達 17800000，這對許多系統來說是無法承受的。而且你開發時可能不會出現這個問題，但是到了生產環境才發現，那就採了大坑了。</p>
 <h2 id="總結">總結</h2>
 <p>三種向量化計算的效能，與原本的 for-loop 效能比較如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Speed up <span class="keyword">for</span> vectorlize: 20.12555006054717x</span><br><span class="line">Speed up <span class="keyword">for</span> ptp-vectorlize: 22.528701826997544x</span><br><span class="line">Speed up <span class="keyword">for</span> diff-abs-vectorlize: 125.2495233550453x</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Speed up <span class="keyword">for</span> vectorlize: 16.214365142630854x</span><br><span class="line">Speed up <span class="keyword">for</span> ptp-vectorlize: 22.690497940763034x</span><br><span class="line">Speed up <span class="keyword">for</span> diff-abs-vectorlize: 177.09109827885285x</span><br></pre></td></tr></table></figure>
 <p>這篇文章主要是介紹了 NumPy 的向量化計算，用一個工作上實際遇過的簡單案例，來說明 NumPy 向量化計算的優點。</p>
 <p>這篇文章的程式碼，可以在這裡找到：<a target="_blank" rel="noopener" href="https://gist.github.com/mosdeo/743a6e2275ea7676dc2f98246e055b33">https://gist.github.com/mosdeo/743a6e2275ea7676dc2f98246e055b33</a></p>
 
@@ -500,7 +506,7 @@
                     
 
 
-    <blockquote id="date-expire-notification" class="post-expired-notify">本文最后更新于 <span id="date-expire-num"></span> 天前，文中所描述的信息可能已发生改变</blockquote>
+    <blockquote id="date-expire-notification" class="post-expired-notify">This article was last updated on <span id="date-expire-num"></span> days ago, and the information described in the article may have changed.</blockquote>
     <script>
     (function() {
         var dateUpdate = Date.parse("2023-03-06");
@@ -517,9 +523,9 @@
     </script>
 
 
-<p class="post-footer-info mb-0 pt-0">本文发表于&nbsp;<time datetime="2023-03-04T16:00:00.000Z" itemprop="datePublished">2023-03-05</time>
+<p class="post-footer-info mb-0 pt-0">Published at&nbsp;<time datetime="2023-03-04T16:00:00.000Z" itemprop="datePublished">2023-03-05</time>
 
-    , 最后修改于&nbsp;<time datetime="2023-03-05T16:45:29.310Z" itemprop="dateModified">2023-03-06</time>
+    , Updated at&nbsp;<time datetime="2023-03-06T02:54:08.759Z" itemprop="dateModified">2023-03-06</time>
 
 </p>
 <p class="post-footer-info mb-0 pt-2">
@@ -528,11 +534,11 @@
 
 <span class="post-tags-list mt-2">
 
+<a class="post-tags-list-item" href="/tags/%E7%AD%86%E8%A8%98/" rel="tag">#&nbsp;筆記</a>
+
 <a class="post-tags-list-item" href="/tags/%E6%95%B8%E6%93%9A%E5%88%86%E6%9E%90/" rel="tag">#&nbsp;數據分析</a>
 
 <a class="post-tags-list-item" href="/tags/%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8/" rel="tag">#&nbsp;資料科學</a>
-
-<a class="post-tags-list-item" href="/tags/%E7%AD%86%E8%A8%98/" rel="tag">#&nbsp;筆記</a>
 
 </span>
 
