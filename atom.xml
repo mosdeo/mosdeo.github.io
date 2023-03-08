@@ -6,7 +6,7 @@
   <link href="https://mosdeo.github.io/atom.xml" rel="self"/>
   
   <link href="https://mosdeo.github.io/"/>
-  <updated>2023-03-08T11:00:33.858Z</updated>
+  <updated>2023-03-08T08:11:04.875Z</updated>
   <id>https://mosdeo.github.io/</id>
   
   <author>
@@ -15,36 +15,6 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>用 NumPy 向量化加速 Python：顏色過濾快 200 倍</title>
-    <link href="https://mosdeo.github.io/2023/03/07/%E7%94%A8%20NumPy%20%E5%90%91%E9%87%8F%E5%8C%96%E5%8A%A0%E9%80%9F%20Python%EF%BC%9A%E9%A1%8F%E8%89%B2%E9%81%8E%E6%BF%BE%E5%BF%AB%20200%20%E5%80%8D/"/>
-    <id>https://mosdeo.github.io/2023/03/07/%E7%94%A8%20NumPy%20%E5%90%91%E9%87%8F%E5%8C%96%E5%8A%A0%E9%80%9F%20Python%EF%BC%9A%E9%A1%8F%E8%89%B2%E9%81%8E%E6%BF%BE%E5%BF%AB%20200%20%E5%80%8D/</id>
-    <published>2023-03-07T16:00:00.000Z</published>
-    <updated>2023-03-08T11:00:33.858Z</updated>
-    
-    <content type="html"><![CDATA[<p>上一篇已經介紹過用「Boolean array indexing」的技巧，快速過濾一維陣列。</p><p>這一篇我們要用顏色過濾的需求，來示範快速過濾三維陣列。</p><hr><p>需求：把圖片中的膚色去除，只留下其他顏色</p><h2 id="入門-for-loop-寫法，速度定義為-1x">入門 for loop 寫法，速度定義為 1x</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> NumPy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> cv2 <span class="keyword">as</span> cv</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="comment"># 需求：把圖片中的膚色去除，只留下其他顏色</span></span><br><span class="line"><span class="comment"># 注意：這份程式碼只是示範如何使用向量化，並不是在教學如何做膚色檢測，不要來跟我槓膚色檢測效果好壞</span></span><br><span class="line"></span><br><span class="line">img = cv.imread(<span class="string">&quot;boys.jpg&quot;</span>)</span><br><span class="line">lower_skin = [<span class="number">0</span>, <span class="number">48</span>, <span class="number">80</span>]</span><br><span class="line">upper_skin = [<span class="number">18</span>, <span class="number">225</span>, <span class="number">255</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 方法1: 使用 for 迴圈 (最慢)</span></span><br><span class="line">img_forloop = img.copy()</span><br><span class="line">img_hsv = cv.cvtColor(img, cv.COLOR_BGR2HSV) <span class="comment"># 轉換成 HSV</span></span><br><span class="line">h, s, v = img_hsv[:, :, <span class="number">0</span>], img_hsv[:, :, <span class="number">1</span>], img_hsv[:, :, <span class="number">2</span>] <span class="comment"># 分離出 H, S, V</span></span><br><span class="line">start_time = time.time()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(img.shape[<span class="number">0</span>]):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(img.shape[<span class="number">1</span>]):</span><br><span class="line">        <span class="keyword">if</span> h[i, j] &gt; lower_skin[<span class="number">0</span>] <span class="keyword">and</span> h[i, j] &lt; upper_skin[<span class="number">0</span>] <span class="keyword">and</span> \</span><br><span class="line">            s[i, j] &gt; lower_skin[<span class="number">1</span>] <span class="keyword">and</span> s[i, j] &lt; upper_skin[<span class="number">1</span>] <span class="keyword">and</span> \</span><br><span class="line">            v[i, j] &gt; lower_skin[<span class="number">2</span>] <span class="keyword">and</span> v[i, j] &lt; upper_skin[<span class="number">2</span>]:</span><br><span class="line">            img_forloop[i, j] = <span class="number">0</span></span><br><span class="line">elapsed_time_for_loop = time.time() - start_time</span><br><span class="line">print(<span class="string">&quot;Elapsed time for loop: %s seconds&quot;</span> % (elapsed_time_for_loop))</span><br></pre></td></tr></table></figure><p>輸出如下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Elapsed time <span class="keyword">for</span> loop: 0.38222789764404297 seconds</span><br></pre></td></tr></table></figure><p>上面這個程式碼，就是一般初學者最直覺，用 for loop 寫出來的程式碼，但是效能很差，for 迴圈一次只能處理一個數，數據頻繁的進出往來 RAM 與 CPU，拖慢很多時間。</p><hr><h2 id="用-NumPy-向量化計算，速度-200x">用 NumPy 向量化計算，速度 200x</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 方法2: 使用 NumPy 向量化</span></span><br><span class="line"><span class="comment"># 以上重複部份程式碼省略</span></span><br><span class="line">img_vectorlize = img.copy()</span><br><span class="line">img_hsv = cv.cvtColor(img, cv.COLOR_BGR2HSV) <span class="comment"># 轉換成 HSV</span></span><br><span class="line">h, s, v = img_hsv[:, :, <span class="number">0</span>], img_hsv[:, :, <span class="number">1</span>], img_hsv[:, :, <span class="number">2</span>] <span class="comment"># 分離出 H, S, V</span></span><br><span class="line">start_time = time.time()</span><br><span class="line">skin_mask = np.bitwise_and.reduce([</span><br><span class="line">        h &gt; lower_skin[<span class="number">0</span>], h &lt; upper_skin[<span class="number">0</span>],</span><br><span class="line">        s &gt; lower_skin[<span class="number">1</span>], s &lt; upper_skin[<span class="number">1</span>],</span><br><span class="line">        v &gt; lower_skin[<span class="number">2</span>], v &lt; upper_skin[<span class="number">2</span>]</span><br><span class="line">    ])</span><br><span class="line">img_vectorlize[skin_mask] = <span class="number">0</span></span><br><span class="line">elapsed_time_vectorlize = time.time() - start_time</span><br><span class="line">print(<span class="string">&quot;Elapsed time vectorlize: %s seconds&quot;</span> % (elapsed_time_vectorlize))</span><br></pre></td></tr></table></figure><p>輸出如下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Elapsed time vectorlize: 0.001753091812133789 seconds</span><br></pre></td></tr></table></figure><p>技巧上的大方向，跟上一篇是一樣的。</p><p>我們不逐一比較，而是先產生一個篩子，一個與樣本數量同樣長度的篩子，直接拿這個篩子去一次過濾所有樣本，只要一次！</p><p>只是這一次需求更加複雜。上只有一個條件，這一次有六個條件取交集，所以用 <code>np.bitwise_and.reduce()</code> 來產生篩子。</p><p>我用以下程式碼，給六個條件都產生與樣本數量同樣維度的篩子</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    h &gt; lower_skin[<span class="number">0</span>], h &lt; upper_skin[<span class="number">0</span>],</span><br><span class="line">    s &gt; lower_skin[<span class="number">1</span>], s &lt; upper_skin[<span class="number">1</span>],</span><br><span class="line">    v &gt; lower_skin[<span class="number">2</span>], v &lt; upper_skin[<span class="number">2</span>]</span><br><span class="line">]</span><br></pre></td></tr></table></figure><p>把這六個篩子放進一個陣列。</p><p>為什麼用 <code>np.bitwise_and.reduce()</code>？</p><p>bitwise_and 就是取交集、reduce 就是把陣列裡面的元素做某種「化N合1」的運算。</p><p>所以這六個篩子就會化簡成一個，篩出所有符合條件的樣本。</p><p>最後可以用 <code>img_vectorlize[skin_mask] = 0</code> 一次對符合六個條件的樣本，改顏色。</p><p>在我完整的程式碼中，還用了 <code>np.array_equal()</code> 來驗證兩種方法的結果是否一樣。</p><hr><p>原圖：</p><p><img src="content/images/boys.jpg" alt="原圖"></p><p>膚色換黑色</p><p>![膚色換黑色](content/images/skin_to_black.jpg</p><p>膚色換綠色</p><p><img src="content/images/skin_to_green.jpg" alt="膚色換綠色"></p><hr><p>這篇文章主要是介紹了 NumPy 的向量化計算，用一個生活化簡單案例，來說明 NumPy 向量化計算的優點。</p><p>這篇文章的完整程式碼，可以在這裡找到：<a href="https://gist.github.com/mosdeo/5b0193bead09251f13e649f5cf6129da">https://gist.github.com/mosdeo/5b0193bead09251f13e649f5cf6129da</a></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;上一篇已經介紹過用「Boolean array indexing」的技巧，快速過濾一維陣列。&lt;/p&gt;
-&lt;p&gt;這一篇我們要用顏色過濾的需求，來示範快速過濾三維陣列。&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;需求：把圖片中的膚色去除，只留下其他顏色&lt;/p&gt;
-&lt;h2 id=&quot;入門-for-loo</summary>
-      
-    
-    
-    
-    
-    <category term="筆記" scheme="https://mosdeo.github.io/tags/%E7%AD%86%E8%A8%98/"/>
-    
-    <category term="數據分析" scheme="https://mosdeo.github.io/tags/%E6%95%B8%E6%93%9A%E5%88%86%E6%9E%90/"/>
-    
-    <category term="資料科學" scheme="https://mosdeo.github.io/tags/%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8/"/>
-    
-  </entry>
   
   <entry>
     <title>用 NumPy 向量化加速 Python：從3千萬剩男中找出比我高 16 倍</title>
@@ -66,11 +36,41 @@
     
     
     
+    <category term="數據分析" scheme="https://mosdeo.github.io/tags/%E6%95%B8%E6%93%9A%E5%88%86%E6%9E%90/"/>
+    
+    <category term="資料科學" scheme="https://mosdeo.github.io/tags/%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8/"/>
+    
     <category term="筆記" scheme="https://mosdeo.github.io/tags/%E7%AD%86%E8%A8%98/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>用 NumPy 向量化加速 Python：顏色過濾快 200 倍</title>
+    <link href="https://mosdeo.github.io/2023/03/07/%E7%94%A8%20NumPy%20%E5%90%91%E9%87%8F%E5%8C%96%E5%8A%A0%E9%80%9F%20Python%EF%BC%9A%E9%A1%8F%E8%89%B2%E9%81%8E%E6%BF%BE%E5%BF%AB%20200%20%E5%80%8D/"/>
+    <id>https://mosdeo.github.io/2023/03/07/%E7%94%A8%20NumPy%20%E5%90%91%E9%87%8F%E5%8C%96%E5%8A%A0%E9%80%9F%20Python%EF%BC%9A%E9%A1%8F%E8%89%B2%E9%81%8E%E6%BF%BE%E5%BF%AB%20200%20%E5%80%8D/</id>
+    <published>2023-03-07T16:00:00.000Z</published>
+    <updated>2023-03-08T11:06:20.284Z</updated>
+    
+    <content type="html"><![CDATA[<p>上一篇已經介紹過用「Boolean array indexing」的技巧，快速過濾一維陣列。</p><p>這一篇我們要用顏色過濾的需求，來示範快速過濾三維陣列。</p><hr><p>需求：把圖片中的膚色去除，只留下其他顏色</p><h2 id="入門-for-loop-寫法，速度定義為-1x">入門 for loop 寫法，速度定義為 1x</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> NumPy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> cv2 <span class="keyword">as</span> cv</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="comment"># 需求：把圖片中的膚色去除，只留下其他顏色</span></span><br><span class="line"><span class="comment"># 注意：這份程式碼只是示範如何使用向量化，並不是在教學如何做膚色檢測，不要來跟我槓膚色檢測效果好壞</span></span><br><span class="line"></span><br><span class="line">img = cv.imread(<span class="string">&quot;boys.jpg&quot;</span>)</span><br><span class="line">lower_skin = [<span class="number">0</span>, <span class="number">48</span>, <span class="number">80</span>]</span><br><span class="line">upper_skin = [<span class="number">18</span>, <span class="number">225</span>, <span class="number">255</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 方法1: 使用 for 迴圈 (最慢)</span></span><br><span class="line">img_forloop = img.copy()</span><br><span class="line">img_hsv = cv.cvtColor(img, cv.COLOR_BGR2HSV) <span class="comment"># 轉換成 HSV</span></span><br><span class="line">h, s, v = img_hsv[:, :, <span class="number">0</span>], img_hsv[:, :, <span class="number">1</span>], img_hsv[:, :, <span class="number">2</span>] <span class="comment"># 分離出 H, S, V</span></span><br><span class="line">start_time = time.time()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(img.shape[<span class="number">0</span>]):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(img.shape[<span class="number">1</span>]):</span><br><span class="line">        <span class="keyword">if</span> h[i, j] &gt; lower_skin[<span class="number">0</span>] <span class="keyword">and</span> h[i, j] &lt; upper_skin[<span class="number">0</span>] <span class="keyword">and</span> \</span><br><span class="line">            s[i, j] &gt; lower_skin[<span class="number">1</span>] <span class="keyword">and</span> s[i, j] &lt; upper_skin[<span class="number">1</span>] <span class="keyword">and</span> \</span><br><span class="line">            v[i, j] &gt; lower_skin[<span class="number">2</span>] <span class="keyword">and</span> v[i, j] &lt; upper_skin[<span class="number">2</span>]:</span><br><span class="line">            img_forloop[i, j] = <span class="number">0</span></span><br><span class="line">elapsed_time_for_loop = time.time() - start_time</span><br><span class="line">print(<span class="string">&quot;Elapsed time for loop: %s seconds&quot;</span> % (elapsed_time_for_loop))</span><br></pre></td></tr></table></figure><p>輸出如下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Elapsed time <span class="keyword">for</span> loop: 0.38222789764404297 seconds</span><br></pre></td></tr></table></figure><p>上面這個程式碼，就是一般初學者最直覺，用 for loop 寫出來的程式碼，但是效能很差，for 迴圈一次只能處理一個數，數據頻繁的進出往來 RAM 與 CPU，拖慢很多時間。</p><hr><h2 id="用-NumPy-向量化計算，速度-200x">用 NumPy 向量化計算，速度 200x</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 方法2: 使用 NumPy 向量化</span></span><br><span class="line"><span class="comment"># 以上重複部份程式碼省略</span></span><br><span class="line">img_vectorlize = img.copy()</span><br><span class="line">img_hsv = cv.cvtColor(img, cv.COLOR_BGR2HSV) <span class="comment"># 轉換成 HSV</span></span><br><span class="line">h, s, v = img_hsv[:, :, <span class="number">0</span>], img_hsv[:, :, <span class="number">1</span>], img_hsv[:, :, <span class="number">2</span>] <span class="comment"># 分離出 H, S, V</span></span><br><span class="line">start_time = time.time()</span><br><span class="line">skin_mask = np.bitwise_and.reduce([</span><br><span class="line">        h &gt; lower_skin[<span class="number">0</span>], h &lt; upper_skin[<span class="number">0</span>],</span><br><span class="line">        s &gt; lower_skin[<span class="number">1</span>], s &lt; upper_skin[<span class="number">1</span>],</span><br><span class="line">        v &gt; lower_skin[<span class="number">2</span>], v &lt; upper_skin[<span class="number">2</span>]</span><br><span class="line">    ])</span><br><span class="line">img_vectorlize[skin_mask] = <span class="number">0</span></span><br><span class="line">elapsed_time_vectorlize = time.time() - start_time</span><br><span class="line">print(<span class="string">&quot;Elapsed time vectorlize: %s seconds&quot;</span> % (elapsed_time_vectorlize))</span><br></pre></td></tr></table></figure><p>輸出如下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Elapsed time vectorlize: 0.001753091812133789 seconds</span><br></pre></td></tr></table></figure><p>技巧上的大方向，跟上一篇是一樣的。</p><p>我們不逐一比較，而是先產生一個篩子，一個與樣本數量同樣長度的篩子，直接拿這個篩子去一次過濾所有樣本，只要一次！</p><p>只是這一次需求更加複雜。上只有一個條件，這一次有六個條件取交集，所以用 <code>np.bitwise_and.reduce()</code> 來產生篩子。</p><p>我用以下程式碼，給六個條件都產生與樣本數量同樣維度的篩子</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    h &gt; lower_skin[<span class="number">0</span>], h &lt; upper_skin[<span class="number">0</span>],</span><br><span class="line">    s &gt; lower_skin[<span class="number">1</span>], s &lt; upper_skin[<span class="number">1</span>],</span><br><span class="line">    v &gt; lower_skin[<span class="number">2</span>], v &lt; upper_skin[<span class="number">2</span>]</span><br><span class="line">]</span><br></pre></td></tr></table></figure><p>把這六個篩子放進一個陣列。</p><p>為什麼用 <code>np.bitwise_and.reduce()</code>？</p><p>bitwise_and 就是取交集、reduce 就是把陣列裡面的元素做某種「化N合1」的運算。</p><p>所以這六個篩子就會化簡成一個，篩出所有符合條件的樣本。</p><p>最後可以用 <code>img_vectorlize[skin_mask] = 0</code> 一次對符合六個條件的樣本，改顏色。</p><p>在我完整的程式碼中，還用了 <code>np.array_equal()</code> 來驗證兩種方法的結果是否一樣。</p><hr><p>原圖：</p><p><img src="/content/images/boys.jpg" alt="原圖"></p><p>膚色換黑色</p><p><img src="/content/images/skin_to_black.jpg" alt="膚色換黑色"></p><p>膚色換綠色</p><p><img src="/content/images/skin_to_green.jpg" alt="膚色換綠色"></p><hr><p>這篇文章主要是介紹了 NumPy 的向量化計算，用一個生活化簡單案例，來說明 NumPy 向量化計算的快速。</p><p>這篇文章的完整程式碼，可以在這裡找到：<a href="https://gist.github.com/mosdeo/5b0193bead09251f13e649f5cf6129da">https://gist.github.com/mosdeo/5b0193bead09251f13e649f5cf6129da</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;上一篇已經介紹過用「Boolean array indexing」的技巧，快速過濾一維陣列。&lt;/p&gt;
+&lt;p&gt;這一篇我們要用顏色過濾的需求，來示範快速過濾三維陣列。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;需求：把圖片中的膚色去除，只留下其他顏色&lt;/p&gt;
+&lt;h2 id=&quot;入門-for-loo</summary>
+      
+    
+    
+    
     
     <category term="數據分析" scheme="https://mosdeo.github.io/tags/%E6%95%B8%E6%93%9A%E5%88%86%E6%9E%90/"/>
     
     <category term="資料科學" scheme="https://mosdeo.github.io/tags/%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8/"/>
+    
+    <category term="筆記" scheme="https://mosdeo.github.io/tags/%E7%AD%86%E8%A8%98/"/>
     
   </entry>
   
@@ -94,11 +94,11 @@
     
     
     
-    <category term="筆記" scheme="https://mosdeo.github.io/tags/%E7%AD%86%E8%A8%98/"/>
-    
     <category term="數據分析" scheme="https://mosdeo.github.io/tags/%E6%95%B8%E6%93%9A%E5%88%86%E6%9E%90/"/>
     
     <category term="資料科學" scheme="https://mosdeo.github.io/tags/%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8/"/>
+    
+    <category term="筆記" scheme="https://mosdeo.github.io/tags/%E7%AD%86%E8%A8%98/"/>
     
   </entry>
   
@@ -260,9 +260,9 @@
     
     <category term="資料科學" scheme="https://mosdeo.github.io/tags/%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8/"/>
     
-    <category term="批判" scheme="https://mosdeo.github.io/tags/%E6%89%B9%E5%88%A4/"/>
-    
     <category term="靠盃" scheme="https://mosdeo.github.io/tags/%E9%9D%A0%E7%9B%83/"/>
+    
+    <category term="批判" scheme="https://mosdeo.github.io/tags/%E6%89%B9%E5%88%A4/"/>
     
     <category term="技術" scheme="https://mosdeo.github.io/tags/%E6%8A%80%E8%A1%93/"/>
     

@@ -157,7 +157,7 @@
     <link rel="alternate" type="application/atom+xml" href="/atom.xml"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="LKY 只有原創內容的 Blog"><meta name="msapplication-starturl" content="https://mosdeo.github.io"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="LKY 只有原創內容的 Blog"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
     <!-- ### The Open Graph & Twitter Card Protocol ### -->
-    <meta property="og:title" content="用 NumPy 向量化加速 Python：顏色過濾快 200 倍 | LKY 只有原創內容的 Blog"><meta property="og:site_name" content="LKY 只有原創內容的 Blog"><meta property="og:type" content="article"><meta property="og:url" content="https://mosdeo.github.io/2023/03/07/%E7%94%A8%20NumPy%20%E5%90%91%E9%87%8F%E5%8C%96%E5%8A%A0%E9%80%9F%20Python%EF%BC%9A%E9%A1%8F%E8%89%B2%E9%81%8E%E6%BF%BE%E5%BF%AB%20200%20%E5%80%8D/"><meta property="og:locale" content="zh-TW"><meta name="description" content="上一篇已經介紹過用「Boolean array indexing」的技巧，快速過濾一維陣列。 這一篇我們要用顏色過濾的需求，來示範快速過濾三維陣列。  需求：把圖片中的膚色去除，只留下其他顏色 入門 for loop 寫法，速度定義為 1x 123456789101112131415161718192021222324import NumPy as npimport cv2 as cvimport - Lin, Kao-Yuan - LKY 只有原創內容的 Blog"><meta name="keywords" content="筆記, 數據分析, 資料科學"><meta property="og:image" content="/content/images/boys.jpg"><meta property="og:image" content="https://mosdeo.github.io/2023/03/07/%E7%94%A8%20NumPy%20%E5%90%91%E9%87%8F%E5%8C%96%E5%8A%A0%E9%80%9F%20Python%EF%BC%9A%E9%A1%8F%E8%89%B2%E9%81%8E%E6%BF%BE%E5%BF%AB%20200%20%E5%80%8D/content/images/boys.jpg"><meta property="og:image" content="https://mosdeo.github.io/2023/03/07/%E7%94%A8%20NumPy%20%E5%90%91%E9%87%8F%E5%8C%96%E5%8A%A0%E9%80%9F%20Python%EF%BC%9A%E9%A1%8F%E8%89%B2%E9%81%8E%E6%BF%BE%E5%BF%AB%20200%20%E5%80%8D/content/images/skin_to_green.jpg"><meta property="article:published_time" content="2023-03-07T16:00:00.000Z"><meta property="article:modified_time" content="2023-03-08T11:00:33.858Z"><meta property="og:updated_time" content="2023-03-08T11:00:33.858Z"><meta property="article:author" content="Lin, Kao-Yuan"><meta property="article:tag" content="筆記, 數據分析, 資料科學"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="/content/images/boys.jpg">
+    <meta property="og:title" content="用 NumPy 向量化加速 Python：顏色過濾快 200 倍 | LKY 只有原創內容的 Blog"><meta property="og:site_name" content="LKY 只有原創內容的 Blog"><meta property="og:type" content="article"><meta property="og:url" content="https://mosdeo.github.io/2023/03/07/%E7%94%A8%20NumPy%20%E5%90%91%E9%87%8F%E5%8C%96%E5%8A%A0%E9%80%9F%20Python%EF%BC%9A%E9%A1%8F%E8%89%B2%E9%81%8E%E6%BF%BE%E5%BF%AB%20200%20%E5%80%8D/"><meta property="og:locale" content="zh-TW"><meta name="description" content="上一篇已經介紹過用「Boolean array indexing」的技巧，快速過濾一維陣列。 這一篇我們要用顏色過濾的需求，來示範快速過濾三維陣列。  需求：把圖片中的膚色去除，只留下其他顏色 入門 for loop 寫法，速度定義為 1x 123456789101112131415161718192021222324import NumPy as npimport cv2 as cvimport - Lin, Kao-Yuan - LKY 只有原創內容的 Blog"><meta name="keywords" content="數據分析, 資料科學, 筆記"><meta property="og:image" content="/content/images/boys.jpg"><meta property="og:image" content="https://mosdeo.github.io/content/images/boys.jpg"><meta property="og:image" content="https://mosdeo.github.io/content/images/skin_to_black.jpg"><meta property="og:image" content="https://mosdeo.github.io/content/images/skin_to_green.jpg"><meta property="article:published_time" content="2023-03-07T16:00:00.000Z"><meta property="article:modified_time" content="2023-03-08T11:06:20.284Z"><meta property="og:updated_time" content="2023-03-08T11:06:20.284Z"><meta property="article:author" content="Lin, Kao-Yuan"><meta property="article:tag" content="數據分析, 資料科學, 筆記"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="/content/images/boys.jpg">
 
     
 
@@ -207,7 +207,7 @@
     },
     
     "datePublished": "2023-03-07T16:00:00.000Z",
-    "dateModified": "2023-03-08T11:00:33.858Z",
+    "dateModified": "2023-03-08T11:06:20.284Z",
     "author": {
         "@type": "Person",
         "name": "Lin, Kao-Yuan",
@@ -232,7 +232,7 @@
         "query-input": "required name=search_term_string"
     },
     
-    "keywords": "筆記, 數據分析, 資料科學",
+    "keywords": "數據分析, 資料科學, 筆記",
     "description": "上一篇已經介紹過用「Boolean array indexing」的技巧，快速過濾一維陣列。 這一篇我們要用顏色過濾的需求，來示範快速過濾三維陣列。  需求：把圖片中的膚色去除，只留下其他顏色 入門 for loop 寫法，速度定義為 1x 123456789101112131415161718192021222324import NumPy as npimport cv2 as cvimport - Lin, Kao-Yuan - LKY 只有原創內容的 Blog"
 }
 </script>
@@ -475,13 +475,13 @@
 <p>在我完整的程式碼中，還用了 <code>np.array_equal()</code> 來驗證兩種方法的結果是否一樣。</p>
 <hr>
 <p>原圖：</p>
-<p><img src="content/images/boys.jpg" alt="原圖"></p>
+<p><img src="/content/images/boys.jpg" alt="原圖"></p>
 <p>膚色換黑色</p>
-<p>![膚色換黑色](content/images/skin_to_black.jpg</p>
+<p><img src="/content/images/skin_to_black.jpg" alt="膚色換黑色"></p>
 <p>膚色換綠色</p>
-<p><img src="content/images/skin_to_green.jpg" alt="膚色換綠色"></p>
+<p><img src="/content/images/skin_to_green.jpg" alt="膚色換綠色"></p>
 <hr>
-<p>這篇文章主要是介紹了 NumPy 的向量化計算，用一個生活化簡單案例，來說明 NumPy 向量化計算的優點。</p>
+<p>這篇文章主要是介紹了 NumPy 的向量化計算，用一個生活化簡單案例，來說明 NumPy 向量化計算的快速。</p>
 <p>這篇文章的完整程式碼，可以在這裡找到：<a target="_blank" rel="noopener" href="https://gist.github.com/mosdeo/5b0193bead09251f13e649f5cf6129da">https://gist.github.com/mosdeo/5b0193bead09251f13e649f5cf6129da</a></p>
 
                     </article>
@@ -514,11 +514,11 @@
 
 <span class="post-tags-list mt-2">
 
-<a class="post-tags-list-item" href="/tags/%E7%AD%86%E8%A8%98/" rel="tag">#&nbsp;筆記</a>
-
 <a class="post-tags-list-item" href="/tags/%E6%95%B8%E6%93%9A%E5%88%86%E6%9E%90/" rel="tag">#&nbsp;數據分析</a>
 
 <a class="post-tags-list-item" href="/tags/%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8/" rel="tag">#&nbsp;資料科學</a>
+
+<a class="post-tags-list-item" href="/tags/%E7%AD%86%E8%A8%98/" rel="tag">#&nbsp;筆記</a>
 
 </span>
 
@@ -530,13 +530,20 @@
 <ul class="pagination">
     <!-- Prev Nav -->
     
+        <li class="page-item page-prev">
+            <a href="/2023/03/07/%E7%94%A8%20NumPy%20%E5%90%91%E9%87%8F%E5%8C%96%E5%8A%A0%E9%80%9F%20Python%EF%BC%9A%E5%BE%9E3%E5%8D%83%E8%90%AC%E5%89%A9%E7%94%B7%E4%B8%AD%E6%89%BE%E5%87%BA%E6%AF%94%E6%88%91%E9%AB%98%E8%AE%8A%E5%BF%AB%2016%20%E5%80%8D/" rel="prev">
+                <div class="page-item-title"><i class="icon icon-back" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">用 NumPy 向量化加速 Python：從3千萬剩男中找出比我高 16 倍</div>
+            </a>
+        </li>
+    
 
     <!-- Next Nav -->
     
         <li class="page-item page-next">
-            <a href="/2023/03/07/%E7%94%A8%20NumPy%20%E5%90%91%E9%87%8F%E5%8C%96%E5%8A%A0%E9%80%9F%20Python%EF%BC%9A%E5%BE%9E3%E5%8D%83%E8%90%AC%E5%89%A9%E7%94%B7%E4%B8%AD%E6%89%BE%E5%87%BA%E6%AF%94%E6%88%91%E9%AB%98%E8%AE%8A%E5%BF%AB%2016%20%E5%80%8D/" rel="next">
+            <a href="/2023/03/04/%E7%94%A8%20NumPy%20%E5%90%91%E9%87%8F%E5%8C%96%E5%8A%A0%E9%80%9F%20Python%EF%BC%9A%E5%8D%83%E8%90%AC%E7%B4%9A%E7%9F%A9%E5%BD%A2%E9%9D%A2%E7%A9%8D%E8%A8%88%E7%AE%97%E8%AE%8A%E5%BF%AB%2016~177%20%E5%80%8D/" rel="next">
                 <div class="page-item-title"><i class="icon icon-forward" aria-hidden="true"></i></div>
-                <div class="page-item-subtitle">用 NumPy 向量化加速 Python：從3千萬剩男中找出比我高 16 倍</div>
+                <div class="page-item-subtitle">用 NumPy 向量化加速 Python：千萬級矩形面積計算變快 16~177 倍</div>
             </a>
         </li>
     
