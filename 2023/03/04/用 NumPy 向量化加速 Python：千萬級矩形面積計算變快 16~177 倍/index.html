@@ -57,7 +57,7 @@
     <meta name="renderer" content="webkit">
 
     <!-- Title -->
-    <title>用 Numpy 向量化加速 Python：千萬級矩形面積計算變快 16~177 倍 | LKY 只有原創內容的 Blog</title>
+    <title>用 NumPy 向量化加速 Python：千萬級矩形面積計算變快 16~177 倍 | LKY 只有原創內容的 Blog</title>
 
     <!-- Favicons -->
     <link rel="icon" type="image&#x2F;ico" href="/img/suka-favicon.ico">
@@ -157,12 +157,12 @@
     <link rel="alternate" type="application/atom+xml" href="/atom.xml"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="LKY 只有原創內容的 Blog"><meta name="msapplication-starturl" content="https://mosdeo.github.io"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="LKY 只有原創內容的 Blog"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
     <!-- ### The Open Graph & Twitter Card Protocol ### -->
-    <meta property="og:title" content="用 Numpy 向量化加速 Python：千萬級矩形面積計算變快 16~177 倍 | LKY 只有原創內容的 Blog"><meta property="og:site_name" content="LKY 只有原創內容的 Blog"><meta property="og:type" content="article"><meta property="og:url" content="https://mosdeo.github.io/2023/03/04/%E7%94%A8NumPy%E5%90%91%E9%87%8F%E5%8C%96%E8%A8%88%E7%AE%97%E5%8A%A0%E9%80%9FPython20~120%E5%80%8D%E7%9A%84%E7%B0%A1%E5%96%AE%E6%96%B9%E6%B3%95/"><meta property="og:locale" content="zh-TW"><meta name="description" content="Python 簡單易用，可以很快速的驗證各種演算法。但是到了真的要實際應用時，Python 的毛病就會凸顯，往往就是慢！而且慢的很難受。 我也熟悉 Go 或 C# 這些靜態型別的語言，但是欠缺各式各樣方便好用的套件，難以快速的驗證各種演算法。 這篇文章我們來看看如何用 NumPy 來加速 Python 的效能，並且用一個簡單的例子來說明。 需求是：計算 1780 萬個矩形的面積 入門的人怎麼寫？速 - Lin, Kao-Yuan - LKY 只有原創內容的 Blog"><meta name="keywords" content="數據分析, 資料科學, 筆記"><meta property="article:published_time" content="2023-03-04T16:00:00.000Z"><meta property="article:modified_time" content="2023-03-06T02:54:08.759Z"><meta property="og:updated_time" content="2023-03-06T02:54:08.759Z"><meta property="article:author" content="Lin, Kao-Yuan"><meta property="article:tag" content="數據分析, 資料科學, 筆記"><meta name="twitter:card" content="summary">
+    <meta property="og:title" content="用 NumPy 向量化加速 Python：千萬級矩形面積計算變快 16~177 倍 | LKY 只有原創內容的 Blog"><meta property="og:site_name" content="LKY 只有原創內容的 Blog"><meta property="og:type" content="article"><meta property="og:url" content="https://mosdeo.github.io/2023/03/04/%E7%94%A8%20NumPy%20%E5%90%91%E9%87%8F%E5%8C%96%E5%8A%A0%E9%80%9F%20Python%EF%BC%9A%E5%8D%83%E8%90%AC%E7%B4%9A%E7%9F%A9%E5%BD%A2%E9%9D%A2%E7%A9%8D%E8%A8%88%E7%AE%97%E8%AE%8A%E5%BF%AB%2016~177%20%E5%80%8D/"><meta property="og:locale" content="zh-TW"><meta name="description" content="Python 簡單易用，可以很快速的驗證各種演算法。但是到了真的要實際應用時，Python 的毛病就會凸顯，往往就是慢！而且慢的很難受。 我也熟悉 Go 或 C# 這些靜態型別的語言，但是欠缺各式各樣方便好用的套件，難以快速的驗證各種演算法。 這篇文章我們來看看如何用 NumPy 來加速 Python 的效能，並且用一個簡單的例子來說明。 需求是：計算 1780 萬個矩形的面積 入門的人怎麼寫？速 - Lin, Kao-Yuan - LKY 只有原創內容的 Blog"><meta name="keywords" content="數據分析, 資料科學, 筆記"><meta property="article:published_time" content="2023-03-04T16:00:00.000Z"><meta property="article:modified_time" content="2023-03-07T01:19:37.918Z"><meta property="og:updated_time" content="2023-03-07T01:19:37.918Z"><meta property="article:author" content="Lin, Kao-Yuan"><meta property="article:tag" content="數據分析, 資料科學, 筆記"><meta name="twitter:card" content="summary">
 
     
 
     <!-- ### Canonical link ### -->
-    <link rel="canonical" href="https://mosdeo.github.io/2023/03/04/%E7%94%A8NumPy%E5%90%91%E9%87%8F%E5%8C%96%E8%A8%88%E7%AE%97%E5%8A%A0%E9%80%9FPython20~120%E5%80%8D%E7%9A%84%E7%B0%A1%E5%96%AE%E6%96%B9%E6%B3%95/">
+    <link rel="canonical" href="https://mosdeo.github.io/2023/03/04/%E7%94%A8%20NumPy%20%E5%90%91%E9%87%8F%E5%8C%96%E5%8A%A0%E9%80%9F%20Python%EF%BC%9A%E5%8D%83%E8%90%AC%E7%B4%9A%E7%9F%A9%E5%BD%A2%E9%9D%A2%E7%A9%8D%E8%A8%88%E7%AE%97%E8%AE%8A%E5%BF%AB%2016~177%20%E5%80%8D/">
 
     <meta name="generator" content="Hexo 5.2.0">
 
@@ -192,14 +192,14 @@
 <script type="application/ld+json">
 {
     "@context": "http://schema.org",
-    "url": "https://mosdeo.github.io/2023/03/04/%E7%94%A8NumPy%E5%90%91%E9%87%8F%E5%8C%96%E8%A8%88%E7%AE%97%E5%8A%A0%E9%80%9FPython20~120%E5%80%8D%E7%9A%84%E7%B0%A1%E5%96%AE%E6%96%B9%E6%B3%95/",
+    "url": "https://mosdeo.github.io/2023/03/04/%E7%94%A8%20NumPy%20%E5%90%91%E9%87%8F%E5%8C%96%E5%8A%A0%E9%80%9F%20Python%EF%BC%9A%E5%8D%83%E8%90%AC%E7%B4%9A%E7%9F%A9%E5%BD%A2%E9%9D%A2%E7%A9%8D%E8%A8%88%E7%AE%97%E8%AE%8A%E5%BF%AB%2016~177%20%E5%80%8D/",
     "@type": "BlogPosting",
     "logo": "https://mosdeo.github.io/img/suka-favicon.ico",
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "https://mosdeo.github.io/2023/03/04/%E7%94%A8NumPy%E5%90%91%E9%87%8F%E5%8C%96%E8%A8%88%E7%AE%97%E5%8A%A0%E9%80%9FPython20~120%E5%80%8D%E7%9A%84%E7%B0%A1%E5%96%AE%E6%96%B9%E6%B3%95/"
+        "@id": "https://mosdeo.github.io/2023/03/04/%E7%94%A8%20NumPy%20%E5%90%91%E9%87%8F%E5%8C%96%E5%8A%A0%E9%80%9F%20Python%EF%BC%9A%E5%8D%83%E8%90%AC%E7%B4%9A%E7%9F%A9%E5%BD%A2%E9%9D%A2%E7%A9%8D%E8%A8%88%E7%AE%97%E8%AE%8A%E5%BF%AB%2016~177%20%E5%80%8D/"
     },
-    "headline": "用 Numpy 向量化加速 Python：千萬級矩形面積計算變快 16~177 倍 | LKY 只有原創內容的 Blog",
+    "headline": "用 NumPy 向量化加速 Python：千萬級矩形面積計算變快 16~177 倍 | LKY 只有原創內容的 Blog",
     
     "image": {
         "@type": "ImageObject",
@@ -207,7 +207,7 @@
     },
     
     "datePublished": "2023-03-04T16:00:00.000Z",
-    "dateModified": "2023-03-06T02:54:08.759Z",
+    "dateModified": "2023-03-07T01:19:37.918Z",
     "author": {
         "@type": "Person",
         "name": "Lin, Kao-Yuan",
@@ -261,73 +261,73 @@
 
     <nav class="navbar-section text-center">
     
-        <a href="/" class="navbar-link">首页</a>
+        <a href="/" class="navbar-link">Home</a>
     
     
-        <a href="/archives/" class="navbar-link">归档</a>
+        <a href="/archives/" class="navbar-link">Archives</a>
     
     
-        <a href="/search" class="navbar-link">搜索</a>
+        <a href="/search" class="navbar-link">Search</a>
     
     
     
         <div class="dropdown dropdown-right">
-    <a class="navbar-link dropdown-toggle" tabindex="0">分享</a>
+    <a class="navbar-link dropdown-toggle" tabindex="0">Share</a>
     <ul class="menu share-menu">
 
         <!-- Share Weibo -->
         
         <li class="menu-item">
-            <a href="http://service.weibo.com/share/share.php?appkey=&title=LKY 只有原創內容的 Blog&url=https://mosdeo.github.io&pic=https://mosdeo.github.io/img/suka-favicon.ico&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">分享到微博</a>
+            <a href="http://service.weibo.com/share/share.php?appkey=&title=LKY 只有原創內容的 Blog&url=https://mosdeo.github.io&pic=https://mosdeo.github.io/img/suka-favicon.ico&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">Share to Weibo</a>
         </li>
         
 
         <!-- Share Twitter -->
         
         <li class="menu-item">
-            <a href="https://twitter.com/intent/tweet?text=LKY 只有原創內容的 Blog&url=https://mosdeo.github.io&via=Lin, Kao-Yuan" target="_blank" rel="external noopener noreferrer nofollow">分享到 Twitter</a>
+            <a href="https://twitter.com/intent/tweet?text=LKY 只有原創內容的 Blog&url=https://mosdeo.github.io&via=Lin, Kao-Yuan" target="_blank" rel="external noopener noreferrer nofollow">Share to Twitter</a>
         </li>
         
 
         <!-- Share Facebook -->
         
         <li class="menu-item">
-            <a href="https://www.facebook.com/sharer/sharer.php?u=https://mosdeo.github.io" target="_blank" rel="external noopener noreferrer nofollow">分享到 Facebook</a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://mosdeo.github.io" target="_blank" rel="external noopener noreferrer nofollow">Share to Facebook</a>
         </li>
         
 
         <!-- Share Google+ -->
         
         <li class="menu-item">
-            <a href="https://plus.google.com/share?url=https://mosdeo.github.io" target="_blank" rel="external noopener noreferrer nofollow">分享到 Google+</a>
+            <a href="https://plus.google.com/share?url=https://mosdeo.github.io" target="_blank" rel="external noopener noreferrer nofollow">Share to Google+</a>
         </li>
         
 
         <!-- Share LinkedIn -->
         
         <li class="menu-item">
-            <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://mosdeo.github.io&title=用 Numpy 向量化加速 Python：千萬級矩形面積計算變快 16~177 倍" target="_blank" rel="external noopener noreferrer nofollow">分享到 LinkedIn</a>
+            <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://mosdeo.github.io&title=用 NumPy 向量化加速 Python：千萬級矩形面積計算變快 16~177 倍" target="_blank" rel="external noopener noreferrer nofollow">Share to LinkedIn</a>
         </li>
         
 
         <!-- Share QQ -->
         
         <li class="menu-item">
-            <a href="http://connect.qq.com/widget/shareqq/index.html?site=LKY 只有原創內容的 Blog&title=用 Numpy 向量化加速 Python：千萬級矩形面積計算變快 16~177 倍&summary=&pics=https://mosdeo.github.io/img/suka-favicon.ico&url=https://mosdeo.github.io" target="_blank" rel="external noopener noreferrer nofollow"> 分享到 QQ</a>
+            <a href="http://connect.qq.com/widget/shareqq/index.html?site=LKY 只有原創內容的 Blog&title=用 NumPy 向量化加速 Python：千萬級矩形面積計算變快 16~177 倍&summary=&pics=https://mosdeo.github.io/img/suka-favicon.ico&url=https://mosdeo.github.io" target="_blank" rel="external noopener noreferrer nofollow"> Share to QQ</a>
         </li>
         
 
         <!-- Share Telegram -->
         
         <li class="menu-item">
-            <a href="https://t.me/share/url?url=https://mosdeo.github.io&text=用 Numpy 向量化加速 Python：千萬級矩形面積計算變快 16~177 倍" target="_blank" rel="external noopener noreferrer nofollow">分享到 Telegram</a>
+            <a href="https://t.me/share/url?url=https://mosdeo.github.io&text=用 NumPy 向量化加速 Python：千萬級矩形面積計算變快 16~177 倍" target="_blank" rel="external noopener noreferrer nofollow">Share to Telegram</a>
         </li>
         
 
         <!-- QRCode -->
         
         <li class="menu-item">
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOQAAADkCAAAAACtPNdRAAAEI0lEQVR42u3cyW7bUBBEUf3/TydbxxCrbj85AJu+2sSDLPE8w82ekNefX/B4iRQpUqRIkR8iX+Hxzw9cfO/r598//v619Dpfv3/12ul63l6bSJFLkW//aMOLXuGuvpaw6f2u3ptet0iRm5HvLiphWnBowYUc0LvXpNctUuTTkeQGfnXjTjf5qwNoBylS5G9HXoEuC9ZwSFcHl274V8mCSJFPRbZgQm/kJNFPCTwB/3gVIlLkzZAtGNz13x/r1okUeSNkHZqA5JwEKdqUakX7f5lqiRR5I+SkOCaQyWCGNLDbICn+AkSKXIikSfp0ONoK34ScFPTxPUSKXIpsf8iTRYaUULRmdBsukV9AzHhEilyAnCbVLbC0BQfSKGtBhTa8RYrciqTNoZRYT5vJJEDRZvdlgBMpciEy/VFPliVoMDoNKJPGl0iR25Et8W6JOkmmW5P4dAgbnyNS5FLk9MZLhrY0KW+NK/L6uDMgUuQyZGogk4V4GljaAtTVtZChkUiR25HTJb2WQNMCmyz10kFQTdBFilyE/GQgmgZDdMBDivAU5OLShkiRC5ETXEsSaIJBEoc22G3fEylyK/KkUUQWBknCP2l4pYY3WiAUKXIJsg1naMCZDmtoMj5taqMqRKTIBUjStCJBYrJATxL7tgwVD0GkyAcgaYJMitvWaE4QWqSPqhCRIhch03Al3XgnDeQW1OgwCRffIkUuRNILng6E6AGQgpgGOrTUK1LkAiRtJpPCtzXE2pCoLVq0BYo41RIpcgGSLgBOL+L0c9JcowWBSJEbkW1QOknW6euRYnyyQHF54CJFLkROC2Pa+GqJfksO2hBolKCLFLkMScDkY1JIkwEvXV6qi1IiRS5H0otKxetp0KCF9+SARYrciKSDT4JpCfYn8LREgbYkRYpchkSLBmmB9jX/DxZIw5g0pEcddJEib45sN/lWzE4K78kixmlRL1LkE5A0qBwtu5eFXXLjnxbZIkVuRk4WjdoQhiw4tQcJPvR9RIrcjmxv2AagtAmWimsySGpBTqTIJyHJEDUFJ1rwpmBHFpRaIS5S5HYkTb4pZlowp+ETWdRACbpIkUuQJwsK6Q0nS4Ip6EyS8rcBS6TIhUg0zCzPocu3NEGnRXO7NpEin4KkTaxJ8/l0WDsZCqMhrEiRN0emgEOHsq3gTQ0rssSbkgS01CtS5DIkHqCARYhJQzolHm0Ai4a4IkUuR5LAc4IhyXw7sMkyk0iRm5F0sEqXkdIFp6HpyfNbsBQpciuSJuaTizpZ4p0EJdTkEilyMZIWpmlJIR0MHZ62gxsl+yJFPhSJm7mDr1PwR0NakSIfjqRLDqfNMdqoIoFNpMjtyMliEhnCTm7qp+B6wCJFLkWmhLc1fifNYzr0Jc9HC8EiRS5EPvkhUqRIkSJFHj7+ApdmAWx37cDMAAAAAElFTkSuQmCC" alr="QRCode">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQQAAAEECAAAAADrYxXWAAAFZUlEQVR42u3dy24TURBF0f7/nzYjJAR96+xTbQbQ25ME2enHslSpl8P18fG5JBBBBBFEEEGEEeEaHj+f//W16evd97+fJ513et10Hnp8EUQQYUa4DRo3Bzsd/IQ0AZzOl75Px5ie/+N4IoggwhHhdKFTkJwQfn+OBC4SgE+vT9d/ew8iiCBCjZAuPt30FDSbROwUyGkCJ4IIInwvMJ6SjikoTjeeiqUpGE4BlwRpEUQQgSGkguYU0FKRNQVDUiCR85IA+qiKFEGElyGQRuu/+PXr3WYRRHgBAh5eHgINac7SImsq2GgC91en0iKI8AIEWtykhkcavpIhLG3ATvBTswYNZEUQ4eUIJLhMxdTmQtqijC54pEYO/u0ggggixGWHqSlK/r1Z/pqCW1oymzBFEEEEhkCGoWShKw1hCSBJepo36hZXBBFEOCKQxeq0KEWTGIJDBzopUE9JmQgiiDAvaTTNkVRkTYkKada0w1da5I2NVhFEEAE3LclgpU2o6LBmcw0pwRJBBBEunCfQRmo8ycWWwjeJEj32WLiJIIIIcZmTDmKbxkh6DjVFYTFHGi0iiCDCFXebyWJ2Sk5IkdXcSJMIpWbK7RsugggirBqt6eCkkUKTpuZGyFAWBUYRRBABBa27m6VLUdOgl9xAwqQLZY8mUCKI8FIEMnAlwaYd3DTHaBY58BsogggiHBHITU9o5Oa3zdL2+dRoEUEEEVhTZTs0TUvhZJGDLJeTBfE0DIqNVhFEEOGiJ6eLVaSQ2ixy0cCXAq4IIojAe4ztAkXz882Qt1n6IoWUCCKIwBDi0PK68IfGpoWvhEuWuGmzhCyTiSCCCBmBBkOa7NBhLwGeEjDSbL0FEUEEEY7JUkqEmkRpW5yRAWvT4BVBBBF6hJRkTMHrSWOVBmC66EGPfRy+iCCCCJ9totMUTiSoNkscqenbvKkiiCAC+wxUGmCkxQoaRJvlLdpoqQa3IoggwlhANY1WMohNN9gE1nSMFBjHJQ0RRBABFzY0oE1FFy1wSKCmBRUpBEUQQYTPbWBsBiG0sUqbobQoahupKdkTQQQRnv39BFKoVIMPcBN4KbO58evBp+ZFEOElCLRISsPWpsAiRRAZ7pAFT/zbQQQRRMB/wI02R2nCki70SUE3JWIiiCACR6CBjDQytktdqVgiCVV6U0QQQYTu7zGmgqVpmDQ3+c3GLloQEUEEEaqBbLuUlQYuNDkji2PpPKi5K4IIIqACijRcUwOWLFyQ5U7yehLI0TKnCCKIEE++GaCkISpt3NKCii6giSCCCAwhBcNmcEqarQ12lfyAwC6CCCLk2iEtRKeEhg5laLAjSVxKllYL3iKIIEK8MXIwkjiRYioFYbIwXiV3Ioggwri4lYIOOQHB2TRz6BIHSeBEEEGEa1zS2HxPiqE2mUnLoSQZS8AxYxRBhJcjpCXvadDSFk/pdU3yRK4pXosIIohQFVDTslYKlmSY2iyFkICXji+CCCJwBLKwSRYyUlBMmJuBbWrYHK9XBBFEGAMjXYJqkiSCRo5FG63p3PG3gwgivByBLD2QBakmkUkLXnQwTAvAuLglgggirBsV30qCyAAHDVCu3QfMRRBBBPZBMJpEpaSKLEnEwAVvfn18EUQQIQZGFFBC0UODHE2KnlzL6reDCCK8HCEVHmTBizRhU+M2DVxoAKcDZRFEEIH9/w5to7MZxDSLXLRxuk7oRBBBhBUCWa5uipopaaLDE7LMERfBRBBBhBqBBELyc2kgSwJxuk4SvEUQQYTuA+N0oEKXuOjC1XYxo7l5EUQQgSG0S1vThW6XM9qBbUrWEpIIIoiw20/4nx8iiCCCCCKIIMLt4we6aK3YVu9n1AAAAABJRU5ErkJggg==" alr="QRCode">
         </li>
         
 
@@ -350,7 +350,7 @@
                 <!-- # Post Header Info # -->
                 <div class="card-header">
                     
-    <h1 class="card-title h3 mb-2">用 Numpy 向量化加速 Python：千萬級矩形面積計算變快 16~177 倍</h1>
+    <h1 class="card-title h3 mb-2">用 NumPy 向量化加速 Python：千萬級矩形面積計算變快 16~177 倍</h1>
 
 
 
@@ -374,61 +374,61 @@
     <div class="post-header-info-right">
         
             <div class="dropdown dropdown-right">
-<a class="dropdown-toggle" tabindex="0">分享本文</a>
+<a class="dropdown-toggle" tabindex="0">Share the post</a>
 <ul class="menu share-menu">
     <!-- Share Weibo -->
     
     <li class="menu-item">
-        <a href="http://service.weibo.com/share/share.php?appkey=&title=用 Numpy 向量化加速 Python：千萬級矩形面積計算變快 16~177 倍&url=https://mosdeo.github.io/2023/03/04/%E7%94%A8NumPy%E5%90%91%E9%87%8F%E5%8C%96%E8%A8%88%E7%AE%97%E5%8A%A0%E9%80%9FPython20~120%E5%80%8D%E7%9A%84%E7%B0%A1%E5%96%AE%E6%96%B9%E6%B3%95/&pic=https://mosdeo.github.io/img/suka-favicon.ico&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">分享到微博</a>
+        <a href="http://service.weibo.com/share/share.php?appkey=&title=用 NumPy 向量化加速 Python：千萬級矩形面積計算變快 16~177 倍&url=https://mosdeo.github.io/2023/03/04/%E7%94%A8%20NumPy%20%E5%90%91%E9%87%8F%E5%8C%96%E5%8A%A0%E9%80%9F%20Python%EF%BC%9A%E5%8D%83%E8%90%AC%E7%B4%9A%E7%9F%A9%E5%BD%A2%E9%9D%A2%E7%A9%8D%E8%A8%88%E7%AE%97%E8%AE%8A%E5%BF%AB%2016~177%20%E5%80%8D/&pic=https://mosdeo.github.io/img/suka-favicon.ico&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">Share to Weibo</a>
     </li>
     
 
     <!-- Share Twitter -->
     
     <li class="menu-item">
-        <a href="https://twitter.com/intent/tweet?text=用 Numpy 向量化加速 Python：千萬級矩形面積計算變快 16~177 倍&url=https://mosdeo.github.io/2023/03/04/%E7%94%A8NumPy%E5%90%91%E9%87%8F%E5%8C%96%E8%A8%88%E7%AE%97%E5%8A%A0%E9%80%9FPython20~120%E5%80%8D%E7%9A%84%E7%B0%A1%E5%96%AE%E6%96%B9%E6%B3%95/&via=Lin, Kao-Yuan" target="_blank" rel="external noopener noreferrer nofollow">分享到 Twitter</a>
+        <a href="https://twitter.com/intent/tweet?text=用 NumPy 向量化加速 Python：千萬級矩形面積計算變快 16~177 倍&url=https://mosdeo.github.io/2023/03/04/%E7%94%A8%20NumPy%20%E5%90%91%E9%87%8F%E5%8C%96%E5%8A%A0%E9%80%9F%20Python%EF%BC%9A%E5%8D%83%E8%90%AC%E7%B4%9A%E7%9F%A9%E5%BD%A2%E9%9D%A2%E7%A9%8D%E8%A8%88%E7%AE%97%E8%AE%8A%E5%BF%AB%2016~177%20%E5%80%8D/&via=Lin, Kao-Yuan" target="_blank" rel="external noopener noreferrer nofollow">Share to Twitter</a>
     </li>
     
 
     <!-- Share Facebook -->
     
     <li class="menu-item">
-        <a href="https://www.facebook.com/sharer/sharer.php?u=https://mosdeo.github.io/2023/03/04/%E7%94%A8NumPy%E5%90%91%E9%87%8F%E5%8C%96%E8%A8%88%E7%AE%97%E5%8A%A0%E9%80%9FPython20~120%E5%80%8D%E7%9A%84%E7%B0%A1%E5%96%AE%E6%96%B9%E6%B3%95/" target="_blank" rel="external noopener noreferrer nofollow">分享到 Facebook</a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://mosdeo.github.io/2023/03/04/%E7%94%A8%20NumPy%20%E5%90%91%E9%87%8F%E5%8C%96%E5%8A%A0%E9%80%9F%20Python%EF%BC%9A%E5%8D%83%E8%90%AC%E7%B4%9A%E7%9F%A9%E5%BD%A2%E9%9D%A2%E7%A9%8D%E8%A8%88%E7%AE%97%E8%AE%8A%E5%BF%AB%2016~177%20%E5%80%8D/" target="_blank" rel="external noopener noreferrer nofollow">Share to Facebook</a>
     </li>
     
 
     <!-- Share Google+ -->
     
     <li class="menu-item">
-        <a href="https://plus.google.com/share?url=https://mosdeo.github.io/2023/03/04/%E7%94%A8NumPy%E5%90%91%E9%87%8F%E5%8C%96%E8%A8%88%E7%AE%97%E5%8A%A0%E9%80%9FPython20~120%E5%80%8D%E7%9A%84%E7%B0%A1%E5%96%AE%E6%96%B9%E6%B3%95/" target="_blank" rel="external noopener noreferrer nofollow">分享到 Google+</a>
+        <a href="https://plus.google.com/share?url=https://mosdeo.github.io/2023/03/04/%E7%94%A8%20NumPy%20%E5%90%91%E9%87%8F%E5%8C%96%E5%8A%A0%E9%80%9F%20Python%EF%BC%9A%E5%8D%83%E8%90%AC%E7%B4%9A%E7%9F%A9%E5%BD%A2%E9%9D%A2%E7%A9%8D%E8%A8%88%E7%AE%97%E8%AE%8A%E5%BF%AB%2016~177%20%E5%80%8D/" target="_blank" rel="external noopener noreferrer nofollow">Share to Google+</a>
     </li>
     
 
     <!-- Share LinkedIn -->
     
     <li class="menu-item">
-        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://mosdeo.github.io/2023/03/04/%E7%94%A8NumPy%E5%90%91%E9%87%8F%E5%8C%96%E8%A8%88%E7%AE%97%E5%8A%A0%E9%80%9FPython20~120%E5%80%8D%E7%9A%84%E7%B0%A1%E5%96%AE%E6%96%B9%E6%B3%95/&title=LKY 只有原創內容的 Blog" target="_blank" rel="external noopener noreferrer nofollow">分享到 LinkedIn</a>
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://mosdeo.github.io/2023/03/04/%E7%94%A8%20NumPy%20%E5%90%91%E9%87%8F%E5%8C%96%E5%8A%A0%E9%80%9F%20Python%EF%BC%9A%E5%8D%83%E8%90%AC%E7%B4%9A%E7%9F%A9%E5%BD%A2%E9%9D%A2%E7%A9%8D%E8%A8%88%E7%AE%97%E8%AE%8A%E5%BF%AB%2016~177%20%E5%80%8D/&title=LKY 只有原創內容的 Blog" target="_blank" rel="external noopener noreferrer nofollow">Share to LinkedIn</a>
     </li>
     
 
     <!-- Share QQ -->
     
     <li class="menu-item">
-        <a href="http://connect.qq.com/widget/shareqq/index.html?site=LKY 只有原創內容的 Blog&title=LKY 只有原創內容的 Blog&summary=&pics=https://mosdeo.github.io/img/suka-favicon.ico&url=https://mosdeo.github.io/2023/03/04/%E7%94%A8NumPy%E5%90%91%E9%87%8F%E5%8C%96%E8%A8%88%E7%AE%97%E5%8A%A0%E9%80%9FPython20~120%E5%80%8D%E7%9A%84%E7%B0%A1%E5%96%AE%E6%96%B9%E6%B3%95/" target="_blank" rel="external noopener noreferrer nofollow"> 分享到 QQ</a>
+        <a href="http://connect.qq.com/widget/shareqq/index.html?site=LKY 只有原創內容的 Blog&title=LKY 只有原創內容的 Blog&summary=&pics=https://mosdeo.github.io/img/suka-favicon.ico&url=https://mosdeo.github.io/2023/03/04/%E7%94%A8%20NumPy%20%E5%90%91%E9%87%8F%E5%8C%96%E5%8A%A0%E9%80%9F%20Python%EF%BC%9A%E5%8D%83%E8%90%AC%E7%B4%9A%E7%9F%A9%E5%BD%A2%E9%9D%A2%E7%A9%8D%E8%A8%88%E7%AE%97%E8%AE%8A%E5%BF%AB%2016~177%20%E5%80%8D/" target="_blank" rel="external noopener noreferrer nofollow"> Share to QQ</a>
     </li>
     
 
     <!-- Share Telegram -->
     
     <li class="menu-item">
-        <a href="https://t.me/share/url?url=https://mosdeo.github.io/2023/03/04/%E7%94%A8NumPy%E5%90%91%E9%87%8F%E5%8C%96%E8%A8%88%E7%AE%97%E5%8A%A0%E9%80%9FPython20~120%E5%80%8D%E7%9A%84%E7%B0%A1%E5%96%AE%E6%96%B9%E6%B3%95/&text=LKY 只有原創內容的 Blog" target="_blank" rel="external noopener noreferrer nofollow">分享到 Telegram</a>
+        <a href="https://t.me/share/url?url=https://mosdeo.github.io/2023/03/04/%E7%94%A8%20NumPy%20%E5%90%91%E9%87%8F%E5%8C%96%E5%8A%A0%E9%80%9F%20Python%EF%BC%9A%E5%8D%83%E8%90%AC%E7%B4%9A%E7%9F%A9%E5%BD%A2%E9%9D%A2%E7%A9%8D%E8%A8%88%E7%AE%97%E8%AE%8A%E5%BF%AB%2016~177%20%E5%80%8D/&text=LKY 只有原創內容的 Blog" target="_blank" rel="external noopener noreferrer nofollow">Share to Telegram</a>
     </li>
     
 
     <!-- QRCode -->
     
     <li class="menu-item">
-        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOQAAADkCAAAAACtPNdRAAAEI0lEQVR42u3cyW7bUBBEUf3/TydbxxCrbj85AJu+2sSDLPE8w82ekNefX/B4iRQpUqRIkR8iX+Hxzw9cfO/r598//v619Dpfv3/12ul63l6bSJFLkW//aMOLXuGuvpaw6f2u3ptet0iRm5HvLiphWnBowYUc0LvXpNctUuTTkeQGfnXjTjf5qwNoBylS5G9HXoEuC9ZwSFcHl274V8mCSJFPRbZgQm/kJNFPCTwB/3gVIlLkzZAtGNz13x/r1okUeSNkHZqA5JwEKdqUakX7f5lqiRR5I+SkOCaQyWCGNLDbICn+AkSKXIikSfp0ONoK34ScFPTxPUSKXIpsf8iTRYaUULRmdBsukV9AzHhEilyAnCbVLbC0BQfSKGtBhTa8RYrciqTNoZRYT5vJJEDRZvdlgBMpciEy/VFPliVoMDoNKJPGl0iR25Et8W6JOkmmW5P4dAgbnyNS5FLk9MZLhrY0KW+NK/L6uDMgUuQyZGogk4V4GljaAtTVtZChkUiR25HTJb2WQNMCmyz10kFQTdBFilyE/GQgmgZDdMBDivAU5OLShkiRC5ETXEsSaIJBEoc22G3fEylyK/KkUUQWBknCP2l4pYY3WiAUKXIJsg1naMCZDmtoMj5taqMqRKTIBUjStCJBYrJATxL7tgwVD0GkyAcgaYJMitvWaE4QWqSPqhCRIhch03Al3XgnDeQW1OgwCRffIkUuRNILng6E6AGQgpgGOrTUK1LkAiRtJpPCtzXE2pCoLVq0BYo41RIpcgGSLgBOL+L0c9JcowWBSJEbkW1QOknW6euRYnyyQHF54CJFLkROC2Pa+GqJfksO2hBolKCLFLkMScDkY1JIkwEvXV6qi1IiRS5H0otKxetp0KCF9+SARYrciKSDT4JpCfYn8LREgbYkRYpchkSLBmmB9jX/DxZIw5g0pEcddJEib45sN/lWzE4K78kixmlRL1LkE5A0qBwtu5eFXXLjnxbZIkVuRk4WjdoQhiw4tQcJPvR9RIrcjmxv2AagtAmWimsySGpBTqTIJyHJEDUFJ1rwpmBHFpRaIS5S5HYkTb4pZlowp+ETWdRACbpIkUuQJwsK6Q0nS4Ip6EyS8rcBS6TIhUg0zCzPocu3NEGnRXO7NpEin4KkTaxJ8/l0WDsZCqMhrEiRN0emgEOHsq3gTQ0rssSbkgS01CtS5DIkHqCARYhJQzolHm0Ai4a4IkUuR5LAc4IhyXw7sMkyk0iRm5F0sEqXkdIFp6HpyfNbsBQpciuSJuaTizpZ4p0EJdTkEilyMZIWpmlJIR0MHZ62gxsl+yJFPhSJm7mDr1PwR0NakSIfjqRLDqfNMdqoIoFNpMjtyMliEhnCTm7qp+B6wCJFLkWmhLc1fifNYzr0Jc9HC8EiRS5EPvkhUqRIkSJFHj7+ApdmAWx37cDMAAAAAElFTkSuQmCC" alt="QRCode">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQQAAAEECAAAAADrYxXWAAAFZUlEQVR42u3dy24TURBF0f7/nzYjJAR96+xTbQbQ25ME2enHslSpl8P18fG5JBBBBBFEEEGEEeEaHj+f//W16evd97+fJ513et10Hnp8EUQQYUa4DRo3Bzsd/IQ0AZzOl75Px5ie/+N4IoggwhHhdKFTkJwQfn+OBC4SgE+vT9d/ew8iiCBCjZAuPt30FDSbROwUyGkCJ4IIInwvMJ6SjikoTjeeiqUpGE4BlwRpEUQQgSGkguYU0FKRNQVDUiCR85IA+qiKFEGElyGQRuu/+PXr3WYRRHgBAh5eHgINac7SImsq2GgC91en0iKI8AIEWtykhkcavpIhLG3ATvBTswYNZEUQ4eUIJLhMxdTmQtqijC54pEYO/u0ggggixGWHqSlK/r1Z/pqCW1oymzBFEEEEhkCGoWShKw1hCSBJepo36hZXBBFEOCKQxeq0KEWTGIJDBzopUE9JmQgiiDAvaTTNkVRkTYkKada0w1da5I2NVhFEEAE3LclgpU2o6LBmcw0pwRJBBBEunCfQRmo8ycWWwjeJEj32WLiJIIIIcZmTDmKbxkh6DjVFYTFHGi0iiCDCFXebyWJ2Sk5IkdXcSJMIpWbK7RsugggirBqt6eCkkUKTpuZGyFAWBUYRRBABBa27m6VLUdOgl9xAwqQLZY8mUCKI8FIEMnAlwaYd3DTHaBY58BsogggiHBHITU9o5Oa3zdL2+dRoEUEEEVhTZTs0TUvhZJGDLJeTBfE0DIqNVhFEEOGiJ6eLVaSQ2ixy0cCXAq4IIojAe4ztAkXz882Qt1n6IoWUCCKIwBDi0PK68IfGpoWvhEuWuGmzhCyTiSCCCBmBBkOa7NBhLwGeEjDSbL0FEUEEEY7JUkqEmkRpW5yRAWvT4BVBBBF6hJRkTMHrSWOVBmC66EGPfRy+iCCCCJ9totMUTiSoNkscqenbvKkiiCAC+wxUGmCkxQoaRJvlLdpoqQa3IoggwlhANY1WMohNN9gE1nSMFBjHJQ0RRBABFzY0oE1FFy1wSKCmBRUpBEUQQYTPbWBsBiG0sUqbobQoahupKdkTQQQRnv39BFKoVIMPcBN4KbO58evBp+ZFEOElCLRISsPWpsAiRRAZ7pAFT/zbQQQRRMB/wI02R2nCki70SUE3JWIiiCACR6CBjDQytktdqVgiCVV6U0QQQYTu7zGmgqVpmDQ3+c3GLloQEUEEEaqBbLuUlQYuNDkji2PpPKi5K4IIIqACijRcUwOWLFyQ5U7yehLI0TKnCCKIEE++GaCkISpt3NKCii6giSCCCAwhBcNmcEqarQ12lfyAwC6CCCLk2iEtRKeEhg5laLAjSVxKllYL3iKIIEK8MXIwkjiRYioFYbIwXiV3Ioggwri4lYIOOQHB2TRz6BIHSeBEEEGEa1zS2HxPiqE2mUnLoSQZS8AxYxRBhJcjpCXvadDSFk/pdU3yRK4pXosIIohQFVDTslYKlmSY2iyFkICXji+CCCJwBLKwSRYyUlBMmJuBbWrYHK9XBBFEGAMjXYJqkiSCRo5FG63p3PG3gwgivByBLD2QBakmkUkLXnQwTAvAuLglgggirBsV30qCyAAHDVCu3QfMRRBBBPZBMJpEpaSKLEnEwAVvfn18EUQQIQZGFFBC0UODHE2KnlzL6reDCCK8HCEVHmTBizRhU+M2DVxoAKcDZRFEEIH9/w5to7MZxDSLXLRxuk7oRBBBhBUCWa5uipopaaLDE7LMERfBRBBBhBqBBELyc2kgSwJxuk4SvEUQQYTuA+N0oEKXuOjC1XYxo7l5EUQQgSG0S1vThW6XM9qBbUrWEpIIIoiw20/4nx8iiCCCCCKIIMLt4we6aK3YVu9n1AAAAABJRU5ErkJggg==" alt="QRCode">
     </li>
     
 
@@ -491,11 +491,11 @@
 <p>用 NumPy 就是這樣，通常會比只用單純的 Python 快很多，但是各種不同用法的效能差異卻很大。</p>
 <p>想達到最好的效能，有沒有一次到位的方法？除非有時間仔細鑽研 NumPy 的底層原理，不然我覺得沒有，只能一步一步的嘗試，並且不斷的優化。</p>
 <h2 id="更快的方法，要注意其他的風險">更快的方法，要注意其他的風險</h2>
-<p>可以看到在最後一段程式碼中，有一個被我註解的地方。</p>
+<p>可以看到，在最後一段程式碼中，有一行被我註解的地方。</p>
 <p>用 np.diff 也可以達到同樣的效果，還更快一點，而且我完全想不出原因是什麼？</p>
 <p>但是我開了 Docker 之後，就會發生爆記憶體的錯誤：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Exception has occurred: _ArrayMemoryError</span><br><span class="line">Unable to allocate 2.25 PiB <span class="keyword">for</span> an array with shape (17800000, 17800000) and data <span class="built_in">type</span> int64</span><br><span class="line">  File <span class="string">&quot;/Users/xxx/demo_vectorlize.py&quot;</span>, line 44, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    area = np.abs(np.diff(rects[:, 0], axis=1)) * np.abs(np.diff(rects[:, 1], axis=1)).flatten()</span><br><span class="line">           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span><br><span class="line">numpy.core._exceptions._ArrayMemoryError: Unable to allocate 2.25 PiB <span class="keyword">for</span> an array with shape (17800000, 17800000) and data <span class="built_in">type</span> int64</span><br></pre></td></tr></table></figure>
-<p>可以看到 np.diff 跟記憶體要了一塊 N x N 的空間，而 N 高達 17800000，這對許多系統來說是無法承受的。而且你開發時可能不會出現這個問題，但是到了生產環境才發現，那就採了大坑了。</p>
+<p>可以看到 np.diff 跟記憶體要了一塊 N x N 的空間，而 N 高達 17800000，這對許多系統來說是無法承受的。而且你開發時可能不會出現這個問題，但是到了生產環境才發現，那就踩了大坑了。</p>
 <h2 id="總結">總結</h2>
 <p>三種向量化計算的效能，與原本的 for-loop 效能比較如下：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Speed up <span class="keyword">for</span> vectorlize: 16.214365142630854x</span><br><span class="line">Speed up <span class="keyword">for</span> ptp-vectorlize: 22.690497940763034x</span><br><span class="line">Speed up <span class="keyword">for</span> diff-abs-vectorlize: 177.09109827885285x</span><br></pre></td></tr></table></figure>
@@ -506,10 +506,10 @@
                     
 
 
-    <blockquote id="date-expire-notification" class="post-expired-notify">本文最后更新于 <span id="date-expire-num"></span> 天前，文中所描述的信息可能已发生改变</blockquote>
+    <blockquote id="date-expire-notification" class="post-expired-notify">This article was last updated on <span id="date-expire-num"></span> days ago, and the information described in the article may have changed.</blockquote>
     <script>
     (function() {
-        var dateUpdate = Date.parse("2023-03-06");
+        var dateUpdate = Date.parse("2023-03-07");
         var nowDate = new Date();
         var a = nowDate.getTime();
         var b = a - dateUpdate;
@@ -523,9 +523,9 @@
     </script>
 
 
-<p class="post-footer-info mb-0 pt-0">本文发表于&nbsp;<time datetime="2023-03-04T16:00:00.000Z" itemprop="datePublished">2023-03-05</time>
+<p class="post-footer-info mb-0 pt-0">Published at&nbsp;<time datetime="2023-03-04T16:00:00.000Z" itemprop="datePublished">2023-03-05</time>
 
-    , 最后修改于&nbsp;<time datetime="2023-03-06T02:54:08.759Z" itemprop="dateModified">2023-03-06</time>
+    , Updated at&nbsp;<time datetime="2023-03-07T01:19:37.918Z" itemprop="dateModified">2023-03-07</time>
 
 </p>
 <p class="post-footer-info mb-0 pt-2">
@@ -550,6 +550,13 @@
 <ul class="pagination">
     <!-- Prev Nav -->
     
+        <li class="page-item page-prev">
+            <a href="/2023/03/07/%E7%94%A8%20NumPy%20%E5%90%91%E9%87%8F%E5%8C%96%E5%8A%A0%E9%80%9F%20Python%EF%BC%9A%E5%BE%9E3%E5%8D%83%E8%90%AC%E5%89%A9%E7%94%B7%E4%B8%AD%E6%89%BE%E5%87%BA%E6%AF%94%E6%88%91%E9%AB%98%E8%AE%8A%E5%BF%AB%2016%20%E5%80%8D/" rel="prev">
+                <div class="page-item-title"><i class="icon icon-back" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">用 NumPy 向量化加速 Python：從3千萬剩男中找出比我高 16 倍</div>
+            </a>
+        </li>
+    
 
     <!-- Next Nav -->
     
@@ -570,8 +577,8 @@
                             <div id="disqus_thread"></div>
 <script>
     var disqus_config = function () {
-        this.page.url = 'https://mosdeo.github.io/2023/03/04/%E7%94%A8NumPy%E5%90%91%E9%87%8F%E5%8C%96%E8%A8%88%E7%AE%97%E5%8A%A0%E9%80%9FPython20~120%E5%80%8D%E7%9A%84%E7%B0%A1%E5%96%AE%E6%96%B9%E6%B3%95/'; // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = 'https://mosdeo.github.io/2023/03/04/%E7%94%A8NumPy%E5%90%91%E9%87%8F%E5%8C%96%E8%A8%88%E7%AE%97%E5%8A%A0%E9%80%9FPython20~120%E5%80%8D%E7%9A%84%E7%B0%A1%E5%96%AE%E6%96%B9%E6%B3%95/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.url = 'https://mosdeo.github.io/2023/03/04/%E7%94%A8%20NumPy%20%E5%90%91%E9%87%8F%E5%8C%96%E5%8A%A0%E9%80%9F%20Python%EF%BC%9A%E5%8D%83%E8%90%AC%E7%B4%9A%E7%9F%A9%E5%BD%A2%E9%9D%A2%E7%A9%8D%E8%A8%88%E7%AE%97%E8%AE%8A%E5%BF%AB%2016~177%20%E5%80%8D/'; // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'https://mosdeo.github.io/2023/03/04/%E7%94%A8%20NumPy%20%E5%90%91%E9%87%8F%E5%8C%96%E5%8A%A0%E9%80%9F%20Python%EF%BC%9A%E5%8D%83%E8%90%AC%E7%B4%9A%E7%9F%A9%E5%BD%A2%E9%9D%A2%E7%A9%8D%E8%A8%88%E7%AE%97%E8%AE%8A%E5%BF%AB%2016~177%20%E5%80%8D/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 </script>
 <script id="disqus-thread-script">
