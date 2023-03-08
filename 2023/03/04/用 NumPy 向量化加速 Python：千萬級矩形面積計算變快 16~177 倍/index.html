@@ -157,7 +157,7 @@
     <link rel="alternate" type="application/atom+xml" href="/atom.xml"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="LKY 只有原創內容的 Blog"><meta name="msapplication-starturl" content="https://mosdeo.github.io"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="LKY 只有原創內容的 Blog"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
     <!-- ### The Open Graph & Twitter Card Protocol ### -->
-    <meta property="og:title" content="用 NumPy 向量化加速 Python：千萬級矩形面積計算變快 16~177 倍 | LKY 只有原創內容的 Blog"><meta property="og:site_name" content="LKY 只有原創內容的 Blog"><meta property="og:type" content="article"><meta property="og:url" content="https://mosdeo.github.io/2023/03/04/%E7%94%A8%20NumPy%20%E5%90%91%E9%87%8F%E5%8C%96%E5%8A%A0%E9%80%9F%20Python%EF%BC%9A%E5%8D%83%E8%90%AC%E7%B4%9A%E7%9F%A9%E5%BD%A2%E9%9D%A2%E7%A9%8D%E8%A8%88%E7%AE%97%E8%AE%8A%E5%BF%AB%2016~177%20%E5%80%8D/"><meta property="og:locale" content="zh-TW"><meta name="description" content="Python 簡單易用，可以很快速的驗證各種演算法。但是到了真的要實際應用時，Python 的毛病就會凸顯，往往就是慢！而且慢的很難受。 我也熟悉 Go 或 C# 這些靜態型別的語言，但是欠缺各式各樣方便好用的套件，難以快速的驗證各種演算法。 這篇文章我們來看看如何用 NumPy 來加速 Python 的效能，並且用一個簡單的例子來說明。 需求是：計算 1780 萬個矩形的面積 入門的人怎麼寫？速 - Lin, Kao-Yuan - LKY 只有原創內容的 Blog"><meta name="keywords" content="數據分析, 資料科學, 筆記"><meta property="article:published_time" content="2023-03-04T16:00:00.000Z"><meta property="article:modified_time" content="2023-03-07T01:19:37.918Z"><meta property="og:updated_time" content="2023-03-07T01:19:37.918Z"><meta property="article:author" content="Lin, Kao-Yuan"><meta property="article:tag" content="數據分析, 資料科學, 筆記"><meta name="twitter:card" content="summary">
+    <meta property="og:title" content="用 NumPy 向量化加速 Python：千萬級矩形面積計算變快 16~177 倍 | LKY 只有原創內容的 Blog"><meta property="og:site_name" content="LKY 只有原創內容的 Blog"><meta property="og:type" content="article"><meta property="og:url" content="https://mosdeo.github.io/2023/03/04/%E7%94%A8%20NumPy%20%E5%90%91%E9%87%8F%E5%8C%96%E5%8A%A0%E9%80%9F%20Python%EF%BC%9A%E5%8D%83%E8%90%AC%E7%B4%9A%E7%9F%A9%E5%BD%A2%E9%9D%A2%E7%A9%8D%E8%A8%88%E7%AE%97%E8%AE%8A%E5%BF%AB%2016~177%20%E5%80%8D/"><meta property="og:locale" content="zh-TW"><meta name="description" content="Python 簡單易用，可以很快速的驗證各種演算法。但是到了真的要實際應用時，Python 的毛病就會凸顯，往往就是慢！而且慢的很難受。 我也熟悉 Go 或 C# 這些靜態型別的語言，但是欠缺各式各樣方便好用的套件，難以快速的驗證各種演算法。 這篇文章我們來看看如何用 NumPy 來加速 Python 的效能，並且用一個簡單的例子來說明。 需求是：計算 1780 萬個矩形的面積 入門的人怎麼寫？速 - Lin, Kao-Yuan - LKY 只有原創內容的 Blog"><meta name="keywords" content="筆記, 數據分析, 資料科學"><meta property="article:published_time" content="2023-03-04T16:00:00.000Z"><meta property="article:modified_time" content="2023-03-07T01:19:37.918Z"><meta property="og:updated_time" content="2023-03-07T01:19:37.918Z"><meta property="article:author" content="Lin, Kao-Yuan"><meta property="article:tag" content="筆記, 數據分析, 資料科學"><meta name="twitter:card" content="summary">
 
     
 
@@ -232,7 +232,7 @@
         "query-input": "required name=search_term_string"
     },
     
-    "keywords": "數據分析, 資料科學, 筆記",
+    "keywords": "筆記, 數據分析, 資料科學",
     "description": "Python 簡單易用，可以很快速的驗證各種演算法。但是到了真的要實際應用時，Python 的毛病就會凸顯，往往就是慢！而且慢的很難受。 我也熟悉 Go 或 C# 這些靜態型別的語言，但是欠缺各式各樣方便好用的套件，難以快速的驗證各種演算法。 這篇文章我們來看看如何用 NumPy 來加速 Python 的效能，並且用一個簡單的例子來說明。 需求是：計算 1780 萬個矩形的面積 入門的人怎麼寫？速 - Lin, Kao-Yuan - LKY 只有原創內容的 Blog"
 }
 </script>
@@ -534,11 +534,11 @@
 
 <span class="post-tags-list mt-2">
 
+<a class="post-tags-list-item" href="/tags/%E7%AD%86%E8%A8%98/" rel="tag">#&nbsp;筆記</a>
+
 <a class="post-tags-list-item" href="/tags/%E6%95%B8%E6%93%9A%E5%88%86%E6%9E%90/" rel="tag">#&nbsp;數據分析</a>
 
 <a class="post-tags-list-item" href="/tags/%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8/" rel="tag">#&nbsp;資料科學</a>
-
-<a class="post-tags-list-item" href="/tags/%E7%AD%86%E8%A8%98/" rel="tag">#&nbsp;筆記</a>
 
 </span>
 
