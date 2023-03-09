@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+
+<html lang="zh-TW">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        hexo-theme-suka © SukkaW
+        GitHub: https://github.com/SukkaW/hexo-theme-suka
+    -->
+
+    <!-- ### Resource Hint ### -->
+
+    <!-- ## DNS Prefetch ## -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+<!-- busuanzi -->
+
+    <link rel="dns-prefetch" href="//busuanzi.ibruce.info">
+
+
+<!-- comment -->
+
+
+    <link rel="dns-prefetch" href="//disqus.com">
+    <link rel="dns-prefetch" href="//mosdeo-github-io.disqus.com">
+
+
+
+
+
+
+<!-- analytics -->
+
+
+    <link rel="dns-prefetch" href="//www.google-analytics.com">
+
+
+
+
+
+
+    <!-- ## Preload ## -->
+    
+    <!-- Busuanzi -->
+    
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.js" as="script">
+
+
+
+
+
+
+
+    <!-- ### Meta & Title & Info ### -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <meta name="renderer" content="webkit">
+
+    <!-- Title -->
+    <title>用 NumPy 向量化加速 Python：條件式卷積，變快 250 倍 | LKY 只有原創內容的 Blog</title>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image&#x2F;ico" href="/img/suka-favicon.ico">
+
+    <!-- ### Import File ### -->
+    <link rel="stylesheet" href="/lib/spectre/spectre.min.css"><style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    a, a:visited {
+        color: #0070ff;
+    }
+
+    a:active, a:focus, a:hover {
+        color: #0070ff;
+        opacity: .75;
+    }
+
+    #post-content a,
+    #post-content a:hover,
+    #post-content a:focus,
+    #post-content a:visited {
+        color: #005eb9;
+        opacity: 1;
+    }
+
+    
+
+    .post-entry .card-body a {
+        color: #0070ff;
+    }
+
+    .avatar {
+        background: #444;
+    }
+
+    .navbar-link,
+    .navbar-link:visited,
+    .timeline .timeline-item .timeline-icon.icon-lg {
+        color: #0070ff;
+    }
+
+    .navbar-link:hover {
+        color: #0070ff;
+        opacity: .8;
+    }
+
+    #search-input .btn,
+    #disqus_click_btn,
+    #disqus-switch-to-direct,
+    #disqus-loadmore-button {
+        background: #727e96;
+        border-color: #727e96;
+        color: #fff;
+    }
+
+    #post-toc a.post-toc-link,
+    #post-toc a.post-toc-link:visited,
+    .share-menu.menu .menu-item>a {
+        color: #727e96;
+    }
+
+    .share-menu.menu .menu-item>a:hover,
+    .share-menu.menu .menu-item>a:focus,
+    .share-menu.menu .menu-item>a:visited {
+        color: #50596c;
+        background: #f8f9fa;
+        opacity: .85;
+    }
+</style><link rel="stylesheet" href="/css/style.min.css">
+
+
+
+
+
+
+
+
+    <!-- Prettify Theme -->
+    
+    <link rel="preload" href="/css/highlight/github.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/css/highlight/github.min.css"></noscript>
+
+
+
+
+
+<script>
+/*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+!function(t){"use strict";t.loadCSS||(t.loadCSS=function(){});var e=loadCSS.relpreload={};if(e.support=function(){var e;try{e=t.document.createElement("link").relList.supports("preload")}catch(t){e=!1}return function(){return e}}(),e.bindMediaToggle=function(t){var e=t.media||"all";function a(){t.addEventListener?t.removeEventListener("load",a):t.attachEvent&&t.detachEvent("onload",a),t.setAttribute("onload",null),t.media=e}t.addEventListener?t.addEventListener("load",a):t.attachEvent&&t.attachEvent("onload",a),setTimeout(function(){t.rel="stylesheet",t.media="only x"}),setTimeout(a,3e3)},e.poly=function(){if(!e.support())for(var a=t.document.getElementsByTagName("link"),n=0;n<a.length;n++){var o=a[n];"preload"!==o.rel||"style"!==o.getAttribute("as")||o.getAttribute("data-loadcss")||(o.setAttribute("data-loadcss",!0),e.bindMediaToggle(o))}},!e.support()){e.poly();var a=t.setInterval(e.poly,500);t.addEventListener?t.addEventListener("load",function(){e.poly(),t.clearInterval(a)}):t.attachEvent&&t.attachEvent("onload",function(){e.poly(),t.clearInterval(a)})}"undefined"!=typeof exports?exports.loadCSS=loadCSS:t.loadCSS=loadCSS}("undefined"!=typeof global?global:this);
+</script>
+
+    <!-- ### Site Verification ### -->
+    
+
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="LKY 只有原創內容的 Blog"><meta name="msapplication-starturl" content="https://mosdeo.github.io"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="LKY 只有原創內容的 Blog"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- ### The Open Graph & Twitter Card Protocol ### -->
+    <meta property="og:title" content="用 NumPy 向量化加速 Python：條件式卷積，變快 250 倍 | LKY 只有原創內容的 Blog"><meta property="og:site_name" content="LKY 只有原創內容的 Blog"><meta property="og:type" content="article"><meta property="og:url" content="https://mosdeo.github.io/2023/03/08/%E7%94%A8%20NumPy%20%E5%90%91%E9%87%8F%E5%8C%96%E5%8A%A0%E9%80%9F%20Python%EF%BC%9A%E6%A2%9D%E4%BB%B6%E5%BC%8F%E5%8D%B7%E7%A9%8D%EF%BC%8C%E8%AE%8A%E5%BF%AB%20250%20%E5%80%8D/"><meta property="og:locale" content="zh-TW"><meta name="description" content="如果你能看到這篇文章，應該知道什麼叫做「卷積(Convolution)」，我就不解釋了。 難的是什麼？如果我卷積的演算法，是有條件的、不能用 NumPy 的convolve函式、不能用 OpenCV 的filter2D函式、不能用一個 MxN 的卷積核描述，那我該怎麼辦？ 要是用迴圈，大家都會寫啊。可是效能很差，怎麼辦？ 這篇文章，我要介紹一個技巧，讓你自定義有條件的卷積演算法，變快 250 倍。 - Lin, Kao-Yuan - LKY 只有原創內容的 Blog"><meta name="keywords" content="數據分析, 資料科學, 筆記"><meta property="og:image" content="/content/images/%E6%97%8B%E8%BD%89%E6%A2%AF%E5%B1%80%E9%83%A8.jpg"><meta property="og:image" content="https://mosdeo.github.io/content/images/%E6%97%8B%E8%BD%89%E6%A2%AF%E5%B1%80%E9%83%A8.jpg"><meta property="article:published_time" content="2023-03-08T16:00:00.000Z"><meta property="article:modified_time" content="2023-03-09T16:32:38.687Z"><meta property="og:updated_time" content="2023-03-09T16:32:38.687Z"><meta property="article:author" content="Lin, Kao-Yuan"><meta property="article:tag" content="數據分析, 資料科學, 筆記"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="/content/images/%E6%97%8B%E8%BD%89%E6%A2%AF%E5%B1%80%E9%83%A8.jpg">
+
+    
+
+    <!-- ### Canonical link ### -->
+    <link rel="canonical" href="https://mosdeo.github.io/2023/03/08/%E7%94%A8%20NumPy%20%E5%90%91%E9%87%8F%E5%8C%96%E5%8A%A0%E9%80%9F%20Python%EF%BC%9A%E6%A2%9D%E4%BB%B6%E5%BC%8F%E5%8D%B7%E7%A9%8D%EF%BC%8C%E8%AE%8A%E5%BF%AB%20250%20%E5%80%8D/">
+
+    <meta name="generator" content="Hexo 5.2.0">
+
+    <!-- ### Analytics ### -->
+    
+    <!-- Google Analytics -->
+<script>
+    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+    ga('create', 'UA-64570213-2', 'auto');
+    ga('send', 'pageview');
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+
+
+
+
+
+
+
+
+
+    <!-- ### Structured Data ### -->
+    
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "url": "https://mosdeo.github.io/2023/03/08/%E7%94%A8%20NumPy%20%E5%90%91%E9%87%8F%E5%8C%96%E5%8A%A0%E9%80%9F%20Python%EF%BC%9A%E6%A2%9D%E4%BB%B6%E5%BC%8F%E5%8D%B7%E7%A9%8D%EF%BC%8C%E8%AE%8A%E5%BF%AB%20250%20%E5%80%8D/",
+    "@type": "BlogPosting",
+    "logo": "https://mosdeo.github.io/img/suka-favicon.ico",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://mosdeo.github.io/2023/03/08/%E7%94%A8%20NumPy%20%E5%90%91%E9%87%8F%E5%8C%96%E5%8A%A0%E9%80%9F%20Python%EF%BC%9A%E6%A2%9D%E4%BB%B6%E5%BC%8F%E5%8D%B7%E7%A9%8D%EF%BC%8C%E8%AE%8A%E5%BF%AB%20250%20%E5%80%8D/"
+    },
+    "headline": "用 NumPy 向量化加速 Python：條件式卷積，變快 250 倍 | LKY 只有原創內容的 Blog",
+    
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://mosdeo.github.io/content/images/%E6%97%8B%E8%BD%89%E6%A2%AF%E5%B1%80%E9%83%A8.jpg"
+    },
+    
+    "datePublished": "2023-03-08T16:00:00.000Z",
+    "dateModified": "2023-03-09T16:32:38.687Z",
+    "author": {
+        "@type": "Person",
+        "name": "Lin, Kao-Yuan",
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://mosdeo.github.io/img/default_avatar.png"
+        },
+        "description": "今之能者，謂能轉貼，至於魯蛇，皆能轉貼。不原創，何以別乎？"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "LKY 只有原創內容的 Blog",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://mosdeo.github.io/img/suka-favicon.ico"
+        }
+    },
+    
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://mosdeo.github.io/search?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+    },
+    
+    "keywords": "數據分析, 資料科學, 筆記",
+    "description": "如果你能看到這篇文章，應該知道什麼叫做「卷積(Convolution)」，我就不解釋了。 難的是什麼？如果我卷積的演算法，是有條件的、不能用 NumPy 的convolve函式、不能用 OpenCV 的filter2D函式、不能用一個 MxN 的卷積核描述，那我該怎麼辦？ 要是用迴圈，大家都會寫啊。可是效能很差，怎麼辦？ 這篇文章，我要介紹一個技巧，讓你自定義有條件的卷積演算法，變快 250 倍。 - Lin, Kao-Yuan - LKY 只有原創內容的 Blog"
+}
+</script>
+
+
+
+    <!-- ### Custom Head ### -->
+    
+</head>
+
+    <body>
+            
+
+            <!-- ### Main content ### -->
+            <!-- ## Header ##-->
+<header>
+    <h1 class="header-title text-center"><a href="/">LKY 只有原創內容的 Blog</a></h1>
+
+    <p class="text-center header-slogan">
+        
+            
+                今之能者，謂能轉貼，至於魯蛇，皆能轉貼。不原創，何以別乎？
+            
+        
+    </p>
+
+    <nav class="navbar-section text-center">
+    
+        <a href="/" class="navbar-link">Home</a>
+    
+    
+        <a href="/archives/" class="navbar-link">Archives</a>
+    
+    
+        <a href="/search" class="navbar-link">Search</a>
+    
+    
+    
+        <div class="dropdown dropdown-right">
+    <a class="navbar-link dropdown-toggle" tabindex="0">Share</a>
+    <ul class="menu share-menu">
+
+        <!-- Share Weibo -->
+        
+        <li class="menu-item">
+            <a href="http://service.weibo.com/share/share.php?appkey=&title=LKY 只有原創內容的 Blog&url=https://mosdeo.github.io&pic=/content/images/旋轉梯局部.jpg&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">Share to Weibo</a>
+        </li>
+        
+
+        <!-- Share Twitter -->
+        
+        <li class="menu-item">
+            <a href="https://twitter.com/intent/tweet?text=LKY 只有原創內容的 Blog&url=https://mosdeo.github.io&via=Lin, Kao-Yuan" target="_blank" rel="external noopener noreferrer nofollow">Share to Twitter</a>
+        </li>
+        
+
+        <!-- Share Facebook -->
+        
+        <li class="menu-item">
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://mosdeo.github.io" target="_blank" rel="external noopener noreferrer nofollow">Share to Facebook</a>
+        </li>
+        
+
+        <!-- Share Google+ -->
+        
+        <li class="menu-item">
+            <a href="https://plus.google.com/share?url=https://mosdeo.github.io" target="_blank" rel="external noopener noreferrer nofollow">Share to Google+</a>
+        </li>
+        
+
+        <!-- Share LinkedIn -->
+        
+        <li class="menu-item">
+            <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://mosdeo.github.io&title=用 NumPy 向量化加速 Python：條件式卷積，變快 250 倍" target="_blank" rel="external noopener noreferrer nofollow">Share to LinkedIn</a>
+        </li>
+        
+
+        <!-- Share QQ -->
+        
+        <li class="menu-item">
+            <a href="http://connect.qq.com/widget/shareqq/index.html?site=LKY 只有原創內容的 Blog&title=用 NumPy 向量化加速 Python：條件式卷積，變快 250 倍&summary=&pics=/content/images/旋轉梯局部.jpg&url=https://mosdeo.github.io" target="_blank" rel="external noopener noreferrer nofollow"> Share to QQ</a>
+        </li>
+        
+
+        <!-- Share Telegram -->
+        
+        <li class="menu-item">
+            <a href="https://t.me/share/url?url=https://mosdeo.github.io&text=用 NumPy 向量化加速 Python：條件式卷積，變快 250 倍" target="_blank" rel="external noopener noreferrer nofollow">Share to Telegram</a>
+        </li>
+        
+
+        <!-- QRCode -->
+        
+        <li class="menu-item">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPQAAAD0CAAAAACJRFQiAAAEiklEQVR42u3dwW7bUAxEUf//T7fbwLU4d57ThcTrTYDEVnUUgH0kp+jrz8LXS7Ro0aJFi74Z+jW83n/+z0V+vKf52fSZn99v7ik5RIvehJ5uitwc+f77tdJDufr8O546RIvehk4XJA/hU3GJN/J23avPXxWzyiFatGh0EJiKGD2ofLoOAYoWLbovZKSgTYcS2hBcFa2m6IkWLfrsAJEKWBpCkEPI1efS9b7uskSLvjk6DQbv8vVXp6GiRd8U3Q7lmoI3DQzTe0kx+29bS9Gib4yeDhxXRWJq/uk1aMOSBhak+RAtehOaFps0MCRFLC0QUlNCBhvjcEK06AXo5kNkcUeGeqmxSQeWk0GmaNEb0WRoR26QNBXpgZOF3VRoY8MhWvRD0c0ijC7w2wUBXcqnw8w04BAtegt6Crs1hwTymZPgDQ3ukAOVaNEb0M1f/m14tnlw5GDTLO9Ei96Kpg19OtyTAT4NwJOHT4M4KIkgWvSD0CnA1jbtJKRDgnCp2Tl5uKJFb0Oj4RpY0E+HlBSEPV3coaZEtOgFaNpUkCJDDxPNIDK9N10XhedEi34gumkcSBiGhuMmDP0zyYFKtOgt6HYwd7KQPwnXNIvCdB3Rojeh26AMaTKaoCwJ6U2FkDYeokVvQjeNQHtQIEEdspAnQTw8GBQt+uFoAiGH+9ScTBAycJwKJ1ouiBa9AJ1CLBROBgFNsOabYiZa9GY0HZSfHP6bUDxZ0NHQnmjR29FXzQddkDU3lZqNNIyg9ypa9Gb0SSi9GbLT5j8tBunA8XIZIVr0IjRtyKevJw0+OYTQpV4cdIgWvQCdFmpkGNA0A23Ipg3DjoNE0aIXoOlBvmkoaNiGBGnJQ07XFi16E5oOy9sBOy0wzUM/WRTgQKxo0Q9Dk5tKi7lfC7kVwVx6j6JFb0Q3TQhpJqZhAQ3L0wUg+uWIFr0ATYPqzQIvLfDTMoEeapqHL1r0FjRpLKaHQBp8sshLhxt6L6NFtOgFaBJ6aZdrJ8G7piCRh/LxfaJFL0SfBG/oEi89JBLKJQVTtOjNaFJMaIGiAffTJT8J3I2/FNGiF6DJEJ4GXxOQBFppo5GaFZQYFC36gWhabNpDBh0u0KUe+SXE4YZo0cvQaYhPCgsNxjVDv1QIcYhHtOglaDKcSwND0jDQg0QzYEzNh2jR29BTeIUWJ7IMpMWMDgjJwWnsskSLXoCmhSj9g5ST5WAbrktBujg5ES364WgavKEDQ3JTzWCRBN9joRMtehGahmLJwq5pPsiwn1yDBHRFi96CTkHzdmFOw7Kk4BHY1cIupotEi34gmi7Ym2JCguhT4TwpVnWyX7ToZWiyxEtFjAZr6TC/va5o0RvRr+HVLtrI0P7bxd/pQlG06E1oUsCaIXsK8DSDvma5XxUy0aIfjj4Z3pEHQ15TUTy9Ph72ixa9DJ1ukgZlpyH8tEikg0pUPEWLFo3+A0+yGPimISGNSQrSiRa9DU0+lB5UCrulpiE1D2QgOBY50aKXoGkjkBZqaZiXho8kKJsWhmMhFC16AXrTS7Ro0aJFi77J6y8GGxI8FvjhQAAAAABJRU5ErkJggg==" alr="QRCode">
+        </li>
+        
+
+    </ul>
+</div>
+    
+    
+        <a href="/atom.xml" target="_blank" class="navbar-link">RSS</a>
+    
+</nav>
+</header>
+
+            
+    <!-- ## Post ## -->
+    <div class="post-container">
+    <div id="post-card" class="card">
+        
+            <div class="card-image lazyload" data-bg="url('/content/images/旋轉梯局部.jpg')"></div>
+        
+        <div class="card-item-container">
+            <div class="card-inner-cell">
+                <!-- # Post Header Info # -->
+                <div class="card-header">
+                    
+    <h1 class="card-title h3 mb-2">用 NumPy 向量化加速 Python：條件式卷積，變快 250 倍</h1>
+
+
+
+
+<div class="post-header-info">
+    <p class="post-header-info-left text-gray">
+        <img class="author-thumb lazyload" data-src="/img/default_avatar.png" src="/img/suka-lazyload.gif" alt="Lin, Kao-Yuan's Avatar">
+        <span>2023-03-09</span>
+        
+        
+            <!-- Busuanzi Post Views -->
+<span id="busuanzi_container_page_pv" hidden>
+    <span class="suka-devide-dot"></span>
+    <span></span>
+    <span id="busuanzi_value_page_pv"></span>
+    <span>Views</span>
+</span>
+        
+        
+    </p>
+    <div class="post-header-info-right">
+        
+            <div class="dropdown dropdown-right">
+<a class="dropdown-toggle" tabindex="0">Share the post</a>
+<ul class="menu share-menu">
+    <!-- Share Weibo -->
+    
+    <li class="menu-item">
+        <a href="http://service.weibo.com/share/share.php?appkey=&title=用 NumPy 向量化加速 Python：條件式卷積，變快 250 倍&url=https://mosdeo.github.io/2023/03/08/%E7%94%A8%20NumPy%20%E5%90%91%E9%87%8F%E5%8C%96%E5%8A%A0%E9%80%9F%20Python%EF%BC%9A%E6%A2%9D%E4%BB%B6%E5%BC%8F%E5%8D%B7%E7%A9%8D%EF%BC%8C%E8%AE%8A%E5%BF%AB%20250%20%E5%80%8D/&pic=/content/images/旋轉梯局部.jpg&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">Share to Weibo</a>
+    </li>
+    
+
+    <!-- Share Twitter -->
+    
+    <li class="menu-item">
+        <a href="https://twitter.com/intent/tweet?text=用 NumPy 向量化加速 Python：條件式卷積，變快 250 倍&url=https://mosdeo.github.io/2023/03/08/%E7%94%A8%20NumPy%20%E5%90%91%E9%87%8F%E5%8C%96%E5%8A%A0%E9%80%9F%20Python%EF%BC%9A%E6%A2%9D%E4%BB%B6%E5%BC%8F%E5%8D%B7%E7%A9%8D%EF%BC%8C%E8%AE%8A%E5%BF%AB%20250%20%E5%80%8D/&via=Lin, Kao-Yuan" target="_blank" rel="external noopener noreferrer nofollow">Share to Twitter</a>
+    </li>
+    
+
+    <!-- Share Facebook -->
+    
+    <li class="menu-item">
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://mosdeo.github.io/2023/03/08/%E7%94%A8%20NumPy%20%E5%90%91%E9%87%8F%E5%8C%96%E5%8A%A0%E9%80%9F%20Python%EF%BC%9A%E6%A2%9D%E4%BB%B6%E5%BC%8F%E5%8D%B7%E7%A9%8D%EF%BC%8C%E8%AE%8A%E5%BF%AB%20250%20%E5%80%8D/" target="_blank" rel="external noopener noreferrer nofollow">Share to Facebook</a>
+    </li>
+    
+
+    <!-- Share Google+ -->
+    
+    <li class="menu-item">
+        <a href="https://plus.google.com/share?url=https://mosdeo.github.io/2023/03/08/%E7%94%A8%20NumPy%20%E5%90%91%E9%87%8F%E5%8C%96%E5%8A%A0%E9%80%9F%20Python%EF%BC%9A%E6%A2%9D%E4%BB%B6%E5%BC%8F%E5%8D%B7%E7%A9%8D%EF%BC%8C%E8%AE%8A%E5%BF%AB%20250%20%E5%80%8D/" target="_blank" rel="external noopener noreferrer nofollow">Share to Google+</a>
+    </li>
+    
+
+    <!-- Share LinkedIn -->
+    
+    <li class="menu-item">
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://mosdeo.github.io/2023/03/08/%E7%94%A8%20NumPy%20%E5%90%91%E9%87%8F%E5%8C%96%E5%8A%A0%E9%80%9F%20Python%EF%BC%9A%E6%A2%9D%E4%BB%B6%E5%BC%8F%E5%8D%B7%E7%A9%8D%EF%BC%8C%E8%AE%8A%E5%BF%AB%20250%20%E5%80%8D/&title=LKY 只有原創內容的 Blog" target="_blank" rel="external noopener noreferrer nofollow">Share to LinkedIn</a>
+    </li>
+    
+
+    <!-- Share QQ -->
+    
+    <li class="menu-item">
+        <a href="http://connect.qq.com/widget/shareqq/index.html?site=LKY 只有原創內容的 Blog&title=LKY 只有原創內容的 Blog&summary=&pics=/content/images/旋轉梯局部.jpg&url=https://mosdeo.github.io/2023/03/08/%E7%94%A8%20NumPy%20%E5%90%91%E9%87%8F%E5%8C%96%E5%8A%A0%E9%80%9F%20Python%EF%BC%9A%E6%A2%9D%E4%BB%B6%E5%BC%8F%E5%8D%B7%E7%A9%8D%EF%BC%8C%E8%AE%8A%E5%BF%AB%20250%20%E5%80%8D/" target="_blank" rel="external noopener noreferrer nofollow"> Share to QQ</a>
+    </li>
+    
+
+    <!-- Share Telegram -->
+    
+    <li class="menu-item">
+        <a href="https://t.me/share/url?url=https://mosdeo.github.io/2023/03/08/%E7%94%A8%20NumPy%20%E5%90%91%E9%87%8F%E5%8C%96%E5%8A%A0%E9%80%9F%20Python%EF%BC%9A%E6%A2%9D%E4%BB%B6%E5%BC%8F%E5%8D%B7%E7%A9%8D%EF%BC%8C%E8%AE%8A%E5%BF%AB%20250%20%E5%80%8D/&text=LKY 只有原創內容的 Blog" target="_blank" rel="external noopener noreferrer nofollow">Share to Telegram</a>
+    </li>
+    
+
+    <!-- QRCode -->
+    
+    <li class="menu-item">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPQAAAD0CAAAAACJRFQiAAAEiklEQVR42u3dwW7bUAxEUf//T7fbwLU4d57ThcTrTYDEVnUUgH0kp+jrz8LXS7Ro0aJFi74Z+jW83n/+z0V+vKf52fSZn99v7ik5RIvehJ5uitwc+f77tdJDufr8O546RIvehk4XJA/hU3GJN/J23avPXxWzyiFatGh0EJiKGD2ofLoOAYoWLbovZKSgTYcS2hBcFa2m6IkWLfrsAJEKWBpCkEPI1efS9b7uskSLvjk6DQbv8vVXp6GiRd8U3Q7lmoI3DQzTe0kx+29bS9Gib4yeDhxXRWJq/uk1aMOSBhak+RAtehOaFps0MCRFLC0QUlNCBhvjcEK06AXo5kNkcUeGeqmxSQeWk0GmaNEb0WRoR26QNBXpgZOF3VRoY8MhWvRD0c0ijC7w2wUBXcqnw8w04BAtegt6Crs1hwTymZPgDQ3ukAOVaNEb0M1f/m14tnlw5GDTLO9Ei96Kpg19OtyTAT4NwJOHT4M4KIkgWvSD0CnA1jbtJKRDgnCp2Tl5uKJFb0Oj4RpY0E+HlBSEPV3coaZEtOgFaNpUkCJDDxPNIDK9N10XhedEi34gumkcSBiGhuMmDP0zyYFKtOgt6HYwd7KQPwnXNIvCdB3Rojeh26AMaTKaoCwJ6U2FkDYeokVvQjeNQHtQIEEdspAnQTw8GBQt+uFoAiGH+9ScTBAycJwKJ1ouiBa9AJ1CLBROBgFNsOabYiZa9GY0HZSfHP6bUDxZ0NHQnmjR29FXzQddkDU3lZqNNIyg9ypa9Gb0SSi9GbLT5j8tBunA8XIZIVr0IjRtyKevJw0+OYTQpV4cdIgWvQCdFmpkGNA0A23Ipg3DjoNE0aIXoOlBvmkoaNiGBGnJQ07XFi16E5oOy9sBOy0wzUM/WRTgQKxo0Q9Dk5tKi7lfC7kVwVx6j6JFb0Q3TQhpJqZhAQ3L0wUg+uWIFr0ATYPqzQIvLfDTMoEeapqHL1r0FjRpLKaHQBp8sshLhxt6L6NFtOgFaBJ6aZdrJ8G7piCRh/LxfaJFL0SfBG/oEi89JBLKJQVTtOjNaFJMaIGiAffTJT8J3I2/FNGiF6DJEJ4GXxOQBFppo5GaFZQYFC36gWhabNpDBh0u0KUe+SXE4YZo0cvQaYhPCgsNxjVDv1QIcYhHtOglaDKcSwND0jDQg0QzYEzNh2jR29BTeIUWJ7IMpMWMDgjJwWnsskSLXoCmhSj9g5ST5WAbrktBujg5ES364WgavKEDQ3JTzWCRBN9joRMtehGahmLJwq5pPsiwn1yDBHRFi96CTkHzdmFOw7Kk4BHY1cIupotEi34gmi7Ym2JCguhT4TwpVnWyX7ToZWiyxEtFjAZr6TC/va5o0RvRr+HVLtrI0P7bxd/pQlG06E1oUsCaIXsK8DSDvma5XxUy0aIfjj4Z3pEHQ15TUTy9Ph72ixa9DJ1ukgZlpyH8tEikg0pUPEWLFo3+A0+yGPimISGNSQrSiRa9DU0+lB5UCrulpiE1D2QgOBY50aKXoGkjkBZqaZiXho8kKJsWhmMhFC16AXrTS7Ro0aJFi77J6y8GGxI8FvjhQAAAAABJRU5ErkJggg==" alt="QRCode">
+    </li>
+    
+
+</ul>
+</div>
+        
+    </div>
+</div>
+                </div>
+                <div class="card-body">
+                    
+                        
+                        
+                            <div id="post-toc"><ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%85%A5%E9%96%80-for-loop-%E5%AF%AB%E6%B3%95%EF%BC%8C%E9%80%9F%E5%BA%A6%E5%AE%9A%E7%BE%A9%E7%82%BA-1x"><span class="post-toc-number">1.</span> <span class="post-toc-text">入門 for loop 寫法，速度定義為 1x</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%94%A8-NumPy-%E5%90%91%E9%87%8F%E5%8C%96%E8%A8%88%E7%AE%97%EF%BC%8C%E9%80%9F%E5%BA%A6-250x"><span class="post-toc-number">2.</span> <span class="post-toc-text">用 NumPy 向量化計算，速度 250x</span></a></li></ol></div>
+                        
+                    
+                    <article id="post-content">
+                        <p>如果你能看到這篇文章，應該知道什麼叫做「卷積(Convolution)」，我就不解釋了。</p>
+<p>難的是什麼？如果我卷積的演算法，是有條件的、不能用 NumPy 的<code>convolve</code>函式、不能用 OpenCV 的<code>filter2D</code>函式、不能用一個 MxN 的卷積核描述，那我該怎麼辦？</p>
+<p>要是用迴圈，大家都會寫啊。可是效能很差，怎麼辦？</p>
+<p>這篇文章，我要介紹一個技巧，讓你自定義有條件的卷積演算法，變快 250 倍。</p>
+<hr>
+<p>需求：</p>
+<ul>
+<li>訪問每一個像素點，根據周圍的像素點的中位數，來決定自己的值</li>
+<li>如果周圍的中位數大於自己就+1，小於則就-1，自己就是中位數的話不變</li>
+</ul>
+<hr>
+<p>為了說明簡潔，以下說明不會放完整程式碼，完整程式碼會放在最後連結。</p>
+<h2 id="入門-for-loop-寫法，速度定義為-1x">入門 for loop 寫法，速度定義為 1x</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 方法1: 使用 for 迴圈 (最慢)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">for_loop</span>():</span></span><br><span class="line">    map_prev = get_map()</span><br><span class="line">    map_prev = np.pad(map_prev, <span class="number">1</span>, <span class="string">&#x27;constant&#x27;</span>, constant_values=<span class="number">0</span>) <span class="comment"># 處理邊界問題，在原本的陣列外面包一圈 0</span></span><br><span class="line">    my_map_forloop = get_map()</span><br><span class="line">    <span class="keyword">for</span> y <span class="keyword">in</span> <span class="built_in">range</span>(h):</span><br><span class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(w):</span><br><span class="line">            <span class="comment"># 如果周圍的中位數大於自己就+1，小於則就-1，自己就是中位數的話不變</span></span><br><span class="line">            around9 = map_prev[y:y+<span class="number">3</span>, x:x+<span class="number">3</span>].flatten()</span><br><span class="line">            median = np.median(around9)</span><br><span class="line">            <span class="keyword">if</span> median &gt; my_map_forloop[y, x]:</span><br><span class="line">                my_map_forloop[y, x] += <span class="number">1</span></span><br><span class="line">            <span class="keyword">elif</span> median &lt; my_map_forloop[y, x]:</span><br><span class="line">                my_map_forloop[y, x] -= <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> my_map_forloop</span><br></pre></td></tr></table></figure>
+<p>上面這個程式碼，就是一般初學者最直覺，用 for loop 寫出來的程式碼，但是效能很差，因為 for 迴圈一次只能處理一個數，數據頻繁的進出往來 RAM 與 CPU，效能也很差。</p>
+<hr>
+<h2 id="用-NumPy-向量化計算，速度-250x">用 NumPy 向量化計算，速度 250x</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 方法2: 使用 NumPy 向量化</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">numpy_vectorization</span>():</span></span><br><span class="line">    my_map_vectorlize = get_map()</span><br><span class="line">    around9_of_my_map = np.zeros((h+<span class="number">2</span>, w+<span class="number">2</span>, <span class="number">9</span>), dtype=np.uint8) <span class="comment">#+2是為了避免邊界問題</span></span><br><span class="line">    <span class="comment"># 從左上角開始，順時針方向，旋轉梯式整片賦值</span></span><br><span class="line">    <span class="comment"># 作者: Lin Kao-Yuan 林高遠</span></span><br><span class="line">    <span class="comment"># 知乎: www.zhihu.com/people/lin-kao-yuan</span></span><br><span class="line">    <span class="comment"># 網站: web.ntnu.edu.tw/~60132057A</span></span><br><span class="line">    <span class="comment"># around9_of_my_map[Y位置, X位置, 第幾個方向]</span></span><br><span class="line">    around9_of_my_map[<span class="number">0</span>:-<span class="number">2</span>, <span class="number">0</span>:-<span class="number">2</span>, <span class="number">0</span>] = my_map_vectorlize</span><br><span class="line">    around9_of_my_map[<span class="number">0</span>:-<span class="number">2</span>, <span class="number">1</span>:-<span class="number">1</span>, <span class="number">1</span>] = my_map_vectorlize</span><br><span class="line">    around9_of_my_map[<span class="number">0</span>:-<span class="number">2</span>, <span class="number">2</span>:  , <span class="number">2</span>] = my_map_vectorlize</span><br><span class="line">    around9_of_my_map[<span class="number">1</span>:-<span class="number">1</span>, <span class="number">0</span>:-<span class="number">2</span>, <span class="number">3</span>] = my_map_vectorlize</span><br><span class="line">    around9_of_my_map[<span class="number">1</span>:-<span class="number">1</span>, <span class="number">1</span>:-<span class="number">1</span>, <span class="number">4</span>] = my_map_vectorlize <span class="comment"># 自己</span></span><br><span class="line">    around9_of_my_map[<span class="number">1</span>:-<span class="number">1</span>, <span class="number">2</span>:  , <span class="number">5</span>] = my_map_vectorlize</span><br><span class="line">    around9_of_my_map[<span class="number">2</span>:  , <span class="number">0</span>:-<span class="number">2</span>, <span class="number">6</span>] = my_map_vectorlize</span><br><span class="line">    around9_of_my_map[<span class="number">2</span>:  , <span class="number">1</span>:-<span class="number">1</span>, <span class="number">7</span>] = my_map_vectorlize</span><br><span class="line">    around9_of_my_map[<span class="number">2</span>:  , <span class="number">2</span>:  , <span class="number">8</span>] = my_map_vectorlize</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 裁掉邊界</span></span><br><span class="line">    around9_of_my_map = around9_of_my_map[<span class="number">1</span>:-<span class="number">1</span>, <span class="number">1</span>:-<span class="number">1</span>, :]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 計算中位數</span></span><br><span class="line">    median_map = np.median(around9_of_my_map, axis=<span class="number">2</span>).astype(np.uint8)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 比較中位數和自己的大小</span></span><br><span class="line">    <span class="comment"># 如果周圍的中位數大於自己就+1，小於則就-1，自己就是中位數的話不變</span></span><br><span class="line">    my_map_vectorlize = np.where(median_map &gt; my_map_vectorlize, my_map_vectorlize + <span class="number">1</span>, my_map_vectorlize)</span><br><span class="line">    my_map_vectorlize = np.where(median_map &lt; my_map_vectorlize, my_map_vectorlize - <span class="number">1</span>, my_map_vectorlize)</span><br><span class="line">    <span class="keyword">return</span> my_map_vectorlize</span><br></pre></td></tr></table></figure>
+<p>上面這個程式碼，的概念是什麼？</p>
+<p>我個人對卷積的理解，就是「以我自己為中心，對周圍的 MxN 個點做處理」，通常 M 與 N 皆為奇數。</p>
+<p>那為了向量化，我就這樣做：</p>
+<ol>
+<li>生成一個 MxN 層與原本相同大小的陣列。</li>
+<li>把原本的陣列，旋轉梯式的shift，整片賦值。裡面的每一層，都有「原本陣列的副本＋空的邊界」。</li>
+<li>裁掉邊界。</li>
+<li>不論是要計算中位數或是其他演算法，就像一把槍，一次射穿所有的 MxN 層，就可以得到結果。</li>
+</ol>
+<p><img src="/content/images/%E6%97%8B%E8%BD%89%E6%A2%AF%E5%B1%80%E9%83%A8.jpg" alt="旋轉梯局部"></p>
+<p>如何在向量化的同時，實現條件式演算法？：</p>
+<ol>
+<li>對於條件式的演算法(就是你寫成for loop時會有if的那種)，就用 np.where() 來寫，每種 case 都是一個向量化的運算。</li>
+<li>不滿足條件的設定，要比較小心，看是要不變、或給 0。反正向量化計算，不管是否符合條件，一定要給值！不能留空。</li>
+<li>每種 case 的結果再組合起來，可能是 +、and、or、max、min、sum 等等，看情況決定。</li>
+</ol>
+<hr>
+<p>這篇文章主要是介紹了 NumPy 的向量化計算，用一個…很不生活化（暫時想不到卷積如何生活化）的簡單案例，來說明 NumPy 向量化計算的優點。</p>
+<p>這篇文章的完整程式碼，可以在這裡找到：<a target="_blank" rel="noopener" href="https://gist.github.com/mosdeo/32230317309bab30727c0c76f09b47f0">https://gist.github.com/mosdeo/32230317309bab30727c0c76f09b47f0</a></p>
+<p>旋轉梯圖片：该图片由<a target="_blank" rel="noopener" href="https://pixabay.com/zh/users/anaterate-2348028/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2892645">Wolfgang Eckert</a>在<a target="_blank" rel="noopener" href="https://pixabay.com/zh//?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2892645">Pixabay</a>上发布</p>
+
+                    </article>
+                    
+
+
+    <blockquote id="date-expire-notification" class="post-expired-notify">This article was last updated on <span id="date-expire-num"></span> days ago, and the information described in the article may have changed.</blockquote>
+    <script>
+    (function() {
+        var dateUpdate = Date.parse("2023-03-10");
+        var nowDate = new Date();
+        var a = nowDate.getTime();
+        var b = a - dateUpdate;
+        var daysUpdateExpire = Math.floor(b/(24*3600*1000));
+        if (daysUpdateExpire >= 120) {
+            document.getElementById('date-expire-num').innerHTML = daysUpdateExpire;
+        } else {
+            document.getElementById('date-expire-notification').style.display = 'none';
+        }
+    })();
+    </script>
+
+
+<p class="post-footer-info mb-0 pt-0">Published at&nbsp;<time datetime="2023-03-08T16:00:00.000Z" itemprop="datePublished">2023-03-09</time>
+
+    , Updated at&nbsp;<time datetime="2023-03-09T16:32:38.687Z" itemprop="dateModified">2023-03-10</time>
+
+</p>
+<p class="post-footer-info mb-0 pt-2">
+
+
+
+<span class="post-tags-list mt-2">
+
+<a class="post-tags-list-item" href="/tags/%E6%95%B8%E6%93%9A%E5%88%86%E6%9E%90/" rel="tag">#&nbsp;數據分析</a>
+
+<a class="post-tags-list-item" href="/tags/%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8/" rel="tag">#&nbsp;資料科學</a>
+
+<a class="post-tags-list-item" href="/tags/%E7%AD%86%E8%A8%98/" rel="tag">#&nbsp;筆記</a>
+
+</span>
+
+
+</p>
+
+                </div>
+                <div class="post-nav px-2 bg-gray">
+<ul class="pagination">
+    <!-- Prev Nav -->
+    
+
+    <!-- Next Nav -->
+    
+        <li class="page-item page-next">
+            <a href="/2023/03/07/%E7%94%A8%20NumPy%20%E5%90%91%E9%87%8F%E5%8C%96%E5%8A%A0%E9%80%9F%20Python%EF%BC%9A%E5%BE%9E3%E5%8D%83%E8%90%AC%E5%89%A9%E7%94%B7%E4%B8%AD%E6%89%BE%E5%87%BA%E6%AF%94%E6%88%91%E9%AB%98%E8%AE%8A%E5%BF%AB%2016%20%E5%80%8D/" rel="next">
+                <div class="page-item-title"><i class="icon icon-forward" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">用 NumPy 向量化加速 Python：從3千萬剩男中找出比我高 16 倍</div>
+            </a>
+        </li>
+    
+</ul>
+</div>
+
+                
+                    <!-- # Comment # -->
+                    
+                        <div class="card-footer post-comment">
+                            <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://mosdeo.github.io/2023/03/08/%E7%94%A8%20NumPy%20%E5%90%91%E9%87%8F%E5%8C%96%E5%8A%A0%E9%80%9F%20Python%EF%BC%9A%E6%A2%9D%E4%BB%B6%E5%BC%8F%E5%8D%B7%E7%A9%8D%EF%BC%8C%E8%AE%8A%E5%BF%AB%20250%20%E5%80%8D/'; // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'https://mosdeo.github.io/2023/03/08/%E7%94%A8%20NumPy%20%E5%90%91%E9%87%8F%E5%8C%96%E5%8A%A0%E9%80%9F%20Python%EF%BC%9A%E6%A2%9D%E4%BB%B6%E5%BC%8F%E5%8D%B7%E7%A9%8D%EF%BC%8C%E8%AE%8A%E5%BF%AB%20250%20%E5%80%8D/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+<script id="disqus-thread-script">
+    (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document;
+        var s = d.createElement('script');
+        s.src = '//mosdeo-github-io.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', + new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+                        </div>
+                    
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!-- ### Footer ### -->
+            <footer class="text-center">
+    <!-- footer copyright -->
+    
+        <p class="footer-copyright mb-0">Copyright&nbsp;©&nbsp;<span id="copyright-year"></span>
+            <a class="footer-copyright-a" href="https://mosdeo.github.io">LKY 只有原創內容的 Blog</a>
+        </p>
+
+    <!-- footer custom text -->
+    <p class="footer-text mb-0">
+    
+    </p>
+    <!-- footer develop info -->
+    <p class="footer-develop mb-0">
+        
+    <!-- Busuanzi User Views -->
+    <span id="busuanzi_container_site_uv" hidden>
+        <span></span>
+        <span id="busuanzi_value_site_uv"></span>
+        <span>Viewers</span>
+        
+            <span>|</span>
+        
+    </span>
+
+
+
+
+        
+        Powered by&nbsp;<!--
+         --><a href="https://hexo.io" target="_blank" class="footer-develop-a" rel="external nofollow noopener noreferrer">Hexo</a><span class="footer-develop-divider"></span>Theme&nbsp;-&nbsp;<!--
+         --><a href="https://github.com/SukkaW/hexo-theme-suka" target="_blank" class="footer-develop-a" rel="external noopener">Suka</a>
+    </p>
+</footer>
+
+
+        <!-- ### Import File ### -->
+        <!-- ### Footer JS Import ### -->
+
+<script>
+
+    
+window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 50
+};
+document.getElementById('copyright-year').textContent = new Date().getFullYear();
+console.log('\n %c Suka Theme (hexo-theme-suka) | © SukkaW | Verision 1.3.3 %c https://github.com/SukkaW/hexo-theme-suka \n', 'color: #fff; background: #444; padding:5px 0;', 'background: #bbb; padding:5px 0;');
+
+</script>
+
+<script src="/lib/vanilla-lazyload/lazyload.min.js" async></script>
+    <script src="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.js" async></script>
+
+
+<!-- Offset -->
+
+
+
+
+<!-- Comment -->
+
+    
+        <script id="dsq-count-scr" src="https://mosdeo-github-io.disqus.com/count.js" async></script>
+
+    
+
+
+<!-- ### Custom Footer ### -->
+
+    </body>
+
+</html>

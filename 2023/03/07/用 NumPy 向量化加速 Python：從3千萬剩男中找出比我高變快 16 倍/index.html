@@ -157,7 +157,7 @@
     <link rel="alternate" type="application/atom+xml" href="/atom.xml"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="LKY 只有原創內容的 Blog"><meta name="msapplication-starturl" content="https://mosdeo.github.io"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="LKY 只有原創內容的 Blog"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
     <!-- ### The Open Graph & Twitter Card Protocol ### -->
-    <meta property="og:title" content="用 NumPy 向量化加速 Python：從3千萬剩男中找出比我高 16 倍 | LKY 只有原創內容的 Blog"><meta property="og:site_name" content="LKY 只有原創內容的 Blog"><meta property="og:type" content="article"><meta property="og:url" content="https://mosdeo.github.io/2023/03/07/%E7%94%A8%20NumPy%20%E5%90%91%E9%87%8F%E5%8C%96%E5%8A%A0%E9%80%9F%20Python%EF%BC%9A%E5%BE%9E3%E5%8D%83%E8%90%AC%E5%89%A9%E7%94%B7%E4%B8%AD%E6%89%BE%E5%87%BA%E6%AF%94%E6%88%91%E9%AB%98%E8%AE%8A%E5%BF%AB%2016%20%E5%80%8D/"><meta property="og:locale" content="zh-TW"><meta name="description" content="Python 簡單易用，可以很快速的驗證各種演算法。但是到了真的要實際應用時，Python 的毛病就會凸顯，往往就是慢！而且慢的很難受。 我也熟悉 Go 或 C# 這些靜態型別的語言，但是欠缺各式各樣方便好用的套件，難以快速的驗證各種演算法。 這篇文章我們來看看如何用 NumPy 來加速 Python 的效能，並且用一個簡單的例子來說明。  本文要介紹的是 NumPy 當中一種叫做「Boolean - Lin, Kao-Yuan - LKY 只有原創內容的 Blog"><meta name="keywords" content="數據分析, 資料科學, 筆記"><meta property="article:published_time" content="2023-03-07T16:00:00.000Z"><meta property="article:modified_time" content="2023-03-08T08:11:04.875Z"><meta property="og:updated_time" content="2023-03-08T08:11:04.875Z"><meta property="article:author" content="Lin, Kao-Yuan"><meta property="article:tag" content="數據分析, 資料科學, 筆記"><meta name="twitter:card" content="summary">
+    <meta property="og:title" content="用 NumPy 向量化加速 Python：從3千萬剩男中找出比我高 16 倍 | LKY 只有原創內容的 Blog"><meta property="og:site_name" content="LKY 只有原創內容的 Blog"><meta property="og:type" content="article"><meta property="og:url" content="https://mosdeo.github.io/2023/03/07/%E7%94%A8%20NumPy%20%E5%90%91%E9%87%8F%E5%8C%96%E5%8A%A0%E9%80%9F%20Python%EF%BC%9A%E5%BE%9E3%E5%8D%83%E8%90%AC%E5%89%A9%E7%94%B7%E4%B8%AD%E6%89%BE%E5%87%BA%E6%AF%94%E6%88%91%E9%AB%98%E8%AE%8A%E5%BF%AB%2016%20%E5%80%8D/"><meta property="og:locale" content="zh-TW"><meta name="description" content="Python 簡單易用，可以很快速的驗證各種演算法。但是到了真的要實際應用時，Python 的毛病就會凸顯，往往就是慢！而且慢的很難受。 我也熟悉 Go 或 C# 這些靜態型別的語言，但是欠缺各式各樣方便好用的套件，難以快速的驗證各種演算法。 這篇文章我們來看看如何用 NumPy 來加速 Python 的效能，並且用一個簡單的例子來說明。  本文要介紹的是 NumPy 當中一種叫做「Boolean - Lin, Kao-Yuan - LKY 只有原創內容的 Blog"><meta name="keywords" content="數據分析, 資料科學, 筆記"><meta property="article:published_time" content="2023-03-07T16:00:00.000Z"><meta property="article:modified_time" content="2023-03-08T11:19:49.405Z"><meta property="og:updated_time" content="2023-03-08T11:19:49.405Z"><meta property="article:author" content="Lin, Kao-Yuan"><meta property="article:tag" content="數據分析, 資料科學, 筆記"><meta name="twitter:card" content="summary">
 
     
 
@@ -207,7 +207,7 @@
     },
     
     "datePublished": "2023-03-07T16:00:00.000Z",
-    "dateModified": "2023-03-08T08:11:04.875Z",
+    "dateModified": "2023-03-08T11:19:49.405Z",
     "author": {
         "@type": "Person",
         "name": "Lin, Kao-Yuan",
@@ -489,7 +489,7 @@
 <li>因為 NumPy 是靜態型別，所以不用每次迴圈都去判斷型別，並且不用去做型別轉換。</li>
 <li>一次處理多個數字，數據不用頻繁的進出 RAM 與 CPU，效能更好。</li>
 </ul>
-<p>當演算法被正確地向量化時，CPU 僅需一條指令完成這行程式碼，而不是對每個 i 進行獨立操作。理想情況下，any(result)操作將只發生於 CPU 內部而不用將數據傳回 RAM。</p>
+<p>當演算法被正確地向量化時，CPU 僅需一條指令完成這行程式碼，而不是對每個 i 進行獨立操作。理想情況下，<code>array[boolean_mask]</code>操作將只發生於 CPU 內部而不用將數據傳回 RAM。</p>
 <hr>
 <p>這篇文章主要是介紹了 NumPy 的向量化計算，用一個生活化簡單案例，來說明 NumPy 向量化計算的優點。</p>
 <p>這篇文章的完整程式碼，可以在這裡找到：<a target="_blank" rel="noopener" href="https://gist.github.com/mosdeo/341216a87a099486c1420760f24ced00">https://gist.github.com/mosdeo/341216a87a099486c1420760f24ced00</a></p>
@@ -539,6 +539,13 @@
                 <div class="post-nav px-2 bg-gray">
 <ul class="pagination">
     <!-- Prev Nav -->
+    
+        <li class="page-item page-prev">
+            <a href="/2023/03/08/%E7%94%A8%20NumPy%20%E5%90%91%E9%87%8F%E5%8C%96%E5%8A%A0%E9%80%9F%20Python%EF%BC%9A%E6%A2%9D%E4%BB%B6%E5%BC%8F%E5%8D%B7%E7%A9%8D%EF%BC%8C%E8%AE%8A%E5%BF%AB%20250%20%E5%80%8D/" rel="prev">
+                <div class="page-item-title"><i class="icon icon-back" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">用 NumPy 向量化加速 Python：條件式卷積，變快 250 倍</div>
+            </a>
+        </li>
     
 
     <!-- Next Nav -->
