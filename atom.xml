@@ -6,7 +6,7 @@
   <link href="https://mosdeo.github.io/atom.xml" rel="self"/>
   
   <link href="https://mosdeo.github.io/"/>
-  <updated>2023-03-09T16:36:49.807Z</updated>
+  <updated>2023-04-24T10:06:39.390Z</updated>
   <id>https://mosdeo.github.io/</id>
   
   <author>
@@ -17,11 +17,67 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>3D點雲的最小二乘法求解-Python實現</title>
+    <link href="https://mosdeo.github.io/2023/04/23/3D%E9%BB%9E%E9%9B%B2%E7%9A%84%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95%E6%B1%82%E8%A7%A3-Python%E5%AF%A6%E7%8F%BE/"/>
+    <id>https://mosdeo.github.io/2023/04/23/3D%E9%BB%9E%E9%9B%B2%E7%9A%84%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95%E6%B1%82%E8%A7%A3-Python%E5%AF%A6%E7%8F%BE/</id>
+    <published>2023-04-23T16:00:00.000Z</published>
+    <updated>2023-04-24T10:06:39.390Z</updated>
+    
+    <content type="html"><![CDATA[<p>仿造各種 Python 機器學習類別的風格，建立一個 class，並且實作 fit() 與 predict() 方法。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LeastSq3D</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">      self.coeficient = <span class="literal">None</span></span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">fit</span>(<span class="params">self, pts</span>):</span></span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">predict</span>(<span class="params">self, pts</span>):</span></span><br></pre></td></tr></table></figure><p>pts 就是所有的三維點，pts[0] 就是第一個點，pts[0][0] 就是第一個點的 x 座標，依此類推。</p><h2 id="fit">fit()</h2><p>就是重現上一篇文章以 Ax=b 求解的過程。</p><p>首先初始化矩陣 A</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">A &#x3D; [</span><br><span class="line"> [x^2 + xy + 1],</span><br><span class="line"> [xy + y^2 + 1],</span><br><span class="line"> [x + y + 1]</span><br><span class="line">]</span><br></pre></td></tr></table></figure><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">m11 = np.<span class="built_in">sum</span>(pts[:, <span class="number">0</span>] * pts[:, <span class="number">0</span>])</span><br><span class="line">m12 = np.<span class="built_in">sum</span>(pts[:, <span class="number">0</span>] * pts[:, <span class="number">1</span>])</span><br><span class="line">m13 = np.<span class="built_in">sum</span>(pts[:, <span class="number">0</span>])</span><br><span class="line">m21 = m12</span><br><span class="line">m22 = np.<span class="built_in">sum</span>(pts[:, <span class="number">1</span>] * pts[:, <span class="number">1</span>])</span><br><span class="line">m23 = np.<span class="built_in">sum</span>(pts[:, <span class="number">1</span>])</span><br><span class="line">m31 = m13</span><br><span class="line">m32 = m23</span><br><span class="line">m33 = pts.shape[<span class="number">0</span>]</span><br><span class="line">A = np.array([[m11, m12, m13], [m21, m22, m23], [m31, m32, m33]])</span><br></pre></td></tr></table></figure><p>再來初始化矩陣 b</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">b &#x3D; [xz, yz, z]</span><br></pre></td></tr></table></figure><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">b1 = np.<span class="built_in">sum</span>(pts[:, <span class="number">0</span>] * pts[:, <span class="number">2</span>])</span><br><span class="line">b2 = np.<span class="built_in">sum</span>(pts[:, <span class="number">1</span>] * pts[:, <span class="number">2</span>])</span><br><span class="line">b3 = np.<span class="built_in">sum</span>(pts[:, <span class="number">2</span>])</span><br><span class="line">b = np.array([b1, b2, b3])</span><br></pre></td></tr></table></figure><p>最後求A的反矩陣，並且乘上 b，就是最後的結果，把係數 A,B,C 存在 <code>self.coeficient </code>。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">self.coeficient = np.dot(np.linalg.inv(A), b)</span><br></pre></td></tr></table></figure><p>NumPy 還提供了更強的實現</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">self.coeficient = np.linalg.solve(A, b)</span><br></pre></td></tr></table></figure><h2 id="predict">predict()</h2><p>這個部分最簡單，就是把所有的點帶入方程式，得到預測的 z 座標。</p><p>就只是寫 <code>z = Ax + By + C</code>。</p><p>不過要注意的是，最好用向量化寫法，不要用迴圈，這樣會比較快。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">predict</span>(<span class="params">self, pts</span>):</span></span><br><span class="line">    <span class="keyword">if</span> self.coeficient <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="keyword">raise</span> Exception(<span class="string">&#x27;You need to fit the model first.&#x27;</span>)</span><br><span class="line">    pts = np.array(pts)</span><br><span class="line">    <span class="keyword">return</span> np.dot(pts, self.coeficient)</span><br></pre></td></tr></table></figure><h2 id="範例">範例</h2><p>我用 Free3D 的一個<a href="https://free3d.com/3d-model/base-mesh-ready-to-be-rigged-15483.html">人體模型</a>來做範例。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="comment"># 載入已經讀好的點雲</span></span><br><span class="line">    pts = np.load(<span class="string">r&#x27;human_body_vertices.npy&#x27;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 畫出半透明的原始點雲</span></span><br><span class="line">    fig = plt.figure()</span><br><span class="line">    ax = fig.add_subplot(<span class="number">111</span>, projection=<span class="string">&#x27;3d&#x27;</span>)</span><br><span class="line">    ax.set_box_aspect(aspect = (<span class="number">1</span>, <span class="number">1</span>, <span class="number">0.25</span>))</span><br><span class="line">    ax.scatter(pts[:, <span class="number">0</span>], pts[:, <span class="number">1</span>], pts[:, <span class="number">2</span>], alpha=<span class="number">0.1</span>, c=<span class="string">&#x27;goldenrod&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 用最小二乘法求解</span></span><br><span class="line">    l3d = LeastSq3D()</span><br><span class="line">    l3d.fit(pts)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 對平面點雲取樣，並畫出</span></span><br><span class="line">    x_range = np.arange(pts[:, <span class="number">0</span>].<span class="built_in">min</span>(), pts[:, <span class="number">0</span>].<span class="built_in">max</span>(), pts[:, <span class="number">0</span>].ptp()/<span class="number">10</span>)</span><br><span class="line">    y_range = np.arange(pts[:, <span class="number">1</span>].<span class="built_in">min</span>(), pts[:, <span class="number">1</span>].<span class="built_in">max</span>(), pts[:, <span class="number">1</span>].ptp()/<span class="number">10</span>)</span><br><span class="line">    xx, yy = np.meshgrid(x_range, y_range)</span><br><span class="line">    zz = l3d.predict(np.array([xx.flatten(), yy.flatten(), np.ones(shape=<span class="built_in">len</span>(xx.flatten()))]).T).reshape(xx.shape)</span><br><span class="line">    ax.plot_surface(xx, yy, zz, alpha=<span class="number">0.5</span>, color=<span class="string">&#x27;r&#x27;</span>)</span><br><span class="line">    plt.show()</span><br></pre></td></tr></table></figure><p><img src="/content/images/human_body_regression.gif" alt="image"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;仿造各種 Python 機器學習類別的風格，建立一個 class，並且實作 fit() 與 predict() 方法。&lt;/p&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span</summary>
+      
+    
+    
+    
+    
+    <category term="筆記" scheme="https://mosdeo.github.io/tags/%E7%AD%86%E8%A8%98/"/>
+    
+    <category term="資料科學" scheme="https://mosdeo.github.io/tags/%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8/"/>
+    
+    <category term="數據分析" scheme="https://mosdeo.github.io/tags/%E6%95%B8%E6%93%9A%E5%88%86%E6%9E%90/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>3D點雲的最小二乘法求解-數學推導</title>
+    <link href="https://mosdeo.github.io/2023/04/23/3D%E9%BB%9E%E9%9B%B2%E7%9A%84%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95%E6%B1%82%E8%A7%A3-%E6%95%B8%E5%AD%B8%E6%8E%A8%E5%B0%8E/"/>
+    <id>https://mosdeo.github.io/2023/04/23/3D%E9%BB%9E%E9%9B%B2%E7%9A%84%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95%E6%B1%82%E8%A7%A3-%E6%95%B8%E5%AD%B8%E6%8E%A8%E5%B0%8E/</id>
+    <published>2023-04-23T16:00:00.000Z</published>
+    <updated>2023-04-24T10:06:36.678Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="平面方程式">平面方程式</h2><p>如果有一群 3D 的點，要如何 regression 一個平面出來？</p><p>平面方程式：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Ax + By + Cz + D &#x3D; 0</span><br></pre></td></tr></table></figure><p>但是把 Cz 移動到等號另一邊，C 就可以消掉，所以實際上只有三個未知數：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(A&#x2F;C)x + (B&#x2F;C)y + (D&#x2F;C) &#x3D; z</span><br></pre></td></tr></table></figure><p>C 可以是除了0或者無限大以外的任何實數，因此，在這裡就不重要了。</p><p>為了簡化，重寫平面方程式：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Ax + By + C &#x3D; z</span><br></pre></td></tr></table></figure><p>以下就用 Ax + By + C = z 推導</p><hr><h2 id="誤差方程式">誤差方程式</h2><p>無誤差情況：Ax + By + C = z<br>實際上情況：Ax + By + C = f(x, y)<br>也就是說，存在誤差：z - f(x, y)</p><p>為了同時消除方向性、逞罰大誤差，所以將誤差平方：( z - f(x, y) )^2<br>將誤差方程式寫出來，求出微分=0的極值點，就能得到此方程式參數。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Err</span><br><span class="line">&#x3D; ( z - f(x, y) )^2</span><br><span class="line">&#x3D; ( z - Ax - By - C )^2</span><br></pre></td></tr></table></figure><h2 id="求誤差方程式極值點">求誤差方程式極值點</h2><p>有多個未知數 A, B, C，因此需要分別對 x, y, z 微分：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dErr&#x2F;dA &#x3D; ( z - Ax - By - C )(-x)</span><br><span class="line">dErr&#x2F;dB &#x3D; ( z - Ax - By - C )(-y)</span><br><span class="line">dErr&#x2F;dC &#x3D; ( z - Ax - By - C )(-1)</span><br></pre></td></tr></table></figure><p>（ x, y, z 都是已有的點雲數據集，都有值，所以未知數是 A, B, C！別搞錯了！）</p><p>根據我們的需要與期望，要找出誤差變化率為0的點，這一點的誤差，不是最大就是最小。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">0 &#x3D; ( z - Ax - By - C )(-x)</span><br><span class="line">0 &#x3D; ( z - Ax - By - C )(-y)</span><br><span class="line">0 &#x3D; ( z - Ax - By - C )(-1)</span><br></pre></td></tr></table></figure><p>把 chain rule 長出來的這一項乘進去</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">0 &#x3D; -xz + Ax^2 + Bxy + Cx</span><br><span class="line">0 &#x3D; -yz + Axy + By^2 + Cy</span><br><span class="line">0 &#x3D;   -z + Ax + By + C</span><br></pre></td></tr></table></figure><p>把已知項移到等號左邊</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">xz &#x3D; Ax^2 + Bxy + Cx</span><br><span class="line">yz &#x3D; Axy + By^2 + Cy</span><br><span class="line">  z &#x3D; Ax + By + C</span><br></pre></td></tr></table></figure><p>最後一條剛好就是原本的平面方程式<br>第一條就是原本的平面方程式同乘x<br>第二條就是原本的平面方程式同乘y</p><p>寫成矩陣形式</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Ax &#x3D; b</span><br><span class="line">b &#x3D; [xz, yz, z]</span><br><span class="line">x &#x3D; [A, B, C]</span><br><span class="line">A &#x3D; [</span><br><span class="line"> [x^2 + xy + 1],</span><br><span class="line"> [xy + y^2 + 1],</span><br><span class="line"> [x + y + 1]</span><br><span class="line">]</span><br></pre></td></tr></table></figure><p>矩陣計算沒有除法，只能用反矩陣搬移。兩邊同時左乘A的逆矩陣</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(A^-1)Ax &#x3D; (A^-1)b</span><br><span class="line">(A^-1)A &#x3D; I(單位矩陣)</span><br><span class="line">x &#x3D; (A^-1)b</span><br></pre></td></tr></table></figure><p>由此解得所有未知數。</p><hr><p>逆矩陣計算也是超複雜的，我忘光了，課本都有，在此不贅述。</p><p>以調包的角度來看，到這裡已經可以輕易使用現成工具實現了。應該沒有哪種程式語言，找不到現成逆矩陣算法的。</p><p>下一篇文章會說如何用 Python 實現這個演算法，不使用<code>np.linalg.lstsq</code>、<code>scipy.optimize.leastsq</code>這些已經寫好的方法。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;平面方程式&quot;&gt;平面方程式&lt;/h2&gt;
+&lt;p&gt;如果有一群 3D 的點，要如何 regression 一個平面出來？&lt;/p&gt;
+&lt;p&gt;平面方程式：&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutt</summary>
+      
+    
+    
+    
+    
+    <category term="筆記" scheme="https://mosdeo.github.io/tags/%E7%AD%86%E8%A8%98/"/>
+    
+    <category term="資料科學" scheme="https://mosdeo.github.io/tags/%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8/"/>
+    
+    <category term="數據分析" scheme="https://mosdeo.github.io/tags/%E6%95%B8%E6%93%9A%E5%88%86%E6%9E%90/"/>
+    
+  </entry>
+  
+  <entry>
     <title>用 NumPy 向量化加速 Python：條件式卷積，變快 250 倍</title>
     <link href="https://mosdeo.github.io/2023/03/08/%E7%94%A8%20NumPy%20%E5%90%91%E9%87%8F%E5%8C%96%E5%8A%A0%E9%80%9F%20Python%EF%BC%9A%E6%A2%9D%E4%BB%B6%E5%BC%8F%E5%8D%B7%E7%A9%8D%EF%BC%8C%E8%AE%8A%E5%BF%AB%20250%20%E5%80%8D/"/>
     <id>https://mosdeo.github.io/2023/03/08/%E7%94%A8%20NumPy%20%E5%90%91%E9%87%8F%E5%8C%96%E5%8A%A0%E9%80%9F%20Python%EF%BC%9A%E6%A2%9D%E4%BB%B6%E5%BC%8F%E5%8D%B7%E7%A9%8D%EF%BC%8C%E8%AE%8A%E5%BF%AB%20250%20%E5%80%8D/</id>
     <published>2023-03-08T16:00:00.000Z</published>
-    <updated>2023-03-09T16:36:49.807Z</updated>
+    <updated>2023-03-09T16:41:02.832Z</updated>
     
     <content type="html"><![CDATA[<p>如果你能看到這篇文章，應該知道什麼叫做「卷積(Convolution)」，我就不解釋了。</p><p>難的是什麼？如果我卷積的演算法，是有條件的、不能用 NumPy 的<code>convolve</code>函式、不能用 OpenCV 的<code>filter2D</code>函式、不能用一個 MxN 的卷積核描述，那我該怎麼辦？</p><p>要是用迴圈，大家都會寫啊。可是效能很差，怎麼辦？</p><p>這篇文章，我要介紹一個技巧，讓你自定義有條件的卷積演算法，變快 250 倍。</p><hr><p>需求：</p><ul><li>訪問每一個像素點，根據周圍的像素點的中位數，來決定自己的值</li><li>如果周圍的中位數大於自己就+1，小於則就-1，自己就是中位數的話不變</li></ul><hr><p>為了說明簡潔，以下說明不會放完整程式碼，完整程式碼會放在最後連結。</p><h2 id="入門-for-loop-寫法，速度定義為-1x">入門 for loop 寫法，速度定義為 1x</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 方法1: 使用 for 迴圈 (最慢)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">for_loop</span>():</span></span><br><span class="line">    map_prev = get_map()</span><br><span class="line">    map_prev = np.pad(map_prev, <span class="number">1</span>, <span class="string">&#x27;constant&#x27;</span>, constant_values=<span class="number">0</span>) <span class="comment"># 處理邊界問題，在原本的陣列外面包一圈 0</span></span><br><span class="line">    my_map_forloop = get_map()</span><br><span class="line">    <span class="keyword">for</span> y <span class="keyword">in</span> <span class="built_in">range</span>(h):</span><br><span class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(w):</span><br><span class="line">            <span class="comment"># 如果周圍的中位數大於自己就+1，小於則就-1，自己就是中位數的話不變</span></span><br><span class="line">            around9 = map_prev[y:y+<span class="number">3</span>, x:x+<span class="number">3</span>].flatten()</span><br><span class="line">            median = np.median(around9)</span><br><span class="line">            <span class="keyword">if</span> median &gt; my_map_forloop[y, x]:</span><br><span class="line">                my_map_forloop[y, x] += <span class="number">1</span></span><br><span class="line">            <span class="keyword">elif</span> median &lt; my_map_forloop[y, x]:</span><br><span class="line">                my_map_forloop[y, x] -= <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> my_map_forloop</span><br></pre></td></tr></table></figure><p>上面這個程式碼，就是一般初學者最直覺，用 for loop 寫出來的程式碼，但是效能很差，因為 for 迴圈一次只能處理一個數，數據頻繁的進出往來 RAM 與 CPU，效能也很差。</p><hr><h2 id="用-NumPy-向量化計算，速度-250x">用 NumPy 向量化計算，速度 250x</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 方法2: 使用 NumPy 向量化</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">numpy_vectorization</span>():</span></span><br><span class="line">    my_map_vectorlize = get_map()</span><br><span class="line">    around9_of_my_map = np.zeros((h+<span class="number">2</span>, w+<span class="number">2</span>, <span class="number">9</span>), dtype=np.uint8) <span class="comment">#+2是為了避免邊界問題</span></span><br><span class="line">    <span class="comment"># 從左上角開始，順時針方向，旋轉梯式整片賦值</span></span><br><span class="line">    <span class="comment"># 作者: Lin Kao-Yuan 林高遠</span></span><br><span class="line">    <span class="comment"># 知乎: www.zhihu.com/people/lin-kao-yuan</span></span><br><span class="line">    <span class="comment"># 網站: web.ntnu.edu.tw/~60132057A</span></span><br><span class="line">    <span class="comment"># around9_of_my_map[Y位置, X位置, 第幾個方向]</span></span><br><span class="line">    around9_of_my_map[<span class="number">0</span>:-<span class="number">2</span>, <span class="number">0</span>:-<span class="number">2</span>, <span class="number">0</span>] = my_map_vectorlize</span><br><span class="line">    around9_of_my_map[<span class="number">0</span>:-<span class="number">2</span>, <span class="number">1</span>:-<span class="number">1</span>, <span class="number">1</span>] = my_map_vectorlize</span><br><span class="line">    around9_of_my_map[<span class="number">0</span>:-<span class="number">2</span>, <span class="number">2</span>:  , <span class="number">2</span>] = my_map_vectorlize</span><br><span class="line">    around9_of_my_map[<span class="number">1</span>:-<span class="number">1</span>, <span class="number">0</span>:-<span class="number">2</span>, <span class="number">3</span>] = my_map_vectorlize</span><br><span class="line">    around9_of_my_map[<span class="number">1</span>:-<span class="number">1</span>, <span class="number">1</span>:-<span class="number">1</span>, <span class="number">4</span>] = my_map_vectorlize <span class="comment"># 自己</span></span><br><span class="line">    around9_of_my_map[<span class="number">1</span>:-<span class="number">1</span>, <span class="number">2</span>:  , <span class="number">5</span>] = my_map_vectorlize</span><br><span class="line">    around9_of_my_map[<span class="number">2</span>:  , <span class="number">0</span>:-<span class="number">2</span>, <span class="number">6</span>] = my_map_vectorlize</span><br><span class="line">    around9_of_my_map[<span class="number">2</span>:  , <span class="number">1</span>:-<span class="number">1</span>, <span class="number">7</span>] = my_map_vectorlize</span><br><span class="line">    around9_of_my_map[<span class="number">2</span>:  , <span class="number">2</span>:  , <span class="number">8</span>] = my_map_vectorlize</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 裁掉邊界</span></span><br><span class="line">    around9_of_my_map = around9_of_my_map[<span class="number">1</span>:-<span class="number">1</span>, <span class="number">1</span>:-<span class="number">1</span>, :]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 計算中位數</span></span><br><span class="line">    median_map = np.median(around9_of_my_map, axis=<span class="number">2</span>).astype(np.uint8)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 比較中位數和自己的大小</span></span><br><span class="line">    <span class="comment"># 如果周圍的中位數大於自己就+1，小於則就-1，自己就是中位數的話不變</span></span><br><span class="line">    my_map_vectorlize = np.where(median_map &gt; my_map_vectorlize, my_map_vectorlize + <span class="number">1</span>, my_map_vectorlize)</span><br><span class="line">    my_map_vectorlize = np.where(median_map &lt; my_map_vectorlize, my_map_vectorlize - <span class="number">1</span>, my_map_vectorlize)</span><br><span class="line">    <span class="keyword">return</span> my_map_vectorlize</span><br></pre></td></tr></table></figure><p>上面這個程式碼，的概念是什麼？</p><p>我個人對卷積的理解，就是「以我自己為中心，對周圍的 MxN 個點做處理」，通常 M 與 N 皆為奇數。</p><p>那為了向量化，我就這樣做：</p><ol><li>生成一個 MxN 層與原本相同大小的陣列。</li><li>把原本的陣列，旋轉梯式的shift，整片賦值。裡面的每一層，都有「原本陣列的副本＋空的邊界」。</li><li>裁掉邊界。</li><li>不論是要計算中位數或是其他演算法，就像一把槍，一次射穿所有的 MxN 層，就可以得到結果。</li></ol><p><img src="/content/images/%E6%97%8B%E8%BD%89%E6%A2%AF%E5%B1%80%E9%83%A8.jpg" alt="旋轉梯局部"></p><p>如何在向量化的同時，實現條件式演算法？：</p><ol><li>對於條件式的演算法(就是你寫成for loop時會有if的那種)，就用 np.where() 來寫，每種 case 都是一個向量化的運算。</li><li>不滿足條件的設定，要比較小心，看是要不變、或給 0。反正向量化計算，不管是否符合條件，一定要給值！不能留空。</li><li>每種 case 的結果再組合起來，可能是 +、and、or、max、min、sum 等等，看情況決定。</li></ol><hr><p>這篇文章主要是介紹了 NumPy 的向量化計算，用一個…很不生活化（暫時想不到卷積如何生活化）的簡單案例，來說明 NumPy 向量化計算的優點。</p><p>這篇文章的完整程式碼，可以在這裡找到：<a href="https://gist.github.com/mosdeo/32230317309bab30727c0c76f09b47f0">https://gist.github.com/mosdeo/32230317309bab30727c0c76f09b47f0</a></p><p>旋轉梯圖片：该图片由<a href="https://pixabay.com/zh/users/anaterate-2348028/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2892645">Wolfgang Eckert</a>在<a href="https://pixabay.com/zh//?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2892645">Pixabay</a>上发布</p>]]></content>
     
@@ -35,11 +91,11 @@
     
     
     
-    <category term="數據分析" scheme="https://mosdeo.github.io/tags/%E6%95%B8%E6%93%9A%E5%88%86%E6%9E%90/"/>
+    <category term="筆記" scheme="https://mosdeo.github.io/tags/%E7%AD%86%E8%A8%98/"/>
     
     <category term="資料科學" scheme="https://mosdeo.github.io/tags/%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8/"/>
     
-    <category term="筆記" scheme="https://mosdeo.github.io/tags/%E7%AD%86%E8%A8%98/"/>
+    <category term="數據分析" scheme="https://mosdeo.github.io/tags/%E6%95%B8%E6%93%9A%E5%88%86%E6%9E%90/"/>
     
   </entry>
   
@@ -63,11 +119,11 @@
     
     
     
-    <category term="數據分析" scheme="https://mosdeo.github.io/tags/%E6%95%B8%E6%93%9A%E5%88%86%E6%9E%90/"/>
+    <category term="筆記" scheme="https://mosdeo.github.io/tags/%E7%AD%86%E8%A8%98/"/>
     
     <category term="資料科學" scheme="https://mosdeo.github.io/tags/%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8/"/>
     
-    <category term="筆記" scheme="https://mosdeo.github.io/tags/%E7%AD%86%E8%A8%98/"/>
+    <category term="數據分析" scheme="https://mosdeo.github.io/tags/%E6%95%B8%E6%93%9A%E5%88%86%E6%9E%90/"/>
     
   </entry>
   
@@ -93,11 +149,11 @@
     
     
     
-    <category term="數據分析" scheme="https://mosdeo.github.io/tags/%E6%95%B8%E6%93%9A%E5%88%86%E6%9E%90/"/>
+    <category term="筆記" scheme="https://mosdeo.github.io/tags/%E7%AD%86%E8%A8%98/"/>
     
     <category term="資料科學" scheme="https://mosdeo.github.io/tags/%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8/"/>
     
-    <category term="筆記" scheme="https://mosdeo.github.io/tags/%E7%AD%86%E8%A8%98/"/>
+    <category term="數據分析" scheme="https://mosdeo.github.io/tags/%E6%95%B8%E6%93%9A%E5%88%86%E6%9E%90/"/>
     
   </entry>
   
@@ -121,11 +177,11 @@
     
     
     
-    <category term="數據分析" scheme="https://mosdeo.github.io/tags/%E6%95%B8%E6%93%9A%E5%88%86%E6%9E%90/"/>
+    <category term="筆記" scheme="https://mosdeo.github.io/tags/%E7%AD%86%E8%A8%98/"/>
     
     <category term="資料科學" scheme="https://mosdeo.github.io/tags/%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8/"/>
     
-    <category term="筆記" scheme="https://mosdeo.github.io/tags/%E7%AD%86%E8%A8%98/"/>
+    <category term="數據分析" scheme="https://mosdeo.github.io/tags/%E6%95%B8%E6%93%9A%E5%88%86%E6%9E%90/"/>
     
   </entry>
   
@@ -170,11 +226,11 @@
     
     
     
+    <category term="資料科學" scheme="https://mosdeo.github.io/tags/%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8/"/>
+    
     <category term="數據分析" scheme="https://mosdeo.github.io/tags/%E6%95%B8%E6%93%9A%E5%88%86%E6%9E%90/"/>
     
     <category term="機器學習" scheme="https://mosdeo.github.io/tags/%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92/"/>
-    
-    <category term="資料科學" scheme="https://mosdeo.github.io/tags/%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8/"/>
     
     <category term="AI" scheme="https://mosdeo.github.io/tags/AI/"/>
     
@@ -226,11 +282,11 @@
     
     
     
+    <category term="資料科學" scheme="https://mosdeo.github.io/tags/%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8/"/>
+    
     <category term="數據分析" scheme="https://mosdeo.github.io/tags/%E6%95%B8%E6%93%9A%E5%88%86%E6%9E%90/"/>
     
     <category term="機器學習" scheme="https://mosdeo.github.io/tags/%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92/"/>
-    
-    <category term="資料科學" scheme="https://mosdeo.github.io/tags/%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8/"/>
     
     <category term="AI" scheme="https://mosdeo.github.io/tags/AI/"/>
     
@@ -283,13 +339,13 @@
     
     <category term="運動" scheme="https://mosdeo.github.io/tags/%E9%81%8B%E5%8B%95/"/>
     
-    <category term="數據分析" scheme="https://mosdeo.github.io/tags/%E6%95%B8%E6%93%9A%E5%88%86%E6%9E%90/"/>
-    
     <category term="資料科學" scheme="https://mosdeo.github.io/tags/%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8/"/>
     
-    <category term="批判" scheme="https://mosdeo.github.io/tags/%E6%89%B9%E5%88%A4/"/>
+    <category term="數據分析" scheme="https://mosdeo.github.io/tags/%E6%95%B8%E6%93%9A%E5%88%86%E6%9E%90/"/>
     
     <category term="靠盃" scheme="https://mosdeo.github.io/tags/%E9%9D%A0%E7%9B%83/"/>
+    
+    <category term="批判" scheme="https://mosdeo.github.io/tags/%E6%89%B9%E5%88%A4/"/>
     
     <category term="技術" scheme="https://mosdeo.github.io/tags/%E6%8A%80%E8%A1%93/"/>
     
@@ -484,65 +540,6 @@
     
     
     <category term="Go語言" scheme="https://mosdeo.github.io/tags/Go%E8%AA%9E%E8%A8%80/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>解決在 macOS 上安裝 OpenCV 遇到「‘opencv2/opencv.hpp’ file not found」地雷</title>
-    <link href="https://mosdeo.github.io/2019/10/09/%E5%9C%A8%20macOS%20%E4%B8%8A%E5%AE%89%E8%A3%9D%20OpenCV%20%E9%81%87%E5%88%B0%E7%9A%84%E5%9C%B0%E9%9B%B7/"/>
-    <id>https://mosdeo.github.io/2019/10/09/%E5%9C%A8%20macOS%20%E4%B8%8A%E5%AE%89%E8%A3%9D%20OpenCV%20%E9%81%87%E5%88%B0%E7%9A%84%E5%9C%B0%E9%9B%B7/</id>
-    <published>2019-10-09T16:00:00.000Z</published>
-    <updated>2019-10-10T11:16:52.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>安裝 OpenCV 一直都是堪稱玄學的技術，猶記得我大四第一次入門花了兩週才安裝成功，其中一個原因是我自己對「編譯、連結、載入、執行」不熟悉，這也是我技能樹有待補強的地方。</p><p>是說，這麼多年過去了，Windows 和 Linux 上我也安裝了無數次，EmguCV 也搞得定，換到上 macOS 仍須鬼打牆一整天才找到解方。</p><p>錯誤如下：</p><blockquote><p>fatal error: ‘opencv2/opencv.hpp’ file not found</p></blockquote><hr><h2 id="檢查編譯設定">檢查編譯設定</h2><p>我又反覆檢查 VSCode 中 task.json 的編譯設定，確認給出的路徑裡的確有 libs</p><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;version&quot;</span>: <span class="string">&quot;2.0.0&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;command&quot;</span>: <span class="string">&quot;clang++&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;args&quot;</span>: [</span><br><span class="line">            <span class="string">&quot;$&#123;file&#125;&quot;</span>,</span><br><span class="line">            <span class="comment">//&quot;main(regression_demo).cpp&quot;,</span></span><br><span class="line">            <span class="comment">//&quot;main(classification_demo).cpp&quot;,</span></span><br><span class="line">            <span class="string">&quot;libLKYDeepNN/InputLayer.cpp&quot;</span>,<span class="string">&quot;libLKYDeepNN/HiddenLayer.cpp&quot;</span>,<span class="string">&quot;libLKYDeepNN/OutputLayer.cpp&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-Wall&quot;</span>,</span><br><span class="line">            <span class="comment">//&quot;-v&quot;,</span></span><br><span class="line">            <span class="string">&quot;-pthread&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-I /usr/local/Cellar/opencv/4.1.1_2/lib/&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-lopencv_core&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-lopencv_highgui&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-lopencv_imgproc&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-g&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-std=c++11&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-Ofast&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-o&quot;</span>,</span><br><span class="line">            <span class="string">&quot;LKYDeepNN&quot;</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><hr><h2 id="透過-IntelliSense-驗證-includePath-正確性">透過 IntelliSense 驗證 includePath 正確性</h2><p>而我在 c_cpp_properties.json 中給 IntelliSense 的 includePath 是這樣，</p><blockquote><p>/usr/local/Cellar/opencv/4.1.1_2/include/opencv4/**</p></blockquote><p>IntelliSense 能正確識別叫出 namespace cv 底下的東西，所以也驗證了是正確的。</p><hr><h2 id="失敗：改-include">失敗：改 include</h2><p>如果我把 include 從這樣</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;opencv2/opencv.hpp&gt;</span></span></span><br></pre></td></tr></table></figure><p>改成這樣</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;opencv4/opencv2/opencv.hpp&gt;</span></span></span><br></pre></td></tr></table></figure><p>的話，「fatal error: ‘opencv2/opencv.hpp’ file not found」會消失，但是換成其他的更深層的 OpenCV hpp 找不到 include。</p><p>別忘了要改回來。</p><hr><h2 id="成功解決：soft-link">成功解決：soft link</h2><p>最後發現，在 /usr/local/inlcude 建立一個 softlink 指向 opencv2，就可以成功編譯。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s /usr/<span class="built_in">local</span>/include/opencv4/opencv2 opencv2</span><br></pre></td></tr></table></figure><p>是解決了，但我依然說不清楚誰去參考了「/usr/local/include/opencv2」因此得到錯誤或正確的結果。</p><p>參考來源：https://blog.csdn.net/a13602955218/article/details/101625857</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;安裝 OpenCV 一直都是堪稱玄學的技術，猶記得我大四第一次入門花了兩週才安裝成功，其中一個原因是我自己對「編譯、連結、載入、執行」不熟悉，這也是我技能樹有待補強的地方。&lt;/p&gt;
-&lt;p&gt;是說，這麼多年過去了，Windows 和 Linux 上我也安裝了無數次，EmguCV</summary>
-      
-    
-    
-    
-    
-    <category term="OpenCV" scheme="https://mosdeo.github.io/tags/OpenCV/"/>
-    
-    <category term="Mac" scheme="https://mosdeo.github.io/tags/Mac/"/>
-    
-    <category term="除錯" scheme="https://mosdeo.github.io/tags/%E9%99%A4%E9%8C%AF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Charlotte 碳排放評估案例</title>
-    <link href="https://mosdeo.github.io/2019/03/19/Charlotte%E7%A2%B3%E6%8E%92%E6%94%BE%E8%A9%95%E4%BC%B0%E6%A1%88%E4%BE%8B/"/>
-    <id>https://mosdeo.github.io/2019/03/19/Charlotte%E7%A2%B3%E6%8E%92%E6%94%BE%E8%A9%95%E4%BC%B0%E6%A1%88%E4%BE%8B/</id>
-    <published>2019-03-19T16:00:00.000Z</published>
-    <updated>2019-09-23T02:08:50.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>注意：本文為隨興、無組織的讀書筆記，如果你看不懂我寫什麼是正常的。我只是想記錄一個數據分析的案例。</p><h2 id="摘要">摘要</h2><p>本文為闡述美國環保局對北卡羅萊納州最大的城市－Charlotte，所做的碳排放模擬，想了解＂精明增長（Smart Growth）＂與＂蔓延增長＂兩種土地利用策略對交通設施的變化，進而了解對碳排放的影響。</p><h2 id="原始數據與處理-1-社區特徵聚類">原始數據與處理(1)-社區特徵聚類</h2><ul><li>步行可行性</li><li>可達性</li><li>地塊</li><li>工業區域</li><li>城市屬性值</li></ul><p>將 5 種特徵以 K-means 聚類為 8 種社區類型。</p><h2 id="原始數據與處理-2-人口預測">原始數據與處理(2)-人口預測</h2><ul><li>2003 Woods &amp; Poole 經濟學資料庫</li><li>使用區域預測模型(?)預測到2030年</li><li>3 種外插法預測 2030~2050<ul><li>2029~2030 一次導數</li><li>1991~2030 二次導數</li><li>前兩種方法的綜合，使用 2030 年的二次導數直推到 2050 年</li></ul></li><li>最後，對三種外插法的結果平均</li></ul><h2 id="名詞解釋">名詞解釋</h2><ul><li>TOD(Transit-Oriented Development)：以公共交通为导向的发展</li><li>基礎年：2010 年</li><li>mph：英里每小时。1 mph = 0.44704 m/s</li><li>集計處理(Aggregate)：基於 GIS 單位的 downsample，例如將單位由＂區＂擴大到＂縣市＂。</li><li>美國環保局(EPA)排放因素模組－MOBILE6<ul><li>採用特徵：燃油類型、引擎技術、路段平均速度、設施類型(高速公路、主幹道)、排放控制標準、檢查與維修、環境條件(溫度、濕度、大氣壓力)、車型(輕型車、重型車、公車)與車齡</li></ul></li></ul><h2 id="模擬至2050年的結果">模擬至2050年的結果</h2><ul><li><p>就業（兩方案總就業變化量相同）</p><ul><li>蔓延增長：由市中心向外擴散</li><li>精明增長：由市中心與公車站點向外擴散，形成多中心格局</li></ul></li><li><p>住宅（兩方案總住宅變化量相同）</p><ul><li>蔓延增長：由市中心向外擴散</li><li>精明增長：</li></ul></li><li><p>車輛行駛里程</p><ul><li>蔓延增長/基礎年=97.5%</li><li>精明增長/基礎年=86.7%</li></ul></li><li><p>路網平均行駛速度</p><ul><li>(基礎年,蔓延增長,精明增長) =(42, 33, 35)mph</li></ul></li><li><p>交通行為對比(精明增長：蔓延增長)</p><ul><li>公車乘客里程數：高50%</li><li>小汽車乘客里程數：低6.3%</li><li>步行量：高54%</li><li>公車供給量：多60%</li></ul></li></ul><h2 id="出處">出處</h2><ul><li>宋彦, and 陈燕萍. “城市规划评估指引.” 中国建筑工业出版社(2012). 第十章:信息技术在国外规划评估中的应用。</li><li><a href="http://www.paper.edu.cn/scholar/showpdf/MUT2MN1INTT0Ixxh">宋彦, et al. “城市空间结构对 PM2. 5 的影响——美国夏洛特汽车排放评估项目的借鉴和启示.” 城市规划 5 (2014): 9-14.</a></li></ul>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;注意：本文為隨興、無組織的讀書筆記，如果你看不懂我寫什麼是正常的。我只是想記錄一個數據分析的案例。&lt;/p&gt;
-&lt;h2 id=&quot;摘要&quot;&gt;摘要&lt;/h2&gt;
-&lt;p&gt;本文為闡述美國環保局對北卡羅萊納州最大的城市－Charlotte，所做的碳排放模擬，想了解＂精明增長（Smart Gro</summary>
-      
-    
-    
-    
-    
-    <category term="GIS" scheme="https://mosdeo.github.io/tags/GIS/"/>
-    
-    <category term="地理資訊系統" scheme="https://mosdeo.github.io/tags/%E5%9C%B0%E7%90%86%E8%B3%87%E8%A8%8A%E7%B3%BB%E7%B5%B1/"/>
-    
-    <category term="數據分析" scheme="https://mosdeo.github.io/tags/%E6%95%B8%E6%93%9A%E5%88%86%E6%9E%90/"/>
-    
-    <category term="機器學習" scheme="https://mosdeo.github.io/tags/%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92/"/>
-    
-    <category term="資料科學" scheme="https://mosdeo.github.io/tags/%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8/"/>
     
   </entry>
   

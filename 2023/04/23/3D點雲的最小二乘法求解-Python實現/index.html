@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+
+<html lang="zh-TW">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        hexo-theme-suka © SukkaW
+        GitHub: https://github.com/SukkaW/hexo-theme-suka
+    -->
+
+    <!-- ### Resource Hint ### -->
+
+    <!-- ## DNS Prefetch ## -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+<!-- busuanzi -->
+
+    <link rel="dns-prefetch" href="//busuanzi.ibruce.info">
+
+
+<!-- comment -->
+
+
+    <link rel="dns-prefetch" href="//disqus.com">
+    <link rel="dns-prefetch" href="//mosdeo-github-io.disqus.com">
+
+
+
+
+
+
+<!-- analytics -->
+
+
+    <link rel="dns-prefetch" href="//www.google-analytics.com">
+
+
+
+
+
+
+    <!-- ## Preload ## -->
+    
+    <!-- Busuanzi -->
+    
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.js" as="script">
+
+
+
+
+
+
+
+    <!-- ### Meta & Title & Info ### -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <meta name="renderer" content="webkit">
+
+    <!-- Title -->
+    <title>3D點雲的最小二乘法求解-Python實現 | LKY 只有原創內容的 Blog</title>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image&#x2F;ico" href="/img/suka-favicon.ico">
+
+    <!-- ### Import File ### -->
+    <link rel="stylesheet" href="/lib/spectre/spectre.min.css"><style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    a, a:visited {
+        color: #0070ff;
+    }
+
+    a:active, a:focus, a:hover {
+        color: #0070ff;
+        opacity: .75;
+    }
+
+    #post-content a,
+    #post-content a:hover,
+    #post-content a:focus,
+    #post-content a:visited {
+        color: #005eb9;
+        opacity: 1;
+    }
+
+    
+
+    .post-entry .card-body a {
+        color: #0070ff;
+    }
+
+    .avatar {
+        background: #444;
+    }
+
+    .navbar-link,
+    .navbar-link:visited,
+    .timeline .timeline-item .timeline-icon.icon-lg {
+        color: #0070ff;
+    }
+
+    .navbar-link:hover {
+        color: #0070ff;
+        opacity: .8;
+    }
+
+    #search-input .btn,
+    #disqus_click_btn,
+    #disqus-switch-to-direct,
+    #disqus-loadmore-button {
+        background: #727e96;
+        border-color: #727e96;
+        color: #fff;
+    }
+
+    #post-toc a.post-toc-link,
+    #post-toc a.post-toc-link:visited,
+    .share-menu.menu .menu-item>a {
+        color: #727e96;
+    }
+
+    .share-menu.menu .menu-item>a:hover,
+    .share-menu.menu .menu-item>a:focus,
+    .share-menu.menu .menu-item>a:visited {
+        color: #50596c;
+        background: #f8f9fa;
+        opacity: .85;
+    }
+</style><link rel="stylesheet" href="/css/style.min.css">
+
+
+
+
+
+
+
+
+    <!-- Prettify Theme -->
+    
+    <link rel="preload" href="/css/highlight/github.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/css/highlight/github.min.css"></noscript>
+
+
+
+
+
+<script>
+/*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+!function(t){"use strict";t.loadCSS||(t.loadCSS=function(){});var e=loadCSS.relpreload={};if(e.support=function(){var e;try{e=t.document.createElement("link").relList.supports("preload")}catch(t){e=!1}return function(){return e}}(),e.bindMediaToggle=function(t){var e=t.media||"all";function a(){t.addEventListener?t.removeEventListener("load",a):t.attachEvent&&t.detachEvent("onload",a),t.setAttribute("onload",null),t.media=e}t.addEventListener?t.addEventListener("load",a):t.attachEvent&&t.attachEvent("onload",a),setTimeout(function(){t.rel="stylesheet",t.media="only x"}),setTimeout(a,3e3)},e.poly=function(){if(!e.support())for(var a=t.document.getElementsByTagName("link"),n=0;n<a.length;n++){var o=a[n];"preload"!==o.rel||"style"!==o.getAttribute("as")||o.getAttribute("data-loadcss")||(o.setAttribute("data-loadcss",!0),e.bindMediaToggle(o))}},!e.support()){e.poly();var a=t.setInterval(e.poly,500);t.addEventListener?t.addEventListener("load",function(){e.poly(),t.clearInterval(a)}):t.attachEvent&&t.attachEvent("onload",function(){e.poly(),t.clearInterval(a)})}"undefined"!=typeof exports?exports.loadCSS=loadCSS:t.loadCSS=loadCSS}("undefined"!=typeof global?global:this);
+</script>
+
+    <!-- ### Site Verification ### -->
+    
+
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="LKY 只有原創內容的 Blog"><meta name="msapplication-starturl" content="https://mosdeo.github.io"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="LKY 只有原創內容的 Blog"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- ### The Open Graph & Twitter Card Protocol ### -->
+    <meta property="og:title" content="3D點雲的最小二乘法求解-Python實現 | LKY 只有原創內容的 Blog"><meta property="og:site_name" content="LKY 只有原創內容的 Blog"><meta property="og:type" content="article"><meta property="og:url" content="https://mosdeo.github.io/2023/04/23/3D%E9%BB%9E%E9%9B%B2%E7%9A%84%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95%E6%B1%82%E8%A7%A3-Python%E5%AF%A6%E7%8F%BE/"><meta property="og:locale" content="zh-TW"><meta name="description" content="仿造各種 Python 機器學習類別的風格，建立一個 class，並且實作 fit() 與 predict() 方法。 1234567class LeastSq3D:  def __init__(self):      self.coeficient &#x3D; None    def fit(self, pts):    def predict(self, pts): pts 就是所有的三維點，pts[ - Lin, Kao-Yuan - LKY 只有原創內容的 Blog"><meta name="keywords" content="筆記, 資料科學, 數據分析"><meta property="og:image" content="/content/images/human_body_regression.gif"><meta property="og:image" content="https://mosdeo.github.io/content/images/human_body_regression.gif"><meta property="article:published_time" content="2023-04-23T16:00:00.000Z"><meta property="article:modified_time" content="2023-04-24T10:06:39.390Z"><meta property="og:updated_time" content="2023-04-24T10:06:39.390Z"><meta property="article:author" content="Lin, Kao-Yuan"><meta property="article:tag" content="筆記, 資料科學, 數據分析"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="/content/images/human_body_regression.gif">
+
+    
+
+    <!-- ### Canonical link ### -->
+    <link rel="canonical" href="https://mosdeo.github.io/2023/04/23/3D%E9%BB%9E%E9%9B%B2%E7%9A%84%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95%E6%B1%82%E8%A7%A3-Python%E5%AF%A6%E7%8F%BE/">
+
+    <meta name="generator" content="Hexo 5.2.0">
+
+    <!-- ### Analytics ### -->
+    
+    <!-- Google Analytics -->
+<script>
+    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+    ga('create', 'UA-64570213-2', 'auto');
+    ga('send', 'pageview');
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+
+
+
+
+
+
+
+
+
+    <!-- ### Structured Data ### -->
+    
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "url": "https://mosdeo.github.io/2023/04/23/3D%E9%BB%9E%E9%9B%B2%E7%9A%84%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95%E6%B1%82%E8%A7%A3-Python%E5%AF%A6%E7%8F%BE/",
+    "@type": "BlogPosting",
+    "logo": "https://mosdeo.github.io/img/suka-favicon.ico",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://mosdeo.github.io/2023/04/23/3D%E9%BB%9E%E9%9B%B2%E7%9A%84%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95%E6%B1%82%E8%A7%A3-Python%E5%AF%A6%E7%8F%BE/"
+    },
+    "headline": "3D點雲的最小二乘法求解-Python實現 | LKY 只有原創內容的 Blog",
+    
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://mosdeo.github.io/content/images/human_body_regression.gif"
+    },
+    
+    "datePublished": "2023-04-23T16:00:00.000Z",
+    "dateModified": "2023-04-24T10:06:39.390Z",
+    "author": {
+        "@type": "Person",
+        "name": "Lin, Kao-Yuan",
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://mosdeo.github.io/img/default_avatar.png"
+        },
+        "description": "今之能者，謂能轉貼，至於魯蛇，皆能轉貼。不原創，何以別乎？"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "LKY 只有原創內容的 Blog",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://mosdeo.github.io/img/suka-favicon.ico"
+        }
+    },
+    
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://mosdeo.github.io/search?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+    },
+    
+    "keywords": "筆記, 資料科學, 數據分析",
+    "description": "仿造各種 Python 機器學習類別的風格，建立一個 class，並且實作 fit() 與 predict() 方法。 1234567class LeastSq3D:  def __init__(self):      self.coeficient = None    def fit(self, pts):    def predict(self, pts): pts 就是所有的三維點，pts[ - Lin, Kao-Yuan - LKY 只有原創內容的 Blog"
+}
+</script>
+
+
+
+    <!-- ### Custom Head ### -->
+    
+</head>
+
+    <body>
+            
+
+            <!-- ### Main content ### -->
+            <!-- ## Header ##-->
+<header>
+    <h1 class="header-title text-center"><a href="/">LKY 只有原創內容的 Blog</a></h1>
+
+    <p class="text-center header-slogan">
+        
+            
+                今之能者，謂能轉貼，至於魯蛇，皆能轉貼。不原創，何以別乎？
+            
+        
+    </p>
+
+    <nav class="navbar-section text-center">
+    
+        <a href="/" class="navbar-link">Home</a>
+    
+    
+        <a href="/archives/" class="navbar-link">Archives</a>
+    
+    
+        <a href="/search" class="navbar-link">Search</a>
+    
+    
+    
+        <div class="dropdown dropdown-right">
+    <a class="navbar-link dropdown-toggle" tabindex="0">Share</a>
+    <ul class="menu share-menu">
+
+        <!-- Share Weibo -->
+        
+        <li class="menu-item">
+            <a href="http://service.weibo.com/share/share.php?appkey=&title=LKY 只有原創內容的 Blog&url=https://mosdeo.github.io&pic=/content/images/human_body_regression.gif&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">Share to Weibo</a>
+        </li>
+        
+
+        <!-- Share Twitter -->
+        
+        <li class="menu-item">
+            <a href="https://twitter.com/intent/tweet?text=LKY 只有原創內容的 Blog&url=https://mosdeo.github.io&via=Lin, Kao-Yuan" target="_blank" rel="external noopener noreferrer nofollow">Share to Twitter</a>
+        </li>
+        
+
+        <!-- Share Facebook -->
+        
+        <li class="menu-item">
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://mosdeo.github.io" target="_blank" rel="external noopener noreferrer nofollow">Share to Facebook</a>
+        </li>
+        
+
+        <!-- Share Google+ -->
+        
+        <li class="menu-item">
+            <a href="https://plus.google.com/share?url=https://mosdeo.github.io" target="_blank" rel="external noopener noreferrer nofollow">Share to Google+</a>
+        </li>
+        
+
+        <!-- Share LinkedIn -->
+        
+        <li class="menu-item">
+            <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://mosdeo.github.io&title=3D點雲的最小二乘法求解-Python實現" target="_blank" rel="external noopener noreferrer nofollow">Share to LinkedIn</a>
+        </li>
+        
+
+        <!-- Share QQ -->
+        
+        <li class="menu-item">
+            <a href="http://connect.qq.com/widget/shareqq/index.html?site=LKY 只有原創內容的 Blog&title=3D點雲的最小二乘法求解-Python實現&summary=&pics=/content/images/human_body_regression.gif&url=https://mosdeo.github.io" target="_blank" rel="external noopener noreferrer nofollow"> Share to QQ</a>
+        </li>
+        
+
+        <!-- Share Telegram -->
+        
+        <li class="menu-item">
+            <a href="https://t.me/share/url?url=https://mosdeo.github.io&text=3D點雲的最小二乘法求解-Python實現" target="_blank" rel="external noopener noreferrer nofollow">Share to Telegram</a>
+        </li>
+        
+
+        <!-- QRCode -->
+        
+        <li class="menu-item">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOQAAADkCAAAAACtPNdRAAAEHElEQVR42u3aQXLbQAxEUd//0sk2pRLRv4dZEPTXRrYl0fPGZRAD4OfPL3j8iBQpUqRIkTeRP8Pj39e/XuTjtc/3XX3u39e+XeNzDVfXntYtUuRm5LSICfbteVrg5/PnZ65+P0F//ZxIkYuR3wJOCgZXAegqQJAAMgW0q59drlukyBcirxaVFjhtyBgsQHIiUuRvR05JcFoYSaRJsLpKFkSKfCtyOtSS18jXNElP1//vpxCRIh+GbG++T3n+r9U6kSIfgoxNk3CQnRLtFDDaQDMlELe6WiJFPghJEt90qE3wdLieCtdTwp7WIFLkRuRJ8ts0bu++lzaSYjIgUuQyJDncpkYsxU0BhwKuEhWRIt+KnD7cDEk0wYsm4vR3ihS5EUkGFk4S+HRQnoYQ089SE1ikyM3IZoiQJAHNEAUZiiCbfrl+kSIXItOgQ3NoTfiT4VwyPIibsCJFLkI2A7tkWOkkcKWkghzqRYrcjpwuMt5oiwPv1NRpi8vVYJRIkQuRzaASbbCSTThp8JLDdDWRJVLkA5FTEkwSd5IcTEGHDGjQpFykyDcgSVOGDE+QxIAestOh4egUIlLkMiS5UU9fN8XfJhEnRTSUoIsUuRCZPtQk69PNn24gWd/4hxEpciEyJcH0Hz593yT4dBNvnUJEinwokiTDtABNFt8WqNoNEinyTciUFE8H3gQgQYNenww+iRT5JiRJvOnh+W7CTQYI0SlEpMglSDpMlIYcUoGZBCsynEg3SaTIrUjaUKWFYRIoTq5J11cXl0WKfDCSJMBNAp8ANOA1CTpqwooUuQBJmy8p4T4pgJEknyQVePpDpMgHI1MRuC300mGGu8WyNMQkUuRWJC0Wt42a9vu0mVNxDBeXRYpcgiSNVfJauvlT+PQZWgATKXIzMg1FnC6gwdGBwyYoiRS5EUkXTQ6zzYAFPXiTQSbU1RIpcgmy+eemQ4Ip+aZJP0kYqgRdpMgFyGYIIQWfqQB9WrBqhqZEinwDkg4PNYFqupGTwb92sBB3tUSKXIBMiXBa7HgzHpLzdIBOw0jThokU+QYkHfIlyNOGDy12p0O4SJGbkSmhHm+2oFnTFMsoNh0IRIp8AzI2T4rgMV17Kig3g07p0C1S5HZkWvDJAGBzg6fDvNOhemz4iBS5BBlvqABNk3vS4E1BKa13rKCLFLkEmYpDpBHaJAQ0uDSNXZEi34g8GR4kCTxtGKX3pevFho9IkQuQdwIDGeglw7hN4kATBpEiNyNJYkAKus2QHxlwaIvWY3FZpMhlyKZ5czI4SJo8U0AhBWiRIn8DkiTvJ8NFTQOnbQSJFPl2JEm+bzVmwAAhHRAWKfItyJOgMjVhyGZMG0I2LCb9IkUuRbaFJXrTbxpCzXtosi5S5Ebkmx8iRYoUKVLk4eMv/Vwn4ywhHcoAAAAASUVORK5CYII=" alr="QRCode">
+        </li>
+        
+
+    </ul>
+</div>
+    
+    
+        <a href="/atom.xml" target="_blank" class="navbar-link">RSS</a>
+    
+</nav>
+</header>
+
+            
+    <!-- ## Post ## -->
+    <div class="post-container">
+    <div id="post-card" class="card">
+        
+            <div class="card-image lazyload" data-bg="url('/content/images/human_body_regression.gif')"></div>
+        
+        <div class="card-item-container">
+            <div class="card-inner-cell">
+                <!-- # Post Header Info # -->
+                <div class="card-header">
+                    
+    <h1 class="card-title h3 mb-2">3D點雲的最小二乘法求解-Python實現</h1>
+
+
+
+
+<div class="post-header-info">
+    <p class="post-header-info-left text-gray">
+        <img class="author-thumb lazyload" data-src="/img/default_avatar.png" src="/img/suka-lazyload.gif" alt="Lin, Kao-Yuan's Avatar">
+        <span>2023-04-24</span>
+        
+        
+            <!-- Busuanzi Post Views -->
+<span id="busuanzi_container_page_pv" hidden>
+    <span class="suka-devide-dot"></span>
+    <span></span>
+    <span id="busuanzi_value_page_pv"></span>
+    <span>Views</span>
+</span>
+        
+        
+    </p>
+    <div class="post-header-info-right">
+        
+            <div class="dropdown dropdown-right">
+<a class="dropdown-toggle" tabindex="0">Share the post</a>
+<ul class="menu share-menu">
+    <!-- Share Weibo -->
+    
+    <li class="menu-item">
+        <a href="http://service.weibo.com/share/share.php?appkey=&title=3D點雲的最小二乘法求解-Python實現&url=https://mosdeo.github.io/2023/04/23/3D%E9%BB%9E%E9%9B%B2%E7%9A%84%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95%E6%B1%82%E8%A7%A3-Python%E5%AF%A6%E7%8F%BE/&pic=/content/images/human_body_regression.gif&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">Share to Weibo</a>
+    </li>
+    
+
+    <!-- Share Twitter -->
+    
+    <li class="menu-item">
+        <a href="https://twitter.com/intent/tweet?text=3D點雲的最小二乘法求解-Python實現&url=https://mosdeo.github.io/2023/04/23/3D%E9%BB%9E%E9%9B%B2%E7%9A%84%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95%E6%B1%82%E8%A7%A3-Python%E5%AF%A6%E7%8F%BE/&via=Lin, Kao-Yuan" target="_blank" rel="external noopener noreferrer nofollow">Share to Twitter</a>
+    </li>
+    
+
+    <!-- Share Facebook -->
+    
+    <li class="menu-item">
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://mosdeo.github.io/2023/04/23/3D%E9%BB%9E%E9%9B%B2%E7%9A%84%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95%E6%B1%82%E8%A7%A3-Python%E5%AF%A6%E7%8F%BE/" target="_blank" rel="external noopener noreferrer nofollow">Share to Facebook</a>
+    </li>
+    
+
+    <!-- Share Google+ -->
+    
+    <li class="menu-item">
+        <a href="https://plus.google.com/share?url=https://mosdeo.github.io/2023/04/23/3D%E9%BB%9E%E9%9B%B2%E7%9A%84%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95%E6%B1%82%E8%A7%A3-Python%E5%AF%A6%E7%8F%BE/" target="_blank" rel="external noopener noreferrer nofollow">Share to Google+</a>
+    </li>
+    
+
+    <!-- Share LinkedIn -->
+    
+    <li class="menu-item">
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://mosdeo.github.io/2023/04/23/3D%E9%BB%9E%E9%9B%B2%E7%9A%84%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95%E6%B1%82%E8%A7%A3-Python%E5%AF%A6%E7%8F%BE/&title=LKY 只有原創內容的 Blog" target="_blank" rel="external noopener noreferrer nofollow">Share to LinkedIn</a>
+    </li>
+    
+
+    <!-- Share QQ -->
+    
+    <li class="menu-item">
+        <a href="http://connect.qq.com/widget/shareqq/index.html?site=LKY 只有原創內容的 Blog&title=LKY 只有原創內容的 Blog&summary=&pics=/content/images/human_body_regression.gif&url=https://mosdeo.github.io/2023/04/23/3D%E9%BB%9E%E9%9B%B2%E7%9A%84%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95%E6%B1%82%E8%A7%A3-Python%E5%AF%A6%E7%8F%BE/" target="_blank" rel="external noopener noreferrer nofollow"> Share to QQ</a>
+    </li>
+    
+
+    <!-- Share Telegram -->
+    
+    <li class="menu-item">
+        <a href="https://t.me/share/url?url=https://mosdeo.github.io/2023/04/23/3D%E9%BB%9E%E9%9B%B2%E7%9A%84%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95%E6%B1%82%E8%A7%A3-Python%E5%AF%A6%E7%8F%BE/&text=LKY 只有原創內容的 Blog" target="_blank" rel="external noopener noreferrer nofollow">Share to Telegram</a>
+    </li>
+    
+
+    <!-- QRCode -->
+    
+    <li class="menu-item">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOQAAADkCAAAAACtPNdRAAAEHElEQVR42u3aQXLbQAxEUd//0sk2pRLRv4dZEPTXRrYl0fPGZRAD4OfPL3j8iBQpUqRIkTeRP8Pj39e/XuTjtc/3XX3u39e+XeNzDVfXntYtUuRm5LSICfbteVrg5/PnZ65+P0F//ZxIkYuR3wJOCgZXAegqQJAAMgW0q59drlukyBcirxaVFjhtyBgsQHIiUuRvR05JcFoYSaRJsLpKFkSKfCtyOtSS18jXNElP1//vpxCRIh+GbG++T3n+r9U6kSIfgoxNk3CQnRLtFDDaQDMlELe6WiJFPghJEt90qE3wdLieCtdTwp7WIFLkRuRJ8ts0bu++lzaSYjIgUuQyJDncpkYsxU0BhwKuEhWRIt+KnD7cDEk0wYsm4vR3ihS5EUkGFk4S+HRQnoYQ089SE1ikyM3IZoiQJAHNEAUZiiCbfrl+kSIXItOgQ3NoTfiT4VwyPIibsCJFLkI2A7tkWOkkcKWkghzqRYrcjpwuMt5oiwPv1NRpi8vVYJRIkQuRzaASbbCSTThp8JLDdDWRJVLkA5FTEkwSd5IcTEGHDGjQpFykyDcgSVOGDE+QxIAestOh4egUIlLkMiS5UU9fN8XfJhEnRTSUoIsUuRCZPtQk69PNn24gWd/4hxEpciEyJcH0Hz593yT4dBNvnUJEinwokiTDtABNFt8WqNoNEinyTciUFE8H3gQgQYNenww+iRT5JiRJvOnh+W7CTQYI0SlEpMglSDpMlIYcUoGZBCsynEg3SaTIrUjaUKWFYRIoTq5J11cXl0WKfDCSJMBNAp8ANOA1CTpqwooUuQBJmy8p4T4pgJEknyQVePpDpMgHI1MRuC300mGGu8WyNMQkUuRWJC0Wt42a9vu0mVNxDBeXRYpcgiSNVfJauvlT+PQZWgATKXIzMg1FnC6gwdGBwyYoiRS5EUkXTQ6zzYAFPXiTQSbU1RIpcgmy+eemQ4Ip+aZJP0kYqgRdpMgFyGYIIQWfqQB9WrBqhqZEinwDkg4PNYFqupGTwb92sBB3tUSKXIBMiXBa7HgzHpLzdIBOw0jThokU+QYkHfIlyNOGDy12p0O4SJGbkSmhHm+2oFnTFMsoNh0IRIp8AzI2T4rgMV17Kig3g07p0C1S5HZkWvDJAGBzg6fDvNOhemz4iBS5BBlvqABNk3vS4E1BKa13rKCLFLkEmYpDpBHaJAQ0uDSNXZEi34g8GR4kCTxtGKX3pevFho9IkQuQdwIDGeglw7hN4kATBpEiNyNJYkAKus2QHxlwaIvWY3FZpMhlyKZ5czI4SJo8U0AhBWiRIn8DkiTvJ8NFTQOnbQSJFPl2JEm+bzVmwAAhHRAWKfItyJOgMjVhyGZMG0I2LCb9IkUuRbaFJXrTbxpCzXtosi5S5Ebkmx8iRYoUKVLk4eMv/Vwn4ywhHcoAAAAASUVORK5CYII=" alt="QRCode">
+    </li>
+    
+
+</ul>
+</div>
+        
+    </div>
+</div>
+                </div>
+                <div class="card-body">
+                    
+                        
+                        
+                            <div id="post-toc"><ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#fit"><span class="post-toc-number">1.</span> <span class="post-toc-text">fit()</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#predict"><span class="post-toc-number">2.</span> <span class="post-toc-text">predict()</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%AF%84%E4%BE%8B"><span class="post-toc-number">3.</span> <span class="post-toc-text">範例</span></a></li></ol></div>
+                        
+                    
+                    <article id="post-content">
+                        <p>仿造各種 Python 機器學習類別的風格，建立一個 class，並且實作 fit() 與 predict() 方法。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LeastSq3D</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">      self.coeficient = <span class="literal">None</span></span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">fit</span>(<span class="params">self, pts</span>):</span></span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">predict</span>(<span class="params">self, pts</span>):</span></span><br></pre></td></tr></table></figure>
+<p>pts 就是所有的三維點，pts[0] 就是第一個點，pts[0][0] 就是第一個點的 x 座標，依此類推。</p>
+<h2 id="fit">fit()</h2>
+<p>就是重現上一篇文章以 Ax=b 求解的過程。</p>
+<p>首先初始化矩陣 A</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">A &#x3D; [</span><br><span class="line"> [x^2 + xy + 1],</span><br><span class="line"> [xy + y^2 + 1],</span><br><span class="line"> [x + y + 1]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">m11 = np.<span class="built_in">sum</span>(pts[:, <span class="number">0</span>] * pts[:, <span class="number">0</span>])</span><br><span class="line">m12 = np.<span class="built_in">sum</span>(pts[:, <span class="number">0</span>] * pts[:, <span class="number">1</span>])</span><br><span class="line">m13 = np.<span class="built_in">sum</span>(pts[:, <span class="number">0</span>])</span><br><span class="line">m21 = m12</span><br><span class="line">m22 = np.<span class="built_in">sum</span>(pts[:, <span class="number">1</span>] * pts[:, <span class="number">1</span>])</span><br><span class="line">m23 = np.<span class="built_in">sum</span>(pts[:, <span class="number">1</span>])</span><br><span class="line">m31 = m13</span><br><span class="line">m32 = m23</span><br><span class="line">m33 = pts.shape[<span class="number">0</span>]</span><br><span class="line">A = np.array([[m11, m12, m13], [m21, m22, m23], [m31, m32, m33]])</span><br></pre></td></tr></table></figure>
+<p>再來初始化矩陣 b</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">b &#x3D; [xz, yz, z]</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">b1 = np.<span class="built_in">sum</span>(pts[:, <span class="number">0</span>] * pts[:, <span class="number">2</span>])</span><br><span class="line">b2 = np.<span class="built_in">sum</span>(pts[:, <span class="number">1</span>] * pts[:, <span class="number">2</span>])</span><br><span class="line">b3 = np.<span class="built_in">sum</span>(pts[:, <span class="number">2</span>])</span><br><span class="line">b = np.array([b1, b2, b3])</span><br></pre></td></tr></table></figure>
+<p>最後求A的反矩陣，並且乘上 b，就是最後的結果，把係數 A,B,C 存在 <code>self.coeficient </code>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">self.coeficient = np.dot(np.linalg.inv(A), b)</span><br></pre></td></tr></table></figure>
+<p>NumPy 還提供了更強的實現</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">self.coeficient = np.linalg.solve(A, b)</span><br></pre></td></tr></table></figure>
+<h2 id="predict">predict()</h2>
+<p>這個部分最簡單，就是把所有的點帶入方程式，得到預測的 z 座標。</p>
+<p>就只是寫 <code>z = Ax + By + C</code>。</p>
+<p>不過要注意的是，最好用向量化寫法，不要用迴圈，這樣會比較快。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">predict</span>(<span class="params">self, pts</span>):</span></span><br><span class="line">    <span class="keyword">if</span> self.coeficient <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="keyword">raise</span> Exception(<span class="string">&#x27;You need to fit the model first.&#x27;</span>)</span><br><span class="line">    pts = np.array(pts)</span><br><span class="line">    <span class="keyword">return</span> np.dot(pts, self.coeficient)</span><br></pre></td></tr></table></figure>
+<h2 id="範例">範例</h2>
+<p>我用 Free3D 的一個<a target="_blank" rel="noopener" href="https://free3d.com/3d-model/base-mesh-ready-to-be-rigged-15483.html">人體模型</a>來做範例。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="comment"># 載入已經讀好的點雲</span></span><br><span class="line">    pts = np.load(<span class="string">r&#x27;human_body_vertices.npy&#x27;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 畫出半透明的原始點雲</span></span><br><span class="line">    fig = plt.figure()</span><br><span class="line">    ax = fig.add_subplot(<span class="number">111</span>, projection=<span class="string">&#x27;3d&#x27;</span>)</span><br><span class="line">    ax.set_box_aspect(aspect = (<span class="number">1</span>, <span class="number">1</span>, <span class="number">0.25</span>))</span><br><span class="line">    ax.scatter(pts[:, <span class="number">0</span>], pts[:, <span class="number">1</span>], pts[:, <span class="number">2</span>], alpha=<span class="number">0.1</span>, c=<span class="string">&#x27;goldenrod&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 用最小二乘法求解</span></span><br><span class="line">    l3d = LeastSq3D()</span><br><span class="line">    l3d.fit(pts)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 對平面點雲取樣，並畫出</span></span><br><span class="line">    x_range = np.arange(pts[:, <span class="number">0</span>].<span class="built_in">min</span>(), pts[:, <span class="number">0</span>].<span class="built_in">max</span>(), pts[:, <span class="number">0</span>].ptp()/<span class="number">10</span>)</span><br><span class="line">    y_range = np.arange(pts[:, <span class="number">1</span>].<span class="built_in">min</span>(), pts[:, <span class="number">1</span>].<span class="built_in">max</span>(), pts[:, <span class="number">1</span>].ptp()/<span class="number">10</span>)</span><br><span class="line">    xx, yy = np.meshgrid(x_range, y_range)</span><br><span class="line">    zz = l3d.predict(np.array([xx.flatten(), yy.flatten(), np.ones(shape=<span class="built_in">len</span>(xx.flatten()))]).T).reshape(xx.shape)</span><br><span class="line">    ax.plot_surface(xx, yy, zz, alpha=<span class="number">0.5</span>, color=<span class="string">&#x27;r&#x27;</span>)</span><br><span class="line">    plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="/content/images/human_body_regression.gif" alt="image"></p>
+
+                    </article>
+                    
+
+
+    <blockquote id="date-expire-notification" class="post-expired-notify">This article was last updated on <span id="date-expire-num"></span> days ago, and the information described in the article may have changed.</blockquote>
+    <script>
+    (function() {
+        var dateUpdate = Date.parse("2023-04-24");
+        var nowDate = new Date();
+        var a = nowDate.getTime();
+        var b = a - dateUpdate;
+        var daysUpdateExpire = Math.floor(b/(24*3600*1000));
+        if (daysUpdateExpire >= 120) {
+            document.getElementById('date-expire-num').innerHTML = daysUpdateExpire;
+        } else {
+            document.getElementById('date-expire-notification').style.display = 'none';
+        }
+    })();
+    </script>
+
+
+<p class="post-footer-info mb-0 pt-0">Published at&nbsp;<time datetime="2023-04-23T16:00:00.000Z" itemprop="datePublished">2023-04-24</time>
+
+</p>
+<p class="post-footer-info mb-0 pt-2">
+
+
+
+<span class="post-tags-list mt-2">
+
+<a class="post-tags-list-item" href="/tags/%E7%AD%86%E8%A8%98/" rel="tag">#&nbsp;筆記</a>
+
+<a class="post-tags-list-item" href="/tags/%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8/" rel="tag">#&nbsp;資料科學</a>
+
+<a class="post-tags-list-item" href="/tags/%E6%95%B8%E6%93%9A%E5%88%86%E6%9E%90/" rel="tag">#&nbsp;數據分析</a>
+
+</span>
+
+
+</p>
+
+                </div>
+                <div class="post-nav px-2 bg-gray">
+<ul class="pagination">
+    <!-- Prev Nav -->
+    
+
+    <!-- Next Nav -->
+    
+        <li class="page-item page-next">
+            <a href="/2023/04/23/3D%E9%BB%9E%E9%9B%B2%E7%9A%84%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95%E6%B1%82%E8%A7%A3-%E6%95%B8%E5%AD%B8%E6%8E%A8%E5%B0%8E/" rel="next">
+                <div class="page-item-title"><i class="icon icon-forward" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">3D點雲的最小二乘法求解-數學推導</div>
+            </a>
+        </li>
+    
+</ul>
+</div>
+
+                
+                    <!-- # Comment # -->
+                    
+                        <div class="card-footer post-comment">
+                            <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://mosdeo.github.io/2023/04/23/3D%E9%BB%9E%E9%9B%B2%E7%9A%84%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95%E6%B1%82%E8%A7%A3-Python%E5%AF%A6%E7%8F%BE/'; // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'https://mosdeo.github.io/2023/04/23/3D%E9%BB%9E%E9%9B%B2%E7%9A%84%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95%E6%B1%82%E8%A7%A3-Python%E5%AF%A6%E7%8F%BE/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+<script id="disqus-thread-script">
+    (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document;
+        var s = d.createElement('script');
+        s.src = '//mosdeo-github-io.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', + new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+                        </div>
+                    
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!-- ### Footer ### -->
+            <footer class="text-center">
+    <!-- footer copyright -->
+    
+        <p class="footer-copyright mb-0">Copyright&nbsp;©&nbsp;<span id="copyright-year"></span>
+            <a class="footer-copyright-a" href="https://mosdeo.github.io">LKY 只有原創內容的 Blog</a>
+        </p>
+
+    <!-- footer custom text -->
+    <p class="footer-text mb-0">
+    
+    </p>
+    <!-- footer develop info -->
+    <p class="footer-develop mb-0">
+        
+    <!-- Busuanzi User Views -->
+    <span id="busuanzi_container_site_uv" hidden>
+        <span></span>
+        <span id="busuanzi_value_site_uv"></span>
+        <span>Viewers</span>
+        
+            <span>|</span>
+        
+    </span>
+
+
+
+
+        
+        Powered by&nbsp;<!--
+         --><a href="https://hexo.io" target="_blank" class="footer-develop-a" rel="external nofollow noopener noreferrer">Hexo</a><span class="footer-develop-divider"></span>Theme&nbsp;-&nbsp;<!--
+         --><a href="https://github.com/SukkaW/hexo-theme-suka" target="_blank" class="footer-develop-a" rel="external noopener">Suka</a>
+    </p>
+</footer>
+
+
+        <!-- ### Import File ### -->
+        <!-- ### Footer JS Import ### -->
+
+<script>
+
+    
+window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 50
+};
+document.getElementById('copyright-year').textContent = new Date().getFullYear();
+console.log('\n %c Suka Theme (hexo-theme-suka) | © SukkaW | Verision 1.3.3 %c https://github.com/SukkaW/hexo-theme-suka \n', 'color: #fff; background: #444; padding:5px 0;', 'background: #bbb; padding:5px 0;');
+
+</script>
+
+<script src="/lib/vanilla-lazyload/lazyload.min.js" async></script>
+    <script src="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.js" async></script>
+
+
+<!-- Offset -->
+
+
+
+
+<!-- Comment -->
+
+    
+        <script id="dsq-count-scr" src="https://mosdeo-github-io.disqus.com/count.js" async></script>
+
+    
+
+
+<!-- ### Custom Footer ### -->
+
+    </body>
+
+</html>

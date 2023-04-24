@@ -157,7 +157,7 @@
     <link rel="alternate" type="application/atom+xml" href="/atom.xml"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="LKY 只有原創內容的 Blog"><meta name="msapplication-starturl" content="https://mosdeo.github.io"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="LKY 只有原創內容的 Blog"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
     <!-- ### The Open Graph & Twitter Card Protocol ### -->
-    <meta property="og:title" content="用 Bayesian 推論出地址遺失值 | LKY 只有原創內容的 Blog"><meta property="og:site_name" content="LKY 只有原創內容的 Blog"><meta property="og:type" content="article"><meta property="og:url" content="https://mosdeo.github.io/2019/01/09/%E7%94%A8Bayseian%E6%8E%A8%E8%AB%96%E5%87%BA%E5%9C%B0%E5%9D%80%E7%BC%BA%E5%A4%B1%E5%80%BC/"><meta property="og:locale" content="zh-TW"><meta name="description" content="情境 我有一大堆人工輸入的地址清單，可是「XX區」大家經常懶得寫，那我要如何找出「XX區」到底是哪一區呢？ 現況 假設要被推論的地址是＂台北市羅斯福路5566號＂，已知訊息如下：  該地址新開了一間85度C咖啡店 羅斯福路只出現在大安區、文山區與中正區 大安區地址數量:文山區地址數量＝5:1 由[原本地址清單 &amp;amp; 85度C官方網站店鋪清單（註*）]兩份表關聯對比得知，地址為大安區時有85度 - Lin, Kao-Yuan - LKY 只有原創內容的 Blog"><meta name="keywords" content="數據分析, 機器學習, 資料科學"><meta property="og:image" content="/content/images/Bayes_rule.png"><meta property="og:image" content="https://mosdeo.github.io/content/images/85%E5%BA%A6C%E5%92%96%E5%95%A1%E8%9B%8B%E7%B3%95.jpg"><meta property="article:published_time" content="2019-01-09T16:00:00.000Z"><meta property="article:modified_time" content="2019-09-23T02:08:50.000Z"><meta property="og:updated_time" content="2019-09-23T02:08:50.000Z"><meta property="article:author" content="Lin, Kao-Yuan"><meta property="article:tag" content="數據分析, 機器學習, 資料科學"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="/content/images/Bayes_rule.png">
+    <meta property="og:title" content="用 Bayesian 推論出地址遺失值 | LKY 只有原創內容的 Blog"><meta property="og:site_name" content="LKY 只有原創內容的 Blog"><meta property="og:type" content="article"><meta property="og:url" content="https://mosdeo.github.io/2019/01/09/%E7%94%A8Bayseian%E6%8E%A8%E8%AB%96%E5%87%BA%E5%9C%B0%E5%9D%80%E7%BC%BA%E5%A4%B1%E5%80%BC/"><meta property="og:locale" content="zh-TW"><meta name="description" content="情境 我有一大堆人工輸入的地址清單，可是「XX區」大家經常懶得寫，那我要如何找出「XX區」到底是哪一區呢？ 現況 假設要被推論的地址是＂台北市羅斯福路5566號＂，已知訊息如下：  該地址新開了一間85度C咖啡店 羅斯福路只出現在大安區、文山區與中正區 大安區地址數量:文山區地址數量＝5:1 由[原本地址清單 &amp;amp; 85度C官方網站店鋪清單（註*）]兩份表關聯對比得知，地址為大安區時有85度 - Lin, Kao-Yuan - LKY 只有原創內容的 Blog"><meta name="keywords" content="資料科學, 數據分析, 機器學習"><meta property="og:image" content="/content/images/Bayes_rule.png"><meta property="og:image" content="https://mosdeo.github.io/content/images/85%E5%BA%A6C%E5%92%96%E5%95%A1%E8%9B%8B%E7%B3%95.jpg"><meta property="article:published_time" content="2019-01-09T16:00:00.000Z"><meta property="article:modified_time" content="2019-09-23T02:08:50.000Z"><meta property="og:updated_time" content="2019-09-23T02:08:50.000Z"><meta property="article:author" content="Lin, Kao-Yuan"><meta property="article:tag" content="資料科學, 數據分析, 機器學習"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="/content/images/Bayes_rule.png">
 
     
 
@@ -232,7 +232,7 @@
         "query-input": "required name=search_term_string"
     },
     
-    "keywords": "數據分析, 機器學習, 資料科學",
+    "keywords": "資料科學, 數據分析, 機器學習",
     "description": "情境 我有一大堆人工輸入的地址清單，可是「XX區」大家經常懶得寫，那我要如何找出「XX區」到底是哪一區呢？ 現況 假設要被推論的地址是＂台北市羅斯福路5566號＂，已知訊息如下：  該地址新開了一間85度C咖啡店 羅斯福路只出現在大安區、文山區與中正區 大安區地址數量:文山區地址數量＝5:1 由[原本地址清單 &amp;amp;amp; 85度C官方網站店鋪清單（註*）]兩份表關聯對比得知，地址為大安區時有85度 - Lin, Kao-Yuan - LKY 只有原創內容的 Blog"
 }
 </script>
@@ -509,11 +509,11 @@ A: 那就看看有沒有小七、全家、OK等等之類的（先別急著罵我
 
 <span class="post-tags-list mt-2">
 
+<a class="post-tags-list-item" href="/tags/%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8/" rel="tag">#&nbsp;資料科學</a>
+
 <a class="post-tags-list-item" href="/tags/%E6%95%B8%E6%93%9A%E5%88%86%E6%9E%90/" rel="tag">#&nbsp;數據分析</a>
 
 <a class="post-tags-list-item" href="/tags/%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92/" rel="tag">#&nbsp;機器學習</a>
-
-<a class="post-tags-list-item" href="/tags/%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8/" rel="tag">#&nbsp;資料科學</a>
 
 </span>
 
